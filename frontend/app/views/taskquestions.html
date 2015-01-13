@@ -76,12 +76,13 @@
         </div>
     </div>
     <br><br>
-    <p>Sobald Sie den Button betätigen werden Sie direkt zur nächsten Entscheidungssituation geleitet.
-        Denken Sie daran, sich <strong>so schnell aber auch so gut wie möglich</strong> für ein Waschmittel zu entscheiden.
-        <br><br>
-        <strong>Viel Erfolg!</strong>
-    </p>
-
+    <div ng-hide="currentRound == 3">
+        <p>Sobald Sie den Button betätigen werden Sie direkt zur nächsten Entscheidungssituation geleitet.
+            Denken Sie daran, sich <strong>so schnell aber auch so gut wie möglich</strong> für ein Waschmittel zu entscheiden.
+            <br><br>
+            <strong>Viel Erfolg!</strong>
+        </p>
+    </div>
     <div class="form-group">
         <div class="col-sm-12">
             <a type="submit" ng-click="onFormSubmit()"
