@@ -1,0 +1,6 @@
+.idea/
+.vagrant/
+backend/vendor/
+backend/composer.lock
+api/vendor/
+api/composer.lock

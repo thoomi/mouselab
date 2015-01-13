@@ -1,0 +1,54 @@
+<h2>Geschafft!</h2>
+<p>Sie haben den Hauptteil nun hinter sich und abschließend erwarten Sie nur noch ein paar Fragen.</p>
+
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="inputAge" class="col-sm-3 control-label">Alter</label>
+        <div class="col-sm-9">
+            <input type="number" min="0" class="form-control" id="inputAge" ng-model="age" placeholder="Alter" integer>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right"><strong>Geschlecht</strong></div>
+        <div class="col-sm-9">
+            <label class="radio-inline">
+                <input type="radio" name="gender" value="m" ng-model="gender"> männlich
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="gender" value="f" ng-model="gender"> weiblich
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right"><strong>Höchster Bildungsabschluss</strong></div>
+        <div class="col-sm-9">
+            <select class="form-control" ng-model="graduation">
+                <option value="1">kein Abschluss</option>
+                <option value="2">Hauptschule</option>
+                <option value="3">Realschule, Mittlere Reife</option>
+                <option value="4">Fachhochschulreife</option>
+                <option value="5">Abitur</option>
+                <option value="6">Diplom, Magister</option>
+                <option value="7">Bachelor</option>
+                <option value="8">Master</option>
+                <option value="9">Promotion</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <a type="submit"
+               ng-click="onFormSubmit()"
+               ng-disabled="!age || !gender || !graduation"
+               class="btn btn-lg btn-success btn-next">Weiter
+                <div class="spinner" ng-hide="notWaitingForRequestToFinish">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</form>

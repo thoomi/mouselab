@@ -1,0 +1,56 @@
+<h2>Vielen Dank für Ihre Teilnahme!</h2>
+<p>Wenn Sie an der Verlosung des Amazon-Gutscheins über 15€ teilnehmen möchten, tragen Sie
+    bitte im Folgenden Ihre Email-Adresse ein. Ich würde mich auch sehr freuen, wenn ich Sie
+    für meine Studie im Rahmen meiner Masterarbeit anschreiben darf. Sollten Sie Anmerkungen
+    oder Anregungen zu dieser Studie haben, freue ich mich über Kommentare.
+    Sollten Sie Fragen zur Studie haben, schreiben Sie eine E-Mail an <a href="mailto:stephan.kopietz@uni-erfurt.de">stephan.kopietz@uni-erfurt.de</a>.
+</p>
+
+<p>Wollen Sie nicht an der Verlosung teilnehmen, dann können Sie das Browserfenster jetzt schließen.</p>
+
+<form class="" action="">
+    <div class="form-group">
+        <label for="inputEmail">E-Mail</label>
+        <input type="email" ng-model="participantEmail" class="form-control thanks-form-input" id="inputEmail"  placeholder="E-Mail">
+    </div>
+
+    <div class="form-group">
+        <div class="">
+            <p><strong>Teilnahme an weiteren Studien im Rahmen meiner Masterarbeit?</strong></p>
+            <label class="radio-inline">
+                <input type="radio" ng-model="participateInOther" name="participateInOther" value="1" checked> ja
+            </label>
+            <label class="radio-inline">
+                <input type="radio" ng-model="participateInOther" name="participateInOther" value="0"> nein
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="comments">Anmerkungen und Anregungen zur Studie</label>
+        <textarea class="form-control thanks-form-input" rows="4" ng-model="comments" name="comments" id="comments"></textarea>
+    </div>
+    <div class="form-group">
+        <a type="submit"
+           ng-click="onFormSubmit()"
+           ng-disabled="saveAndCloseEnabled"
+           class="btn btn-lg btn-success btn-next">Absenden
+            <div class="spinner" ng-hide="notWaitingForRequestToFinish">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+        </a>
+    </div>
+    <div class="alert alert-success" ng-hide="successAlert" role="alert"><strong>Daten erfolgreich gespeichert!</strong> Sie können das Browserfenster jetzt schließen.</div>
+</form>
+
+
+<div class="footer">
+    <p>Verantwortlich für die technische Umsetzung der Studie:</p>
+    <p>
+        Thomas Blank <br>
+        <a href="mailto:thomas.blank@fh-erfurt.de">thomas.blank@fh-erfurt.de</a>
+    </p>
+</div>
