@@ -2,10 +2,10 @@
 // -----------------------------------------------------------------------------
 // Database configuration
 // -----------------------------------------------------------------------------
-define('DB_USERNAME', '9J1cmj1KpA');
-define('DB_PASSWORD', '&7Ccd9z5');
+define('DB_USERNAME', 'testlab');
+define('DB_PASSWORD', 'testlab');
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'kopietz_testlab');
+define('DB_NAME', 'testlabdb');
 
 // -----------------------------------------------------------------------------
 // Additional constants

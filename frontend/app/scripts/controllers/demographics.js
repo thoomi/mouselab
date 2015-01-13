@@ -11,7 +11,7 @@ angular.module('mouselabApp')
   .controller('DemographicsCtrl', function ($scope, $location, dataService) {
         if (!dataService.everythingIsValid()) { $location.path(''); }
 
-        $scope.age        = '';
+        $scope.age        = 0;
         $scope.gender     = '';
         $scope.graduation = 0;
         $scope.notWaitingForRequestToFinish = true;

@@ -258,6 +258,11 @@ angular.module('mouselabApp')
                 endTime                  = 0;
                 currentExperimentRound   = 1;
                 lastExperimentDatabaseId = 0;
+                isParticipantSaved    = false;
+                isExperimentSaved     = [false, false, false];
+                isStressQuestionSaved = [false, false, false];
+                isDemographicsSaved   = false;
+                isMaximisingSaved     = false;
             }
         };
   });
