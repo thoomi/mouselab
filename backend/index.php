@@ -98,7 +98,8 @@ $app->get('/csv', function() use($app) {
 
 		'Alter',
 		'Bildung',
-		'Geschlecht'
+		'Geschlecht',
+		'Gesamtzeit'
 	);
 
 
@@ -143,6 +144,9 @@ $app->get('/csv', function() use($app) {
 		$gender = '#';
 		if (isset($value['participant']['gender'])) { $gender = $value['participant']['gender']; }
 
+		$totalTime = '#';
+		if (isset($value['participant']['total_time'])) { $totalTime = $value['participant']['total_time']; }
+
 
 		$result[] = array(
 			$value['participant']['ip_address'],
@@ -174,7 +178,8 @@ $app->get('/csv', function() use($app) {
 
 			$age,
 			$graduation,
-			$gender
+			$gender,
+			$totalTime
 		);
 	}
 

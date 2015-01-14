@@ -15,7 +15,7 @@ angular.module('mouselabApp')
       dataService.startTime();
 
       $scope.onFormSubmit = function() {
-        Fullscreen.all();
+        //Fullscreen.all();
         $scope.notWaitingForRequestToFinish = false;
 
         dataService.initializeParticipant($scope.personalCode, function(error) {

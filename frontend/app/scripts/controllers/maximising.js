@@ -52,10 +52,10 @@ angular.module('mouselabApp')
                 {
                     $scope.notWaitingForRequestToFinish = true;
 
-                    if (Fullscreen.isEnabled())
+                    /*if (Fullscreen.isEnabled())
                     {
                         Fullscreen.cancel();
-                    }
+                    }*/
 
                     $location.path('thanks');
                 }
@@ -70,7 +70,7 @@ angular.module('mouselabApp')
 
         $scope.maximisingQuestions = [
           {
-              title : 'Wenn ich fernsehe, tappe ich durch die Programme und überfliege oft die zur Verfügung stehenden Alternativen, sogar wenn ich eigentlich eine bestimmte Sendung sehen möchte.',
+              title : 'Wenn ich fernsehe, zappe ich durch die Programme und überfliege oft die zur Verfügung stehenden Alternativen, sogar wenn ich eigentlich eine bestimmte Sendung sehen möchte.',
               label : 'max-questions-1',
               value : 0
           },
