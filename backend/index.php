@@ -22,6 +22,48 @@ $app->get('/', function() use($app) {
 	echo json_encode($app->db->getCurrentEvaluationData());
 });
 
+$app->get('/user', function() use($app) {
+
+	$data = $app->db->getAllUsers();
+
+	$result = array();
+
+	$result[] = array(
+		'Email',
+		'Weitere Teilnahme',
+		'Experiment Umgebung',
+		'Kommentar'
+	);
+
+
+	foreach ($data as $value)
+	{
+		$result[] = array(
+			$value['email'],
+			$value['participate_in_other'],
+			$value['location'],
+			$value['comments']
+		);
+	}
+
+
+	$file = fopen('data/user.csv', 'w');
+
+	foreach ($result as $line)
+	{
+		fputcsv($file, $line);
+	}
+
+	fclose($file);
+
+
+	header('Content-type: text/csv');
+	header('Content-Disposition: attachment; filename="user.csv"');
+
+	readfile('data/user.csv');
+});
+
+
 $app->get('/csv', function() use($app) {
 	$data = $app->db->getCurrentEvaluationData();
 
