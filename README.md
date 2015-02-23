@@ -1,5 +1,5 @@
 # Mouselab
-Simple mouselab survey with time tracking using an Angular frontend. It connects to a Slim backend and stores the data in a mysql database.
+Simple mouselab survey with a time counter. The frontend is built using Angular.js. It connects to a Slim backend and stores the data in a mysql database.
 
 A running version of the system can be found at http://surveyt.stephan-kopietz.de.
 
