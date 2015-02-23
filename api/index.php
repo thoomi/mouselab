@@ -39,11 +39,6 @@ $app->post('/participant/create', function() use($app)
 			throw new Exception("Bad participant Group");
 		}
 
-		if (strlen($requestData['participantId']) !== 8 || !preg_match('/[\w]{8}/', $requestData['participantId']))
-		{
-			throw new Exception("Bad participant id");
-		}
-
 		if (!in_array($requestData['participantLocation'], array('L', 'O', 'T')))
 		{
 			throw new Exception('Bad participant location');
