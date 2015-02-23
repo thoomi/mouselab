@@ -1,5 +1,5 @@
 # mouselab
-Simple angular mouselab survey with time tracking which connects to a Slim backend and stores the data in a mysql database.
+Simple angular mouselab survey with time tracking. It connects to a Slim backend and stores the data in a mysql database.
 
 ## Installation
 **Backend and Api:** Upload the files to a server and install the dependencies with

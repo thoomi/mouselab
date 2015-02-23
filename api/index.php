@@ -34,11 +34,16 @@ $app->post('/participant/create', function() use($app)
 
 	if (isset($requestData['participantId']) && isset($requestData['participantGroup']) && isset($requestData['participantLocation']))
 	{
+        // Check if the participant group matches the expectations
 		if (!in_array($requestData['participantGroup'], array('G1', 'G2', 'G3')))
 		{
 			throw new Exception("Bad participant Group");
 		}
 
+        // Check the participant location for allowed values
+        // L -> Labor
+        // O -> Öffentlich
+        // T -> Test
 		if (!in_array($requestData['participantLocation'], array('L', 'O', 'T')))
 		{
 			throw new Exception('Bad participant location');
@@ -98,6 +103,10 @@ $app->post('/experiment/create', function() use($app){
 	}
 });
 
+
+// -----------------------------------------------------------------------------
+// This route saves the answers to the stress questions
+// -----------------------------------------------------------------------------
 $app->post('/experiment/save/stressquestions', function() use($app) {
 	$requestData = json_decode($app->request->getBody(), true);
 
@@ -122,6 +131,10 @@ $app->post('/experiment/save/stressquestions', function() use($app) {
 	}
 });
 
+
+// -----------------------------------------------------------------------------
+// This route saves the demographic data of the user
+// -----------------------------------------------------------------------------
 $app->post('/participant/save/demographics', function() use($app) {
 	$requestData = json_decode($app->request->getBody(), true);
 
@@ -144,6 +157,10 @@ $app->post('/participant/save/demographics', function() use($app) {
 	}
 });
 
+
+// -----------------------------------------------------------------------------
+// This route saves the answers to the maximising questions
+// -----------------------------------------------------------------------------
 $app->post('/participant/save/maximisinganswers', function() use($app) {
 	$requestData = json_decode($app->request->getBody(), true);
 
@@ -166,6 +183,10 @@ $app->post('/participant/save/maximisinganswers', function() use($app) {
 	}
 });
 
+
+// -----------------------------------------------------------------------------
+// This route creates a new user entry
+// -----------------------------------------------------------------------------
 $app->post('/user/create', function() use($app) {
 	$requestData = json_decode($app->request->getBody(), true);
 

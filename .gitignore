@@ -1,6 +1,7 @@
 .idea/
 .vagrant/
 backend/vendor/
+backend/data/
 backend/composer.lock
 api/vendor/
 api/composer.lock

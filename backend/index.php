@@ -8,6 +8,9 @@ require_once 'inc/dbHandler.php';
 $app = new \Slim\Slim();
 
 
+// -----------------------------------------------------------------------------
+// Define the database connection handler as singleton
+// -----------------------------------------------------------------------------
 $app->container->singleton('db', function () {
 	return new DbHandler();
 });
