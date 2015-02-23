@@ -4,11 +4,17 @@ Simple mouselab survey with time tracking using an Angular frontend. It connects
 A running version of the system can be found at http://surveyt.stephan-kopietz.de.
 
 ## Installation
-**Backend and Api:** Upload the files to a server and install the dependencies with
+#### Backend and Api: 
+Upload the files to a server and install the dependencies with
 
     composer install
     
-**Frontend:** For local development cd into the frontend folder and run
+#### Database:
+In order to setup the mysql database, you can find the creational script in the sql folder and run it for example as a phpMyAdmin import.
+There is also the mysql workbench file, use it in order to easily change the database and export a new creational script.
+
+#### Frontend: 
+For local development *cd* into the frontend folder and run
 
     npm install
     bower install
