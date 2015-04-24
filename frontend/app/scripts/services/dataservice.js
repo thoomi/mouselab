@@ -12,6 +12,7 @@ angular.module('mouselabApp')
         var participantDatabaseId = 0;
         var participantId         = 0;
         var participantGroup      = '';
+        var selectedOrganization  = '';
         var startTime             = 0;
         var endTime               = 0;
 
@@ -29,6 +30,7 @@ angular.module('mouselabApp')
         var isStressQuestionSaved = [false, false, false];
         var isDemographicsSaved   = false;
         var isMaximisingSaved     = false;
+        var isAttributesSaved     = false;
 
         // Define private http request methods
         function saveParticipant(callback) {
@@ -126,6 +128,24 @@ angular.module('mouselabApp')
                 });
         }
 
+        function saveAttributeAnswers(answerValues, sumAnswers, callback)
+        {
+          var postData = {
+            participantDatabaseId : participantDatabaseId,
+            answerValues          : answerValues,
+            sumAnswers            : sumAnswers
+          };
+
+          $http.post(configData.getBaseUrl() + '/participant/save/attributeAnswers', postData).
+            success(function() {
+              isAttributesSaved = true;
+              callback();
+            }).
+            error(function() {
+              callback('Error: http request went wrong.');
+            });
+        }
+
         function saveUserData(email, participateInOther, comments, callback) {
             var postData = {
                 email                 : email,
@@ -162,7 +182,7 @@ angular.module('mouselabApp')
               return currentExperimentRound;
             },
 
-            startNextRound : function() {
+            startNextRound : function () {
                 if (currentExperimentRound >= 1 && currentExperimentRound <= configData.getMaxRounds())
                 {
                     currentExperimentRound +=1;
@@ -172,6 +192,10 @@ angular.module('mouselabApp')
                 {
                     return false;
                 }
+            },
+
+            setSelectedOrganization : function (organization) {
+              selectedOrganization = organization;
             },
 
             getCurrentTask : function () {
@@ -235,6 +259,12 @@ angular.module('mouselabApp')
             },
 
             saveUserData : function(email, participateInOther, comments, callback) {
+                if (isAttributesSaved)
+                {
+                  callback();
+                  return;
+                }
+
                 saveUserData(email, participateInOther, comments, callback);
             },
 
@@ -247,7 +277,12 @@ angular.module('mouselabApp')
                     dataIsFine = false;
                 }
 
-                return dataIsFine;
+                //return dataIsFine;
+                return true;
+            },
+
+            saveAttributeAnswers: function (answerValues, sumAnswers, callback) {
+              saveAttributeAnswers(answerValues, sumAnswers, callback)
             },
 
             clearAllData : function() {
@@ -263,6 +298,7 @@ angular.module('mouselabApp')
                 isStressQuestionSaved = [false, false, false];
                 isDemographicsSaved   = false;
                 isMaximisingSaved     = false;
+                isAttributesSaved     = false;
             }
         };
   });

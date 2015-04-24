@@ -1,46 +1,63 @@
 <h2>Herzlich Willkommen</h2>
 <p >
-  und vielen Dank, dass Sie sich die Zeit nehmen, an meiner Studie zum Thema „Produktbewertung“ teilzunehmen.  Diese Untersuchung findet im Rahmen des Masterstudiengangs Psychologie an der Universität Erfurt statt und wird 10 – 15 Minuten dauern.
+    und vielen Dank das Sie sich die Zeit nehmen, an meiner Studie teilzunehmen. Diese Untersuchung findet im Rahmen meiner Masterarbeit in Psychologie an der Universität Erfurt statt und wird 10 – 15 Minuten dauern. Eine Teilnahme über Smartphones oder Tablet-PC´s ist leider nicht möglich.
 </p>
 <p>
-  In der Studie wird es darum gehen, sich <strong>so schnell und so gut wie möglich</strong>
-  für ein Waschmittel zu entscheiden. Hierfür stehen Ihnen verschiedene Waschmittel zur
-  Verfügung, mit Angaben zum Preis und der Güte verschiedener Eigenschaften.
-  <br>Die Studie wird ungefähr 5 – 10 Minuten dauern.
+    In der Studie wird es darum gehen, sich innerhalb einer begrenzten Entscheidungszeit
+    und anhand einer bestimmten Entscheidungsstrategie, <strong>so schnell und so gut
+    wie möglich</strong> für ein Waschmittel zu entscheiden.
+    Hierfür werden Ihnen verschiedene Waschmittel gezeigt,
+    die sich hinsichtlich verschiedener Eigenschaften voneinander unterscheiden.
 </p>
 <p>
-  Sie werden gleich die Möglichkeit haben, sich in zwei Übungsläufen mit der Vorgehensweise
-  vertraut zu machen, bevor die eigentliche Studie beginnt. Im Anschluss daran beginnt die
-  eigentliche Studie und Sie bekommen drei mal verschiedene Waschmittel gezeigt.
-  Jedes mal wird es darum gehen, eine <strong>Entscheidung so schnell aber auch so gut wie möglich
-  zu treffen.</strong> Nach jeder Entscheidung werden Ihnen Fragen zu Ihrer Entscheidung gestellt.
-  Weitere Fragen schließen die Studie ab und Sie haben die Möglichkeit, an einer Verlosung
-  für einen Amazon-Gutschein im Wert von 15€ teilzunehmen.
+    An dieser Stelle sei explizit darauf hingewiesen, dass es sich um keine kommerzielle Studie handelt und die Ergebnisse ausschließlich für wissenschaftliche Zwecke in der Entscheidungsforschung genutzt werden. Ihre Angaben werden selbstverständlich anonym gespeichert, sodass kein Rückschluss auf Ihre Person möglich ist.
 </p>
 <p>
-  Ihre Angaben werden selbstverständlich anonym gespeichert, sodass kein Rückschluss auf Ihre Person möglich ist.
+    Als Dankeschön werde ich für jede vollständige Teilnahme 0,50€ an eine der drei unten stehenden Hilfsorganisationen Ihrer Wahl spenden. Weiterhin können Sie an einer Verlosung für einen von drei Amazon-Gutscheinen im Wert von 25€ teilnehmen. Am Ende der Studie finden Sie zudem einen Link, durch den Sie Zugriff auf den Quellcode der Programmierung dieser Studie erhalten.
+</p>
+<p>
+    An welche der drei Hilfsorganisationen darf ich für Ihre Teilnahme 0,50€ spenden?
 </p>
 
-<!-- Uncomment below for online version -->
+<section class="choose-organization">
+    <ul class="list-unstyled list-inline text-center">
+        <li class="choose-organization-item">
+            <input type="radio" class="organization-input" name="organization" id="organization1" value="1" ng-model="organization">
+            <label for="organization1" class="organization1">
+                <img src="images/organization1.png" alt="" class="choose-organization-image">
+            </label>
+        </li>
+        <li class="choose-organization-item">
+            <input type="radio" class="organization-input" name="organization" id="organization2" value="2" ng-model="organization">
+            <label for="organization2" class="organization2">
+                <img src="images/organization2.png" alt="" class="choose-organization-image">
+            </label>
+        </li>
+        <li class="choose-organization-item">
+            <input type="radio" class="organization-input" name="organization" id="organization3" value="3" ng-model="organization">
+            <label for="organization3">
+                <img src="images/organization3.png" alt="" class="choose-organization-image">
+            </label>
+        </li>
+    </ul>
+</section>
+
 <p><strong>
-  Für diese Studie ist es unabdingbar, dass Sie während der Durchführung ungestört sind und nicht unterbrochen oder abgelenkt werden.
-  Sollte dies dennoch eintreffen, können Ihre Angaben leider nicht verwendet werden. Aus Erfahrung empfiehlt es sich daher einen ruhigen Ort
-  aufzusuchen, Telefone stumm zu schalten und Mailprogramme und Türen zu schließen.
+    Für diese Studie ist es unabdingbar, dass Sie während der Durchführung ungestört sind und nicht unterbrochen oder abgelenkt werden. Sollte dies dennoch eintreffen, können Ihre Angaben leider nicht verwendet werden. Aus Erfahrung empfiehlt es sich daher einen ruhigen Ort aufzusuchen, Telefone stumm zu schalten und Mailprogramme und Türen zu schließen.
   <br>
   <br>
-  Bitte nehmen Sie an dieser Studie nicht mit einem Smartphone oder Tablet teil!
+    Bitte nehmen Sie an dieser Studie nicht mit einem Smartphone oder Tablet-PC teil und nutzen Sie keine Hilfsmittel!
   <br><br>
   Vielen Dank!
+    <br><br>
   </strong>
 </p>
-
-<!-- Uncomment below for labor version -->
-<!--
 <p>
-  <strong>Bitte sorgen Sie dafür, dass Sie während der nächsten 10 – 15 Minuten ungestört sind und nicht
-  während der Teilnahme an der Studie unterbrochen oder abgelenkt werden.
-<br><br>
-Vielen Dank!</strong>
+    <div class="checkbox">
+        <label for="agree-to-participate" class="agree-to-participate">
+            <input type="checkbox" value="" id="agree-to-participate" ng-model="agreedToParticipate">
+            Ich bestätige hiermit, dass ich den oben stehenden Text gelesen und verstanden habe und erkläre mich bereit, an dieser Studie teilzunehmen.
+        </label>
+    </div>
 </p>
--->
-<p><a class="btn btn-lg btn-success btn-next" ng-href="#/personal-code">Weiter</a></p>
+<p><a class="btn btn-lg btn-success btn-next" ng-click="onSubmit()" ng-disabled="!agreedToParticipate || !organization">Weiter</a></p>

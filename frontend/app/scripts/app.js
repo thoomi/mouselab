@@ -67,6 +67,10 @@ angular
         templateUrl: 'views/personal-code.html',
         controller: 'PersonalCodeCtrl'
       })
+      .when('/attribute-weights', {
+        templateUrl: 'views/attribute-weights.html',
+        controller: 'AttributeWeightsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

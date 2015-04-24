@@ -1,0 +1,41 @@
+<h2>Was ist Ihnen wichtig?</h2>
+<p>
+    In dieser Studie werden Entscheidungen am Beispiel von Waschmitteln und deren Eigenschaften getroffen. Für die Studie ist es daher wichtig zu wissen, welche Eigenschaften für Sie persönlich wichtig sind und welche nicht.
+    <br>
+    <br>
+    Bitte geben Sie bei den folgenden sieben Eigenschaften an, wie bedeutsam diese für Sie persönlich sind:
+</p>
+
+<form class="form-horizontal stress-questions">
+    <div class="form-group" ng-repeat="question in attributeQuestions">
+        <div class="col-sm-3">
+            <p><strong>{{ $index + 1 }}. {{ question.title }}</strong></p>
+        </div>
+        <div class="col-sm-9">
+            <span class="stress-questions-option-label">{{ labelLeft }}</span>
+
+            <label class="radio-inline" ng-repeat="i in [5]|makeRange track by $index">
+                <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="{{ $index + 1 }}">
+            </label>
+
+            <span class="stress-questions-option-label">{{ labelRight }}</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-12">
+            <a type="submit"
+               ng-click="onFormSubmit()"
+               ng-disabled="!allQuestionsAnswered"
+               class="btn btn-lg btn-success btn-next">Weiter
+                <div class="spinner" ng-hide="notWaitingForRequestToFinish">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</form>

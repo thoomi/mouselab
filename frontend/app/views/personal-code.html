@@ -1,15 +1,8 @@
-<h2></h2>
-<p><strong>
-    Da die Ergebnisse des Fragebogens teilweise für eine zweite Untersuchung genutzt werden,
-    für die einige Personen einen weiteren Test absolvieren, erstellen Sie bitte Ihren persönlichen Code.
-</strong></p>
-<p>Über den Code ergibt sich die Möglichkeit, die Ergebnisse beider Tests der gleichen Person
-    zuzuordnen und für alle Teilnehmer die Anonymität zu wahren. Der persönliche Code besteht
-    aus einer Kombination von Buchstaben und Zahlen, die außer Ihnen niemandem bekannt ist,
-    der jedoch bei der zweiten Untersuchung wieder herleitbar ist.
+<h2>Ihr persönlicher Code</h2>
+<p>Bitte erstellen Sie Ihren persönlichen Code. Dieser Code besteht aus einer Kombination von Buchstaben und Zahlen, die außer Ihnen niemandem bekannt ist, für Sie persönlich jedoch leicht wieder herzuleiten ist. Sollten Sie bereits an der vorangegangenen Studie teilgenommen haben, können die Ergebnisse beider Tests anhand dieses Codes einander zugeordnet werden und zugleich Ihre Anonymität gewahrt werden.
     <br>
     <br>
-    Er setzt sich wie folgt zusammen:
+    Der persönliche Code setzt sich wie folgt zusammen:
 </p>
 <ul>
     <li>Die ersten beiden Buchstaben des Vornamens Ihrer Mutter.</li>
@@ -34,11 +27,23 @@ Ihre Mutter heißt Helga, Sie sind in Frankfurt geboren,
             <input type="text" class="form-control personal-code-input" id="personalCode" placeholder="HEFR1602" minlength="8" maxlength="8" required="" ng-model="personalCode">
         </div>
     </div>
+    <br>
+    <div class="form-group">
+        <div class="col-xs-12">
+            <p>Haben Sie bereits an der vorangegangenen Studie mit dem Titel „Produktbewertung“ teilgenommen?</p>
+            <label class="radio-inline">
+                <input type="radio" name="previousParticipant" ng-model="isPreviousParticipant" value="1"> Ja
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="previousParticipant" ng-model="isPreviousParticipant" value="0"> Nein
+            </label>
+        </div>
+    </div>
     <div class="form-group">
         <div class="col-sm-12">
             <a type="submit"
                ng-click="onFormSubmit()"
-               ng-disabled="!personalCode"
+               ng-disabled="!personalCode || !isPreviousParticipant"
                class="btn btn-lg btn-success btn-next">Weiter
                 <div class="spinner" ng-hide="notWaitingForRequestToFinish">
                     <div class="rect1"></div>

@@ -51,12 +51,6 @@ angular.module('mouselabApp')
                 if (!error)
                 {
                     $scope.notWaitingForRequestToFinish = true;
-
-                    /*if (Fullscreen.isEnabled())
-                    {
-                        Fullscreen.cancel();
-                    }*/
-
                     $location.path('thanks');
                 }
                 else

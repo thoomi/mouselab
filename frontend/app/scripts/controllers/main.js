@@ -8,6 +8,14 @@
  * Controller of the mouselabApp
  */
 angular.module('mouselabApp')
-  .controller('MainCtrl', function (dataService) {
-        dataService.clearAllData();
+  .controller('MainCtrl', function ($scope, $location, dataService) {
+    dataService.clearAllData();
+
+    $scope.organization = '';
+
+
+    $scope.onSubmit = function() {
+      dataService.setSelectedOrganization($scope.organization);
+      $location.path('personal-code');
+    };
   });

@@ -11,6 +11,7 @@ angular.module('mouselabApp')
   .controller('PersonalCodeCtrl', function ($scope, $window, $location, Fullscreen, dataService) {
       $scope.personalCode = '';
       $scope.notWaitingForRequestToFinish = true;
+      $scope.isPreviousParticipant = '';
 
       dataService.startTime();
 
@@ -21,7 +22,7 @@ angular.module('mouselabApp')
         dataService.initializeParticipant($scope.personalCode, function(error) {
           if (!error)
           {
-            $location.path('uebung1-description');
+            $location.path('attribute-weights');
           }
           else
           {
