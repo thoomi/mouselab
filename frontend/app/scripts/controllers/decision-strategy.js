@@ -29,8 +29,5 @@ angular.module('mouselabApp')
       { name  : 'Waschmittel 3', testCaseRatings : [0.40, '+',  '+', '+', '--', '++', '++'], rank : 3}
     ];
 
-    //$scope.participantAttributeValues = dataService.getParticipantAttributeValues();
     $scope.participantAttributeValues = [5, 4, 2, 1, 3, 3, 4];
-
-
   });

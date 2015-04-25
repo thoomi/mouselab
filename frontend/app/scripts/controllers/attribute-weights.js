@@ -51,9 +51,11 @@ angular.module('mouselabApp')
           $scope.notWaitingForRequestToFinish = true;
 
           // TODO: Randomly generate a deciscion strategy and move player to it
+          $location.path('decision-strategy');
         }
         else
         {
+          $location.path('decision-strategy');
           console.log(error);
         }
       });

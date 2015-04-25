@@ -31,6 +31,17 @@ angular.module('mouselabApp')
         $scope.itemSelected = function () {
             $scope.$broadcast('timer-stop');
             $scope.timerRunning = false;
-            $location.path('taskdescription');
+            //$location.path('taskdescription');
         };
+
+        $scope.timerFinished = function () {
+          console.log('Timer finished');
+        };
+
+        $scope.$on('timer-stopped', function (event, data) {
+          if (!event.targetScope.countdown)
+          {
+            console.log(data.millis);
+          }
+        });
   });

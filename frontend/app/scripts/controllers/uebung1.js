@@ -12,16 +12,18 @@ angular.module('mouselabApp')
         if (!dataService.everythingIsValid()) { $location.path(''); }
 
         $scope.ratingTestCases = [
-            'Preis je Waschgang in Cent',
-            'Schmutzentfernung',
-            'Vergrauung',
-            'Umwelteigenschaften'
+          'Preis je Waschgang in Cent',
+          'Schmutzentfernung',
+          'Fleckenentfernung',
+          'Vergrauung',
+          'Farberhaltung',
+          'Faserschutz',
+          'Umwelteigenschaften'
         ];
 
         $scope.washingPowders = [
-            { name  : 'Waschmittel 1', testCaseRatings : [0.19, '+',  '-',  '-'],  rank : 2},
-            { name  : 'Waschmittel 2', testCaseRatings : [0.23, 'o',  '++', 'o'],  rank : 1},
-            { name  : 'Waschmittel 3', testCaseRatings : [0.28, '++', '+',  '--'], rank : 3}
+            { name  : 'Waschmittel 1', testCaseRatings : [0.19, '+',  'o',  '+',  '+',  '-',  '-'],  rank : 2},
+            { name  : 'Waschmittel 2', testCaseRatings : [0.25, 'o',  '+',  'o', '++',  '+',  'o'],  rank : 1},
         ];
 
         $scope.timerRunning = true;
@@ -30,6 +32,15 @@ angular.module('mouselabApp')
         $scope.itemSelected = function () {
             $scope.$broadcast('timer-stop');
             $scope.timerRunning = false;
-            $location.path('uebung2-description');
+            //$location.path('uebung2-description');
         };
+
+        $scope.timerFinished = function () {
+          console.log('Timer finished');
+          $location.path('uebung2-description');
+        };
+
+        $scope.$on('timer-stopped', function (event, data) {
+          console.log(data.millis);
+        });
   });

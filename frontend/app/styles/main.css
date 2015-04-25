@@ -35,6 +35,12 @@ body {
   color: #333;
 }
 
+.decision-countdown {
+    text-align: right;
+    display: inline-block;
+    width: 40px;
+}
+
 .decision-headline {
   margin-bottom: 40px;
 }
