@@ -43,13 +43,26 @@ body {
   margin-top: 40px;
 }
 
-.stress-questions .radio-inline {
+.radio-inline {
   vertical-align: top;
   padding-top: 0;
 }
 
 .stress-questions-option-label {
   padding: 0 10px;
+}
+
+.test-case-value {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.table-personal-weights {
+    max-width: 450px;
+}
+
+.strategy-wadd-column-width {
+    max-width: 100px;
 }
 
 #inputAge {

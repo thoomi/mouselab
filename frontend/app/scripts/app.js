@@ -71,6 +71,10 @@ angular
         templateUrl: 'views/attribute-weights.html',
         controller: 'AttributeWeightsCtrl'
       })
+      .when('/decision-strategy', {
+        templateUrl: 'views/decision-strategy.html',
+        controller: 'DecisionStrategyCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

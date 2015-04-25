@@ -9,12 +9,13 @@
  */
 angular.module('mouselabApp')
   .service('dataService', function ($http, configData) {
-        var participantDatabaseId = 0;
-        var participantId         = 0;
-        var participantGroup      = '';
-        var selectedOrganization  = '';
-        var startTime             = 0;
-        var endTime               = 0;
+        var participantDatabaseId       = 0;
+        var participantId               = 0;
+        var participantGroup            = '';
+        var participantAttributeWeights = [];
+        var selectedOrganization        = '';
+        var startTime                   = 0;
+        var endTime                     = 0;
 
         //var participantAge        = 0;
         //var participantGender     = '';
@@ -139,6 +140,10 @@ angular.module('mouselabApp')
           $http.post(configData.getBaseUrl() + '/participant/save/attributeAnswers', postData).
             success(function() {
               isAttributesSaved = true;
+
+              // Save the attribute weights
+              participantAttributeWeights = postData.answerValues;
+
               callback();
             }).
             error(function() {
@@ -180,6 +185,10 @@ angular.module('mouselabApp')
 
             getCurrentRound : function () {
               return currentExperimentRound;
+            },
+
+            getParticipantAttributeValues : function () {
+              return participantAttributeWeights;
             },
 
             startNextRound : function () {
@@ -282,7 +291,7 @@ angular.module('mouselabApp')
             },
 
             saveAttributeAnswers: function (answerValues, sumAnswers, callback) {
-              saveAttributeAnswers(answerValues, sumAnswers, callback)
+              saveAttributeAnswers(answerValues, sumAnswers, callback);
             },
 
             clearAllData : function() {
