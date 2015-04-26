@@ -75,6 +75,10 @@ angular
         templateUrl: 'views/decision-strategy.html',
         controller: 'DecisionStrategyCtrl'
       })
+      .when('/participation-questions', {
+        templateUrl: 'views/participation-questions.html',
+        controller: 'ParticipationQuestionsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

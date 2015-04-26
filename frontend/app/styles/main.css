@@ -168,7 +168,10 @@ body {
 }
 
 .from-demographics {
-  max-width: 400px;
+  max-width: 350px;
+}
+.demographics-age {
+    max-width: 80px;
 }
 
 /* SPINNER */

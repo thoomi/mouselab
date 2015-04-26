@@ -2,17 +2,17 @@
 <timer class="pull-right decision-timer" interval="10" style="display:none;"><span class="deciscion-timer-description">Benötigte Zeit: </span>{{(millis / 1000) | number : 1}}</timer>
 <div class="clearfix"></div>
 
-<table class="table table-condensed">
+<table class="table table-condensed table-bordered table-striped">
 	<thead>
 	<tr>
-		<th></th>
+		<th>Eigenschaft</th>
 		<th ng-repeat="powder in washingPowders" class="text-center">{{ powder.name }}</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr ng-repeat="testCase in ratingTestCases">
 		<td>{{ testCase }}</td>
-		<td ng-repeat="powder in washingPowders" class="text-center">{{ powder.testCaseRatings[$parent.$index] }}</td>
+		<td ng-repeat="powder in washingPowders" class="text-center test-case-value">{{ ($parent.$index == 0) ? (powder.testCaseRatings[$parent.$index] | number:2) : powder.testCaseRatings[$parent.$index] }}</td>
 	</tr>
 	<tr>
 		<td></td>

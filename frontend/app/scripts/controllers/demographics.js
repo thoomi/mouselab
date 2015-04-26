@@ -14,6 +14,7 @@ angular.module('mouselabApp')
         $scope.age        = 0;
         $scope.gender     = '';
         $scope.graduation = 0;
+        $scope.currentStatus = 0;
         $scope.notWaitingForRequestToFinish = true;
 
         $scope.onFormSubmit = function() {

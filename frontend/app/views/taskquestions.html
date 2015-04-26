@@ -1,80 +1,55 @@
 <h2>Fragen zu ihrer Entscheidung {{currentRound}}</h2>
 <p>
-    Bitte beantworten Sie die folgenden Fragen ohne groß zu überlegen und klicken Sie den Wert an der Ihnen als erstes in den Sinn kommt. Bei den Fragen kommt es auf Ihre subjektive Einschätzung an, es gibt keine richtigen oder falschen Antworten. Wenn eine Aussage für Sie schwierig einzuschätzen ist, versuchen Sie, diese bitte trotzdem zu beantworten.
+    Im Anschluss an Ihre Entscheidung folgen nun einige Fragen. Bitte beantworten Sie die Fragen ohne groß zu überlegen und klicken Sie den Wert an der Ihnen als erstes in den Sinn kommt. Bei den Fragen kommt es auf Ihre subjektive Einschätzung an, es gibt keine richtigen oder falschen Antworten. Wenn eine Aussage für Sie schwierig einzuschätzen ist, versuchen Sie, diese bitte trotzdem zu beantworten.
 </p>
 <form class="form-horizontal stress-questions">
     <div class="form-group">
-        <div class=" col-sm-12">
-            <p><strong>Ich empfand deutlichen Zeitdruck während ich meine Entscheidung getroffen habe:</strong></p>
-            <span class="stress-questions-option-label">Stimme gar nicht zu</span>
-
+        <div class="col-xs-5">
+            <p><strong>Haben Sie anhand Ihrer vorgegebenen Entscheidungsstrategie Ihre Wahl getroffen?</strong></p>
+        </div>
+        <div class="col-xs-7">
             <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion1" ng-change="checkAllSet()" name="stress-question-1" value="1">
+                <input type="radio" name="decidedByStrategy" ng-model="decidedByStrategy" ng-change="checkAllSet()" value="1"> Ja
             </label>
             <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion1" ng-change="checkAllSet()" name="stress-question-1" value="2">
+                <input type="radio" name="decidedByStrategy" ng-model="decidedByStrategy" ng-change="checkAllSet()" value="0"> Nein
             </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion1" ng-change="checkAllSet()" name="stress-question-1" value="3">
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion1" ng-change="checkAllSet()" name="stress-question-1" value="4">
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion1" ng-change="checkAllSet()" name="stress-question-1" value="5">
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion1" ng-change="checkAllSet()" name="stress-question-1" value="6">
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion1" ng-change="checkAllSet()" name="stress-question-1" value="7">
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion1" ng-change="checkAllSet()" name="stress-question-1" value="8">
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion1" ng-change="checkAllSet()" name="stress-question-1" value="9">
-            </label>
-
-            <span class="stress-questions-option-label">Stimme voll und ganz zu</span>
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-sm-12">
-            <p><strong>Die Anzahl an Waschmitteln empfand ich als zu hoch:</strong></p>
-            <span class="stress-questions-option-label">Stimme gar nicht zu</span>
+    <br><br>
 
-            <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion2" ng-change="checkAllSet()" name="stress-question-2" value="1">
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion2" ng-change="checkAllSet()" name="stress-question-2" value="2">
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion2" ng-change="checkAllSet()" name="stress-question-2" value="3">
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion2" ng-change="checkAllSet()" name="stress-question-2" value="4">
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion2" ng-change="checkAllSet()" name="stress-question-2" value="5">
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion2" ng-change="checkAllSet()" name="stress-question-2" value="6">
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion2" ng-change="checkAllSet()" name="stress-question-2" value="7">
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion2" ng-change="checkAllSet()" name="stress-question-2" value="8">
-            </label>
-            <label class="radio-inline">
-                <input type="radio" ng-model="valueQuestion2" ng-change="checkAllSet()" name="stress-question-2" value="9">
+    <div class="form-group" ng-repeat="question in satisfyQuestions">
+        <div class="col-sm-5">
+            <p><strong>{{ $index + 1 }}. {{ question.title }}</strong></p>
+        </div>
+        <div class="col-sm-7">
+            <span class="stress-questions-option-label">{{ labelLeft }}</span>
+
+            <label class="radio-inline" ng-repeat="i in [9]|makeRange track by $index">
+                <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="{{ $index + 1 }}">
             </label>
 
-            <span class="stress-questions-option-label">Stimme voll und ganz zu</span>
+            <span class="stress-questions-option-label">{{ labelRight }}</span>
         </div>
     </div>
+    <br><br><br>
+
+    <div class="form-group" ng-repeat="question in stressQuestions">
+        <div class="col-sm-5">
+            <p><strong>{{ $index + 1 }}. {{ question.title }}</strong></p>
+        </div>
+        <div class="col-sm-7">
+            <span class="stress-questions-option-label">{{ labelLeft }}</span>
+
+            <label class="radio-inline" ng-repeat="i in [9]|makeRange track by $index">
+                <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="{{ $index + 1 }}">
+            </label>
+
+            <span class="stress-questions-option-label">{{ labelRight }}</span>
+        </div>
+    </div>
+
+
     <br><br>
     <div ng-hide="currentRound == 3">
         <p>Sobald Sie den Button betätigen werden Sie direkt zur nächsten Entscheidungssituation geleitet.
