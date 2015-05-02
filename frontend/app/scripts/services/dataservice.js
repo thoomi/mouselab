@@ -19,10 +19,6 @@ angular.module('mouselabApp')
         var startTime                   = 0;
         var endTime                     = 0;
 
-        //var participantAge        = 0;
-        //var participantGender     = '';
-        //var participantGraduation = 0;
-
         var currentExperimentRound   = 1;
         var lastExperimentDatabaseId = 0;
 
@@ -34,6 +30,7 @@ angular.module('mouselabApp')
         var isDemographicsSaved   = false;
         var isMaximisingSaved     = false;
         var isAttributesSaved     = false;
+        var isParticipationQuestionSaved = false;
 
         // Define private http request methods
         function saveParticipant(callback) {
@@ -58,13 +55,14 @@ angular.module('mouselabApp')
                 });
         }
 
-        function saveExperiment(optionRank, timeToDecision, callback) {
+        function saveExperiment(optionRank, timeToDecision, optionPosition, callback) {
             var postData = {
                 participantDatabaseId : participantDatabaseId,
                 condition             : configData.getTask(participantGroup, currentExperimentRound),
                 conditionPosition     : currentExperimentRound,
                 chosenOptionRank      : optionRank,
-                timeToDecision        : timeToDecision
+                timeToDecision        : timeToDecision,
+                chosenOptionPosition  : optionPosition
             };
 
             $http.post(configData.getBaseUrl() + '/experiment/create', postData).
@@ -79,13 +77,15 @@ angular.module('mouselabApp')
                 });
         }
 
-        function saveStressQuestions(valueQuestion1, valueQuestion2, callback) {
+        function saveStressQuestions(questionsData, callback) {
             var postData = {
-                participantDatabaseId : participantDatabaseId,
-                experimentDatabaseId  : lastExperimentDatabaseId,
-                valueQuestion1        : valueQuestion1,
-                valueQuestion2        : valueQuestion2,
-                questionSum           : parseInt(valueQuestion1) + parseInt(valueQuestion2)
+                participantDatabaseId  : participantDatabaseId,
+                experimentDatabaseId   : lastExperimentDatabaseId,
+                satisfactionAnswers    : questionsData.satisfactionAnswers,
+                satisfactionAnswersSum : questionsData.satisfactionAnswersSum,
+                stressAnswers          : questionsData.stressAnswers,
+                stressAnswersSum       : questionsData.stressAnswersSum,
+                decisionByStrategy     : questionsData.decidedByStrategy
             };
 
             $http.post(configData.getBaseUrl() + '/experiment/save/stressquestions', postData).
@@ -98,12 +98,13 @@ angular.module('mouselabApp')
                 });
         }
 
-        function saveDemographicData(age, gender, graduation, callback) {
+        function saveDemographicData(age, gender, graduation, status, callback) {
             var postData = {
                 participantDatabaseId : participantDatabaseId,
                 age                   : age,
                 gender                : gender,
-                graduation            : graduation
+                graduation            : graduation,
+                status                : status
             };
 
             $http.post(configData.getBaseUrl() + '/participant/save/demographics', postData).
@@ -120,8 +121,7 @@ angular.module('mouselabApp')
             var postData = {
                 participantDatabaseId : participantDatabaseId,
                 answerValues          : answerValues,
-                sumAnswers            : sumAnswers,
-                totalTime             : parseInt(endTime) - parseInt(startTime)
+                sumAnswers            : sumAnswers
             };
 
             $http.post(configData.getBaseUrl() + '/participant/save/maximisinganswers', postData).
@@ -132,6 +132,24 @@ angular.module('mouselabApp')
                 error(function() {
                     callback('Error: http request went wrong.');
                 });
+        }
+
+        function saveParticipationQuestions(questionsData, callback) {
+          var postData = {
+            participantDatabaseId : 8,
+            environmentAnswers    : questionsData.environmentAnswers,
+            participantAnswers    : questionsData.participantAnswers,
+            totalTime             : parseInt(endTime) - parseInt(startTime)
+          };
+
+          $http.post(configData.getBaseUrl() + '/participant/save/additionalanswers', postData).
+            success(function() {
+              isParticipationQuestionSaved = true;
+              callback();
+            }).
+            error(function() {
+              callback('Error: http request went wrong.');
+            });
         }
 
         function saveAttributeAnswers(answerValues, sumAnswers, callback)
@@ -233,8 +251,6 @@ angular.module('mouselabApp')
             },
 
             getCurrentTask : function () {
-              participantGroup = 'G1';
-
               return configData.getTask(participantGroup, currentExperimentRound);
             },
 
@@ -256,14 +272,14 @@ angular.module('mouselabApp')
                 }
             },
 
-            saveExperiment : function(optionRank, timeToDecision, callback) {
+            saveExperiment : function(optionRank, timeToDecision, optionPosition, callback) {
                 if (isExperimentSaved[currentExperimentRound-1])
                 {
                     callback();
                     return;
                 }
 
-              saveExperiment(optionRank, timeToDecision, callback);
+              saveExperiment(optionRank, timeToDecision, optionPosition, callback);
             },
 
             saveStressQuestions : function (answer1, answer2, callback) {
@@ -276,14 +292,14 @@ angular.module('mouselabApp')
                 saveStressQuestions(answer1, answer2, callback);
             },
 
-            saveDemographicData : function (age, gender, graduation, callback) {
+            saveDemographicData : function (age, gender, graduation, status, callback) {
                 if (isDemographicsSaved)
                 {
                     callback();
                     return;
                 }
 
-                saveDemographicData(age, gender, graduation, callback);
+                saveDemographicData(age, gender, graduation, status, callback);
             },
 
             saveMaximisingAnswers : function (answerValues, sumAnswers, callback) {
@@ -294,6 +310,16 @@ angular.module('mouselabApp')
                 }
 
                 saveMaximisingAnswers(answerValues, sumAnswers, callback);
+            },
+
+            saveParticipationQuestions : function (answerData, callback) {
+                if (isParticipationQuestionSaved)
+                {
+                  callback();
+                  return;
+                }
+
+                saveParticipationQuestions(answerData, callback);
             },
 
             saveUserData : function(email, participateInOther, comments, callback) {

@@ -20,6 +20,11 @@ angular.module('mouselabApp')
       var possibleGroups = ['G1', 'G2', 'G3'];
       var possibleTasks  = ['A',  'B',  'C'];
 
+      var availableTime = {};
+      availableTime[possibleTasks[0]] = 11500;
+      availableTime[possibleTasks[1]] = 14000;
+      availableTime[possibleTasks[2]] = 19500;
+
       // Define the washing powder rating test cases
       var ratingTestCases = [
         'Preis je Waschgang in Cent',
@@ -82,6 +87,10 @@ angular.module('mouselabApp')
 
         getTask : function(group, round) {
           return taskOrder[group][round - 1];
+        },
+
+        getAvailableTime : function (task) {
+          return availableTime[task];
         },
 
         getWashingPowders : function (task) {

@@ -11,16 +11,16 @@ angular.module('mouselabApp')
   .controller('DemographicsCtrl', function ($scope, $location, dataService) {
         if (!dataService.everythingIsValid()) { $location.path(''); }
 
-        $scope.age        = 0;
-        $scope.gender     = '';
-        $scope.graduation = 0;
+        $scope.age           = 0;
+        $scope.gender        = '';
+        $scope.graduation    = 0;
         $scope.currentStatus = 0;
         $scope.notWaitingForRequestToFinish = true;
 
         $scope.onFormSubmit = function() {
             $scope.notWaitingForRequestToFinish = false;
 
-            dataService.saveDemographicData($scope.age, $scope.gender, $scope.graduation, function(error) {
+            dataService.saveDemographicData($scope.age, $scope.gender, $scope.graduation, $scope.currentStatus, function(error) {
                 if (!error)
                 {
                     $scope.notWaitingForRequestToFinish = true;

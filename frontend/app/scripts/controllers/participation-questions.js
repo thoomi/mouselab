@@ -8,7 +8,7 @@
  * Controller of the mouselabApp
  */
 angular.module('mouselabApp')
-  .controller('ParticipationQuestionsCtrl', function ($scope, $location, dataService) {
+  .controller('ParticipationQuestionsCtrl', function ($scope, $location, dataService, randomizer) {
     if (!dataService.everythingIsValid()) { $location.path(''); }
 
     $scope.allQuestionsAnswered = false;
@@ -41,25 +41,31 @@ angular.module('mouselabApp')
     $scope.onFormSubmit = function() {
       $scope.notWaitingForRequestToFinish = false;
 
-      dataService.saveStressQuestions($scope.valueQuestion1, $scope.valueQuestion2, function(error) {
+      var taskQuestionData = {};
+      // Save all Answers into an array and calculate the sum
+      taskQuestionData.environmentAnswers = [];
+      angular.forEach($scope.environmentQuestions, function(question) {
+        taskQuestionData.environmentAnswers[parseInt(question.id - 1)] = question.value;
+      });
+
+      // Save all Answers into an array and calculate the sum
+      taskQuestionData.participantAnswers = [];
+      angular.forEach($scope.participantQuestions, function(question) {
+        taskQuestionData.participantAnswers[parseInt(question.id - 1)] = question.value;
+      });
+
+
+      dataService.endTime();
+
+      dataService.saveParticipationQuestions(taskQuestionData, function(error) {
         if (!error)
         {
           $scope.notWaitingForRequestToFinish = true;
-
-          if (dataService.isLastRound())
-          {
-            $location.path('demographics');
-          }
-          else
-          {
-            dataService.startNextRound();
-            $location.path('taskdecision');
-          }
+          $location.path('thanks');
         }
         else
         {
           console.log(error);
-          // TODO: Handle error properly
         }
       });
     };
@@ -67,16 +73,19 @@ angular.module('mouselabApp')
 
     $scope.environmentQuestions = [
       {
+        id    : 1,
         title : 'Ich wurde während der Studie gestört oder abgelenkt.',
         label : 'environment-questions-1',
         value : 0
       },
       {
+        id    : 2,
         title : 'Ich habe ernsthaft und sorgfältig an der Studie teilgenommen.',
         label : 'environment-questions-2',
         value : 0
       },
       {
+        id    : 3,
         title : 'Ich achte beim Einkauf von Waschmitteln auf verschiedene Produkteigenschaften.',
         label : 'environment-questions-3',
         value : 0
@@ -85,19 +94,25 @@ angular.module('mouselabApp')
 
     $scope.participantQuestions = [
       {
+        id    : 1,
         title : 'Haben Sie während der Studie Hilfsmittel (z.B. Notizzettel, Taschenrechner) benutzt?',
         label : 'participant-questions-1',
         value : null
       },
       {
+        id    : 2,
         title : 'Ich schätze mich im Kopfrechnen als gut ein.',
         label : 'participant-questions-2',
         value : null
       },
       {
+        id    : 3,
         title : 'Ich kann mir Informationen schnell und gut über einen kurzen Zeitraum merken',
         label : 'participant-questions-3',
         value : null
       }
     ];
+
+    randomizer.shuffleArray($scope.environmentQuestions);
+    randomizer.shuffleArray($scope.participantQuestions);
   });

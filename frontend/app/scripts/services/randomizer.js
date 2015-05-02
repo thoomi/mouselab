@@ -34,5 +34,5 @@ angular.module('mouselabApp')
             _array[randomIndex] = tmp;
           }
         }
-      }
+      };
   });
