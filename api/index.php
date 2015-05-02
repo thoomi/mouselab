@@ -150,14 +150,15 @@ $app->post('/experiment/create', function() use($app){
 		&& isset($requestData['condition'])
 		&& isset($requestData['conditionPosition'])
 		&& isset($requestData['chosenOptionRank'])
-		&& isset($requestData['timeToDecision']))
+		&& isset($requestData['timeToDecision'])
+        && isset($requestData['chosenOptionPosition']))
 	{
 		if (!in_array($requestData['condition'], array('A', 'B', 'C')))
 		{
 			throw new Exception("Bad participant Group");
 		}
 
-		$experimentDbId = $app->db->saveExperiment($requestData['participantDatabaseId'], $requestData['condition'], $requestData['conditionPosition'], $requestData['chosenOptionRank'], $requestData['timeToDecision']);
+		$experimentDbId = $app->db->saveExperiment($requestData['participantDatabaseId'], $requestData['condition'], $requestData['conditionPosition'], $requestData['chosenOptionRank'], $requestData['timeToDecision'], $requestData['chosenOptionPosition']);
 
 		$app->response->setStatus(200);
 		$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
@@ -180,12 +181,21 @@ $app->post('/experiment/save/stressquestions', function() use($app) {
 
 	if (isset($requestData['participantDatabaseId'])
 		&& isset($requestData['experimentDatabaseId'])
-		&& isset($requestData['valueQuestion1'])
-		&& isset($requestData['valueQuestion2'])
-		&& isset($requestData['questionSum']))
+		&& isset($requestData['satisfactionAnswers'])
+		&& isset($requestData['satisfactionAnswersSum'])
+        && isset($requestData['stressAnswers'])
+        && isset($requestData['stressAnswersSum'])
+		&& isset($requestData['decisionByStrategy']))
 	{
 
-		$app->db->saveStressQuestionAnswers($requestData['participantDatabaseId'], $requestData['experimentDatabaseId'], $requestData['valueQuestion1'], $requestData['valueQuestion2'], $requestData['questionSum']);
+		$app->db->saveStressQuestionAnswers(
+            $requestData['participantDatabaseId'],
+            $requestData['experimentDatabaseId'],
+            $requestData['satisfactionAnswers'],
+            $requestData['satisfactionAnswersSum'],
+            $requestData['stressAnswers'],
+            $requestData['stressAnswersSum'],
+            $requestData['decisionByStrategy']);
 
 		$app->response->setStatus(200);
 		$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
@@ -209,9 +219,10 @@ $app->post('/participant/save/demographics', function() use($app) {
 	if (isset($requestData['participantDatabaseId'])
 		&& isset($requestData['age'])
 		&& isset($requestData['gender'])
-		&& isset($requestData['graduation']))
+		&& isset($requestData['graduation'])
+        && isset($requestData['status']))
 	{
-		$app->db->saveDemographics($requestData['participantDatabaseId'], $requestData['age'], $requestData['gender'], $requestData['graduation']);
+		$app->db->saveDemographics($requestData['participantDatabaseId'], $requestData['age'], $requestData['gender'], $requestData['graduation'], $requestData['status']);
 
 		$app->response->setStatus(200);
 		$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
@@ -234,10 +245,9 @@ $app->post('/participant/save/maximisinganswers', function() use($app) {
 
 	if (isset($requestData['participantDatabaseId'])
 		&& isset($requestData['answerValues'])
-		&& isset($requestData['sumAnswers'])
-		&& isset($requestData['totalTime']))
+		&& isset($requestData['sumAnswers']))
 	{
-		$app->db->saveMaximisingAnswers($requestData['participantDatabaseId'], $requestData['answerValues'], $requestData['sumAnswers'], $requestData['totalTime']);
+		$app->db->saveMaximisingAnswers($requestData['participantDatabaseId'], $requestData['answerValues'], $requestData['sumAnswers']);
 
 		$app->response->setStatus(200);
 		$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
@@ -249,6 +259,32 @@ $app->post('/participant/save/maximisinganswers', function() use($app) {
 	{
 		throw new Exception("Bad request body");
 	}
+});
+
+
+// -----------------------------------------------------------------------------
+// This route saves the answers to the maximising questions
+// -----------------------------------------------------------------------------
+$app->post('/participant/save/additionalanswers', function() use($app) {
+    $requestData = json_decode($app->request->getBody(), true);
+
+    if (isset($requestData['participantDatabaseId'])
+        && isset($requestData['environmentAnswers'])
+        && isset($requestData['participantAnswers'])
+        && isset($requestData['totalTime']))
+    {
+        $app->db->saveParticipationAnswers($requestData['participantDatabaseId'], $requestData['environmentAnswers'], $requestData['participantAnswers'], $requestData['totalTime']);
+
+        $app->response->setStatus(200);
+        $app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
+        $app->response->headers->set('Content-Type', 'application/json');
+
+        echo json_encode(array());
+    }
+    else
+    {
+        throw new Exception("Bad request body");
+    }
 });
 
 
