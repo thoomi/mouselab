@@ -33,7 +33,7 @@ class DbHandler
      */
     public function saveParticipant($ipAddress, $participatedAt, $id, $dropout, $location, $group, $strategy, $organization, $participatedPreviously)
     {
-        $insertStatement = $this->dbh->prepare('INSERT INTO tl_participant (ip_address, participated_at, participation_id, dropout, location, participation_group, Participation_condition, donation_organization, previous_participant)
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_participant (ip_address, participated_at, participation_id, dropout, location, participation_group, Participation_condition, donation_organization_id, previous_participant)
                                                 VALUES (:ip_address, :participated_at, :participation_id, :dropout, :location, :participation_group, :participation_condition, :donation_organization, :previous_participant)');
 
         $insertStatement->bindParam(':ip_address',              $ipAddress);
@@ -50,6 +50,38 @@ class DbHandler
 
         return $this->dbh->lastInsertId();
     }
+
+    public function saveAttributeAnswers($participantDbId, $answerValues, $sumAnswers)
+    {
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_attribute_weights (q_num_1, q_num_2, q_num_3, q_num_4, q_num_5, q_num_6, q_num_7, q_sum, tl_participant_id)
+                                                VALUES (:answer1, :answer2, :answer3, :answer4, :answer5, :answer6, :answer7, :sumAnswers, :participantId)');
+
+        $insertStatement->bindParam(':answer1', $answerValues[0]);
+        $insertStatement->bindParam(':answer2', $answerValues[1]);
+        $insertStatement->bindParam(':answer3', $answerValues[2]);
+        $insertStatement->bindParam(':answer4', $answerValues[3]);
+        $insertStatement->bindParam(':answer5', $answerValues[4]);
+        $insertStatement->bindParam(':answer6', $answerValues[5]);
+        $insertStatement->bindParam(':answer7',       $answerValues[6]);
+        $insertStatement->bindParam(':sumAnswers',    $sumAnswers);
+        $insertStatement->bindParam(':participantId', $participantDbId);
+
+        $insertStatement->execute();
+    }
+
+    public function saveTraining($participantDbId, $trainingId, $optionRank, $timeToDecision)
+    {
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_experiment_training (training_number, chosen_option_rank, time_to_decision, tl_participant_id)
+                                                VALUES (:training_number, :chosen_option_rank, :time_to_decision, :participant_id)');
+
+        $insertStatement->bindParam(':training_number',    $trainingId);
+        $insertStatement->bindParam(':chosen_option_rank', $optionRank);
+        $insertStatement->bindParam(':time_to_decision',   $timeToDecision);
+        $insertStatement->bindParam(':participant_id',     $participantDbId);
+
+        $insertStatement->execute();
+    }
+
 
     public function saveExperiment($participantDbId, $condition, $conditionPosition, $optionRank, $timeToDecision)
     {

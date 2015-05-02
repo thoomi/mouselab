@@ -17,7 +17,7 @@
 	<tr>
 		<td></td>
 		<td ng-repeat="powder in washingPowders" class="text-center">
-			<button class="btn btn-success" ng-disabled="!timerRunning" ng-click="itemSelected()" ><span class="glyphicon glyphicon-ok"></span></button>
+			<button class="btn btn-success" ng-disabled="!timerRunning" ng-click="itemSelected(powder.rank)" ><span class="glyphicon glyphicon-ok"></span></button>
 		</td>
 	</tr>
 	</tbody>

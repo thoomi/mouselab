@@ -29,18 +29,26 @@ angular.module('mouselabApp')
         $scope.timerRunning = true;
 
 
-        $scope.itemSelected = function () {
+        var chosenOptionRank = 0;
+
+        $scope.itemSelected = function (optionRank) {
+            chosenOptionRank = optionRank;
+
             $scope.$broadcast('timer-stop');
             $scope.timerRunning = false;
-            //$location.path('uebung2-description');
-        };
-
-        $scope.timerFinished = function () {
-          console.log('Timer finished');
-          $location.path('uebung2-description');
         };
 
         $scope.$on('timer-stopped', function (event, data) {
-          console.log(data.millis);
+          dataService.saveTrainingData(1, chosenOptionRank, data.millis, function(error) {
+            if (!error)
+            {
+              $location.path('uebung2-description');
+            }
+            else
+            {
+              console.log(error);
+              // TODO: Handle error properly
+            }
+          });
         });
   });

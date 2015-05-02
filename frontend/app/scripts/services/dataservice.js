@@ -173,6 +173,22 @@ angular.module('mouselabApp')
                 });
         }
 
+        function saveTrainingData(trainingId, optionRank, timeToDecision, callback) {
+          var postData = {
+            participantDatabaseId : participantDatabaseId,
+            trainingId     : trainingId,
+            optionRank     : optionRank,
+            timeToDecision : timeToDecision
+          };
+
+          $http.post(configData.getBaseUrl() + '/participant/save/training', postData).
+            success(function() {
+              callback();
+            }).
+            error(function() {
+              callback('Error: http request went wrong.');
+            });
+        }
 
         return {
 
@@ -196,6 +212,10 @@ angular.module('mouselabApp')
               return participantAttributeWeights;
             },
 
+            getParticipantStrategy : function() {
+              return participantStrategy;
+            },
+
             startNextRound : function () {
                 if (currentExperimentRound >= 1 && currentExperimentRound <= configData.getMaxRounds())
                 {
@@ -213,6 +233,8 @@ angular.module('mouselabApp')
             },
 
             getCurrentTask : function () {
+              participantGroup = 'G1';
+
               return configData.getTask(participantGroup, currentExperimentRound);
             },
 
@@ -299,6 +321,10 @@ angular.module('mouselabApp')
 
             saveAttributeAnswers: function (answerValues, sumAnswers, callback) {
               saveAttributeAnswers(answerValues, sumAnswers, callback);
+            },
+
+            saveTrainingData : function (trainingId, optionRank, timeToDecision, callback) {
+              saveTrainingData(trainingId, optionRank, timeToDecision, callback);
             },
 
             clearAllData : function() {

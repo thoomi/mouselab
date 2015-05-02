@@ -20,7 +20,6 @@ $app->map('/:x+', function($x) use ($app) {
 
 	$app->response->setStatus(200);
 	$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
-    $app->response->headers->set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT');
 	$app->response->headers->set('Access-Control-Allow-Headers', 'content-type');
 
 })->via('OPTIONS');
@@ -77,9 +76,6 @@ $app->post('/participant/create', function() use($app)
 		}
 		else
 		{
-            $app->response->setStatus(200);
-            $app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
-            $app->response->headers->set('Content-Type', 'application/json');
 			throw new Exception('Database operation failed.');
 		}
 
@@ -89,6 +85,60 @@ $app->post('/participant/create', function() use($app)
 		throw new Exception("Bad request body");
 	}
 });
+
+
+// -----------------------------------------------------------------------------
+// This route saves the participants attribute answer values
+// -----------------------------------------------------------------------------
+$app->post('/participant/save/attributeAnswers', function() use($app){
+    $requestData = json_decode($app->request->getBody(), true);
+
+    if (isset($requestData['participantDatabaseId'])
+        && isset($requestData['answerValues'])
+        && isset($requestData['sumAnswers']))
+    {
+
+        $app->db->saveAttributeAnswers($requestData['participantDatabaseId'], $requestData['answerValues'], $requestData['sumAnswers']);
+
+        $app->response->setStatus(200);
+        $app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
+        $app->response->headers->set('Content-Type', 'application/json');
+
+        echo json_encode(array());
+    }
+    else
+    {
+        throw new Exception("Bad request body");
+    }
+});
+
+
+// -----------------------------------------------------------------------------
+// This route saves the participants attribute answer values
+// -----------------------------------------------------------------------------
+$app->post('/participant/save/training', function() use($app){
+    $requestData = json_decode($app->request->getBody(), true);
+
+    if (isset($requestData['participantDatabaseId'])
+        && isset($requestData['trainingId'])
+        && isset($requestData['optionRank'])
+        && isset($requestData['timeToDecision']))
+    {
+
+        $app->db->saveTraining($requestData['participantDatabaseId'], $requestData['trainingId'], $requestData['optionRank'], $requestData['timeToDecision']);
+
+        $app->response->setStatus(200);
+        $app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
+        $app->response->headers->set('Content-Type', 'application/json');
+
+        echo json_encode(array());
+    }
+    else
+    {
+        throw new Exception("Bad request body");
+    }
+});
+
 
 // -----------------------------------------------------------------------------
 // This route creates a experiment entry

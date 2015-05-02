@@ -12,9 +12,8 @@ angular.module('mouselabApp')
     if (!dataService.everythingIsValid()) { $location.path(''); }
 
     $scope.currentRound = dataService.getCurrentRound();
-
-    // Randomly choosen strategy (possible values: lex, eba, eqw, wadd
-    $scope.decisionStrategy = 'wadd';
+    $scope.decisionStrategy = dataService.getParticipantStrategy();
+    $scope.participantAttributeValues = dataService.getParticipantAttributeValues();
 
 
     $scope.ratingTestCases = [
@@ -26,8 +25,4 @@ angular.module('mouselabApp')
       'Faserschutz',
       'Umwelteigenschaften'
     ];
-
-
-    //$scope.participantAttributeValues = dataService.getParticipantAttributeValues();
-    $scope.participantAttributeValues = [5, 4, 2, 1, 3, 3, 4];
   });

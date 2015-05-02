@@ -8,7 +8,7 @@
  * Controller of the mouselabApp
  */
 angular.module('mouselabApp')
-  .controller('TaskdecisionCtrl', function ($scope, $location, dataService, configData) {
+  .controller('TaskdecisionCtrl', function ($scope, $location, dataService, configData, randomizer) {
         if (!dataService.everythingIsValid()) { $location.path(''); }
 
 
@@ -17,7 +17,11 @@ angular.module('mouselabApp')
         $scope.washingPowders  = configData.getWashingPowders(dataService.getCurrentTask());
         $scope.currentRound    = dataService.getCurrentRound();
         $scope.timerRunning    = true;
+        $scope.availableTime   = configData.getAvailableTaimevai(dataService.getCurrentTask())
 
+
+        // Shuffle the washing powders
+        randomizer.shuffleArray($scope.washingPowders);
 
         // Timer Settings
         var chosenOptionRank = 0;

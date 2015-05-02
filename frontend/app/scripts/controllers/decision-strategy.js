@@ -8,9 +8,11 @@
  * Controller of the mouselabApp
  */
 angular.module('mouselabApp')
-  .controller('DecisionStrategyCtrl', function ($scope) {
-    // Randomly choosen strategy (possible values: lex, eba, eqw, wadd
-    $scope.decisionStrategy = 'wadd';
+  .controller('DecisionStrategyCtrl', function ($scope, $location, dataService) {
+    if (!dataService.everythingIsValid()) { $location.path(''); }
+
+    $scope.decisionStrategy = dataService.getParticipantStrategy();
+    $scope.participantAttributeValues =dataService.getParticipantAttributeValues();
 
 
     $scope.ratingTestCases = [
@@ -28,6 +30,4 @@ angular.module('mouselabApp')
       { name  : 'Waschmittel 2', testCaseRatings : [0.35, '++', 'o', '-', 'o', '++', 'o'],   rank : 1},
       { name  : 'Waschmittel 3', testCaseRatings : [0.40, '+',  '+', '+', '--', '++', '++'], rank : 3}
     ];
-
-    $scope.participantAttributeValues = [5, 4, 2, 1, 3, 3, 4];
   });
