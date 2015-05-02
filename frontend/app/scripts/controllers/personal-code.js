@@ -14,6 +14,7 @@ angular.module('mouselabApp')
       $scope.isPreviousParticipant = '';
 
       dataService.startTime();
+      dataService.incrementSiteNumber();
 
       $scope.onFormSubmit = function() {
         $scope.notWaitingForRequestToFinish = false;

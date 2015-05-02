@@ -22,8 +22,13 @@
 
     <!-- Add your site or application content here -->
     <div class="container page-wrapper">
+        <div class="status-bar" ng-controller="StatusbarCtrl">
+            <div class="status-bar-inner" width="{{ barWidth }}%"></div>
+        </div>
+
         <div ng-view=""></div>
     </div>
+
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -82,6 +87,7 @@
         <script src="scripts/controllers/attribute-weights.js"></script>
         <script src="scripts/controllers/decision-strategy.js"></script>
         <script src="scripts/controllers/participation-questions.js"></script>
+        <script src="scripts/controllers/statusbar.js"></script>
         <!-- endbuild -->
 </body>
 </html>

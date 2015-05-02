@@ -8,7 +8,7 @@
  * Service in the mouselabApp.
  */
 angular.module('mouselabApp')
-  .service('dataService', function ($http, configData) {
+  .service('dataService', function ($http, $rootScope, configData) {
         var participantDatabaseId       = 0;
         var participantId               = 0;
         var participantGroup            = '';
@@ -136,7 +136,7 @@ angular.module('mouselabApp')
 
         function saveParticipationQuestions(questionsData, callback) {
           var postData = {
-            participantDatabaseId : 8,
+            participantDatabaseId : participantDatabaseId,
             environmentAnswers    : questionsData.environmentAnswers,
             participantAnswers    : questionsData.participantAnswers,
             totalTime             : parseInt(endTime) - parseInt(startTime)
@@ -351,6 +351,10 @@ angular.module('mouselabApp')
 
             saveTrainingData : function (trainingId, optionRank, timeToDecision, callback) {
               saveTrainingData(trainingId, optionRank, timeToDecision, callback);
+            },
+
+            incrementSiteNumber : function() {
+              $rootScope.$broadcast('siteChange');
             },
 
             clearAllData : function() {
