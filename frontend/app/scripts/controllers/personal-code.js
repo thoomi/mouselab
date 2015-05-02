@@ -16,10 +16,9 @@ angular.module('mouselabApp')
       dataService.startTime();
 
       $scope.onFormSubmit = function() {
-        //Fullscreen.all();
         $scope.notWaitingForRequestToFinish = false;
 
-        dataService.initializeParticipant($scope.personalCode, function(error) {
+        dataService.initializeParticipant($scope.personalCode, $scope.isPreviousParticipant, function(error) {
           if (!error)
           {
             $location.path('attribute-weights');

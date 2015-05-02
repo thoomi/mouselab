@@ -1,6 +1,6 @@
 AuthType Basic
 AuthName "restricted area"
-AuthUserFile /var/www/testlab/backend/.htpasswd
+AuthUserFile /var/www/kopietz/backend/.htpasswd
 require valid-user
 
 RewriteEngine On

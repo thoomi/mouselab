@@ -31,17 +31,20 @@ class DbHandler
      * @param $group
      * @return string
      */
-    public function saveParticipant($ipAddress, $participatedAt, $id, $dropout, $location, $group)
+    public function saveParticipant($ipAddress, $participatedAt, $id, $dropout, $location, $group, $strategy, $organization, $participatedPreviously)
     {
-        $insertStatement = $this->dbh->prepare('INSERT INTO tl_participant (ip_address, participated_at, participation_id, dropout, location, participation_group)
-                                                VALUES (:ip_address, :participated_at, :participation_id, :dropout, :location, :participation_group)');
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_participant (ip_address, participated_at, participation_id, dropout, location, participation_group, Participation_condition, donation_organization, previous_participant)
+                                                VALUES (:ip_address, :participated_at, :participation_id, :dropout, :location, :participation_group, :participation_condition, :donation_organization, :previous_participant)');
 
-        $insertStatement->bindParam(':ip_address',          $ipAddress);
-        $insertStatement->bindParam(':participated_at',     $participatedAt);
-        $insertStatement->bindParam(':participation_id',    $id);
-        $insertStatement->bindParam(':dropout',             $dropout);
-        $insertStatement->bindParam(':location',            $location);
-        $insertStatement->bindParam(':participation_group', $group);
+        $insertStatement->bindParam(':ip_address',              $ipAddress);
+        $insertStatement->bindParam(':participated_at',         $participatedAt);
+        $insertStatement->bindParam(':participation_id',        $id);
+        $insertStatement->bindParam(':dropout',                 $dropout);
+        $insertStatement->bindParam(':location',                $location);
+        $insertStatement->bindParam(':participation_group',     $group);
+        $insertStatement->bindParam(':participation_condition', $strategy);
+        $insertStatement->bindParam(':donation_organization',   $organization);
+        $insertStatement->bindParam(':previous_participant',    $participatedPreviously);
 
         $insertStatement->execute();
 

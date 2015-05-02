@@ -10,4 +10,4 @@ define('DB_NAME', 'testlabdb');
 // -----------------------------------------------------------------------------
 // Additional constants
 // -----------------------------------------------------------------------------
-define('ALLOWED_ORIGINS', '*');
+define('ALLOWED_ORIGINS', 'http://localhost:9000');

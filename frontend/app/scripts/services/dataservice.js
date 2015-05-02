@@ -12,8 +12,10 @@ angular.module('mouselabApp')
         var participantDatabaseId       = 0;
         var participantId               = 0;
         var participantGroup            = '';
+        var participantStrategy         = '';
         var participantAttributeWeights = [];
         var selectedOrganization        = '';
+        var participantIsPreviousParticipant = 0;
         var startTime                   = 0;
         var endTime                     = 0;
 
@@ -36,9 +38,12 @@ angular.module('mouselabApp')
         // Define private http request methods
         function saveParticipant(callback) {
             var postData = {
-                participantId       : participantId,
-                participantGroup    : participantGroup,
-                participantLocation : configData.getExperimentLocation()
+                participantId           : participantId,
+                participantGroup        : participantGroup,
+                participantStrategy     : participantStrategy,
+                participantOrganization : selectedOrganization,
+                participantPreviously   : participantIsPreviousParticipant,
+                participantLocation     : configData.getExperimentLocation()
             };
 
             $http.post(configData.getBaseUrl() + '/participant/create', postData).
@@ -211,15 +216,17 @@ angular.module('mouselabApp')
               return configData.getTask(participantGroup, currentExperimentRound);
             },
 
-            initializeParticipant : function (id, callback) {
+            initializeParticipant : function (id, isPreviousParticipant, callback) {
                 if (isParticipantSaved)
                 {
                     callback();
                     return;
                 }
 
-                participantId    = id;
-                participantGroup = configData.getRandomGroup();
+                participantId         = id;
+                participantIsPreviousParticipant = isPreviousParticipant;
+                participantGroup    = configData.getRandomGroup();
+                participantStrategy = configData.getRandomStrategy();
 
                 if (typeof callback === 'function')
                 {

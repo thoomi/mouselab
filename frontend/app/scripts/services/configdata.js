@@ -12,10 +12,11 @@ angular.module('mouselabApp')
       // Location will be different for each url
       var experimentLocation  = 'T';
 
-      //var baseApiUrl = 'http://testlab.dev';
-      var baseApiUrl = 'http://apilab.stephan-kopietz.de';
+      var baseApiUrl = 'http://api.stephan-kopietz.dev';
+      //var baseApiUrl = 'http://apilab.stephan-kopietz.de';
 
       var numberOfRounds = 3;
+      var possibleStrategies = ['lex', 'eba', 'eqw', 'wadd'];
       var possibleGroups = ['G1', 'G2', 'G3'];
       var possibleTasks  = ['A',  'B',  'C'];
 
@@ -33,30 +34,30 @@ angular.module('mouselabApp')
       var washingPowders = {};
 
       washingPowders[possibleTasks[0]] = [
-        { name  : 'Waschmittel 1', testCaseRatings : [0.31, '+', '+', '-', 'o', '++', '+'],   rank : 4},
-        { name  : 'Waschmittel 2', testCaseRatings : [0.28, 'o', '+', 'o', '++', '++', '++'], rank : 2},
-        { name  : 'Waschmittel 3', testCaseRatings : [0.20, '+', '++', 'o', '+', '+', '++'],  rank : 1},
-        { name  : 'Waschmittel 4', testCaseRatings : [0.19, '+', '+', '-', 'o', 'o', '+'],    rank : 3}
+        { testCaseRatings : [0.25, '+', '+', 'o', '+', '-', '++'],  rank : 1},
+        { testCaseRatings : [0.22, '+', '++', 'o', '--', 'o', '+'], rank : 2},
+        { testCaseRatings : [0.20, '-', '+', '+', '-', '--', '+'],  rank : 3},
+        { testCaseRatings : [0.31, '++', 'o', '-', 'o', '+', 'o'],  rank : 4}
       ];
 
       washingPowders[possibleTasks[1]] = [
-        { name  : 'Waschmittel 1', testCaseRatings : [0.21, '+', 'o', '-', '++', '+', '--'], rank : 3},
-        { name  : 'Waschmittel 2', testCaseRatings : [0.28, 'o', '++', '-', 'o', 'o', '+'],  rank : 5},
-        { name  : 'Waschmittel 3', testCaseRatings : [0.25, '++', '+', '+', 'o', '--', 'o'], rank : 4},
-        { name  : 'Waschmittel 4', testCaseRatings : [0.20, '+', '+', '+', '-', '++', '+'],  rank : 2},
-        { name  : 'Waschmittel 5', testCaseRatings : [0.17, '++', '+', 'o', '+', '-', '++'], rank : 1},
-        { name  : 'Waschmittel 6', testCaseRatings : [0.31, '+', '-', '+', '--', '++', 'o'], rank : 6}
+        { testCaseRatings : [0.25, '+', '+', 'o', '+', '-', '++'],  rank : 1},
+        { testCaseRatings : [0.22, '+', '++', 'o', '--', 'o', '+'], rank : 2},
+        { testCaseRatings : [0.20, '-', '+', '+', '-', '--', '+'],  rank : 3},
+        { testCaseRatings : [0.31, '++', 'o', '-', 'o', '+', 'o'],  rank : 4},
+        { testCaseRatings : [0.27, 'o', '+', 'o', 'o', '-', '--'],  rank : 5},
+        { testCaseRatings : [0.33, '+', '-', 'o', 'o', '+', 'o'],   rank : 5}
       ];
 
       washingPowders[possibleTasks[2]] = [
-        { name  : 'Waschmittel 1', testCaseRatings : [0.20, '+', '++', 'o', '--', 'o', '+'], rank : 1},
-        { name  : 'Waschmittel 2', testCaseRatings : [0.37, '-', 'o', '+', '+', 'o', '++'],  rank : 7},
-        { name  : 'Waschmittel 3', testCaseRatings : [0.27, 'o', '+', '+', 'o', '+', '--'],  rank : 5},
-        { name  : 'Waschmittel 4', testCaseRatings : [0.28, '+', '-', '++', '--', 'o', '-'], rank : 8},
-        { name  : 'Waschmittel 5', testCaseRatings : [0.31, '++', 'o', '-', '++', '+', 'o'], rank : 4},
-        { name  : 'Waschmittel 6', testCaseRatings : [0.23, '+', '+', '+', 'o', '--', '+'],  rank : 3},
-        { name  : 'Waschmittel 7', testCaseRatings : [0.22, '+', '+', '--', '+', '-', '++'], rank : 2},
-        { name  : 'Waschmittel 8', testCaseRatings : [0.33, '++', '-', 'o', '+', '+', 'o'],  rank : 6}
+        { testCaseRatings : [0.25, '+', '+', 'o', '+', '-', '++'],  rank : 1},
+        { testCaseRatings : [0.22, '+', '++', 'o', '--', 'o', '+'], rank : 2},
+        { testCaseRatings : [0.20, '-', '+', '+', '-', '--', '+'],  rank : 3},
+        { testCaseRatings : [0.31, '++', 'o', '-', 'o', '+', 'o'],  rank : 4},
+        { testCaseRatings : [0.27, 'o', '+', 'o', 'o', '-', '--'],  rank : 5},
+        { testCaseRatings : [0.33, '+', '-', 'o', 'o', '+', 'o'],   rank : 6},
+        { testCaseRatings : [0.37, '-', 'o', '-', '+', 'o', '++'],  rank : 7},
+        { testCaseRatings : [0.28, '+', '-', 'o', '--', 'o', '-'],  rank : 8}
       ];
 
       // Define the task order (The order how the user will see it)
@@ -73,6 +74,10 @@ angular.module('mouselabApp')
 
         getRandomGroup : function () {
           return possibleGroups[randomizer.numberBetween(0, 2)];
+        },
+
+        getRandomStrategy : function () {
+          return possibleStrategies[randomizer.numberBetween(0,3)];
         },
 
         getTask : function(group, round) {

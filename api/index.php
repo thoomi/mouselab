@@ -1,5 +1,5 @@
 <?php
-//error_reporting(E_ALL);
+error_reporting(E_ALL);
 
 require_once 'inc/config.php';
 require_once 'vendor/autoload.php';
@@ -20,6 +20,7 @@ $app->map('/:x+', function($x) use ($app) {
 
 	$app->response->setStatus(200);
 	$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
+    $app->response->headers->set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT');
 	$app->response->headers->set('Access-Control-Allow-Headers', 'content-type');
 
 })->via('OPTIONS');
@@ -32,7 +33,12 @@ $app->post('/participant/create', function() use($app)
 {
 	$requestData = json_decode($app->request->getBody(), true);
 
-	if (isset($requestData['participantId']) && isset($requestData['participantGroup']) && isset($requestData['participantLocation']))
+	if (isset($requestData['participantId'])
+        && isset($requestData['participantGroup'])
+        && isset($requestData['participantLocation'])
+        && isset($requestData['participantStrategy'])
+        && isset($requestData['participantOrganization'])
+        && isset($requestData['participantPreviously']))
 	{
         // Check if the participant group matches the expectations
 		if (!in_array($requestData['participantGroup'], array('G1', 'G2', 'G3')))
@@ -50,7 +56,16 @@ $app->post('/participant/create', function() use($app)
 		}
 
 
-		$participantDatabaseId = $app->db->saveParticipant($app->request->getIp(), date("Y-m-d H:i:s"), $requestData['participantId'], true, $requestData['participantLocation'], $requestData['participantGroup']);
+		$participantDatabaseId = $app->db->saveParticipant(
+            $app->request->getIp(),
+            date("Y-m-d H:i:s"),
+            $requestData['participantId'],
+            true,
+            $requestData['participantLocation'],
+            $requestData['participantGroup'],
+            $requestData['participantStrategy'],
+            $requestData['participantOrganization'],
+            $requestData['participantPreviously']);
 
 		if ($participantDatabaseId)
 		{
@@ -62,6 +77,9 @@ $app->post('/participant/create', function() use($app)
 		}
 		else
 		{
+            $app->response->setStatus(200);
+            $app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
+            $app->response->headers->set('Content-Type', 'application/json');
 			throw new Exception('Database operation failed.');
 		}
 
