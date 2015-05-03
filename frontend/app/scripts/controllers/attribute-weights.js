@@ -11,6 +11,7 @@ angular.module('mouselabApp')
   .controller('AttributeWeightsCtrl', function ($scope, $location, dataService) {
     if (!dataService.everythingIsValid()) { $location.path(''); }
 
+    dataService.incrementSiteNumber();
 
     $scope.labelLeft = 'nicht wichtig';
     $scope.labelRight = 'sehr wichtig';

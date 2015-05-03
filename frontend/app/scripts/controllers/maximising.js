@@ -10,7 +10,8 @@
 angular.module('mouselabApp')
   .controller('MaximisingCtrl', function ($scope, $location, Fullscreen, dataService, randomizer) {
         if (!dataService.everythingIsValid()) { $location.path(''); }
-
+    
+    dataService.incrementSiteNumber();
 
         $scope.labelLeft = 'trifft nicht zu';
         $scope.labelRight = 'trifft zu';

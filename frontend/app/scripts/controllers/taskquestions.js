@@ -11,6 +11,8 @@ angular.module('mouselabApp')
   .controller('TaskquestionsCtrl', function ($scope, $location, dataService, randomizer) {
       if (!dataService.everythingIsValid()) { $location.path(''); }
 
+    dataService.incrementSiteNumber();
+
       $scope.allQuestionsAnswered = false;
       $scope.decidedByStrategy    = null;
       $scope.currentRound         = dataService.getCurrentRound();
@@ -77,7 +79,7 @@ angular.module('mouselabApp')
                   else
                   {
                       dataService.startNextRound();
-                      $location.path('taskdecision');
+                      $location.path('taskdescription');
                   }
               }
               else

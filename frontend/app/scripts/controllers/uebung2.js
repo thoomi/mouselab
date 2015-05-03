@@ -8,8 +8,10 @@
  * Controller of the mouselabApp
  */
 angular.module('mouselabApp')
-  .controller('Uebung2Ctrl', function ($scope, $location, dataService) {
+  .controller('Uebung2Ctrl', function ($scope, $interval, $location, dataService) {
     if (!dataService.everythingIsValid()) { $location.path(''); }
+
+    dataService.incrementSiteNumber();
 
     $scope.ratingTestCases = [
       'Preis je Waschgang in Cent',
@@ -47,16 +49,35 @@ angular.module('mouselabApp')
     }
 
 
+    $scope.countDownTime = 15000.0;
+
+    var intervalId = $interval(function() {
+      if ($scope.countDownTime <= 0)
+      {
+        $interval.cancel(intervalId);
+        $scope.timerRunning = false;
+        saveExperiment(0);
+        return;
+      }
+
+      $scope.countDownTime -= 10;
+
+    }, 10);
+
+
+    $scope.$on('$destroy', function() {
+      // Make sure that the interval is destroyed too
+      $interval.cancel(intervalId);
+    });
+
+
 
     $scope.itemSelected = function (optionRank) {
         chosenOptionRank = optionRank;
 
         $scope.$broadcast('timer-stop');
         $scope.timerRunning = false;
-    };
-
-    $scope.timerFinished = function () {
-      saveExperiment(0);
+        $interval.cancel(intervalId);
     };
 
     $scope.$on('timer-stopped', function (event, data) {

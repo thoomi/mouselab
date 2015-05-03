@@ -11,6 +11,8 @@ angular.module('mouselabApp')
   .controller('ThanksCtrl', function ($scope, $location, dataService) {
         if (!dataService.everythingIsValid()) { $location.path(''); }
 
+    dataService.incrementSiteNumber();
+
         $scope.saveAndCloseEnabled = false;
         $scope.participantEmail = '';
         $scope.participateInOther = 1;

@@ -1,5 +1,5 @@
 <h2 class="pull-left decision-headline">Entscheidung {{currentRound}}</h2>
-<timer class="pull-right decision-timer" interval="1000" countdown="availableTime" finish-callback="timerFinished()"><span class="deciscion-timer-description">Verfügbare Zeit: </span><span class="decision-countdown">{{ countdown }}</span></timer>
+<div class="pull-right decision-timer"><span class="deciscion-timer-description">Verfügbare Zeit: </span><span class="decision-countdown">{{ availableTime / 1000.0 |number:1 }}</span></div>
 <timer class="pull-right decision-timer" interval="10" style="display:none;"><span class="deciscion-timer-description">Benötigte Zeit: </span>{{(millis ) | number : 1}}</timer>
 
 <div class="clearfix"></div>

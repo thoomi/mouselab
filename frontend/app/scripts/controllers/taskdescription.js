@@ -8,8 +8,10 @@
  * Controller of the mouselabApp
  */
 angular.module('mouselabApp')
-  .controller('TaskdescriptionCtrl', function ($scope, $location, dataService) {
+  .controller('TaskdescriptionCtrl', function ($scope, $rootScope, $location, dataService) {
     if (!dataService.everythingIsValid()) { $location.path(''); }
+
+    dataService.incrementSiteNumber();
 
     $scope.currentRound = dataService.getCurrentRound();
     $scope.decisionStrategy = dataService.getParticipantStrategy();
@@ -25,4 +27,8 @@ angular.module('mouselabApp')
       'Faserschutz',
       'Umwelteigenschaften'
     ];
+
+    $rootScope.$on('strategyChange', function(event, strategy) {
+      $scope.decisionStrategy = strategy;
+    });
   });

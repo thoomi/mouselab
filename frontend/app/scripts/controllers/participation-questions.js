@@ -11,6 +11,8 @@ angular.module('mouselabApp')
   .controller('ParticipationQuestionsCtrl', function ($scope, $location, dataService, randomizer) {
     if (!dataService.everythingIsValid()) { $location.path(''); }
 
+    dataService.incrementSiteNumber();
+
     $scope.allQuestionsAnswered = false;
     $scope.notWaitingForRequestToFinish = true;
     $scope.labelLeft = 'Stimme gar nicht zu';

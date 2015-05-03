@@ -8,9 +8,10 @@
  * Controller of the mouselabApp
  */
 angular.module('mouselabApp')
-  .controller('TaskdecisionCtrl', function ($scope, $location, dataService, configData, randomizer) {
+  .controller('TaskdecisionCtrl', function ($scope, $interval, $location, dataService, configData, randomizer) {
         if (!dataService.everythingIsValid()) { $location.path(''); }
 
+    dataService.incrementSiteNumber();
 
         // Define the washing powder rating test cases
         $scope.ratingTestCases = configData.getRatingTestCases();
@@ -41,16 +42,35 @@ angular.module('mouselabApp')
           });
         }
 
+
+        var intervalId = $interval(function() {
+          if ($scope.availableTime <= 0)
+          {
+            $interval.cancel(intervalId);
+            $scope.timerRunning = false;
+            saveExperiment(0);
+            return;
+          }
+
+          $scope.availableTime -= 10;
+
+        }, 10);
+
+
+        $scope.$on('$destroy', function() {
+          // Make sure that the interval is destroyed too
+          $interval.cancel(intervalId);
+        });
+
+
+
         $scope.itemSelected = function (optionRank, optionPosition) {
             chosenOptionRank     = optionRank;
             chosenOptionPosition = optionPosition;
 
             $scope.$broadcast('timer-stop');
             $scope.timerRunning = false;
-        };
-
-        $scope.timerFinished = function () {
-          saveExperiment(0);
+            $interval.cancel(intervalId);
         };
 
         $scope.$on('timer-stopped', function (event, data) {

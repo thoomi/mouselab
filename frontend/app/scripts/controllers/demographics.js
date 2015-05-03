@@ -11,6 +11,8 @@ angular.module('mouselabApp')
   .controller('DemographicsCtrl', function ($scope, $location, dataService) {
         if (!dataService.everythingIsValid()) { $location.path(''); }
 
+    dataService.incrementSiteNumber();
+
         $scope.age           = 0;
         $scope.gender        = '';
         $scope.graduation    = 0;

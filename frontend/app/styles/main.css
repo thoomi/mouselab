@@ -11,6 +11,63 @@ body {
   }
 }
 
+.position-relative {
+    position: relative;
+}
+
+html {
+    position: relative;
+}
+
+.status-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.progress {
+    border-radius: 0;
+    height: 14px;
+    margin-bottom: 0;
+}
+
+.progress-bar {
+    line-height: 13px;
+    font-size: 11px;
+}
+
+.testing-configurators {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    background-color: #333;
+    color: #eee;
+    padding: 10px;
+}
+
+.site-number {
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+.select-strategy {
+    min-width: 80px;
+}
+
+.strategy-title {
+    padding-top: 10px;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+}
+
+.select-strategy-form {
+    padding: 0;
+    border-radius: 0;
+    height: 25px;
+}
 
 /***************************************************************************
 * Custom styles
@@ -38,7 +95,7 @@ body {
 .decision-countdown {
     text-align: right;
     display: inline-block;
-    width: 40px;
+    width: 60px;
 }
 
 .decision-headline {

@@ -21,13 +21,30 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container page-wrapper">
-        <div class="status-bar" ng-controller="StatusbarCtrl">
-            <div class="status-bar-inner" width="{{ barWidth }}%"></div>
-        </div>
-
+    <div class="container page-wrapper position-relative">
         <div ng-view=""></div>
     </div>
+
+    <div class="status-bar" ng-controller="StatusbarCtrl">
+        <div class="progress" ng-hide="currentSite < 1">
+            <div class="progress-bar" role="progressbar" style="width: {{ barWidth }}%">{{ barWidth }}%</div>
+        </div>
+
+
+        <div class="testing-configurators" ng-hide="!isTestEnv">
+            <span class="site-number">Seite {{ currentSite + 1 }}</span>
+            <p class="strategy-title">Strategie: </p>
+            <div class="select-strategy">
+                <select class="form-control select-strategy-form" ng-model="currentStrategy">
+                    <option value="lex">LEX</option>
+                    <option value="eba">EBA</option>
+                    <option value="eqw">EQW</option>
+                    <option value="wadd">WADD</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
 
 
 

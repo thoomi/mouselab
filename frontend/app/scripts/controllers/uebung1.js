@@ -11,6 +11,8 @@ angular.module('mouselabApp')
   .controller('Uebung1Ctrl', function ($scope, $location, dataService) {
         if (!dataService.everythingIsValid()) { $location.path(''); }
 
+    dataService.incrementSiteNumber();
+
         $scope.ratingTestCases = [
           'Preis je Waschgang in Cent',
           'Schmutzentfernung',

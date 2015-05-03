@@ -8,8 +8,10 @@
  * Controller of the mouselabApp
  */
 angular.module('mouselabApp')
-  .controller('DecisionStrategyCtrl', function ($scope, $location, dataService) {
+  .controller('DecisionStrategyCtrl', function ($scope, $rootScope, $location, dataService) {
     if (!dataService.everythingIsValid()) { $location.path(''); }
+
+    dataService.incrementSiteNumber();
 
     $scope.decisionStrategy = dataService.getParticipantStrategy();
     $scope.participantAttributeValues =dataService.getParticipantAttributeValues();
@@ -30,4 +32,8 @@ angular.module('mouselabApp')
       { name  : 'Waschmittel 2', testCaseRatings : [0.35, '++', 'o', '-', 'o', '++', 'o'],   rank : 1},
       { name  : 'Waschmittel 3', testCaseRatings : [0.40, '+',  '+', '+', '--', '++', '++'], rank : 3}
     ];
+
+    $rootScope.$on('strategyChange', function(event, strategy) {
+      $scope.decisionStrategy = strategy;
+    });
   });

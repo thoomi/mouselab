@@ -341,8 +341,7 @@ angular.module('mouselabApp')
                     dataIsFine = false;
                 }
 
-                //return dataIsFine;
-                return true;
+                return dataIsFine;
             },
 
             saveAttributeAnswers: function (answerValues, sumAnswers, callback) {
@@ -358,13 +357,17 @@ angular.module('mouselabApp')
             },
 
             clearAllData : function() {
-                participantDatabaseId    = 0;
-                participantId            = 0;
-                participantGroup         = '';
-                startTime                = 0;
-                endTime                  = 0;
-                currentExperimentRound   = 1;
-                lastExperimentDatabaseId = 0;
+                participantDatabaseId       = 0;
+                participantId               = 0;
+                participantGroup            = '';
+                participantStrategy         = '';
+                participantAttributeWeights = [];
+                selectedOrganization        = '';
+                startTime                   = 0;
+                endTime                     = 0;
+                currentExperimentRound      = 1;
+                lastExperimentDatabaseId    = 0;
+                participantIsPreviousParticipant = 0;
                 isParticipantSaved    = false;
                 isExperimentSaved     = [false, false, false];
                 isStressQuestionSaved = [false, false, false];
