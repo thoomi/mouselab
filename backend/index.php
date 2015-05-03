@@ -5,7 +5,9 @@ require_once 'inc/config.php';
 require_once 'vendor/autoload.php';
 require_once 'inc/dbHandler.php';
 
-$app = new \Slim\Slim();
+$app = new \Slim\Slim(array(
+    'templates.path' => './templates'
+));
 
 
 // -----------------------------------------------------------------------------
@@ -19,10 +21,7 @@ $app->container->singleton('db', function () {
 // Get function to gain all current data
 // -----------------------------------------------------------------------------
 $app->get('/', function() use($app) {
-	$app->response->setStatus(200);
-	$app->response->headers->set('Content-Type', 'application/json');
-
-	echo json_encode($app->db->getCurrentEvaluationData());
+    $app->render('dashboard.php', array('name' => 'thomas'), 200);
 });
 
 $app->get('/user', function() use($app) {
