@@ -112,6 +112,31 @@ class DbHandler
         $selectStatement->execute();
         $data['numberOfParticipants'] = $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
 
+
+        // Get data for tasks
+        $tasks = array('A', 'B', 'C');
+        foreach($tasks as $task)
+        {
+            $selectStatement = $this->dbh->prepare('SELECT
+                                                    COUNT(CASE WHEN tl_experiment.time_to_decision = 0 THEN 1 ELSE null END) as timeouts,
+                                                    AVG(CASE WHEN tl_experiment.time_to_decision = 0 THEN null ELSE tl_experiment.time_to_decision END) as decision_time,
+                                                    AVG(CASE WHEN tl_experiment.time_to_decision = 0 THEN null ELSE tl_experiment.chosen_option_rank END) as chosen_option,
+                                                    AVG(tl_satisfaction_question.q_sum) as satisfaction,
+                                                    AVG(tl_stress_question.q_sum) as stress
+                                                FROM tl_participant
+                                                JOIN tl_experiment ON tl_experiment.tl_participant_id = tl_participant.id
+                                                JOIN tl_satisfaction_question ON tl_satisfaction_question.tl_experiment_id = tl_experiment.id
+                                                JOIN tl_stress_question ON tl_stress_question.tl_experiment_id = tl_experiment.id
+                                                WHERE tl_participant.Participation_condition = :strategy
+                                                AND tl_experiment.task = :task');
+            $selectStatement->bindParam(':strategy', $strategy);
+            $selectStatement->bindParam(':task', $task);
+
+            $selectStatement->execute();
+
+            $data[$task] = $selectStatement->fetch(PDO::FETCH_ASSOC);
+        }
+
         return $data;
     }
 
