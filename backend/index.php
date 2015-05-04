@@ -21,7 +21,30 @@ $app->container->singleton('db', function () {
 // Get function to gain all current data
 // -----------------------------------------------------------------------------
 $app->get('/', function() use($app) {
-    $app->render('dashboard.php', array('name' => 'thomas'), 200);
+
+    $generalData = array(
+        'numberOfParticipants'         => $app->db->getNumberOfParticipants(),
+        'numberOfPreviousParticipants' => $app->db->getNumberOfPreviousParticipants(),
+        'numberOfDropOuts'             => $app->db->getDropOuts(),
+        'averageTotalTime'             => $app->db->getAverageTotalTime(),
+        'averageMaximising'            => $app->db->getAverageMaximising(),
+        'genderShare'                  => $app->db->getGenderShare(),
+        'averageAge'                   => $app->db->getAverageAge()
+    );
+
+    // Get data per strategy
+    $strategies   = array('lex', 'eba', 'eqw', 'wadd');
+    $strategyData = array();
+
+    foreach($strategies as $strategy)
+    {
+        $strategyData[$strategy] = $app->db->getDataByStrategy($strategy);
+    }
+
+    $app->render('dashboard.php', array(
+        'general'  => $generalData,
+        'strategy' => $strategyData
+    ), 200);
 });
 
 $app->get('/user', function() use($app) {

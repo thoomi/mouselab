@@ -31,6 +31,90 @@ class DbHandler
         return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getNumberOfParticipants()
+    {
+        $selectStatement = $this->dbh->prepare('SELECT COUNT(DISTINCT id) as total FROM tl_participant');
+        $selectStatement->execute();
+
+        return $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+
+    public function getNumberOfPreviousParticipants()
+    {
+        $selectStatement = $this->dbh->prepare('SELECT COUNT(DISTINCT id) as total FROM tl_participant WHERE previous_participant = 1');
+        $selectStatement->execute();
+
+        return $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+
+    public function getDropOuts()
+    {
+        $selectStatement = $this->dbh->prepare('SELECT COUNT(DISTINCT id) as total FROM tl_participant WHERE dropout = 1');
+        $selectStatement->execute();
+
+        return $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+
+    public function getAverageTotalTime()
+    {
+        $selectStatement = $this->dbh->prepare('SELECT AVG(total_time) as total FROM tl_participant');
+        $selectStatement->execute();
+
+        return $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+
+    public function getAverageMaximising()
+    {
+        $selectStatement = $this->dbh->prepare('SELECT AVG(q_sum) as total FROM tl_participant
+                                                JOIN tl_maximising_question ON tl_participant.id = tl_maximising_question.tl_participant_id');
+        $selectStatement->execute();
+
+        return $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+
+    public function getGenderShare()
+    {
+        $genderShare = array('male' => array(), 'female' => array());
+
+        $selectStatement = $this->dbh->prepare('SELECT count(gender) as total FROM tl_participant
+                                                JOIN tl_demographics ON tl_participant.id = tl_demographics.tl_participant_id
+                                                WHERE gender = 0');
+        $selectStatement->execute();
+        $genderShare['male'] = $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
+
+
+        $selectStatement = $this->dbh->prepare('SELECT count(gender) as total FROM tl_participant
+                                                JOIN tl_demographics ON tl_participant.id = tl_demographics.tl_participant_id
+                                                WHERE gender = 1');
+        $selectStatement->execute();
+        $genderShare['female'] = $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
+
+        return $genderShare;
+    }
+
+    public function getAverageAge()
+    {
+        $selectStatement = $this->dbh->prepare('SELECT AVG(age) as total FROM tl_participant
+                                                JOIN tl_demographics ON tl_participant.id = tl_demographics.tl_participant_id');
+        $selectStatement->execute();
+
+        return $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+
+    public function getDataByStrategy($strategy)
+    {
+        $data = array();
+
+        // Get participant count per strategy
+        $selectStatement = $this->dbh->prepare('SELECT COUNT(*) as total FROM tl_participant
+                                                WHERE tl_participant.Participation_condition = :strategy');
+        $selectStatement->bindParam(':strategy', $strategy);
+        $selectStatement->execute();
+        $data['numberOfParticipants'] = $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
+
+        return $data;
+    }
+
     public function getExperiments($participantId)
     {
         $selectStatement = $this->dbh->prepare('SELECT * FROM tl_experiment
