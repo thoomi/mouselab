@@ -101,6 +101,15 @@ class DbHandler
         return $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
     }
 
+    public function getUserStats()
+    {
+        $selectStatement = $this->dbh->prepare('SELECT AVG(age) as total FROM tl_participant
+                                                JOIN tl_demographics ON tl_participant.id = tl_demographics.tl_participant_id');
+        $selectStatement->execute();
+
+        return $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+
     public function getDataByStrategy($strategy)
     {
         $data = array();

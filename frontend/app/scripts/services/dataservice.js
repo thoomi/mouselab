@@ -323,12 +323,6 @@ angular.module('mouselabApp')
             },
 
             saveUserData : function(email, participateInOther, comments, callback) {
-                if (isAttributesSaved)
-                {
-                  callback();
-                  return;
-                }
-
                 saveUserData(email, participateInOther, comments, callback);
             },
 
@@ -345,6 +339,11 @@ angular.module('mouselabApp')
             },
 
             saveAttributeAnswers: function (answerValues, sumAnswers, callback) {
+              if (isAttributesSaved)
+              {
+                callback();
+                return;
+              }
               saveAttributeAnswers(answerValues, sumAnswers, callback);
             },
 

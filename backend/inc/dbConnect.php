@@ -25,7 +25,7 @@ class DbConnect {
         // -----------------------------------------------------------------------------
         //$this->conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
-        $this->conn = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USERNAME, DB_PASSWORD);
+        $this->conn = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME . ';charset=utf8', DB_USERNAME, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
 
         // -----------------------------------------------------------------------------

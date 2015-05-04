@@ -26,37 +26,60 @@
         <div class="panel panel-default">
             <div class="panel-heading"><strong>Dashboard Masterarbeit</strong></div>
             <div class="panel-body">
-                <p><strong>Allgemeine Daten:</strong></p>
-                <table class="table table-condensed table-bordered table-striped common-data">
-                    <tr>
-                        <td>Anzahl Teilnehmer</td>
-                        <td><strong><?php echo $this->data['general']['numberOfParticipants'] ?></strong></td>
-                    </tr>
-                    <tr>
-                        <td>Anzahl Vorstudie</td>
-                        <td><strong><?php echo $this->data['general']['numberOfPreviousParticipants'] ?></strong></td>
-                    </tr>
-                    <tr>
-                        <td>Anzahl Drop-Outs</td>
-                        <td><strong><?php echo $this->data['general']['numberOfDropOuts'] ?></strong></td>
-                    </tr>
-                    <tr>
-                        <td>Dauer der Studienteilnahme</td>
-                        <td><strong><?php echo round($this->data['general']['averageTotalTime']) ?></strong></td>
-                    </tr>
-                    <tr>
-                        <td>Mittelwert Maximierungstendenz</td>
-                        <td><strong><?php echo round($this->data['general']['averageMaximising']) ?></strong></td>
-                    </tr>
-                    <tr>
-                        <td>Anteil Männer und Frauen</td>
-                        <td><strong><?php echo $this->data['general']['genderShare']['male'] . ' / ' . $this->data['general']['genderShare']['female'] ?></strong></td>
-                    </tr>
-                    <tr>
-                        <td>Durchschnittliches Alter</td>
-                        <td><strong><?php echo round($this->data['general']['averageAge']) ?></strong></td>
-                    </tr>
-                </table>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <p><strong>Allgemeine Daten:</strong></p>
+                        <table class="table table-condensed table-bordered table-striped common-data">
+                            <tr>
+                                <td>Anzahl Teilnehmer</td>
+                                <td><strong><?php echo $this->data['general']['numberOfParticipants'] ?></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Anzahl Vorstudie</td>
+                                <td><strong><?php echo $this->data['general']['numberOfPreviousParticipants'] ?></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Anzahl Drop-Outs</td>
+                                <td><strong><?php echo $this->data['general']['numberOfDropOuts'] ?></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Dauer der Studienteilnahme</td>
+                                <td><strong><?php echo round($this->data['general']['averageTotalTime']) ?></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Mittelwert Maximierungstendenz</td>
+                                <td><strong><?php echo round($this->data['general']['averageMaximising']) ?></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Anteil Männer und Frauen</td>
+                                <td><strong><?php echo $this->data['general']['genderShare']['male'] . ' / ' . $this->data['general']['genderShare']['female'] ?></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Durchschnittliches Alter</td>
+                                <td><strong><?php echo round($this->data['general']['averageAge']) ?></strong></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-xs-6">
+                        <p><strong>Nutzerdaten:</strong></p>
+                        <table class="table table-condensed table-bordered table-striped common-data">
+                            <tr>
+                                <td>Gesammelte E-Mail Adressen</td>
+                                <td><strong><?php echo $this->data['general']['numberOfParticipants'] ?></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Bereit zu weiteren Teilnahmen</td>
+                                <td><strong><?php echo $this->data['general']['numberOfPreviousParticipants'] ?></strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Letzter Kommentar:</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad enim ipsam nam necessitatibus neque odit, rem tempora. Consequatur consequuntur excepturi nisi pariatur praesentium quisquam, tenetur voluptas. Culpa, eum voluptatibus.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <table class="table table-condensed table-bordered table-striped">
