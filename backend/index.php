@@ -41,9 +41,12 @@ $app->get('/', function() use($app) {
         $strategyData[$strategy] = $app->db->getDataByStrategy($strategy);
     }
 
+    $userStats = $app->db->getUserStats();
+
     $app->render('dashboard.php', array(
         'general'  => $generalData,
-        'strategy' => $strategyData
+        'strategy' => $strategyData,
+        'user'     => $userStats
     ), 200);
 });
 

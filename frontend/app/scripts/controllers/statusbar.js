@@ -8,7 +8,7 @@
  * Controller of the mouselabApp
  */
 angular.module('mouselabApp')
-  .controller('StatusbarCtrl', function ($scope, $rootScope, configData) {
+  .controller('StatusbarCtrl', function ($scope, $rootScope, configData, dataService) {
     var maxNumberOfSites = 20;
 
     $scope.currentSite = 0;
@@ -23,7 +23,12 @@ angular.module('mouselabApp')
       $scope.barWidth = Math.round(100 / maxNumberOfSites * $scope.currentSite);
     });
 
+    $rootScope.$on('strategyChosen', function(event, strategy) {
+      $scope.currentStrategy = strategy;
+    });
+
     $scope.$watch('currentStrategy', function() {
       $rootScope.$broadcast('strategyChange', $scope.currentStrategy);
+      dataService.setParticipantStrategy($scope.currentStrategy);
     });
   });

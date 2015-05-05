@@ -65,17 +65,17 @@
                         <table class="table table-condensed table-bordered table-striped common-data">
                             <tr>
                                 <td>Gesammelte E-Mail Adressen</td>
-                                <td><strong><?php echo $this->data['general']['numberOfParticipants'] ?></strong></td>
+                                <td><strong><?php echo $this->data['user']['numberOfEmails'] ?></strong></td>
                             </tr>
                             <tr>
                                 <td>Bereit zu weiteren Teilnahmen</td>
-                                <td><strong><?php echo $this->data['general']['numberOfPreviousParticipants'] ?></strong></td>
+                                <td><strong><?php echo $this->data['user']['participateInOther'] ?></strong></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><strong>Letzter Kommentar:</strong></td>
                             </tr>
                             <tr>
-                                <td colspan="2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad enim ipsam nam necessitatibus neque odit, rem tempora. Consequatur consequuntur excepturi nisi pariatur praesentium quisquam, tenetur voluptas. Culpa, eum voluptatibus.</td>
+                                <td colspan="2"><?php echo $this->data['user']['lastComment'] ?></td>
                             </tr>
                         </table>
                     </div>

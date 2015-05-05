@@ -9,7 +9,7 @@
  */
 angular.module('mouselabApp')
   .controller('ThanksCtrl', function ($scope, $location, dataService) {
-        //if (!dataService.everythingIsValid()) { $location.path(''); }
+        if (!dataService.everythingIsValid()) { $location.path(''); }
 
     dataService.incrementSiteNumber();
 

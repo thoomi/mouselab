@@ -103,11 +103,29 @@ class DbHandler
 
     public function getUserStats()
     {
-        $selectStatement = $this->dbh->prepare('SELECT AVG(age) as total FROM tl_participant
-                                                JOIN tl_demographics ON tl_participant.id = tl_demographics.tl_participant_id');
+        // Willing to participate in other
+        $selectStatement = $this->dbh->prepare('SELECT COUNT(*) as total FROM tl_user WHERE participate_in_other = 1');
         $selectStatement->execute();
 
-        return $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
+        $participateInOther = $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
+
+        // Number of email adresses saved
+        $selectStatement = $this->dbh->prepare('SELECT COUNT(*) as total FROM tl_user');
+        $selectStatement->execute();
+
+        $numberOfEmails = $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
+
+        // Get newest comment
+        $selectStatement = $this->dbh->prepare('SELECT comments FROM tl_user ORDER BY id DESC LIMIT 1');
+        $selectStatement->execute();
+
+        $lastComment = $selectStatement->fetch(PDO::FETCH_ASSOC)['comments'];
+
+        return array(
+            'participateInOther' => $participateInOther,
+            'numberOfEmails'     => $numberOfEmails,
+            'lastComment'        => $lastComment
+        );
     }
 
     public function getDataByStrategy($strategy)

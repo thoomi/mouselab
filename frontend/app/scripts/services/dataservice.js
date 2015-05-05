@@ -234,6 +234,10 @@ angular.module('mouselabApp')
               return participantStrategy;
             },
 
+            setParticipantStrategy : function(strategy) {
+              participantStrategy = strategy;
+            },
+
             startNextRound : function () {
                 if (currentExperimentRound >= 1 && currentExperimentRound <= configData.getMaxRounds())
                 {
@@ -265,6 +269,8 @@ angular.module('mouselabApp')
                 participantIsPreviousParticipant = isPreviousParticipant;
                 participantGroup    = configData.getRandomGroup();
                 participantStrategy = configData.getRandomStrategy();
+
+                $rootScope.$broadcast('strategyChosen', participantStrategy);
 
                 if (typeof callback === 'function')
                 {
