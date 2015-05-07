@@ -169,9 +169,19 @@ class DbHandler
 
     public function getExperiments($participantId)
     {
-        $selectStatement = $this->dbh->prepare('SELECT * FROM tl_experiment
-                                                JOIN tl_stress_question ON tl_experiment.id = tl_stress_question.tl_experiment_id
-                                                JOIN tl_satisfaction_question ON tl_experiment.id = tl_satisfaction_question.tl_experiment_id
+        $selectStatement = $this->dbh->prepare('SELECT
+                                                    tl_experiment.task,
+                                                    tl_experiment.task_pos AS task_pos,
+                                                    tl_experiment.chosen_option_position AS chosen_option_position,
+                                                    tl_experiment.chosen_option_rank AS chosen_option_rank,
+                                                    tl_experiment.time_to_decision AS time_to_decision,
+                                                    tl_satisfaction_question.q_sum AS satisfaction_sum,
+                                                    tl_stress_question.q_sum AS stress_sum,
+                                                    tl_experiment.q_decision_by_guideline AS by_guide_line
+
+                                                FROM tl_experiment
+                                                JOIN tl_stress_question ON tl_stress_question.tl_experiment_id = tl_experiment.id
+                                                JOIN tl_satisfaction_question ON tl_satisfaction_question.tl_experiment_id = tl_experiment.id
                                                 WHERE tl_experiment.tl_participant_id = :participantId
                                                 ORDER BY tl_experiment.task');
         $selectStatement->bindParam(':participantId', $participantId);
@@ -225,6 +235,39 @@ class DbHandler
         return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getStressQuestions($participantId)
+    {
+        $selectStatement = $this->dbh->prepare('SELECT * FROM tl_stress_question
+                                                WHERE tl_participant_id = :participantId');
+        $selectStatement->bindParam(':participantId', $participantId);
+
+        $selectStatement->execute();
+
+        return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getSatisfactionQuestions($participantId)
+    {
+        $selectStatement = $this->dbh->prepare('SELECT * FROM tl_satisfaction_question
+                                                WHERE tl_participant_id = :participantId');
+        $selectStatement->bindParam(':participantId', $participantId);
+
+        $selectStatement->execute();
+
+        return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getDemographicData($participantId)
+    {
+        $selectStatement = $this->dbh->prepare('SELECT * FROM tl_demographics
+                                                WHERE tl_participant_id = :participantId');
+        $selectStatement->bindParam(':participantId', $participantId);
+
+        $selectStatement->execute();
+
+        return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getAllUsers()
     {
         $selectStatement = $this->dbh->prepare('SELECT * FROM tl_user');
@@ -243,19 +286,19 @@ class DbHandler
         $data = array();
 
         foreach ($participants as $participant) {
-            $experiments         = $this->getExperiments($participant['id']);
-            $trainingExperiments = $this->getTrainingExperiments($participant['id']);
-            $maximisingAnswers   = $this->getMaximisingAnswers($participant['id']);
-            $attributeWeights    = $this->getAttributeWeights($participant['id']);
-            $additionalQuestions = $this->getAdditionalQuestions($participant['id']);
+            $experiments           = $this->getExperiments($participant['id']);
+            $maximisingAnswers     = $this->getMaximisingAnswers($participant['id']);
+            $attributeWeights      = $this->getAttributeWeights($participant['id']);
+            $additionalQuestions   = $this->getAdditionalQuestions($participant['id']);
+            $demographics          = $this->getDemographicData($participant['id']);
 
             $data[] = array(
-                'participant' => $participant,
-                'experiments' => $experiments,
-                'maximising'  => $maximisingAnswers,
-                'trainings'   => $trainingExperiments,
-                'attributes'  => $attributeWeights,
-                'additional'  => $additionalQuestions
+                'participant'  => $participant,
+                'experiments'  => $experiments,
+                'maximising'   => $maximisingAnswers,
+                'attributes'   => $attributeWeights,
+                'additional'   => $additionalQuestions,
+                'demographic'  => $demographics
             );
         }
 

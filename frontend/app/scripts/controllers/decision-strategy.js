@@ -14,7 +14,7 @@ angular.module('mouselabApp')
     dataService.incrementSiteNumber();
 
     $scope.decisionStrategy = dataService.getParticipantStrategy();
-    $scope.participantAttributeValues =dataService.getParticipantAttributeValues();
+    $scope.participantAttributeValues = [5, 4, 2, 1, 3, 3, 4];
 
 
     $scope.ratingTestCases = [

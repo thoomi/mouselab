@@ -13,7 +13,7 @@ angular.module('mouselabApp')
 
     dataService.incrementSiteNumber();
 
-        $scope.saveAndCloseEnabled = false;
+        $scope.cd  = false;
         $scope.participantEmail = '';
         $scope.participateInOther = 1;
         $scope.comments = '';
@@ -25,26 +25,20 @@ angular.module('mouselabApp')
           $scope.saveAndCloseEnabled = true;
           $scope.notWaitingForRequestToFinish = false;
 
-          if ($scope.participantEmail)
-          {
-              dataService.saveUserData($scope.participantEmail, $scope.participateInOther, $scope.comments, function(error) {
-                  if (!error)
-                  {
-                      // TODO: Reset data redirect to startpage
-                      $scope.successAlert = false;
-                      $scope.notWaitingForRequestToFinish = true;
-                  }
-                  else
-                  {
-                      $scope.notWaitingForRequestToFinish = false;
-                      console.log(error);
-                  }
-              });
-          }
-          else
-          {
-              $scope.successAlert = false;
-              $scope.notWaitingForRequestToFinish = true;
-          }
+
+          dataService.saveUserData($scope.participantEmail, $scope.participateInOther, $scope.comments, function(error) {
+              if (!error)
+              {
+                  // TODO: Reset data redirect to startpage
+                  $scope.successAlert = false;
+                  $scope.notWaitingForRequestToFinish = true;
+              }
+              else
+              {
+                  $scope.notWaitingForRequestToFinish = false;
+                  $scope.successAlert = false;
+                  console.log(error);
+              }
+          });
       };
   });

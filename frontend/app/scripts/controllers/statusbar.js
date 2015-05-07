@@ -31,4 +31,8 @@ angular.module('mouselabApp')
       $rootScope.$broadcast('strategyChange', $scope.currentStrategy);
       dataService.setParticipantStrategy($scope.currentStrategy);
     });
+
+    $rootScope.$on('resetPageCount', function() {
+      $scope.currentSite = 0;
+    });
   });

@@ -19,12 +19,19 @@
         .border-bottom-bold {
             border-bottom: 2px solid #aaa;
         }
+        .dashboard-btn {
+            margin-left: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="page-wrapper">
         <div class="panel panel-default">
-            <div class="panel-heading"><strong>Dashboard Masterarbeit</strong></div>
+            <div class="panel-heading">
+                <strong>Dashboard Masterarbeit</strong>
+                <a href="/csv" class="btn btn-info pull-right btn-sm dashboard-btn">Data CSV</a>
+                <a href="/user" class="btn btn-info pull-right btn-sm dashboard-btn">User CSV</a>
+                <div class="clearfix"></div></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-xs-6">

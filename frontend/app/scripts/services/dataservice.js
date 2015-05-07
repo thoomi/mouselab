@@ -379,6 +379,8 @@ angular.module('mouselabApp')
                 isDemographicsSaved   = false;
                 isMaximisingSaved     = false;
                 isAttributesSaved     = false;
+
+                $rootScope.$broadcast('resetPageCount');
             }
         };
   });

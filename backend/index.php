@@ -99,33 +99,55 @@ $app->get('/csv', function() use($app) {
 	$result[] = array(
 		'ip',
 		'Date',
-		'VpID',  			// Participant ID
+        'Gerät',            // device
+		'VpN',  			// Participant ID
+        'Spende',
+        'Vorstudie',
 		'DO',    			// Dropout
-		'ExpU',				// Location
+        'Gewicht',
+        'ExpI',             // Strategy
 		'ExpG',				// Group
 
-		'PosExpBA',			// task_pos
-		'RaP-GeOp-ExpBA',	// chosen_option_rank
-		'BEz-ExpBA',		// time_to_decision
-		'SuZs-ExpBA-Q1',	// stress_question q_num_1
-		'SuZs-ExpBA-Q2',	// stress_question q_num_2
+		'Position-ExpBA',	     // task_pos
+        'Position-Option-ExpBA', // chosen_option_position
+		'Rang-Option-ExpBA',	 // chosen_option_rank
+		'B-Zeit-ExpBA',		     // time_to_decision
+		'V-Zeit-ExpBA',	         // Verfügbare Zeit
+		'Zufriedenheit-ExpBA',	 // satisfaction questions
+        'Stress-ExpBA',          // Stress questions
+        'Entscheidung-Vorgabe',  // decision by guideline
 
-		'PosExpBB',			// task_pos
-		'RaP-GeOp-ExpBB',	// chosen_option_rank
-		'BEz-ExpBB',		// time_to_decision
-		'SuZs-ExpBB-Q1',	// stress_question q_num_1
-		'SuZs-ExpBB-Q2',	// stress_question q_num_2
+        'Position-ExpBB',	     // task_pos
+        'Position-Option-ExpBB', // chosen_option_position
+        'Rang-Option-ExpBB',	 // chosen_option_rank
+        'B-Zeit-ExpBB',		     // time_to_decision
+        'V-Zeit-ExpBB',	         // Verfügbare Zeit
+        'Zufriedenheit-ExpBB',	 // satisfaction questions
+        'Stress-ExpBB',          // Stress questions
+        'Entscheidung-Vorgabe',  // decision by guideline
 
-		'PosExpBC',			// task_pos
-		'RaP-GeOp-ExpBC',	// chosen_option_rank
-		'BEz-ExpBC',		// time_to_decision
-		'SuZs-ExpBC-Q1',	// stress_question q_num_1
-		'SuZs-ExpBC-Q2',	// stress_question q_num_2
+        'Position-ExpBC',	     // task_pos
+        'Position-Option-ExpBC', // chosen_option_position
+        'Rang-Option-ExpBC',	 // chosen_option_rank
+        'B-Zeit-ExpBC',		     // time_to_decision
+        'V-Zeit-ExpBC',	         // Verfügbare Zeit
+        'Zufriedenheit-ExpBC',	 // satisfaction questions
+        'Stress-ExpBC',          // Stress questions
+        'Entscheidung-Vorgabe',  // decision by guideline
 
 		'MaxT',				// maximising_sum
 
+        'Störung',
+        'Ernsthaftigkeit',
+        'Interesse',
+        'Hilfsmittel',
+        'Kopfrechnen',
+        'Merkfähigkeit',
+
+
 		'Alter',
 		'Bildung',
+        'Beruf',
 		'Geschlecht',
 		'Gesamtzeit'
 	);
@@ -134,29 +156,35 @@ $app->get('/csv', function() use($app) {
 
 	foreach ($data as $value) {
 		$expA = array(
-			'task_pos'           => '#',
-			'chosen_option_rank' => '#',
-			'time_to_decision'   => '#',
-			'q_num_1'            => '#',
-			'q_num_2'            => '#',
+			'task_pos'               => '#',
+            'chosen_option_position' => '#',
+			'chosen_option_rank'     => '#',
+			'time_to_decision'       => '#',
+			'satisfaction_sum'       => '#',
+            'stress_sum'             => '#',
+            'by_guide_line'          => '#'
 		);
 		if (isset($value['experiments'][0])) { $expA = $value['experiments'][0]; }
 
 		$expB = array(
-			'task_pos'           => '#',
-			'chosen_option_rank' => '#',
-			'time_to_decision'   => '#',
-			'q_num_1'            => '#',
-			'q_num_2'            => '#',
+            'task_pos'               => '#',
+            'chosen_option_position' => '#',
+            'chosen_option_rank'     => '#',
+            'time_to_decision'       => '#',
+            'satisfaction_sum'       => '#',
+            'stress_sum'             => '#',
+            'by_guide_line'          => '#'
 		);
 		if (isset($value['experiments'][1])) { $expB = $value['experiments'][1]; }
 
 		$expC = array(
-			'task_pos'           => '#',
-			'chosen_option_rank' => '#',
-			'time_to_decision'   => '#',
-			'q_num_1'            => '#',
-			'q_num_2'            => '#',
+            'task_pos'               => '#',
+            'chosen_option_position' => '#',
+            'chosen_option_rank'     => '#',
+            'time_to_decision'       => '#',
+            'satisfaction_sum'       => '#',
+            'stress_sum'             => '#',
+            'by_guide_line'          => '#'
 		);
 		if (isset($value['experiments'][2])) { $expC = $value['experiments'][2]; }
 
@@ -164,48 +192,97 @@ $app->get('/csv', function() use($app) {
 		if (isset($value['maximising'][0])) { $maximisingSum = $value['maximising'][0]['q_sum']; }
 
 		$age = '#';
-		if (isset($value['participant']['age'])) { $age = $value['participant']['age']; }
+		if (isset($value['demographic']['age'])) { $age = $value['demographic']['age']; }
 
 		$graduation = '#';
-		if (isset($value['participant']['graduation'])) { $graduation = $value['participant']['graduation']; }
+		if (isset($value['demographic']['graduation'])) { $graduation = $value['demographic']['graduation']; }
 
 		$gender = '#';
-		if (isset($value['participant']['gender'])) { $gender = $value['participant']['gender']; }
+		if (isset($value['demographic']['gender'])) { $gender = $value['demographic']['gender']; }
+
+        $job = '#';
+        if (isset($value['demographic']['live_status'])) { $gender = $value['demographic']['live_status']; }
 
 		$totalTime = '#';
 		if (isset($value['participant']['total_time'])) { $totalTime = $value['participant']['total_time']; }
+
+        // Check the additional data
+        $disturbed = '#';
+        if (isset($value['additional']['disturbed'])) { $disturbed = $value['additional']['disturbed']; }
+
+        $seriousness = '#';
+        if (isset($value['additional']['seriousness'])) { $seriousness = $value['additional']['seriousness']; }
+
+        $interest = '#';
+        if (isset($value['additional']['interest'])) { $interest = $value['additional']['interest']; }
+
+        $additionalTools = '#';
+        if (isset($value['additional']['additional_tools'])) { $additionalTools = $value['additional']['additional_tools']; }
+
+        $mentalArithmetic = '#';
+        if (isset($value['additional']['mental_arithmetic'])) { $mentalArithmetic = $value['additional']['mental_arithmetic']; }
+
+        $mentalRetention = '#';
+        if (isset($value['additional']['mental_retention'])) { $mentalRetention = $value['additional']['mental_retention']; }
+
+        $device = '#';
+        if (isset($value['demographic']['device'])) { $device = $value['demographic']['device']; }
+
+        $attributes = '#';
+        if (isset($value['attributes']['q_sum'])) { $attributes = $value['attributes']['q_sum']; }
 
 
 		$result[] = array(
 			$value['participant']['ip_address'],
 			$value['participant']['participated_at'],
+            $device,
 			$value['participant']['participation_id'],
+            $value['participant']['donation_organization_id'],
+            $value['participant']['previous_participant'],
 			$value['participant']['dropout'],
-			$value['participant']['location'],
+            $attributes,
+            $value['participant']['Participation_condition'],
 			$value['participant']['participation_group'],
 
 			$expA['task_pos'],
+            $expA['chosen_option_position'],
 			$expA['chosen_option_rank'],
 			$expA['time_to_decision'],
-			$expA['q_num_1'],
-			$expA['q_num_2'],
+            11500,
+			$expA['satisfaction_sum'],
+			$expA['stress_sum'],
+            $expA['by_guide_line'],
 
-			$expB['task_pos'],
-			$expB['chosen_option_rank'],
-			$expB['time_to_decision'],
-			$expB['q_num_1'],
-			$expB['q_num_2'],
+            $expB['task_pos'],
+            $expB['chosen_option_position'],
+            $expB['chosen_option_rank'],
+            $expB['time_to_decision'],
+            14000,
+            $expB['satisfaction_sum'],
+            $expB['stress_sum'],
+            $expB['by_guide_line'],
 
-			$expC['task_pos'],
-			$expC['chosen_option_rank'],
-			$expC['time_to_decision'],
-			$expC['q_num_1'],
-			$expC['q_num_2'],
+            $expC['task_pos'],
+            $expC['chosen_option_position'],
+            $expC['chosen_option_rank'],
+            $expC['time_to_decision'],
+            19500,
+            $expC['satisfaction_sum'],
+            $expC['stress_sum'],
+            $expC['by_guide_line'],
 
 			$maximisingSum,
 
+            $disturbed,
+            $seriousness,
+            $interest,
+            $additionalTools,
+            $mentalArithmetic,
+            $mentalRetention,
+
 			$age,
 			$graduation,
+            $job,
 			$gender,
 			$totalTime
 		);
