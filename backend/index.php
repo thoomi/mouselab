@@ -79,7 +79,7 @@ $app->get('/user', function() use($app) {
 
 	foreach ($result as $line)
 	{
-		fputcsv($file, $line);
+		fputcsv($file, $line, ';');
 	}
 
 	fclose($file);

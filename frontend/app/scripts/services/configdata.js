@@ -12,8 +12,8 @@ angular.module('mouselabApp')
       // Location will be different for each url
       var experimentLocation  = 'T';
 
-      var baseApiUrl = 'http://api.stephan-kopietz.dev';
-      //var baseApiUrl = 'http://apima.stephan-kopietz.de';
+      //var baseApiUrl = 'http://api.stephan-kopietz.dev';
+      var baseApiUrl = 'http://apima.stephan-kopietz.de';
 
       var numberOfRounds = 3;
       var possibleStrategies = ['lex', 'eba', 'eqw', 'wadd'];
