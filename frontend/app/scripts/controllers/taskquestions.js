@@ -102,12 +102,6 @@ angular.module('mouselabApp')
         title : 'Ich konnte die Art und Weise wie ich Entscheidungen treffen musste sehr gut anwenden.',
         label : 'satisfy-questions-2',
         value : 0
-      },
-      {
-        id    : 3,
-        title : 'Ich bin mit dem Waschmittel das ich gewählt habe zufrieden.',
-        label : 'satisfy-questions-3',
-        value : 0
       }
     ];
 
@@ -152,6 +146,12 @@ angular.module('mouselabApp')
         id    : 7,
         title : 'Ich hatte nicht ausreichend Zeit zum nachdenken',
         label : 'stress-questions-7',
+        value : 0
+      },
+      {
+        id    : 8,
+        title : 'Es hat mich beim treffen meiner Entscheidung abgelenkt, die noch verbleibende Zeit im Blick zu behalten',
+        label : 'stress-questions-8 ',
         value : 0
       }
     ];

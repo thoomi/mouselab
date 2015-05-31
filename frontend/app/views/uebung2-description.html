@@ -1,17 +1,6 @@
 <h2>Übungslauf 2</h2>
 <p>Die erste Übung haben Sie absolviert. Auf der folgenden Seite werden Ihnen erneut verschiedene Waschmittel gezeigt. Sobald Sie sich für eines der Waschmittel entschieden haben, betätigen Sie einfach wieder den „Button“ der sich unter diesem Waschmittel befindet.</p>
 <p>
-    Neben der Anwendung Ihrer Entscheidungsstrategie wird es erneut auch darum gehen,
-    innerhalb einer <strong>begrenzten Zeit</strong> Ihre Entscheidung zu treffen. Im Rahmen dieser
-    begrenzten Entscheidungszeit gilt es, Ihre Entscheidung <strong>so schnell aber auch
-    so gut wie möglich</strong> zu treffen. Sie können Ihre Entscheidung also schneller treffen
-    als die maximale Zeit die Sie dafür haben, Sie können unter Umständen aber auch
-    länger für Ihre Entscheidung brauchen als Ihnen Zeit zur Verfügung steht. Nutzen
-    Sie Ihre Entscheidungsstrategie so lange, bis Sie zur Wahl eines Waschmittels gelangen,
-    auch wenn Ihnen dabei die Zeit auslaufen kann und somit keine Entscheidung getroffen wird.
-    Wenden Sie bitte <strong>keine andere Entscheidungsstrategie</strong> an als diejenige die Ihnen beschrieben wurde.
-</p>
-<p>
     Bevor es gleich los geht, finden Sie hier nochmal eine kurze Beschreibung Ihrer Entscheidungsstrategie, wie auch Ihre persönlichen Angaben zur Relevanz einzelner Eigenschaften von Waschmitteln.
 </p>
 <br>
@@ -19,44 +8,37 @@
 
 <section class="decision-strategy lex" ng-if="decisionStrategy == 'lex'">
     <p>
-        Ihre Entscheidungsstrategie besteht aus zwei Schritten. Im ersten Schritt wählen Sie
-        sich Ihre persönlich wichtigste Eigenschaft bei Waschmitteln aus. Nehmen wir einmal
-        an, für Sie ist die Eigenschaft „Schmutzentfernung“ am wichtigsten. Im zweiten
-        Schritt vergleichen Sie nun alle verfügbaren Waschmittel hinsichtlich der
-        Eigenschaft „Schmutzentfernung“ und entscheiden sich für das Waschmittel mit dem
-        <strong>besten Wert</strong> bei dieser Eigenschaft. Sollten zwei oder mehrere Waschmittel gleich
-        gut bei Ihrer wichtigsten Eigenschaft sein, nehmen Sie Ihre zweitwichtigste Eigenschaft
-        hinzu und vergleichen diese Waschmittel nun zusätzlich noch hinsichtlich dieser Eigenschaft.
+        Ihre Entscheidungsstrategie besteht darin, dass Sie das Waschmittel wählen, welches bei Ihrer persönlichen wichtigsten Eigenschaft das beste ist. Ihre Strategie besteht demnach aus drei Schritten. Im ersten Schritt wählen Sie sich Ihre persönlich wichtigste Eigenschaft bei Waschmitteln aus. Im zweiten Schritt vergleichen Sie die Bewertungen aller Waschmittel bei dieser Eigenschaft. Im dritten Schritt wählen Sie das Waschmittel, welches den höchsten Wert auf Ihrer wichtigsten Eigenschaft hat.
     </p>
-
+    <p>
+        Sollten zwei oder mehrere Waschmittel gleich gut bei Ihrer wichtigsten Eigenschaft sein, nehmen Sie Ihre zweitwichtigste Eigenschaft hinzu und vergleichen diese Waschmittel nun zusätzlich noch auf dieser Eigenschaft.
+    </p>
 </section>
 
-<section class="decision-strategy lex" ng-if="decisionStrategy == 'eba'">
+<section class="decision-strategy eba" ng-if="decisionStrategy == 'eba'">
     <p>
         Ihre Entscheidungsstrategie besteht darin, dass Sie ein Waschmittel nach dem anderen aussortieren, bis am Ende nur noch ein Waschmittel übrigbleibt, für das Sie sich dann entscheiden.
-        Dieses schrittweise Aussortieren läuft dabei so ab, dass Sie die Waschmittel zuerst auf Ihrer persönlich wichtigsten Eigenschaft vergleichen. Bei diesem Vergleich werden alle Waschmittel aussortiert und nicht weiter beachtet, die Ihrem persönlichen Anspruchsniveau nicht genügen. Sollten mehrere Waschmittel übrig bleiben, vergleichen Sie diese dann auf der zweitwichtigsten Eigenschaft. Sollten weiterhin mehrere Waschmittel übrig sein, vergleichen Sie diese auf Ihrer drittwichtigsten Eigenschaft und so weiter, bis nur noch ein Waschmittel übrig bleibt und somit Ihre Wahl darstellt.
+    </p>
+    <p>
+        Dieses schrittweise Aussortieren läuft dabei so ab, dass Sie die Waschmittel zuerst auf Ihrer persönlich wichtigsten Eigenschaft vergleichen. Bei diesem Vergleich werden alle Waschmittel aussortiert und nicht weiter beachtet, die Ihrem persönlichen Mindestanspruchsniveau nicht genügen. Sollten mehrere Waschmittel übrig bleiben, vergleichen Sie diese dann noch zusätzlich auf der nächstwichtigsten Eigenschaft, bis nur noch ein Waschmittel übrig bleibt und somit Ihre Wahl darstellt.
     </p>
 </section>
 
-<section class="decision-strategy lex" ng-if="decisionStrategy == 'eqw'">
+<section class="decision-strategy eqw" ng-if="decisionStrategy == 'eqw'">
     <p>
-        Ihre Entscheidungsstrategie besteht darin, dass Sie sich für das Waschmittel entscheiden, dass „unterm Strich“, also hinsichtlich aller seiner Eigenschaften das beste Waschmittel darstellt. Dafür betrachten Sie alle Eigenschaften eines Waschmittels, ermitteln die Punkte auf jeder Eigenschaft und zählen diese Punkte zusammen, um dessen Gesamteignung zu erhalten. Diesen Vorgang wiederholen Sie dann für jedes Waschmittel. Am Ende haben Sie die Gesamteignung für jedes Waschmittel und wählen dasjenige aus, dass die beste Gesamteignung besitzt.
+        Ihre Entscheidungsstrategie besteht darin, dass Sie sich für das Waschmittel entscheiden, dass „unterm Strich“, also hinsichtlich aller seiner Eigenschaften das beste Waschmittel darstellt. Dafür betrachten Sie alle Eigenschaften eines Waschmittels und ermitteln dessen Gesamteignung. Diesen Vorgang wiederholen Sie dann für jedes weitere Waschmittel. Am Ende haben Sie die Gesamteignung für jedes Waschmittel und wählen dasjenige aus, dass die beste Gesamteignung besitzt.
     </p>
 </section>
 
-<section class="decision-strategy lex" ng-if="decisionStrategy == 'wadd'">
+<section class="decision-strategy wadd" ng-if="decisionStrategy == 'wadd'">
     <p>
-        Ihre Entscheidungsstrategie besteht darin, dass Sie sich für das Waschmittel entscheiden, dass hinsichtlich aller Eigenschaften und unter Einbezug Ihrer persönlichen Relevanz der einzelnen Eigenschaften, das beste Waschmittel darstellt. Dafür betrachten Sie nacheinander die einzelnen Bewertungen der Eigenschaften eines Waschmittels als Punkte und multiplizieren diese einzelnen Punkte mit der jeweiligen persönlichen Relevanz. Dann zählen Sie einzelnen Ergebnisse aus den Multiplikationen zusammen und erhalten damit die gewichtete Gesamteignung des Waschmittels. Diesen Vorgang wiederholen Sie dann für jedes Waschmittel. Am Ende haben Sie die gewichtete Gesamteignung für jedes einzelne Waschmittel und wählen dasjenige aus, dass die beste gewichtete Gesamteignung besitzt.
+        Ihre Entscheidungsstrategie besteht darin, dass Sie sich für das Waschmittel entscheiden, dass hinsichtlich aller Eigenschaften und unter Einbezug wie wichtig Ihnen die einzelnen Eigenschaften sind, das beste Waschmittel darstellt. Dafür betrachten Sie nacheinander die einzelnen Bewertungen eines Waschmittels. Da einzelne Eigenschaften unterschiedlich wichtig sein können, gewichten sie die einzelnen Eigenschaften und ermitteln daraus die gewichtete Gesamteignung des Waschmittels. Diesen Vorgang wiederholen Sie für jedes Waschmittel. Am Ende haben Sie die gewichtete Gesamteignung für jedes einzelne Waschmittel und wählen das beste darunter aus.
     </p>
-
 </section>
 
 
 <section class="personal-weights" ng-if="decisionStrategy != 'eqw'">
-    <p>
-        <br>
-        Ihre Angaben zur persönlichen Relevanz der Eigenschaften:<br>
-    </p>
+    <h4>Ihre Angaben zur persönlichen Relevanz der Eigenschaften:</h4>
     <table class="table table-condensed table-bordered table-striped table-personal-weights">
         <thead>
         <tr>

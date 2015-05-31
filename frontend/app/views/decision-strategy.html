@@ -1,10 +1,8 @@
 <h2>Die Art und Weise wie Sie hier Ihre Entscheidungen treffen sollen</h2>
 <p>
-    Im Verlauf der Studie werden Sie vor verschiedene Entscheidungsaufgaben gestellt. Dabei ist es zwingend notwendig, dass Sie Ihre Entscheidung anhand einer bestimmten Entscheidungsstrategie treffen. Im Folgenden wird Ihnen daher die Entscheidungsstrategie am Beispiel beschrieben und Sie können sich anschließend mit der Anwendung dieser Strategie in zwei beispielhaften Entscheidungssituationen vertraut machen.
+    Für die beispielhafte Beschreibung Ihrer Entscheidungsstrategie, finden Sie erneut die Tabelle mit den Bewertungen vor.
 </p>
-<p>
-    Betrachten Sie zunächst die folgende Tabelle. Sie finden darin drei Waschmittel mit den bereits bekannten Eigenschaften. Die Waschmittel wurden von einer unabhängigen Warentestung geprüft und die einzelnen Eigenschaften der Waschmittel bewertet. Den entsprechenden Bewertungsschlüssel finden Sie unter der Tabelle.
-</p>
+
 
 <table class="table table-condensed table-bordered table-striped">
     <thead>
@@ -25,155 +23,43 @@
 
 <section class="decision-strategy lex" ng-if="decisionStrategy == 'lex'">
     <p>
-        Ihre Entscheidungsstrategie besteht aus zwei Schritten. Im ersten Schritt wählen Sie sich Ihre persönlich wichtigste Eigenschaft bei Waschmitteln aus. Nehmen wir einmal an, für Sie ist die Eigenschaft „Schmutzentfernung“ am wichtigsten. Im zweiten Schritt vergleichen Sie nun alle verfügbaren Waschmittel hinsichtlich der Eigenschaft „Schmutzentfernung“ und entscheiden sich für das Waschmittel mit dem besten Wert bei dieser Eigenschaft. Wenn Sie sich die Tabelle oben anschauen sehen Sie, dass das Waschmittel 2 mit der Bewertung „++“ bei Schmutzentfernung das beste Waschmittel ist und daher das Waschmittel Ihrer Wahl darstellt.
-    </p>
-    <p>
-        Sollten zwei oder mehrere Waschmittel gleich gut bei Ihrer wichtigsten Eigenschaft sein, nehmen Sie Ihre zweitwichtigste Eigenschaft hinzu und vergleichen diese Waschmittel nun zusätzlich noch hinsichtlich dieser Eigenschaft.
+        Nehmen wir einmal an, für Sie ist die Eigenschaft „Schmutzentfernung“ am wichtigsten. Nun vergleichen Sie alle Waschmittel hinsichtlich der Eigenschaft „Schmutzentfernung“ und entscheiden sich für das Waschmittel mit dem besten Wert bei dieser Eigenschaft. Wenn Sie sich die Tabelle oben anschauen sehen Sie, dass das Waschmittel 2 mit der Bewertung „++“ bei Schmutzentfernung das beste ist und daher das Waschmittel Ihrer Wahl darstellt.
     </p>
 </section>
 
 <section class="decision-strategy eba" ng-if="decisionStrategy == 'eba'">
     <p>
-        Ihre Entscheidungsstrategie besteht darin, dass Sie ein Waschmittel nach dem anderen aussortieren, bis am Ende nur noch ein Waschmittel übrigbleibt, für das Sie sich dann entscheiden.<br>
-        Dieses schrittweise Aussortieren läuft dabei so ab, dass Sie die Waschmittel zuerst auf Ihrer persönlich wichtigsten Eigenschaft vergleichen. Bei diesem Vergleich werden alle Waschmittel aussortiert und nicht weiter beachtet, die Ihrem persönlichen Anspruchsniveau nicht genügen. Sollten mehrere Waschmittel übrig bleiben, vergleichen Sie diese dann auf der zweitwichtigsten Eigenschaft. Sollten weiterhin mehrere Waschmittel übrig sein, vergleichen Sie diese auf Ihrer drittwichtigsten Eigenschaft und so weiter, bis nur noch ein Waschmittel übrig bleibt und somit Ihre Wahl darstellt.
+        Nehmen wir einmal an, für Sie ist die Eigenschaft „Faserschutz“ am wichtigsten und alle Waschmittel die hierbei eine schlechtere Note als „++“ haben, werden aussortiert. Wenn Sie sich die Tabelle oben anschauen, wird das Waschmittel 1 aussortiert, da dessen Bewertung mit einer „+“ schlechter als ein „++“ ist. Es bleiben nun die Waschmittel 2 und 3 übrig, die Sie nun auf Ihrer zweitwichtigsten Eigenschaft vergleichen.
     </p>
     <p>
-        Nehmen wir einmal an, für Sie ist die Eigenschaft „Schmutzentfernung“ am wichtigsten und alle Waschmittel die hierbei eine schlechtere Note als „+“ haben, werden aussortiert. Wenn Sie sich die Tabelle oben anschauen, wird das Waschmittel 1 aussortiert, da dessen Bewertung mit einer „o“ schlechter als ein „+“ ist. Es bleiben nun die Waschmittel 2 und 3 übrig, die Sie nun auf Ihrer zweitwichtigsten Eigenschaft verglichen. Nehmen wir an, dass es sich bei Ihrer zweitwichtigsten Eigenschaft um „Faserschutz“ handelt und Sie alle Waschmittel aussortieren, die eine schlechtere Bewertung als „o“ besitzen. Im Vergleich der Waschmittel 2 und 3 stellen Sie fest, dass beide Waschmittel besser als „o“ sind und zudem noch gleiche Werte aufweisen. Um eine Entscheidung treffen zu können, ziehen Sie nun Ihre drittwichtigste Eigenschaft heran. Nehmen wir an, diese sei die „Umwelteigenschaften“ und Sie alle Waschmittel aussortieren, die hierbei eine schlechtere Note als „+“ haben. Im Vergleich von Waschmittel 2 und 3 wird das Waschmittel 2 aussortiert und Waschmittel 3 bleibt übrig und stellt somit Ihre Wahl dar.
+        Nehmen wir an, dass es sich bei Ihrer zweitwichtigsten Eigenschaft um „Fleckenentfernung“ handelt und Sie alle Waschmittel aussortieren, die eine schlechtere Bewertung als „+“ besitzen. Im Vergleich der Waschmittel 2 und 3 stellen Sie fest, dass Waschmittel 2 schlechter ist und daher aussortiert wird. Es bleibt also Waschmittel 3 übrig und stellt somit Ihre Wahl dar.
     </p>
 </section>
 
 <section class="decision-strategy eqw" ng-if="decisionStrategy == 'eqw'">
     <p>
-        Ihre Entscheidungsstrategie besteht darin, dass Sie sich für das Waschmittel entscheiden, dass „unterm Strich“, also hinsichtlich aller seiner Eigenschaften das beste Waschmittel darstellt. Dafür betrachten Sie alle Eigenschaften eines Waschmittels und ermitteln dessen Gesamteignung und wiederholen diesen Vorgang dann für jedes Waschmittel. Am Ende haben Sie die Gesamteignung für jedes Waschmittel und wählen dasjenige aus, dass die beste Gesamteignung besitzt.
+        Wenn Sie die oben stehende Tabelle betrachten sehen Sie, dass die Eigenschaften mit Symbolen bewertet werden. Um die Gesamteignung eines Waschmittels zu ermitteln, können Sie diese Symbole als Bewertungspunkte betrachten.
     </p>
     <p>
-        Betrachten Sie die oben stehende Tabelle so sehen Sie, dass die Eigenschaften mit Symbolen bewertet werden. Um die Gesamteignung eines Waschmittels zu ermitteln, können Sie diese Symbole als Bewertungspunkte betrachten. Da es insgesamt 5 Stufen in dem Bewertungsschlüssel gibt, entspricht die Bewertung „sehr gut“ (+ +) 5 Bewertungspunkten, die Bewertung „gut“ (+) dann 4 Punkten und so weiter, bis die Bewertung „mangelhaft“ (- -) letztendlich nur 1 Bewertungspunkt darstellt.<br>
-        Wie Sie sicherlich erkannt haben, kann diese Vorgehensweise bei der Eigenschaft „Preis je Waschgang“ nicht angewandt werden, da hier direkt der Preis und keine Bewertung mit Symbolen angegeben wird. Sie können bei dem „Preis je Waschgang“ einfach selbst eine Bewertung vornehmen, indem Sie schauen, welches Waschmittel das Teuerste ist und geben diesem Waschmittel 1 Punkt, dem zweitteuersten geben Sie dann 2 Punkte und so weiter, bis das billigste Waschmittel so viele Punkte erhält, wie es insgesamt Waschmittel gibt.
+        Da es insgesamt 5 Stufen in dem Bewertungsschlüssel gibt, entspricht die Bewertung „sehr gut“ (+ +) 5 Bewertungspunkten, die Bewertung „gut“ (+) dann 4 Punkten und so weiter, bis die Bewertung „mangelhaft“ (- -) letztendlich nur 1 Bewertungspunkt darstellt.
     </p>
     <p>
-        Für die Anwendung dieser Entscheidungsstrategie, betrachten Sie bitte erneut die oben stehende Tabelle und das Waschmittel ganz links, also Waschmittel 1. Bezüglich der Eigenschaft „Preis je Waschgang“ ist Waschmittel 1 das billigste und bekommt daher bei insgesamt drei Waschmitteln 3 Punkte für diese Eigenschaft. Für die Eigenschaft „Schmutzentfernung“ bekommt es 3 Punkte, für „Fleckenentfernung“ 2 Punkte, für „Vergrauung“ 3 Punkte, für „Farberhaltung“ 5 Punkte, für „Faserschutz“ 4 Punkte und für „Umwelteigenschaften“ 2 Punkte.<br>
-        Zählt man diese Punkte nun zusammen, so hat das Waschmittel 1 eine Gesamteignung von 22 Punkten. Wiederholt man diesen Vorgang für die Waschmittel 2, so erhält man eine Gesamteignung von 23 Punkten und das Waschmittel 3 eine Gesamteignung von 24 Punkten. Damit besitzt das Waschmittel 3 die höchste Punktzahl und stellt das beste Waschmittel und somit Ihre Wahl dar.
+        Wie Sie sicherlich erkannt haben, kann diese Vorgehensweise bei der Eigenschaft „Preis je Waschgang“ nicht angewandt werden, da hier direkt der Preis und keine Bewertung mit Symbolen angegeben wird. Sie können hier aber einfach selbst eine Bewertung vornehmen, indem Sie schauen, welches Waschmittel das Teuerste ist und geben diesem Waschmittel 1 Punkt. Dem zweitteuersten geben Sie dann 2 Punkte und so weiter, bis das billigste Waschmittel so viele Punkte erhält, wie es insgesamt Waschmittel gibt.
+    </p>
+    <p>
+        Für die Anwendung Ihrer Entscheidungsstrategie zählen Sie einfach alle Punkte von allen Eigenschaften eines Waschmittels zusammen. Dies machen Sie dann nacheinander auch für die anderen Waschmittel und erhalten so für jedes Waschmittel dessen Gesamteignung. Das Waschmittel mit der höchsten Punktzahl stellt das beste Waschmittel dar und ist somit Ihre Wahl.
     </p>
 </section>
 
 <section class="decision-strategy wadd" ng-if="decisionStrategy == 'wadd'">
     <p>
-        Ihre Entscheidungsstrategie besteht darin, dass Sie sich für das Waschmittel entscheiden, dass hinsichtlich aller Eigenschaften und unter Einbezug wie wichtig Ihnen die einzelnen Eigenschaften sind, das beste Waschmittel darstellt. Dafür betrachten Sie nacheinander die einzelnen Bewertungen der Eigenschaften eines Waschmittels und gewichten diese einzelnen Bewertungen mit einem Faktor. Dann ermitteln Sie daraus die gewichtete Gesamteignung des Waschmittels. Diesen Vorgang wiederholen Sie dann für jedes Waschmittel. Am Ende haben Sie die gewichtete Gesamteignung für jedes einzelne Waschmittel und wählen dasjenige aus, dass die beste gewichtete Gesamteignung besitzt.
+        Wenn Sie die oben stehende Tabelle betrachten sehen Sie, dass die Eigenschaften mit Symbolen bewertet werden. Um die gewichtete Gesamteignung eines Waschmittels zu ermitteln, können Sie diese Symbole als Bewertungspunkte betrachten. Da es insgesamt 5 Stufen in dem Bewertungsschlüssel gibt, entspricht die Bewertung „sehr gut“ (+ +) 5 Bewertungspunkten, die Bewertung „gut“ (+) dann 4 Punkten und so weiter, bis die Bewertung „mangelhaft“ (- -) letztendlich nur 1 Bewertungspunkt darstellt.
+        Wie Sie sicherlich erkannt haben, kann diese Vorgehensweise bei der Eigenschaft „Preis je Waschgang“ nicht angewandt werden, da hier direkt der Preis und keine Bewertung mit Symbolen angegeben wird. Sie können hier aber einfach selbst eine Bewertung vornehmen, indem Sie schauen, welches Waschmittel das Teuerste ist und geben diesem Waschmittel 1 Punkt. Dem zweitteuersten geben Sie dann 2 Punkte und so weiter, bis das billigste Waschmittel so viele Punkte erhält, wie es insgesamt Waschmittel gibt.
     </p>
     <p>
-        Betrachten Sie die oben stehende Tabelle so sehen Sie, dass die Eigenschaften mit Symbolen bewertet werden. Um die gewichtete Gesamteignung eines Waschmittels zu ermitteln, können Sie diese Symbole als Bewertungspunkte betrachten. Da es insgesamt 5 Stufen in dem Bewertungsschlüssel gibt, entspricht die Bewertung „sehr gut“ (+ +) 5 Bewertungspunkten, die Bewertung „gut“ (+) dann 4 Punkten und so weiter, bis die Bewertung „mangelhaft“ (- -) letztendlich nur 1 Bewertungspunkt darstellt.<br>
-        Die Gewichtung der einzelnen Bewertungen vollzieht sich durch eine Multiplikation der von Ihnen angegebenen Relevanz der einzelnen Eigenschaften. Zur Erläuterung der Entscheidungsstrategie, zeigt Ihnen die folgende Darstellung beispielhaft Werte für die persönliche Relevanz einzelner Eigenschaften an.
-    </p>
-
-    <table class="table table-condensed table-bordered table-striped table-personal-weights">
-        <thead>
-            <tr>
-                <th>Eigenschaft</th>
-                <th class="text-center">Persönliche Relevanz</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="testCase in ratingTestCases">
-                <td>{{ testCase }}</td>
-                <td>
-                    {{ participantAttributeValues[$index] }}&nbsp;&nbsp;&nbsp;&nbsp;
-                    <label class="radio-inline" ng-repeat="i in [5]|makeRange track by $index">
-                        <input type="radio" ng-checked="{{ (participantAttributeValues[$parent.$index] -1) == $index }}" ng-disabled="true">
-                    </label>
-
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <p>
-        Wenn Sie nun das obige Waschmittel 1 betrachten, ergibt sich die gewichtete Bewertung bei der Eigenschaft „Schmutzentfernung“ aus der Bewertung „befriedigend“, also 3 Punkten, die mit der persönlichen Relevanz von 4 multipliziert wird. Damit besitzt das Waschmittel 1 bei der Eigenschaft „Schmutzentfernung“ eine gewichtete Bewertung von 12 Punkten.
-    </p>
-
-    <p>
-        Wie Sie sicherlich erkannt haben, kann diese Vorgehensweise bei der Eigenschaft „Preis je Waschgang“ nicht angewandt werden, da hier direkt der Preis und keine Bewertung mit Symbolen angegeben wird. Sie können bei dem „Preis je Waschgang“ einfach selbst eine Bewertung vornehmen, indem Sie schauen, welches Waschmittel das Teuerste ist und geben diesem Waschmittel 1 Punkt, dem zweitteuersten geben Sie dann 2 Punkte und so weiter, bis das billigste Waschmittel so viele Punkte erhält, wie es insgesamt Waschmittel gibt.
-    </p>
-
-    <p>
-        Im Folgenden wird Ihnen das Prinzip der gewichteten Bewertungen dieser Entscheidungsstrategie anhand einer Tabelle dargestellt und den Angaben zu dem Waschmittel 1. In der ersten Spalte sehen Sie die einzelnen Eigenschaften, in der zweiten Spalte sehen Sie die Angaben, die durch die unabhängigen Tester der Waschmittel vergeben wurden, in der dritten Spalte sehen Sie die Bewertungen in Punkten ausgedrückt, in der vierten Spalte sehen Sie die persönliche Relevanz der einzelnen Eigenschaften. Zur Berechnung der gewichteten Bewertung in Spalte fünf, werden wie bereits beschrieben, die Bewertung in Punkten, also der dritten Spalte, mit der persönlichen Relevant, also der vierten Spalte multipliziert.
-    </p>
-
-    <table class="table table-condensed table-bordered table-striped table-strategy-wadd">
-        <thead>
-        <tr>
-            <th>Eigenschaft</th>
-            <th class="text-center strategy-wadd-column-width">Bewertung der unabhängigen Tester</th>
-            <th class="text-center strategy-wadd-column-width">Bewertung in Punkten</th>
-            <th class="text-center strategy-wadd-column-width">Persönliche Relevanz</th>
-            <th class="text-center strategy-wadd-column-width">Gewichtete Bewertung</th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Preis je Waschgang</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">{{ 0.30|number:2 }}</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">3</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">5</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">15</td>
-            </tr>
-            <tr>
-                <td>Schmutzentfernung</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">o</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">3</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">4</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">12</td>
-            </tr>
-            <tr>
-                <td>Fleckenentfernung</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">-</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">2</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">2</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">4</td>
-            </tr>
-            <tr>
-                <td>Vergrauung</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">o</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">3</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">1</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">3</td>
-            </tr>
-            <tr>
-                <td>Farberhaltung</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">++</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">5</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">3</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">15</td>
-            </tr>
-            <tr>
-                <td>Faserschutz</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">+</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">4</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">3</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">12</td>
-            </tr>
-            <tr>
-                <td>Umwelteigenschaften</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">-</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">2</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">4</td>
-                <td class="text-center strategy-wadd-column-width test-case-value">8</td>
-            </tr>
-        </tbody>
-    </table>
-    <p>Addiert man nun die einzelnen gewichteten Bewertungen in Spalte fünf, so erhält das Waschmittel 1 eine gewichtete Gesamtbewertung von 69 Punkten.
-        Führt man diesen Vorgang für jedes einzelne Waschmittel durch, so erhält das Waschmittel 2 eine gewichtete Gesamtbewertung von 74 Punkten und das Waschmittel 3 eine gewichtete Gesamtbewertung von 71 Punkten. Damit besitzt das Waschmittel 2 die höchste Punktzahl und stellt für Sie persönlich das beste Waschmittel und somit Ihre Wahl dar.
+        Die Gewichtung der einzelnen Bewertungen vollzieht sich anhand der von Ihnen angegebenen Relevanz der einzelnen Eigenschaften. Eine hohe Relevanz bedeutet: ist mir wichtig und soll deshalb stärker in meine Entscheidung einfließen. Eine geringe Relevanz bedeutet: ist mir nicht so wichtig und soll daher weniger stark in meine Entscheidung einfließen.
+        Hierfür können Sie einfach die Bewertung einer Eigenschaft, mit dem Wert Ihrer persönlichen Relevanz multiplizieren. Dies machen Sie bei jeder Eigenschaft eines Waschmittels und erhalten in Summe dann die gewichtete Gesamteignung eines Waschmittels. Wenn Sie diesen Vorgang nun für jedes der Waschmittel wiederholen, stellt das Waschmittel mit der größten gewichteten Gesamteignung das beste Waschmittel für Sie dar und ist somit Ihre Wahl.
     </p>
 </section>
-
-
-<p>Sie werden gleich die Möglichkeit haben, sich in zwei Übungsläufen
-    mit der soeben beschriebenen Vorgehensweise vertraut zu machen,
-    bevor die eigentliche Studie beginnt.
-    Im Anschluss daran beginnt die eigentliche Studie und Sie bekommen
-    drei mal verschiedene Waschmittel gezeigt.
-    Jedes mal wird es darum gehen, eine <strong>Entscheidung so schnell aber auch so gut wie möglich zu treffen</strong>. <br>
-
-    Nach jeder Entscheidungsaufgabe werden Ihnen Fragen zu Ihrer Entscheidung gestellt. Weitere Fragen schließen die Studie ab und Sie haben am Ende die Möglichkeit, an einer Verlosung für einen von drei Amazon-Gutschein im Wert von 25€ teilzunehmen und Zugriff auf den Quellcode der Programmierung dieser Studie zu erhalten.
-</p>
 
 <p><a class="btn btn-lg btn-success btn-next" ng-href="#/uebung1-description">Weiter</a></p>

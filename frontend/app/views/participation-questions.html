@@ -17,18 +17,34 @@
     <br><br>
 
     <div class="form-group" ng-repeat="question in participantQuestions">
-        <div class="col-sm-5">
+        <div class="col-sm-3">
             <p><strong>{{ $index + 1 }}. {{ question.title }}</strong></p>
+        </div>
+        <div class="col-sm-9">
+            <span class="stress-questions-option-label">{{ labelLeft }}</span>
+
+            <label class="radio-inline" ng-repeat="i in [9]|makeRange track by $index">
+                <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="{{ $index + 1 }}">
+            </label>
+
+            <span class="stress-questions-option-label">{{ labelRight }}</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-5">
+            <p><strong>3. {{ addToolsQuestion.title }}</strong></p>
         </div>
         <div class="col-sm-7">
             <label class="radio-inline">
-                <input type="radio" name="{{ question.label }}" ng-model="question.value" ng-change="checkAllSet()" value="1"> Ja
+                <input type="radio" name="{{ addToolsQuestion.label }}" ng-model="addToolsQuestion.value" ng-change="checkAllSet()" value="1"> Ja
             </label>
             <label class="radio-inline">
-                <input type="radio" name="{{ question.label }}" ng-model="question.value" ng-change="checkAllSet()" value="0"> Nein
+                <input type="radio" name="{{ addToolsQuestion.label }}" ng-model="addToolsQuestion.value" ng-change="checkAllSet()" value="0"> Nein
             </label>
         </div>
     </div>
+
 
     <div class="form-group">
         <div class="col-sm-12">

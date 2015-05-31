@@ -79,6 +79,14 @@ angular
         templateUrl: 'views/participation-questions.html',
         controller: 'ParticipationQuestionsCtrl'
       })
+      .when('/washing-powders', {
+        templateUrl: 'views/washing-powders.html',
+        controller: 'WashingPowdersCtrl'
+      })
+      .when('/common-decision-strategy', {
+        templateUrl: 'views/common-decision-strategy.html',
+        controller: 'CommonDecisionStrategyCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

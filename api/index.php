@@ -6,6 +6,7 @@ require_once 'vendor/autoload.php';
 require_once 'inc/dbHandler.php';
 
 $app = new \Slim\Slim();
+$deviceDetector = new Mobile_Detect;
 
 
 $app->container->singleton('db', function () {
@@ -213,7 +214,7 @@ $app->post('/experiment/save/stressquestions', function() use($app) {
 // -----------------------------------------------------------------------------
 // This route saves the demographic data of the user
 // -----------------------------------------------------------------------------
-$app->post('/participant/save/demographics', function() use($app) {
+$app->post('/participant/save/demographics', function() use($app, $deviceDetector) {
 	$requestData = json_decode($app->request->getBody(), true);
 
 	if (isset($requestData['participantDatabaseId'])
@@ -222,7 +223,13 @@ $app->post('/participant/save/demographics', function() use($app) {
 		&& isset($requestData['graduation'])
         && isset($requestData['status']))
 	{
-		$app->db->saveDemographics($requestData['participantDatabaseId'], $requestData['age'], $requestData['gender'], $requestData['graduation'], $requestData['status']);
+        // Determine users device
+        $device = 1;
+
+        if ($deviceDetector->isTablet()) { $device = 2; }
+        if ($deviceDetector->isMobile() && !$deviceDetector->isTablet()) { $device = 3; }
+
+		$app->db->saveDemographics($requestData['participantDatabaseId'], $requestData['age'], $requestData['gender'], $requestData['graduation'], $requestData['status'], $device);
 
 		$app->response->setStatus(200);
 		$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);

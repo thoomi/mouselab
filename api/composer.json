@@ -1,5 +1,6 @@
 {
     "require": {
-        "slim/slim": "2.*"
+        "slim/slim": "2.*",
+        "mobiledetect/mobiledetectlib" : "2.8.*"
     }
 } 

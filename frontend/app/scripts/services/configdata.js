@@ -10,10 +10,10 @@
 angular.module('mouselabApp')
   .service('configData', function (randomizer) {
       // Location will be different for each url
-      var experimentLocation  = 'T';
+      var experimentLocation  = 'O';
 
       //var baseApiUrl = 'http://api.stephan-kopietz.dev';
-      var baseApiUrl = 'http://apima.stephan-kopietz.de';
+      var baseApiUrl = 'http://apimalive.stephan-kopietz.de';
 
       var numberOfRounds = 3;
       var possibleStrategies = ['lex', 'eba', 'eqw', 'wadd'];

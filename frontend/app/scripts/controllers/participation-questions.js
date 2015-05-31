@@ -36,6 +36,11 @@ angular.module('mouselabApp')
         }
       });
 
+      if ($scope.addToolsQuestion.value === null)
+      {
+        allSet = false;
+      }
+
       $scope.allQuestionsAnswered = allSet;
     };
 
@@ -44,17 +49,19 @@ angular.module('mouselabApp')
       $scope.notWaitingForRequestToFinish = false;
 
       var taskQuestionData = {};
-      // Save all Answers into an array and calculate the sum
+      // Save all Answers into an array
       taskQuestionData.environmentAnswers = [];
       angular.forEach($scope.environmentQuestions, function(question) {
         taskQuestionData.environmentAnswers[parseInt(question.id - 1)] = question.value;
       });
 
-      // Save all Answers into an array and calculate the sum
+      // Save all Answers into an array
       taskQuestionData.participantAnswers = [];
       angular.forEach($scope.participantQuestions, function(question) {
         taskQuestionData.participantAnswers[parseInt(question.id - 1)] = question.value;
       });
+
+      taskQuestionData.participantAnswers[0] = $scope.addToolsQuestion.value;
 
 
       dataService.endTime();
@@ -94,24 +101,25 @@ angular.module('mouselabApp')
       }
     ];
 
+    $scope.addToolsQuestion = {
+      id    : 1,
+      title : 'Haben Sie während der Studie Hilfsmittel (z.B. Notizzettel, Taschenrechner) benutzt?',
+      label : 'participant-questions-1',
+      value : null
+    };
+
     $scope.participantQuestions = [
-      {
-        id    : 1,
-        title : 'Haben Sie während der Studie Hilfsmittel (z.B. Notizzettel, Taschenrechner) benutzt?',
-        label : 'participant-questions-1',
-        value : null
-      },
       {
         id    : 2,
         title : 'Ich schätze mich im Kopfrechnen als gut ein.',
         label : 'participant-questions-2',
-        value : null
+        value : 0
       },
       {
         id    : 3,
         title : 'Ich kann mir Informationen schnell und gut über einen kurzen Zeitraum merken',
         label : 'participant-questions-3',
-        value : null
+        value : 0
       }
     ];
 

@@ -103,8 +103,8 @@ class DbHandler
     public function saveStressQuestionAnswers($participantDbId, $experimentId, $satisfactionAnswers, $satisfactionAnswersSum, $stressAnswers, $stressAnswersSum, $decisionByStrategy)
     {
         // Insert stress question answers
-        $insertStatement = $this->dbh->prepare('INSERT INTO tl_stress_question (q_num_1, q_num_2, q_num_3, q_num_4, q_num_5, q_num_6, q_num_7, q_sum, tl_participant_id, tl_experiment_id)
-                                                VALUES (:answer1, :answer2, :answer3, :answer4, :answer5, :answer6, :answer7, :sumAnswers, :participantId, :experimentId)');
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_stress_question (q_num_1, q_num_2, q_num_3, q_num_4, q_num_5, q_num_6, q_num_7, q_num_8, q_sum, tl_participant_id, tl_experiment_id)
+                                                VALUES (:answer1, :answer2, :answer3, :answer4, :answer5, :answer6, :answer7, :answer8, :sumAnswers, :participantId, :experimentId)');
 
         $insertStatement->bindParam(':answer1', $stressAnswers[0]);
         $insertStatement->bindParam(':answer2', $stressAnswers[1]);
@@ -113,6 +113,7 @@ class DbHandler
         $insertStatement->bindParam(':answer5', $stressAnswers[4]);
         $insertStatement->bindParam(':answer6', $stressAnswers[5]);
         $insertStatement->bindParam(':answer7', $stressAnswers[6]);
+        $insertStatement->bindParam(':answer8', $stressAnswers[7]);
         $insertStatement->bindParam(':sumAnswers',    $stressAnswersSum);
         $insertStatement->bindParam(':participantId', $participantDbId);
         $insertStatement->bindParam(':experimentId',  $experimentId);
@@ -121,12 +122,11 @@ class DbHandler
 
 
         // Insert satisfaction question answers
-        $insertStatement = $this->dbh->prepare('INSERT INTO tl_satisfaction_question (q_num_1, q_num_2, q_num_3, q_sum, tl_participant_id, tl_experiment_id)
-                                                VALUES (:answer1, :answer2, :answer3, :sumAnswers, :participantId, :experimentId)');
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_satisfaction_question (q_num_1, q_num_2, q_sum, tl_participant_id, tl_experiment_id)
+                                                VALUES (:answer1, :answer2, :sumAnswers, :participantId, :experimentId)');
 
         $insertStatement->bindParam(':answer1', $satisfactionAnswers[0]);
         $insertStatement->bindParam(':answer2', $satisfactionAnswers[1]);
-        $insertStatement->bindParam(':answer3', $satisfactionAnswers[2]);
         $insertStatement->bindParam(':sumAnswers',    $satisfactionAnswersSum);
         $insertStatement->bindParam(':participantId', $participantDbId);
         $insertStatement->bindParam(':experimentId',  $experimentId);
@@ -143,15 +143,16 @@ class DbHandler
         $updateStatement->execute();
     }
 
-    public function saveDemographics($participantDbId, $age, $gender, $graduation, $status)
+    public function saveDemographics($participantDbId, $age, $gender, $graduation, $status, $device)
     {
         $insertStatement = $this->dbh->prepare('INSERT INTO tl_demographics (age, gender, graduation, live_status, device, tl_participant_id)
-                                                VALUES (:age, :gender, :graduation, :liveStatus, "###", :participantId)');
+                                                VALUES (:age, :gender, :graduation, :liveStatus, :device, :participantId)');
 
         $insertStatement->bindParam(':age',           $age);
         $insertStatement->bindParam(':gender',        $gender);
         $insertStatement->bindParam(':graduation',    $graduation);
         $insertStatement->bindParam(':liveStatus',    $status);
+        $insertStatement->bindParam(':device',        $device);
         $insertStatement->bindParam(':participantId', $participantDbId);
 
         $insertStatement->execute();

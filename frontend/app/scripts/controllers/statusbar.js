@@ -9,7 +9,7 @@
  */
 angular.module('mouselabApp')
   .controller('StatusbarCtrl', function ($scope, $rootScope, configData, dataService) {
-    var maxNumberOfSites = 20;
+    var maxNumberOfSites = 22;
 
     $scope.currentSite = 0;
     $scope.barWidth    = 100 / maxNumberOfSites;

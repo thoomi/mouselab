@@ -288,14 +288,14 @@ angular.module('mouselabApp')
               saveExperiment(optionRank, timeToDecision, optionPosition, callback);
             },
 
-            saveStressQuestions : function (answer1, answer2, callback) {
+            saveStressQuestions : function (questionsData, callback) {
                 if (isStressQuestionSaved[currentExperimentRound-1])
                 {
                     callback();
                     return;
                 }
 
-                saveStressQuestions(answer1, answer2, callback);
+                saveStressQuestions(questionsData, callback);
             },
 
             saveDemographicData : function (age, gender, graduation, status, callback) {

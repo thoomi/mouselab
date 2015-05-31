@@ -169,21 +169,31 @@ class DbHandler
 
     public function getExperiments($participantId)
     {
-        $selectStatement = $this->dbh->prepare('SELECT
-                                                    tl_experiment.task,
-                                                    tl_experiment.task_pos AS task_pos,
-                                                    tl_experiment.chosen_option_position AS chosen_option_position,
-                                                    tl_experiment.chosen_option_rank AS chosen_option_rank,
-                                                    tl_experiment.time_to_decision AS time_to_decision,
-                                                    tl_satisfaction_question.q_sum AS satisfaction_sum,
-                                                    tl_stress_question.q_sum AS stress_sum,
-                                                    tl_experiment.q_decision_by_guideline AS by_guide_line
+            $selectStatement = $this->dbh->prepare('SELECT
+                                                        tl_experiment.task,
+                                                        tl_experiment.task_pos AS task_pos,
+                                                        tl_experiment.chosen_option_position AS chosen_option_position,
+                                                        tl_experiment.chosen_option_rank AS chosen_option_rank,
+                                                        tl_experiment.time_to_decision AS time_to_decision,
+                                                        tl_experiment.q_decision_by_guideline AS by_guide_line,
 
-                                                FROM tl_experiment
-                                                JOIN tl_stress_question ON tl_stress_question.tl_experiment_id = tl_experiment.id
-                                                JOIN tl_satisfaction_question ON tl_satisfaction_question.tl_experiment_id = tl_experiment.id
-                                                WHERE tl_experiment.tl_participant_id = :participantId
-                                                ORDER BY tl_experiment.task');
+                                                        tl_satisfaction_question.q_num_1 AS satisfaction_q1,
+                                                        tl_satisfaction_question.q_num_2 AS satisfaction_q2,
+                                                        tl_satisfaction_question.q_sum AS satisfaction_sum,
+
+                                                        tl_stress_question.q_num_1 AS stress_q1,
+                                                        tl_stress_question.q_num_2 AS stress_q2,
+                                                        tl_stress_question.q_num_3 AS stress_q3,
+                                                        tl_stress_question.q_num_4 AS stress_q4,
+                                                        tl_stress_question.q_num_5 AS stress_q5,
+                                                        tl_stress_question.q_num_6 AS stress_q6,
+                                                        tl_stress_question.q_num_7 AS stress_q7,
+                                                        tl_stress_question.q_sum AS stress_sum
+                                                    FROM tl_experiment
+                                                    JOIN tl_stress_question ON tl_stress_question.tl_experiment_id = tl_experiment.id
+                                                    JOIN tl_satisfaction_question ON tl_satisfaction_question.tl_experiment_id = tl_experiment.id
+                                                    WHERE tl_experiment.tl_participant_id = :participantId
+                                                    ORDER BY tl_experiment.task');
         $selectStatement->bindParam(':participantId', $participantId);
 
         $selectStatement->execute();

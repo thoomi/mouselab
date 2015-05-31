@@ -50,7 +50,7 @@ angular.module('mouselabApp')
         if (!error)
         {
           $scope.notWaitingForRequestToFinish = true;
-          $location.path('decision-strategy');
+          $location.path('washing-powders');
         }
         else
         {
