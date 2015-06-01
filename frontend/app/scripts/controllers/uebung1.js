@@ -23,7 +23,7 @@ angular.module('mouselabApp')
           'Umwelteigenschaften'
         ];
 
-        $scope.washingPowders = [
+          $scope.washingPowders = [
             { name  : 'Waschmittel 1', testCaseRatings : [0.19, '+',  'o',  '+',  '+',  '-',  '-'],  rank : 2},
             { name  : 'Waschmittel 2', testCaseRatings : [0.25, 'o',  '+',  'o', '++',  '+',  'o'],  rank : 1},
         ];

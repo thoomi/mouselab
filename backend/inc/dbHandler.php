@@ -215,7 +215,8 @@ class DbHandler
     public function getTrainingExperiments($participantId)
     {
         $selectStatement = $this->dbh->prepare('SELECT * FROM tl_experiment_training
-                                                WHERE tl_participant_id = :participantId');
+                                                WHERE tl_participant_id = :participantId
+                                                ORDER BY training_number');
         $selectStatement->bindParam(':participantId', $participantId);
 
         $selectStatement->execute();
@@ -301,6 +302,7 @@ class DbHandler
             $attributeWeights      = $this->getAttributeWeights($participant['id']);
             $additionalQuestions   = $this->getAdditionalQuestions($participant['id']);
             $demographics          = $this->getDemographicData($participant['id']);
+            $trainings             = $this->getTrainingExperiments($participant['id']);
 
             $data[] = array(
                 'participant'  => $participant,
@@ -308,7 +310,8 @@ class DbHandler
                 'maximising'   => $maximisingAnswers,
                 'attributes'   => $attributeWeights,
                 'additional'   => $additionalQuestions,
-                'demographic'  => $demographics
+                'demographic'  => $demographics,
+                'training'    => $trainings
             );
         }
 

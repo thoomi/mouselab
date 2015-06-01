@@ -116,6 +116,11 @@ $app->get('/csv', function() use($app) {
         'Gewicht 7',
         'Gewicht-MW',
 
+        'Training-1-Zeit',
+        'Training-1-Opt-Rang',
+        'Training-2-Zeit',
+        'Training-2-Opt-Rang',
+
 		'Position-ExpBA',	     // task_pos
         'Position-Option-ExpBA', // chosen_option_position
 		'Rang-Option-ExpBA',	 // chosen_option_rank
@@ -331,6 +336,25 @@ $app->get('/csv', function() use($app) {
         );
         if (isset($value['attributes'][0])) { $attributes = $value['attributes'][0]; }
 
+
+        $training = array(
+            't-1-time'   => '#',
+            't-1-option' => '#',
+            't-2-time'   => '#',
+            't-2-option' => '#'
+        );
+        if (isset($value['training'][0]))
+        {
+            $training['t-1-time']   = $value['training'][0]['time_to_decision'];
+            $training['t-1-option'] = $value['training'][0]['chosen_option_rank'];
+        }
+        if (isset($value['training'][1]))
+        {
+            $training['t-2-time']   = $value['training'][1]['time_to_decision'];
+            $training['t-2-option'] = $value['training'][1]['chosen_option_rank'];
+        }
+
+
 		$result[] = array(
 			$value['participant']['ip_address'],
 			$value['participant']['participated_at'],
@@ -350,6 +374,11 @@ $app->get('/csv', function() use($app) {
             $attributes['q_num_6'],
             $attributes['q_num_7'],
             $attributes['q_sum'],
+
+            $training['t-1-time'],
+            $training['t-1-option'],
+            $training['t-2-time'],
+            $training['t-2-option'],
 
 			$expA['task_pos'],
             $expA['chosen_option_position'],
@@ -439,7 +468,7 @@ $app->get('/csv', function() use($app) {
 
 	foreach ($result as $line)
 	{
-		fputcsv($file, $line);
+		fputcsv($file, $line, ';');
 	}
 
 	fclose($file);
