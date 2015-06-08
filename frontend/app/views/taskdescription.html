@@ -8,7 +8,12 @@
         Sie können Ihre Entscheidung also schneller treffen als die maximale Zeit die Sie dafür haben, Sie können unter Umständen aber auch länger für Ihre Entscheidung brauchen als Ihnen Zeit zur Verfügung steht. Nutzen Sie Ihre Entscheidungsstrategie so lange, bis Sie zur Wahl eines Waschmittels gelangen, auch wenn Ihnen dabei die Zeit auslaufen kann und somit keine Entscheidung getroffen wird. Wenden Sie bitte <strong>keine andere Entscheidungsstrategie</strong> an als diejenige, die Ihnen beschrieben wurde.
     </p>
     <p>
-        Bevor es gleich los geht, finden Sie hier nochmal eine kurze Beschreibung Ihrer Entscheidungsstrategie, wie auch Ihre persönlichen Angaben zur Relevanz einzelner Eigenschaften von Waschmitteln.
+        <section ng-if="decisionStrategy == 'eqw'">
+            Bevor es gleich los geht, finden Sie hier nochmal eine kurze Beschreibung Ihrer Entscheidungsstrategie.
+        </section>
+        <section ng-if="decisionStrategy != 'eqw'">
+            Bevor es gleich los geht, finden Sie hier nochmal eine kurze Beschreibung Ihrer Entscheidungsstrategie, wie auch Ihre persönlichen Angaben zur Relevanz einzelner Eigenschaften von Waschmitteln.
+        </section>
     </p>
 </section>
 

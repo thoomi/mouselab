@@ -6,7 +6,12 @@
     Treffen Sie Ihre Entscheidung bitte anhand der beschriebenen Entscheidungsstrategie und dies <strong>so schnell aber auch so gut wie möglich</strong>. Wenden Sie bitte <strong>keine andere Entscheidungsstrategie</strong> an als diejenige die Ihnen beschrieben wurde. Sobald Sie sich für eines der Waschmittel entschieden haben, betätigen Sie einfach den „Button“ der sich unter diesem Waschmittel befindet. Oben rechts wird Ihnen angezeigt, wie viel Zeit bereits verstrichen ist.
 </p>
 <p>
-    Bevor es gleich los geht, finden Sie hier nochmal eine kurze Beschreibung Ihrer Entscheidungsstrategie, wie auch Ihre persönlichen Angaben zur Relevanz einzelner Eigenschaften von Waschmitteln.
+    <section ng-if="decisionStrategy == 'eqw'">
+        Bevor es gleich los geht, finden Sie hier nochmal eine kurze Beschreibung Ihrer Entscheidungsstrategie.
+    </section>
+    <section ng-if="decisionStrategy != 'eqw'">
+        Bevor es gleich los geht, finden Sie hier nochmal eine kurze Beschreibung Ihrer Entscheidungsstrategie, wie auch Ihre persönlichen Angaben zur Relevanz einzelner Eigenschaften von Waschmitteln.
+    </section>
 </p>
 <br>
 <h4>Ihre Entscheidungsstrategie:</h4>

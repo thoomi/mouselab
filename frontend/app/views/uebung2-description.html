@@ -1,7 +1,12 @@
 <h2>Übungslauf 2</h2>
 <p>Die erste Übung haben Sie absolviert. Auf der folgenden Seite werden Ihnen erneut verschiedene Waschmittel gezeigt. Sobald Sie sich für eines der Waschmittel entschieden haben, betätigen Sie einfach wieder den „Button“ der sich unter diesem Waschmittel befindet.</p>
 <p>
-    Bevor es gleich los geht, finden Sie hier nochmal eine kurze Beschreibung Ihrer Entscheidungsstrategie, wie auch Ihre persönlichen Angaben zur Relevanz einzelner Eigenschaften von Waschmitteln.
+    <section ng-if="decisionStrategy == 'eqw'">
+        Bevor es gleich los geht, finden Sie hier nochmal eine kurze Beschreibung Ihrer Entscheidungsstrategie.
+    </section>
+    <section ng-if="decisionStrategy != 'eqw'">
+        Bevor es gleich los geht, finden Sie hier nochmal eine kurze Beschreibung Ihrer Entscheidungsstrategie, wie auch Ihre persönlichen Angaben zur Relevanz einzelner Eigenschaften von Waschmitteln.
+    </section>
 </p>
 <br>
 <h4>Ihre Entscheidungsstrategie:</h4>
