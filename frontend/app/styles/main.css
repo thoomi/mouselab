@@ -19,6 +19,10 @@ html {
     position: relative;
 }
 
+.link:hover {
+  cursor: pointer;
+}
+
 .status-bar {
     position: absolute;
     top: 0;

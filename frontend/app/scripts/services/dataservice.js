@@ -12,9 +12,8 @@ angular.module('mouselabApp')
         var participantDatabaseId       = 0;
         var participantId               = 0;
         var participantGroup            = '';
-        var participantStrategy         = '';
+        var participantCondition        = '';
         var participantAttributeWeights = [];
-        var selectedOrganization        = '';
         var participantIsPreviousParticipant = 0;
         var startTime                   = 0;
         var endTime                     = 0;
@@ -36,11 +35,10 @@ angular.module('mouselabApp')
         function saveParticipant(callback) {
             var postData = {
                 participantId           : participantId,
-                participantGroup        : participantGroup,
-                participantStrategy     : participantStrategy,
-                participantOrganization : selectedOrganization,
                 participantPreviously   : participantIsPreviousParticipant,
-                participantLocation     : configData.getExperimentLocation()
+                participantLocation     : configData.getExperimentLocation(),
+                participantCondition    : participantCondition,
+                participantGroup        : participantGroup
             };
 
             $http.post(configData.getBaseUrl() + '/participant/create', postData).
@@ -98,13 +96,15 @@ angular.module('mouselabApp')
                 });
         }
 
-        function saveDemographicData(age, gender, graduation, status, callback) {
+        function saveDemographicData(age, gender, graduation, status, apprenticeship, academicDegree, callback) {
             var postData = {
                 participantDatabaseId : participantDatabaseId,
                 age                   : age,
                 gender                : gender,
                 graduation            : graduation,
-                status                : status
+                status                : status,
+                apprenticeship        : apprenticeship,
+                academicDegree        : academicDegree
             };
 
             $http.post(configData.getBaseUrl() + '/participant/save/demographics', postData).
@@ -230,14 +230,6 @@ angular.module('mouselabApp')
               return participantAttributeWeights;
             },
 
-            getParticipantStrategy : function() {
-              return participantStrategy;
-            },
-
-            setParticipantStrategy : function(strategy) {
-              participantStrategy = strategy;
-            },
-
             startNextRound : function () {
                 if (currentExperimentRound >= 1 && currentExperimentRound <= configData.getMaxRounds())
                 {
@@ -248,10 +240,6 @@ angular.module('mouselabApp')
                 {
                     return false;
                 }
-            },
-
-            setSelectedOrganization : function (organization) {
-              selectedOrganization = organization;
             },
 
             getCurrentTask : function () {
@@ -265,12 +253,10 @@ angular.module('mouselabApp')
                     return;
                 }
 
-                participantId         = id;
+                participantId                    = id;
                 participantIsPreviousParticipant = isPreviousParticipant;
-                participantGroup    = configData.getRandomGroup();
-                participantStrategy = configData.getRandomStrategy();
-
-                $rootScope.$broadcast('strategyChosen', participantStrategy);
+                participantGroup     = configData.getRandomGroup();
+                participantCondition = configData.getRandomCondition();
 
                 if (typeof callback === 'function')
                 {
@@ -298,14 +284,14 @@ angular.module('mouselabApp')
                 saveStressQuestions(questionsData, callback);
             },
 
-            saveDemographicData : function (age, gender, graduation, status, callback) {
+            saveDemographicData : function (age, gender, graduation, status, apprenticeship, academicDegree, callback) {
                 if (isDemographicsSaved)
                 {
                     callback();
                     return;
                 }
 
-                saveDemographicData(age, gender, graduation, status, callback);
+                saveDemographicData(age, gender, graduation, status, apprenticeship, academicDegree, callback);
             },
 
             saveMaximisingAnswers : function (answerValues, sumAnswers, callback) {
@@ -365,9 +351,8 @@ angular.module('mouselabApp')
                 participantDatabaseId       = 0;
                 participantId               = 0;
                 participantGroup            = '';
-                participantStrategy         = '';
+                participantCondition        = '';
                 participantAttributeWeights = [];
-                selectedOrganization        = '';
                 startTime                   = 0;
                 endTime                     = 0;
                 currentExperimentRound      = 1;

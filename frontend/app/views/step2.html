@@ -1,0 +1,19 @@
+<h2>Zur Studie</h2>
+<p >
+    Diese	Untersuchung	wird	ca.	15	bis	25	Minuten	dauern	und	beschäftigt	sich	mit	Entscheidungen.	In	der	Studie	werden	Sie	verschiedene	Entscheidungen	treffen	und	können	durch	Punkte	für	Ihre	Entscheidungen	einen	zusätzlichen	Geldbetrag	zur	Teilnahmevergütung	erhalten.	Genaueres	dazu	später.
+</p>
+<p>
+    Während	der	Studie	ist	es	wichtig,	dass	Sie	weder	gestört	noch	abgelenkt	werden.	Schalten	Sie	daher	bitte	Ihr	Mobiltelefon	aus,	sodass	auch	kein	Vibrationssignal	ertönen	kann	–	vielen	Dank!	
+</p>
+<p>
+   Ihre	Daten	werden	nicht	an	Dritte	weitergegeben	und	ausschließlich	für	wissenschaftliche	Zwecke	genutzt.	Ihre	Angaben	werden	selbstverständlich	anonym	gespeichert,	sodass	kein	Rückschluss	auf	Ihre	Person	möglich	ist.
+</p>
+<br>
+<div class="checkbox">
+    <label for="agree-to-participate" class="agree-to-participate">
+        <input type="checkbox" value="" id="agree-to-participate" ng-model="agreedToParticipate">
+        Ich bestätige hiermit, dass ich den oben stehenden Text gelesen und verstanden habe und erkläre mich bereit, an dieser Studie teilzunehmen.
+    </label>
+</div>
+
+<p><a class="btn btn-lg btn-success btn-next" ng-click="disabled()" ng-disabled="!agreedToParticipate">Weiter <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></p>

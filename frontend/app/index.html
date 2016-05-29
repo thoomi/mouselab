@@ -8,10 +8,10 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
@@ -26,23 +26,20 @@
     </div>
 
     <div class="status-bar" ng-controller="StatusbarCtrl">
-        <div class="progress" ng-hide="currentSite < 1">
+        <div class="progress" ng-hide="currentSite <= 1">
             <div class="progress-bar" role="progressbar" style="width: {{ barWidth }}%">{{ barWidth }}%</div>
         </div>
 
 
-        <!--<div class="testing-configurators" ng-hide="!isTestEnv">
-            <span class="site-number">Seite {{ currentSite + 1 }}</span>
-            <p class="strategy-title">Strategie: </p>
+        <div class="testing-configurators" ng-hide="!isTestEnv">
+            <span class="site-number">Seite {{ currentSite }}</span>
+            <p class="strategy-title">Gehe zu: </p>
             <div class="select-strategy">
-                <select class="form-control select-strategy-form" ng-model="currentStrategy">
-                    <option value="lex">LEX</option>
-                    <option value="eba">EBA</option>
-                    <option value="eqw">EQW</option>
-                    <option value="wadd">WADD</option>
+                <select class="form-control select-strategy-form" ng-model="currentSite" ng-change="onChange()">
+                    <option ng-repeat="i in [maxNumberOfSites]|makeRange" value="{{ i + 1 }}">Seite {{ i + 1 }}</option>
                 </select>
             </div>
-        </div>-->
+        </div>
     </div>
 
 
@@ -85,28 +82,27 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/uebung1.js"></script>
-        <script src="scripts/controllers/demographics.js"></script>
-        <script src="scripts/controllers/maximising.js"></script>
-        <script src="scripts/controllers/thanks.js"></script>
-        <script src="scripts/controllers/taskdescription.js"></script>
-        <script src="scripts/controllers/taskdecision.js"></script>
-        <script src="scripts/controllers/taskquestions.js"></script>
+        <script src="scripts/controllers/step1.js"></script>
+        <script src="scripts/controllers/step2.js"></script>
+        <script src="scripts/controllers/step3.js"></script>
+        <script src="scripts/controllers/step4.js"></script>
+        <script src="scripts/controllers/step5.js"></script>
+        <script src="scripts/controllers/step6.js"></script>
+        <script src="scripts/controllers/step7.js"></script>
+        <script src="scripts/controllers/step8.js"></script>
+        <script src="scripts/controllers/step9.js"></script>
+        <script src="scripts/controllers/step10.js"></script>
+        <script src="scripts/controllers/step11.js"></script>
+        <script src="scripts/controllers/step16.js"></script>
+        <script src="scripts/controllers/step17.js"></script>
+        <script src="scripts/controllers/step18.js"></script>
+        <script src="scripts/controllers/step19.js"></script>
+        <script src="scripts/controllers/step20.js"></script>
         <script src="scripts/services/dataservice.js"></script>
-        <script src="scripts/controllers/uebung1-description.js"></script>
-        <script src="scripts/controllers/uebung2-description.js"></script>
-        <script src="scripts/controllers/uebung2.js"></script>
         <script src="scripts/filters/makerange.js"></script>
-        <script src="scripts/controllers/personal-code.js"></script>
         <script src="scripts/services/configdata.js"></script>
         <script src="scripts/services/randomizer.js"></script>
-        <script src="scripts/controllers/attribute-weights.js"></script>
-        <script src="scripts/controllers/decision-strategy.js"></script>
-        <script src="scripts/controllers/participation-questions.js"></script>
         <script src="scripts/controllers/statusbar.js"></script>
-        <script src="scripts/controllers/washing-powders.js"></script>
-        <script src="scripts/controllers/common-decision-strategy.js"></script>
         <!-- endbuild -->
 </body>
 </html>

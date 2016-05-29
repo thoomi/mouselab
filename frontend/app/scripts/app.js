@@ -20,72 +20,68 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/step1.html',
+        controller: 'Step1Ctrl'
       })
-      .when('/uebung1', {
-        templateUrl: 'views/uebung1.html',
-        controller: 'Uebung1Ctrl'
+      .when('/step2', {
+        templateUrl: 'views/step2.html',
+        controller: 'Step2Ctrl'
       })
-      .when('/demographics', {
-        templateUrl: 'views/demographics.html',
-        controller: 'DemographicsCtrl'
+      .when('/step3', {
+        templateUrl: 'views/step3.html',
+        controller: 'Step3Ctrl'
       })
-      .when('/maximising', {
-        templateUrl: 'views/maximising.html',
-        controller: 'MaximisingCtrl'
+      .when('/step4', {
+        templateUrl: 'views/step4.html',
+        controller: 'Step4Ctrl'
       })
-      .when('/thanks', {
-        templateUrl: 'views/thanks.html',
-        controller: 'ThanksCtrl'
+      .when('/step5', {
+        templateUrl: 'views/step5.html',
+        controller: 'Step5Ctrl' 
       })
-      .when('/taskdescription', {
-        templateUrl: 'views/taskdescription.html',
-        controller: 'TaskdescriptionCtrl'
+      .when('/step6', {
+        templateUrl: 'views/step6.html',
+        controller: 'Step6Ctrl'
       })
-      .when('/taskdecision', {
-        templateUrl: 'views/taskdecision.html',
-        controller: 'TaskdecisionCtrl'
+      .when('/step7', {
+        templateUrl: 'views/step7.html',
+        controller: 'Step7Ctrl'
       })
-      .when('/taskquestions', {
-        templateUrl: 'views/taskquestions.html',
-        controller: 'TaskquestionsCtrl'
+      .when('/step8', {
+        templateUrl: 'views/step8.html',
+        controller: 'Step8Ctrl'
       })
-      .when('/uebung1-description', {
-        templateUrl: 'views/uebung1-description.html',
-        controller: 'Uebung1DescriptionCtrl'
+      .when('/step9', {
+        templateUrl: 'views/step9.html',
+        controller: 'Step9Ctrl'
       })
-      .when('/uebung2-description', {
-        templateUrl: 'views/uebung2-description.html',
-        controller: 'Uebung2DescriptionCtrl'
+      .when('/step10', {
+        templateUrl: 'views/step10.html',
+        controller: 'Step10Ctrl'
       })
-      .when('/uebung2', {
-        templateUrl: 'views/uebung2.html',
-        controller: 'Uebung2Ctrl'
+      .when('/step11', {
+        templateUrl: 'views/step11.html',
+        controller: 'Step11Ctrl'
       })
-      .when('/personal-code', {
-        templateUrl: 'views/personal-code.html',
-        controller: 'PersonalCodeCtrl'
+      .when('/step16', {
+        templateUrl: 'views/step16.html',
+        controller: 'Step16Ctrl'
       })
-      .when('/attribute-weights', {
-        templateUrl: 'views/attribute-weights.html',
-        controller: 'AttributeWeightsCtrl'
+      .when('/step17', {
+        templateUrl: 'views/step17.html',
+        controller: 'Step17Ctrl'
       })
-      .when('/decision-strategy', {
-        templateUrl: 'views/decision-strategy.html',
-        controller: 'DecisionStrategyCtrl'
+      .when('/step18', {
+        templateUrl: 'views/step18.html',
+        controller: 'Step18Ctrl'
       })
-      .when('/participation-questions', {
-        templateUrl: 'views/participation-questions.html',
-        controller: 'ParticipationQuestionsCtrl'
+      .when('/step19', {
+        templateUrl: 'views/step19.html',
+        controller: 'Step19Ctrl'
       })
-      .when('/washing-powders', {
-        templateUrl: 'views/washing-powders.html',
-        controller: 'WashingPowdersCtrl'
-      })
-      .when('/common-decision-strategy', {
-        templateUrl: 'views/common-decision-strategy.html',
-        controller: 'CommonDecisionStrategyCtrl'
+      .when('/step20', {
+        templateUrl: 'views/step20.html',
+        controller: 'Step20Ctrl'
       })
       .otherwise({
         redirectTo: '/'

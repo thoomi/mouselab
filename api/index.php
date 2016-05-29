@@ -36,12 +36,11 @@ $app->post('/participant/create', function() use($app)
 	if (isset($requestData['participantId'])
         && isset($requestData['participantGroup'])
         && isset($requestData['participantLocation'])
-        && isset($requestData['participantStrategy'])
-        && isset($requestData['participantOrganization'])
+        && isset($requestData['participantCondition'])
         && isset($requestData['participantPreviously']))
 	{
         // Check if the participant group matches the expectations
-		if (!in_array($requestData['participantGroup'], array('G1', 'G2', 'G3')))
+		if (!in_array($requestData['participantGroup'], array('G1', 'G2')))
 		{
 			throw new Exception("Bad participant Group");
 		}
@@ -63,8 +62,7 @@ $app->post('/participant/create', function() use($app)
             true,
             $requestData['participantLocation'],
             $requestData['participantGroup'],
-            $requestData['participantStrategy'],
-            $requestData['participantOrganization'],
+            $requestData['participantCondition'],
             $requestData['participantPreviously']);
 
 		if ($participantDatabaseId)
@@ -221,7 +219,9 @@ $app->post('/participant/save/demographics', function() use($app, $deviceDetecto
 		&& isset($requestData['age'])
 		&& isset($requestData['gender'])
 		&& isset($requestData['graduation'])
-        && isset($requestData['status']))
+        && isset($requestData['status'])
+        && isset($requestData['apprenticeship'])
+        && isset($requestData['academicDegree']))
 	{
         // Determine users device
         $device = 1;
@@ -229,7 +229,7 @@ $app->post('/participant/save/demographics', function() use($app, $deviceDetecto
         if ($deviceDetector->isTablet()) { $device = 2; }
         if ($deviceDetector->isMobile() && !$deviceDetector->isTablet()) { $device = 3; }
 
-		$app->db->saveDemographics($requestData['participantDatabaseId'], $requestData['age'], $requestData['gender'], $requestData['graduation'], $requestData['status'], $device);
+		$app->db->saveDemographics($requestData['participantDatabaseId'], $requestData['age'], $requestData['gender'], $requestData['graduation'], $requestData['status'], $requestData['apprenticeship'], $requestData['academicDegree'], $device);
 
 		$app->response->setStatus(200);
 		$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);

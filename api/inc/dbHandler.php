@@ -31,10 +31,10 @@ class DbHandler
      * @param $group
      * @return string
      */
-    public function saveParticipant($ipAddress, $participatedAt, $id, $dropout, $location, $group, $strategy, $organization, $participatedPreviously)
+    public function saveParticipant($ipAddress, $participatedAt, $id, $dropout, $location, $group, $condition, $participatedPreviously)
     {
-        $insertStatement = $this->dbh->prepare('INSERT INTO tl_participant (ip_address, participated_at, participation_id, dropout, location, participation_group, Participation_condition, donation_organization_id, previous_participant)
-                                                VALUES (:ip_address, :participated_at, :participation_id, :dropout, :location, :participation_group, :participation_condition, :donation_organization, :previous_participant)');
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_participant (ip_address, participated_at, participation_id, dropout, location, participation_group, Participation_condition, previous_participant)
+                                                VALUES (:ip_address, :participated_at, :participation_id, :dropout, :location, :participation_group, :participation_condition, :previous_participant)');
 
         $insertStatement->bindParam(':ip_address',              $ipAddress);
         $insertStatement->bindParam(':participated_at',         $participatedAt);
@@ -42,8 +42,7 @@ class DbHandler
         $insertStatement->bindParam(':dropout',                 $dropout);
         $insertStatement->bindParam(':location',                $location);
         $insertStatement->bindParam(':participation_group',     $group);
-        $insertStatement->bindParam(':participation_condition', $strategy);
-        $insertStatement->bindParam(':donation_organization',   $organization);
+        $insertStatement->bindParam(':participation_condition', $condition);
         $insertStatement->bindParam(':previous_participant',    $participatedPreviously);
 
         $insertStatement->execute();
@@ -51,23 +50,6 @@ class DbHandler
         return $this->dbh->lastInsertId();
     }
 
-    public function saveAttributeAnswers($participantDbId, $answerValues, $sumAnswers)
-    {
-        $insertStatement = $this->dbh->prepare('INSERT INTO tl_attribute_weights (q_num_1, q_num_2, q_num_3, q_num_4, q_num_5, q_num_6, q_num_7, q_sum, tl_participant_id)
-                                                VALUES (:answer1, :answer2, :answer3, :answer4, :answer5, :answer6, :answer7, :sumAnswers, :participantId)');
-
-        $insertStatement->bindParam(':answer1', $answerValues[0]);
-        $insertStatement->bindParam(':answer2', $answerValues[1]);
-        $insertStatement->bindParam(':answer3', $answerValues[2]);
-        $insertStatement->bindParam(':answer4', $answerValues[3]);
-        $insertStatement->bindParam(':answer5', $answerValues[4]);
-        $insertStatement->bindParam(':answer6', $answerValues[5]);
-        $insertStatement->bindParam(':answer7',       $answerValues[6]);
-        $insertStatement->bindParam(':sumAnswers',    $sumAnswers);
-        $insertStatement->bindParam(':participantId', $participantDbId);
-
-        $insertStatement->execute();
-    }
 
     public function saveTraining($participantDbId, $trainingId, $optionRank, $timeToDecision)
     {
@@ -143,17 +125,19 @@ class DbHandler
         $updateStatement->execute();
     }
 
-    public function saveDemographics($participantDbId, $age, $gender, $graduation, $status, $device)
+    public function saveDemographics($participantDbId, $age, $gender, $graduation, $status, $apprenticeship, $academicDegree, $device)
     {
-        $insertStatement = $this->dbh->prepare('INSERT INTO tl_demographics (age, gender, graduation, live_status, device, tl_participant_id)
-                                                VALUES (:age, :gender, :graduation, :liveStatus, :device, :participantId)');
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_demographics (age, gender, graduation, live_status, apprenticeship, academic_degree, device, tl_participant_id)
+                                                VALUES (:age, :gender, :graduation, :liveStatus, :apprenticeship, :academic_degree, :device, :participantId)');
 
-        $insertStatement->bindParam(':age',           $age);
-        $insertStatement->bindParam(':gender',        $gender);
-        $insertStatement->bindParam(':graduation',    $graduation);
-        $insertStatement->bindParam(':liveStatus',    $status);
-        $insertStatement->bindParam(':device',        $device);
-        $insertStatement->bindParam(':participantId', $participantDbId);
+        $insertStatement->bindParam(':age',             $age);
+        $insertStatement->bindParam(':gender',          $gender);
+        $insertStatement->bindParam(':graduation',      $graduation);
+        $insertStatement->bindParam(':liveStatus',      $status);
+        $insertStatement->bindParam(':apprenticeship',  $apprenticeship);
+        $insertStatement->bindParam(':academic_degree', $academicDegree);
+        $insertStatement->bindParam(':device',          $device);
+        $insertStatement->bindParam(':participantId',   $participantDbId);
 
         $insertStatement->execute();
     }
