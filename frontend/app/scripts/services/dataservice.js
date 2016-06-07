@@ -13,13 +13,15 @@ angular.module('mouselabApp')
         var participantId               = 0;
         var participantGroup            = '';
         var participantCondition        = '';
-        var participantAttributeWeights = [];
         var participantIsPreviousParticipant = 0;
         var startTime                   = 0;
         var endTime                     = 0;
 
         var currentExperimentRound   = 1;
         var lastExperimentDatabaseId = 0;
+        
+        var availableTrials = [];
+        var usedTrials      = [];
 
         // Helping variables to determine if data is already saved
         // For example if the user hits the back button and answers the questions twice
@@ -28,8 +30,7 @@ angular.module('mouselabApp')
         var isStressQuestionSaved = [false, false, false];
         var isDemographicsSaved   = false;
         var isMaximisingSaved     = false;
-        var isAttributesSaved     = false;
-        var isParticipationQuestionSaved = false;
+        var isResilienceSaved     = false;
 
         // Define private http request methods
         function saveParticipant(callback) {
@@ -133,45 +134,22 @@ angular.module('mouselabApp')
                     callback('Error: http request went wrong.');
                 });
         }
+        
+        function saveResilienceAnswers(answerValues, sumAnswers, callback) {
+            var postData = {
+                participantDatabaseId : participantDatabaseId,
+                answerValues          : answerValues,
+                sumAnswers            : sumAnswers
+            };
 
-        function saveParticipationQuestions(questionsData, callback) {
-          var postData = {
-            participantDatabaseId : participantDatabaseId,
-            environmentAnswers    : questionsData.environmentAnswers,
-            participantAnswers    : questionsData.participantAnswers,
-            totalTime             : parseInt(endTime) - parseInt(startTime)
-          };
-
-          $http.post(configData.getBaseUrl() + '/participant/save/additionalanswers', postData).
-            success(function() {
-              isParticipationQuestionSaved = true;
-              callback();
-            }).
-            error(function() {
-              callback('Error: http request went wrong.');
-            });
-        }
-
-        function saveAttributeAnswers(answerValues, sumAnswers, callback)
-        {
-          var postData = {
-            participantDatabaseId : participantDatabaseId,
-            answerValues          : answerValues,
-            sumAnswers            : sumAnswers
-          };
-
-          $http.post(configData.getBaseUrl() + '/participant/save/attributeAnswers', postData).
-            success(function() {
-              isAttributesSaved = true;
-
-              // Save the attribute weights
-              participantAttributeWeights = postData.answerValues;
-
-              callback();
-            }).
-            error(function() {
-              callback('Error: http request went wrong.');
-            });
+            $http.post(configData.getBaseUrl() + '/participant/save/resilienceanswers', postData).
+                success(function() {
+                    isResilienceSaved = true;
+                    callback();
+                }).
+                error(function() {
+                    callback('Error: http request went wrong.');
+                });
         }
 
         function saveUserData(email, participateInOther, comments, callback) {
@@ -225,15 +203,24 @@ angular.module('mouselabApp')
             getCurrentRound : function () {
               return currentExperimentRound;
             },
-
-            getParticipantAttributeValues : function () {
-              return participantAttributeWeights;
+            
+            initializeTrials : function() {
+              availableTrials = configData.getTrials();
+              usedTrials      = [];
+            },
+            
+            getNextTrial : function() {
+                var trial = availableTrials.pop();
+                usedTrials.push(trial);
+                
+                return trial;
             },
 
             startNextRound : function () {
                 if (currentExperimentRound >= 1 && currentExperimentRound <= configData.getMaxRounds())
                 {
                     currentExperimentRound +=1;
+                    
                     return true;
                 }
                 else
@@ -303,15 +290,15 @@ angular.module('mouselabApp')
 
                 saveMaximisingAnswers(answerValues, sumAnswers, callback);
             },
-
-            saveParticipationQuestions : function (answerData, callback) {
-                if (isParticipationQuestionSaved)
+            
+            saveResilienceAnswers : function (answerValues, sumAnswers, callback) {
+                if (isResilienceSaved)
                 {
-                  callback();
-                  return;
+                    callback();
+                    return;
                 }
 
-                saveParticipationQuestions(answerData, callback);
+                saveResilienceAnswers(answerValues, sumAnswers, callback);
             },
 
             saveUserData : function(email, participateInOther, comments, callback) {
@@ -319,24 +306,22 @@ angular.module('mouselabApp')
             },
 
             everythingIsValid : function () {
-                // if the participant id is set and so on
-                var dataIsFine = true;
-
-                if (participantDatabaseId === 0 || participantId === 0 || participantGroup === '')
+                if (configData.getExperimentLocation() === 'T')
                 {
-                    dataIsFine = false;
+                    return true;
                 }
-
-                return dataIsFine;
-            },
-
-            saveAttributeAnswers: function (answerValues, sumAnswers, callback) {
-              if (isAttributesSaved)
-              {
-                callback();
-                return;
-              }
-              saveAttributeAnswers(answerValues, sumAnswers, callback);
+                else 
+                {
+                    // if the participant id is set and so on
+                    var dataIsFine = true;
+    
+                    if (participantDatabaseId === 0 || participantId === 0 || participantGroup === '')
+                    {
+                        dataIsFine = false;
+                    }
+    
+                    return dataIsFine;
+                }
             },
 
             saveTrainingData : function (trainingId, optionRank, timeToDecision, callback) {
@@ -352,7 +337,6 @@ angular.module('mouselabApp')
                 participantId               = 0;
                 participantGroup            = '';
                 participantCondition        = '';
-                participantAttributeWeights = [];
                 startTime                   = 0;
                 endTime                     = 0;
                 currentExperimentRound      = 1;
@@ -363,7 +347,7 @@ angular.module('mouselabApp')
                 isStressQuestionSaved = [false, false, false];
                 isDemographicsSaved   = false;
                 isMaximisingSaved     = false;
-                isAttributesSaved     = false;
+                isResilienceSaved     = false;
 
                 $rootScope.$broadcast('resetPageCount');
             }

@@ -9,6 +9,8 @@
  */
 angular.module('mouselabApp')
   .controller('Step3Ctrl', function ($scope, $window, $location, dataService) {
+      if (!dataService.everythingIsValid()) { $location.path(''); }
+      
       $scope.personalCode = '';
       $scope.notWaitingForRequestToFinish = true;
       $scope.isPreviousParticipant = '';

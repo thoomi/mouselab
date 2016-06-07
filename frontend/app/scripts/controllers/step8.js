@@ -9,6 +9,8 @@
  */
 angular.module('mouselabApp')
   .controller('Step8Ctrl', function ($scope, $location, dataService) {
+    if (!dataService.everythingIsValid()) { $location.path(''); }
     
+    dataService.incrementSiteNumber();
 
   });

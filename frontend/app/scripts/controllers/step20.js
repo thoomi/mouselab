@@ -9,6 +9,6 @@
  */
 angular.module('mouselabApp')
   .controller('Step20Ctrl', function ($scope, $location, dataService) {
-    
+    if (!dataService.everythingIsValid()) { $location.path(''); }
 
   });

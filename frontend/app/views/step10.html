@@ -1,6 +1,44 @@
-<h2>Arbeitstag 1 - 3</h2>
+<h2>Arbeitstag {{ currentRound }}</h2>
+<div class="pull-right decision-timer">
+    <span class="deciscion-timer-description">Verbleibende Zeit: </span><span class="decision-countdown">{{ availableTime / 1000.0 |number:1 }}</span>
+    <br>
+    <span class="deciscion-timer-description">Verbleibende Trials: {{ maxTrials - finishedTrials }}</span>
+    <br>
+    <span class="deciscion-timer-description">Punkte: {{ currentScore }}</span>
+</div>
 
+<timer class="pull-right decision-timer" interval="10" style="display:none;"><span class="deciscion-timer-description">Benötigte Zeit: </span>{{(millis ) | number : 1}}</timer>
 
-<p>
-    <a class="btn btn-success btn-next" ng-href="#/step11">Weiter <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
-</p>
+<div class="clearfix"></div>
+
+<br>
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <td></td>
+            <td class="text-center">Validität</td>
+            <td class="text-center">Aktie A</td>
+            <td class="text-center">Aktie B</td>
+            <td class="text-center">Information kaufen:</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="label in cueLabels track by $index">
+            <td>{{ label }}</td>
+            <td class="text-center">{{ cueValues[$index].validity * 100 }} %</td>
+            <td class="text-center"><span ng-if="!showCueValues[$index].show">?</span><span ng-if="showCueValues[$index].show">{{ currentPair.pattern[$index] === 1 ? 'Ja' : 'Nein' }}</span></td>
+            <td class="text-center"><span ng-if="!showCueValues[$index].show">?</span><span ng-if="showCueValues[$index].show">{{ currentPair.pattern[$index] !== 1 ? 'Ja' : 'Nein' }}</span></td>
+            <td class="text-center"><button class="btn btn-info" ng-disabled="showCueValues[$index].intervalId !== -1" ng-click="buyCue($index)"><strong><span>{{ showCueValues[$index].countdownTime / 1000.0 |number:2 }} sek</span></strong></button></td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="text-center"><button class="btn btn-success" ng-click="chooseShare('A')" ng-disabled="!informationAcquired">Wähle Aktie A</button></td>
+            <td class="text-center"><button class="btn btn-success" ng-click="chooseShare('B')" ng-disabled="!informationAcquired">Wähle Aktie B</button></td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>

@@ -29,8 +29,7 @@ $app->map('/:x+', function($x) use ($app) {
 // -----------------------------------------------------------------------------
 // This route creates a new participant
 // -----------------------------------------------------------------------------
-$app->post('/participant/create', function() use($app)
-{
+$app->post('/participant/create', function() use($app) {
 	$requestData = json_decode($app->request->getBody(), true);
 
 	if (isset($requestData['participantId'])
@@ -40,7 +39,7 @@ $app->post('/participant/create', function() use($app)
         && isset($requestData['participantPreviously']))
 	{
         // Check if the participant group matches the expectations
-		if (!in_array($requestData['participantGroup'], array('G1', 'G2')))
+		if (!in_array($requestData['participantGroup'], array('G1', 'G2', 'G3')))
 		{
 			throw new Exception("Bad participant Group");
 		}
@@ -83,32 +82,6 @@ $app->post('/participant/create', function() use($app)
 	{
 		throw new Exception("Bad request body");
 	}
-});
-
-
-// -----------------------------------------------------------------------------
-// This route saves the participants attribute answer values
-// -----------------------------------------------------------------------------
-$app->post('/participant/save/attributeAnswers', function() use($app){
-    $requestData = json_decode($app->request->getBody(), true);
-
-    if (isset($requestData['participantDatabaseId'])
-        && isset($requestData['answerValues'])
-        && isset($requestData['sumAnswers']))
-    {
-
-        $app->db->saveAttributeAnswers($requestData['participantDatabaseId'], $requestData['answerValues'], $requestData['sumAnswers']);
-
-        $app->response->setStatus(200);
-        $app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
-        $app->response->headers->set('Content-Type', 'application/json');
-
-        echo json_encode(array());
-    }
-    else
-    {
-        throw new Exception("Bad request body");
-    }
 });
 
 
@@ -270,28 +243,27 @@ $app->post('/participant/save/maximisinganswers', function() use($app) {
 
 
 // -----------------------------------------------------------------------------
-// This route saves the answers to the maximising questions
+// This route saves the answers to the resilienceanswers questions
 // -----------------------------------------------------------------------------
-$app->post('/participant/save/additionalanswers', function() use($app) {
-    $requestData = json_decode($app->request->getBody(), true);
+$app->post('/participant/save/resilienceanswers', function() use($app) {
+	$requestData = json_decode($app->request->getBody(), true);
 
-    if (isset($requestData['participantDatabaseId'])
-        && isset($requestData['environmentAnswers'])
-        && isset($requestData['participantAnswers'])
-        && isset($requestData['totalTime']))
-    {
-        $app->db->saveParticipationAnswers($requestData['participantDatabaseId'], $requestData['environmentAnswers'], $requestData['participantAnswers'], $requestData['totalTime']);
+	if (isset($requestData['participantDatabaseId'])
+		&& isset($requestData['answerValues'])
+		&& isset($requestData['sumAnswers']))
+	{
+		$app->db->saveResilienceAnswers($requestData['participantDatabaseId'], $requestData['answerValues'], $requestData['sumAnswers']);
 
-        $app->response->setStatus(200);
-        $app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
-        $app->response->headers->set('Content-Type', 'application/json');
+		$app->response->setStatus(200);
+		$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
+		$app->response->headers->set('Content-Type', 'application/json');
 
-        echo json_encode(array());
-    }
-    else
-    {
-        throw new Exception("Bad request body");
-    }
+		echo json_encode(array());
+	}
+	else
+	{
+		throw new Exception("Bad request body");
+	}
 });
 
 

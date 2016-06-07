@@ -16,21 +16,9 @@
 
 <table class="table table-condensed table-bordered table-striped">
     <tbody>
-        <tr>
-            <td>Kriterium 1</td>
-            <td><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Zuverlässigkeit von 84,0%</td>
-        </tr>
-        <tr>
-            <td>Kriterium 2</td>
-            <td><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Zuverlässigkeit von 77,0%</td>
-        </tr>
-        <tr>
-            <td>Kriterium 3</td>
-            <td><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Zuverlässigkeit von 67,0%</td>
-        </tr>
-        <tr>
-            <td>Kriterium 4</td>
-            <td><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Zuverlässigkeit von 60,0%</td>
+        <tr ng-repeat="label in cueLabels track by $index">
+            <td>{{ label }}</td>
+            <td><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Zuverlässigkeit von {{ cueValues[$index].validity * 100 }}%</td>
         </tr>
     </tbody>
 </table>

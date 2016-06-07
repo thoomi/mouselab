@@ -9,7 +9,7 @@
  */
 angular.module('mouselabApp')
   .controller('Step19Ctrl', function ($scope, $location, dataService) {
-        //if (!dataService.everythingIsValid()) { $location.path(''); }
+    if (!dataService.everythingIsValid()) { $location.path(''); }
 
     dataService.incrementSiteNumber();
 
@@ -34,12 +34,13 @@ angular.module('mouselabApp')
                     // TODO: Reset data redirect to startpage
                     $scope.successAlert = false;
                     $scope.notWaitingForRequestToFinish = true;
+                    $location.path('step20');
                 }
                 else
                 {
                     $scope.notWaitingForRequestToFinish = false;
                     $scope.successAlert = false;
-                    console.log(error);
+                    $location.path('step20');
                 }
             });
           }

@@ -9,6 +9,8 @@
  */
 angular.module('mouselabApp')
   .controller('Step2Ctrl', function ($scope, $location, dataService) {
+    if (!dataService.everythingIsValid()) { $location.path(''); }
+    
     dataService.incrementSiteNumber();
     
     $scope.disabled = function () {

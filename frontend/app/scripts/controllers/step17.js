@@ -9,7 +9,7 @@
  */
 angular.module('mouselabApp')
   .controller('Step17Ctrl', function ($scope, $location, Fullscreen, dataService, randomizer) {
-        //if (!dataService.everythingIsValid()) { $location.path(''); }
+    if (!dataService.everythingIsValid()) { $location.path(''); }
     
     dataService.incrementSiteNumber();
 
@@ -35,6 +35,8 @@ angular.module('mouselabApp')
         };
 
         $scope.onFormSubmit = function() {
+            if (!$scope.allQuestionsAnswered) { return; } 
+            
             $scope.notWaitingForRequestToFinish = false;
 
             // Save all Answers into an array and calculate the sum
@@ -69,61 +71,61 @@ angular.module('mouselabApp')
           },
           {
               id    : 2,
-              title : 'Wenn ich im Auto Radio höre, prüfe ich oft die anderen Radiosender daraufhin, ob etwas besseres gespielt wird, sogar wenn ich relativ zufrieden mit dem bin, was ich gerade höre.',
+              title : 'Normalerweise	schaffe	ich	alles	irgendwie.	',
               label : 'max-questions-2',
               value : 0
           },
           {
               id    : 3,
-              title : 'Mit Beziehungen ist es wie mit Kleidungsstücken: Ich gehe davon aus, dass ich viele ausprobieren muss, bevor ich die perfekte Passung finde.',
+              title : '	Es	ist	mir	wichtig,	an	vielen	Dingen	interessiert	zu	bleiben.	',
               label : 'max-questions-3',
               value : 0
           },
           {
               id    : 4,
-              title : 'Egal wie zufrieden ich mit meinem Beruf bin, es ist immer sinnvoll, nach besseren Optionen Ausschau zu halten.',
+              title : '	Ich	mag	mich.	',
               label : 'max-questions-4',
               value : 0
           },
           {
               id    : 5,
-              title : 'Ich fantasiere oft darüber, ein Leben zu leben, das sich sehr von meinem jetzigen unterscheidet.',
+              title : '	Ich	kann	mehrere	Dinge	gleichzeitig	bewältigen.	',
               label : 'max-questions-5',
               value : 0
           },
           {
               id    : 6,
-              title : 'Ich bin ein großer Freund von Ranglisten (die besten Filme, die besten Sänger, die besten Sportler, die besten Bücher, ...).',
+              title : 'Ich	bin	entschlossen.	',
               label : 'max-questions-6',
               value : 0
           },
           {
               id    : 7,
-              title : 'Es fällt mir häufig schwer, ein Geschenk für einen Freund zu kaufen.',
+              title : '	Ich	behalte	an	vielen	Dingen	Interesse.	',
               label : 'max-questions-7',
               value : 0
           },
           {
               id    : 8,
-              title : 'Wenn ich einkaufen gehe, fällt es mir schwer, Kleidungsstücke zu finden, die ich richtig gut finde.',
+              title : '	Ich	finde	öfters	etwas,	worüber	ich	lachen	kann.	',
               label : 'max-questions-8',
               value : 0
           },
           {
               id    : 9,
-              title : 'Videos auszuleihen ist sehr schwierig. Ich mühe mich stets damit ab, das Beste auszusuchen.',
+              title : '	Normalerweise	kann	ich	eine	Situation	aus	mehreren	Perspektiven	betrachten.	',
               label : 'max-questions-9',
               value : 0
           },
           {
               id    : 10,
-              title : ' Ich finde Schreiben schwierig, sogar wenn es darum geht, einem Freund einen Brief zu schreiben. Es ist so schwer, die richtigen Worte zu finden. Auch von einfacheren Sachen mache ich oft mehrere Entwürfe.',
+              title : '	Ich	kann	mich	auch	überwinden,	Dinge	zu	tun,	die	ich	eigentlich	nicht	machen	will.	',
               label : 'max-questions-10',
               value : 0
           },
           {
               id    : 11,
-              title : 'Egal was ich tue: Ich messe mich am höchsten Standard.',
+              title : '	In	mir	steckt	genügend	Energie,	um	alles	zu	machen,	was	ich	machen	muss.	',
               label : 'max-questions-11',
               value : 0
           }

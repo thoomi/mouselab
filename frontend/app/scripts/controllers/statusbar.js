@@ -8,7 +8,7 @@
  * Controller of the mouselabApp
  */
 angular.module('mouselabApp')
-  .controller('StatusbarCtrl', function ($scope, $rootScope, $location, configData, dataService) {
+  .controller('StatusbarCtrl', function ($scope, $rootScope, $location, configData) {
     $scope.maxNumberOfSites = 20;
 
     $scope.currentSite = 0;
