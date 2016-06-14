@@ -119,18 +119,17 @@ $app->post('/experiment/create', function() use($app){
 	$requestData = json_decode($app->request->getBody(), true);
 
 	if (isset($requestData['participantDatabaseId'])
-		&& isset($requestData['condition'])
-		&& isset($requestData['conditionPosition'])
-		&& isset($requestData['chosenOptionRank'])
-		&& isset($requestData['timeToDecision'])
-        && isset($requestData['chosenOptionPosition']))
+		&& isset($requestData['task'])
+		&& isset($requestData['taskPosition'])
+		&& isset($requestData['trials'])
+		&& isset($requestData['timeToFinish']))
 	{
-		if (!in_array($requestData['condition'], array('A', 'B', 'C')))
+		if (!in_array($requestData['task'], array('A', 'B', 'C')))
 		{
 			throw new Exception("Bad participant Group");
 		}
 
-		$experimentDbId = $app->db->saveExperiment($requestData['participantDatabaseId'], $requestData['condition'], $requestData['conditionPosition'], $requestData['chosenOptionRank'], $requestData['timeToDecision'], $requestData['chosenOptionPosition']);
+		$experimentDbId = $app->db->saveExperiment($requestData['participantDatabaseId'], $requestData['task'], $requestData['taskPosition'], $requestData['trials'], $requestData['timeToFinish']);
 
 		$app->response->setStatus(200);
 		$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
@@ -153,21 +152,17 @@ $app->post('/experiment/save/stressquestions', function() use($app) {
 
 	if (isset($requestData['participantDatabaseId'])
 		&& isset($requestData['experimentDatabaseId'])
-		&& isset($requestData['satisfactionAnswers'])
-		&& isset($requestData['satisfactionAnswersSum'])
         && isset($requestData['stressAnswers'])
         && isset($requestData['stressAnswersSum'])
-		&& isset($requestData['decisionByStrategy']))
+		&& isset($requestData['timeToAnswer']))
 	{
 
 		$app->db->saveStressQuestionAnswers(
             $requestData['participantDatabaseId'],
             $requestData['experimentDatabaseId'],
-            $requestData['satisfactionAnswers'],
-            $requestData['satisfactionAnswersSum'],
             $requestData['stressAnswers'],
             $requestData['stressAnswersSum'],
-            $requestData['decisionByStrategy']);
+            $requestData['timeToAnswer']);
 
 		$app->response->setStatus(200);
 		$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);

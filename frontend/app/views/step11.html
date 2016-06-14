@@ -1,5 +1,36 @@
-<h2>Fragen zum Arbeitstag 1 - 3</h2>
+<h2>Fragen zum Arbeitstag {{ currentRound }}</h2>
 
-<p>
-    <a class="btn btn-success btn-next" ng-href="#/step16">Weiter <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
-</p>
+<form class="form-horizontal stress-questions">
+    <div class="form-group" ng-repeat="question in stressQuestions">
+        <div class="col-sm-5">
+            <p><strong>{{ $index + 1 }}. {{ question.title }}</strong></p>
+        </div>
+        <div class="col-sm-7">
+            <span class="stress-questions-option-label">{{ labelLeft }}</span>
+
+            <label class="radio-inline" ng-repeat="i in [9]|makeRange track by $index">
+                <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="{{ $index + 1 }}">
+            </label>
+
+            <span class="stress-questions-option-label">{{ labelRight }}</span>
+        </div>
+    </div>
+
+
+    <br>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <a type="submit" ng-click="onFormSubmit()"
+               ng-disabled="!allQuestionsAnswered"
+               class="btn btn-lg btn-success btn-next">Weiter
+                <div class="spinner" ng-hide="notWaitingForRequestToFinish">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</form>

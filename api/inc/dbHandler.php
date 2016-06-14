@@ -63,28 +63,50 @@ class DbHandler
         $insertStatement->execute();
     }
 
-    public function saveExperiment($participantDbId, $condition, $conditionPosition, $optionRank, $timeToDecision, $optionPosition)
+    public function saveExperiment($participantDbId, $task, $taskPosition, $trials, $timeToFinish)
     {
-        $insertStatement = $this->dbh->prepare('INSERT INTO tl_experiment (task, task_pos, chosen_option_rank, time_to_decision, chosen_option_position, tl_participant_id)
-                                                VALUES (:task, :task_pos, :chosen_option_rank, :time_to_decision, :chosen_option_position, :participant_id)');
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_experiment (task, task_pos, time_to_finish, tl_participant_id)
+                                                VALUES (:task, :task_pos, :time_to_finish, :participant_id)');
 
-        $insertStatement->bindParam(':task',                   $condition);
-        $insertStatement->bindParam(':task_pos',               $conditionPosition);
-        $insertStatement->bindParam(':chosen_option_rank',     $optionRank);
-        $insertStatement->bindParam(':time_to_decision',       $timeToDecision);
+        $insertStatement->bindParam(':task',                   $task);
+        $insertStatement->bindParam(':task_pos',               $taskPosition);
+        $insertStatement->bindParam(':time_to_finish',         $timeToFinish);
         $insertStatement->bindParam(':participant_id',         $participantDbId);
-        $insertStatement->bindParam(':chosen_option_position', $optionPosition);
 
         $insertStatement->execute();
 
-        return $this->dbh->lastInsertId();
+        $experimentId = $this->dbh->lastInsertId();
+        
+        
+        // Save the trails
+        $insertTrialStatement = $this->dbh->prepare('INSERT INTO tl_trial (number, pair_comparison, number_of_acquisitions, chosen_option, order_of_acqusitions, time_to_finish, acquisition_time, acquired_weights, local_accuracy, tl_experiment_id)
+                                                     VALUES (:number, :pair_comparison, :number_of_acquisitions, :chosen_option, :order_of_acquisitions, :time_to_finish, :acquisition_time, :acquired_weights, :local_accuracy, :tl_experiment_id)');
+        
+        
+        foreach ($trials as $trial)
+        {
+            $insertTrialStatement->bindParam(':number',                 $trial['number']);
+            $insertTrialStatement->bindParam(':pair_comparison',        $trial['pairComparison']);
+            $insertTrialStatement->bindParam(':number_of_acquisitions', $trial['numberOfAcquisitions']);
+            $insertTrialStatement->bindParam(':chosen_option',          $trial['chosenOption']);
+            $insertTrialStatement->bindParam(':order_of_acquisitions',  $trial['acquisitionOrder']);
+            $insertTrialStatement->bindParam(':time_to_finish',         $trial['timeToFinish']);
+            $insertTrialStatement->bindParam(':acquisition_time',       $trial['acquisitionTime']);
+            $insertTrialStatement->bindParam(':acquired_weights',       $trial['acquiredWeights']);
+            $insertTrialStatement->bindParam(':local_accuracy',         $trial['localAccuracy']);
+            $insertTrialStatement->bindParam(':tl_experiment_id',       $experimentId);
+            
+            $insertTrialStatement->execute();
+        }
+        
+        return $experimentId;
     }
 
-    public function saveStressQuestionAnswers($participantDbId, $experimentId, $satisfactionAnswers, $satisfactionAnswersSum, $stressAnswers, $stressAnswersSum, $decisionByStrategy)
+    public function saveStressQuestionAnswers($participantDbId, $experimentId, $stressAnswers, $stressAnswersSum, $timeToAnswer)
     {
         // Insert stress question answers
-        $insertStatement = $this->dbh->prepare('INSERT INTO tl_stress_question (q_num_1, q_num_2, q_num_3, q_num_4, q_num_5, q_num_6, q_num_7, q_sum, tl_participant_id, tl_experiment_id)
-                                                VALUES (:answer1, :answer2, :answer3, :answer4, :answer5, :answer6, :answer7, :sumAnswers, :participantId, :experimentId)');
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_stress_question (q_num_1, q_num_2, q_num_3, q_num_4, q_num_5, q_num_6, q_num_7, q_sum, time_to_answer, tl_participant_id, tl_experiment_id)
+                                                VALUES (:answer1, :answer2, :answer3, :answer4, :answer5, :answer6, :answer7, :sumAnswers, :timeToAnswer, :participantId, :experimentId)');
 
         $insertStatement->bindParam(':answer1', $stressAnswers[0]);
         $insertStatement->bindParam(':answer2', $stressAnswers[1]);
@@ -94,19 +116,14 @@ class DbHandler
         $insertStatement->bindParam(':answer6', $stressAnswers[5]);
         $insertStatement->bindParam(':answer7', $stressAnswers[6]);
         $insertStatement->bindParam(':sumAnswers',    $stressAnswersSum);
+        $insertStatement->bindParam(':timeToAnswer',    $timeToAnswer);
         $insertStatement->bindParam(':participantId', $participantDbId);
         $insertStatement->bindParam(':experimentId',  $experimentId);
 
         $insertStatement->execute();
-
-
-        // Insert decision by strategy value
-        $updateStatement = $this->dbh->prepare('UPDATE tl_experiment SET q_decision_by_guideline = :decisionByStrategy WHERE id = :experimentId');
-
-        $updateStatement->bindParam(':decisionByStrategy', $decisionByStrategy);
-        $updateStatement->bindParam(':experimentId',  $experimentId);
-
-        $updateStatement->execute();
+        
+        $arr = $insertStatement->errorInfo();
+        print_r($arr);
     }
 
     public function saveDemographics($participantDbId, $age, $gender, $graduation, $status, $apprenticeship, $academicDegree, $device)

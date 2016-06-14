@@ -9,19 +9,21 @@
  */
 angular.module('mouselabApp')
   .service('dataService', function ($http, $rootScope, configData) {
-        var participantDatabaseId       = 0;
+        var participantDatabaseId       = 5;
         var participantId               = 0;
         var participantGroup            = '';
-        var participantCondition        = '';
+        var participantCondition        = 'C2';
         var participantIsPreviousParticipant = 0;
         var startTime                   = 0;
         var endTime                     = 0;
 
         var currentExperimentRound   = 1;
-        var lastExperimentDatabaseId = 0;
+        var lastExperimentDatabaseId = 35;
         
         var availableTrials = [];
         var usedTrials      = [];
+        
+        var trainingData = {};
 
         // Helping variables to determine if data is already saved
         // For example if the user hits the back button and answers the questions twice
@@ -54,16 +56,17 @@ angular.module('mouselabApp')
                 });
         }
 
-        function saveExperiment(optionRank, timeToDecision, optionPosition, callback) {
+        function saveExperiment(data, timeToFinish, callback) {
             var postData = {
                 participantDatabaseId : participantDatabaseId,
-                condition             : configData.getTask(participantGroup, currentExperimentRound),
-                conditionPosition     : currentExperimentRound,
-                chosenOptionRank      : optionRank,
-                timeToDecision        : timeToDecision,
-                chosenOptionPosition  : optionPosition
+                task                  : configData.getTask(participantGroup, currentExperimentRound),
+                taskPosition          : currentExperimentRound,
+                timeToFinish          : timeToFinish,
+                trials                : data
             };
-
+            
+            console.log(postData);
+            
             $http.post(configData.getBaseUrl() + '/experiment/create', postData).
                 success(function(data) {
                     lastExperimentDatabaseId = data.experimentDbId;
@@ -80,11 +83,9 @@ angular.module('mouselabApp')
             var postData = {
                 participantDatabaseId  : participantDatabaseId,
                 experimentDatabaseId   : lastExperimentDatabaseId,
-                satisfactionAnswers    : questionsData.satisfactionAnswers,
-                satisfactionAnswersSum : questionsData.satisfactionAnswersSum,
                 stressAnswers          : questionsData.stressAnswers,
                 stressAnswersSum       : questionsData.stressAnswersSum,
-                decisionByStrategy     : questionsData.decidedByStrategy
+                timeToAnswer           : questionsData.timeToAnswer
             };
 
             $http.post(configData.getBaseUrl() + '/experiment/save/stressquestions', postData).
@@ -204,6 +205,10 @@ angular.module('mouselabApp')
               return currentExperimentRound;
             },
             
+            getParticipantCondition : function () {
+              return participantCondition;  
+            },
+            
             initializeTrials : function() {
               availableTrials = configData.getTrials();
               usedTrials      = [];
@@ -251,14 +256,14 @@ angular.module('mouselabApp')
                 }
             },
 
-            saveExperiment : function(optionRank, timeToDecision, optionPosition, callback) {
+            saveExperiment : function(data, timeToFinish, callback) {
                 if (isExperimentSaved[currentExperimentRound-1])
                 {
                     callback();
                     return;
                 }
-
-              saveExperiment(optionRank, timeToDecision, optionPosition, callback);
+                
+                saveExperiment(data, timeToFinish, callback);
             },
 
             saveStressQuestions : function (questionsData, callback) {
@@ -330,6 +335,14 @@ angular.module('mouselabApp')
 
             incrementSiteNumber : function() {
               $rootScope.$broadcast('siteChange');
+            },
+            
+            getTrainingData : function() {
+                return trainingData;
+            },
+            
+            setTrainingData : function(data) {
+              trainingData = data;  
             },
 
             clearAllData : function() {

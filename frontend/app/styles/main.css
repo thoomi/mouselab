@@ -86,9 +86,13 @@ html {
   text-decoration: none;
 }
 
+.feedback-section {
+  position: relative;
+}
+
 .decision-timer {
   margin-top: 15px;
-  font-size: 30px;
+  font-size: 22px;
   color: #ff0a1c;
 }
 
@@ -99,7 +103,17 @@ html {
 .decision-countdown {
     text-align: right;
     display: inline-block;
-    width: 60px;
+}
+
+.remaining-trials {
+  font-size: 22px;
+}
+
+.current-score {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 25px;
 }
 
 .decision-headline {

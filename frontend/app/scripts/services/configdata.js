@@ -26,6 +26,7 @@ angular.module('mouselabApp')
       availableTime[possibleTasks[1]] = 235520;
       availableTime[possibleTasks[2]] = 299520;
       
+      
       var taskOrder = {};
       taskOrder[possibleGroups[0]] = [possibleTasks[0], possibleTasks[1], possibleTasks[2]];
       taskOrder[possibleGroups[1]] = [possibleTasks[1], possibleTasks[2], possibleTasks[0]];
@@ -113,11 +114,14 @@ angular.module('mouselabApp')
             trials[indexOfTrial] = {
               id      : indexOfTrial,
               pairId  : pairComparisons[indexOfComparison].id,
+              optionId: pairComparisons[indexOfComparison].id,
               pattern : pairComparisons[indexOfComparison].pattern.slice()
             };
             
             if (indexOfOption < 4)
             {
+              trials[indexOfTrial].optionId = 16 - indexOfOption;
+              
               trials[indexOfTrial].pattern[0] = 1 - trials[indexOfTrial].pattern[0];
               trials[indexOfTrial].pattern[1] = 1 - trials[indexOfTrial].pattern[1];
               trials[indexOfTrial].pattern[2] = 1 - trials[indexOfTrial].pattern[2];
@@ -154,7 +158,7 @@ angular.module('mouselabApp')
         },
         
         getTask : function(group, round) {
-          if (experimentLocation === 'T') { return taskOrder['G1'][round]; }
+          if (experimentLocation === 'T') { return taskOrder['G1'][round - 1]; }
           return taskOrder[group][round - 1];
         },
         

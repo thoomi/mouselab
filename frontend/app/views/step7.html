@@ -1,8 +1,47 @@
 <h2>Einarbeitungsphase</h2>
-<p >
-   ÜBUNGSAUFGABEN	GEMÄß	S7	IM	LASTENHEFT	
-</p>
 
-<p>
-    <a class="btn btn-success btn-next" ng-href="#/step8">Weiter <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
-</p>
+<div class="feedback-section">
+    <div class="decision-timer">
+        <span class="deciscion-timer-description">Vergangene Zeit: </span><timer class="decision-timer" interval="10">{{ minutes }} min {{ seconds }} sek</timer>
+    </div>
+    <div class="remaining-trials">
+        <span class="remaining-trials-description">Anzahl an Entscheidungen: {{ finishedTrials }}</span>
+    </div>
+    <span class="current-score" ng-hide="experimentCondition === 'C1'">Punkte: {{ currentScore }}</span>
+</div>
+
+<div class="clearfix"></div>
+
+<br>
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <td></td>
+            <td class="text-center">Validität</td>
+            <td class="text-center">Aktie A</td>
+            <td class="text-center">Aktie B</td>
+            <td class="text-center">Information kaufen:</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="option in cueOptions track by $index">
+            <td>{{ option.label }}</td>
+            <td class="text-center">{{ option.validity * 100 }} %</td>
+            <td class="text-center"><span ng-if="!option.isShown">?</span><span ng-if="option.isShown">{{ currentPattern[$index] === 1 ? 'Ja' : 'Nein' }}</span></td>
+            <td class="text-center"><span ng-if="!option.isShown">?</span><span ng-if="option.isShown">{{ currentPattern[$index] !== 1 ? 'Ja' : 'Nein' }}</span></td>
+            <td class="text-center"><button class="btn btn-info" ng-disabled="option.intervalId !== -1" ng-click="buyCue($index)"><strong><span>{{ option.countdownTime / 1000.0 |number:2 }} sek</span></strong></button></td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="text-center"><button class="btn btn-success" ng-click="chooseShare('A')" ng-disabled="!informationAcquired">Wähle Aktie A</button></td>
+            <td class="text-center"><button class="btn btn-success" ng-click="chooseShare('B')" ng-disabled="!informationAcquired">Wähle Aktie B</button></td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>
+
+<a class="btn btn-success btn-xs btn-next text-center" ng-href="#/step8">Einarbeitungsphase beenden <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
