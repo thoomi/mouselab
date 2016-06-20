@@ -245,6 +245,7 @@ $app->get('/csv', function() use($app) {
             'stress_q6'              => '#',
             'stress_q7'              => '#',
             'stress_sum'             => '#',
+            'time_to_answer'         => '#',
             'numberOfTrials'         => '#',
             'score'                  => '#',
             
@@ -262,6 +263,7 @@ $app->get('/csv', function() use($app) {
             'stress_q6'              => '#',
             'stress_q7'              => '#',
             'stress_sum'             => '#',
+            'time_to_answer'         => '#',
             'numberOfTrials'         => '#',
             'score'                  => '#',
 		);
@@ -278,6 +280,7 @@ $app->get('/csv', function() use($app) {
             'stress_q6'              => '#',
             'stress_q7'              => '#',
             'stress_sum'             => '#',
+            'time_to_answer'         => '#',
             'numberOfTrials'         => '#',
             'score'                  => '#',
 		);
