@@ -1,24 +1,32 @@
 <h2>Einarbeitungsphase</h2>
 
 <div class="feedback-section">
-    <div class="decision-timer">
-        <span class="deciscion-timer-description">Vergangene Zeit: </span><timer class="decision-timer" interval="10">{{ minutes }} min {{ seconds }} sek</timer>
-    </div>
-    <div class="remaining-trials">
-        <span class="remaining-trials-description">Anzahl an Entscheidungen: {{ finishedTrials }}</span>
-    </div>
-    <span class="current-score" ng-hide="experimentCondition === 'C1'">Punkte: {{ currentScore }}</span>
+    <table class="table-feedback">
+        <tr>
+            <td class="text-right">Vergangene Zeit:</td>
+            <td class="text-right" style="width: 150px;"><timer class="decision-timer" interval="10">{{ minutes }} min {{ ((millis / 1000.0) % 60) | number:1 }} sek </timer></td>
+        </tr>
+        <tr>
+            <td class="text-right">Anzahl an Entscheidungen:</td>
+            <td class="text-right"><strong>{{ finishedTrials }}</strong></td>
+        </tr>
+        <tr  ng-hide="experimentCondition === 'C1'">
+            <td class="text-right">Punkte:</td>
+            <td class="text-right"><strong>{{ currentScore }}</strong></td>
+        </tr>
+    </table>
+    <div class="clearfix"></div>
 </div>
 
-<div class="clearfix"></div>
+
 
 <br>
 <br>
-<table class="table">
+<table class="table table-buy-board">
     <thead>
         <tr>
             <td></td>
-            <td class="text-center">Validität</td>
+            <td class="text-center">Zuverlässigkeit</td>
             <td class="text-center">Aktie A</td>
             <td class="text-center">Aktie B</td>
             <td class="text-center">Information kaufen:</td>

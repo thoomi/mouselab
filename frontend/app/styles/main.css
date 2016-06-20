@@ -32,13 +32,15 @@ html {
 
 .progress {
     border-radius: 0;
-    height: 14px;
+    height: 18px;
     margin-bottom: 0;
 }
 
 .progress-bar {
-    line-height: 13px;
+    line-height: 18px;
     font-size: 11px;
+    overflow: visible;
+    white-space: nowrap;
 }
 
 .testing-configurators {
@@ -88,6 +90,7 @@ html {
 
 .feedback-section {
   position: relative;
+  margin-bottom: 20px;
 }
 
 .decision-timer {
@@ -124,8 +127,32 @@ html {
   margin-top: 40px;
 }
 
+.nfc-questions label {
+  padding: 0 23px;
+  position: relative;
+}
+
+.nfc-questions label:nth-child(8) {
+  padding-right: 0;
+}
+
+.nfc-radio-wrapper {
+  margin-top: 30px;
+}
+
+.nfcQuestion-label-center {
+  position: absolute;
+  top: -28px;
+  width: 80px;
+  left: -28px;
+}
+
 .radio-inline {
   vertical-align: top;
+  padding-top: 0;
+}
+
+.form-horizontal .radio-inline {
   padding-top: 0;
 }
 
@@ -150,14 +177,66 @@ html {
   max-width: 100px;
 }
 
+.table-buy-board {
+  font-size: 18px;
+}
+
+.table-buy-board td {
+  vertical-align: middle;
+}
+
+.table-buy-board > tbody > tr > td,
+.table-buy-board > thead > tr > td,
+.table-buy-board > tfoot > tr > td{
+  vertical-align: middle;
+}
+
+.table-buy-board .btn-info,
+.table-buy-board .btn-success {
+  font-size: 18px;
+}
+
+.table-feedback {
+  font-size: 18px;
+  float: right;
+}
+
+input[type="radio"]:hover {
+  cursor: pointer;
+}
+
 .btn-next {
   margin-top: 20px;
   font-size: 20px;
   transition: all 0.3s ease-in-out 0s;
 }
+.end-score {
+  font-size: 18px;
+  padding-left: 20px;
+}
+
+.btn-refresh-to-start {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 90px;
+  width: 150px;
+  opacity: 0;
+}
 
 .page-wrapper {
-  /*margin-top: 50px;*/
+  margin-top: 50px;
+}
+
+.invest-input {
+  max-width: 120px
+}
+
+.table-risk {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .choose-organization-item {

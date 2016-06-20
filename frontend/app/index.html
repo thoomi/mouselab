@@ -10,7 +10,7 @@
     <!-- bower:css -->
     <!-- endbower -->
     <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
+    <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
@@ -26,8 +26,8 @@
     </div>
 
     <div class="status-bar" ng-controller="StatusbarCtrl">
-        <div class="progress" ng-hide="currentSite <= 1">
-            <div class="progress-bar" role="progressbar" style="width: {{ barWidth }}%">{{ barWidth }}%</div>
+        <div class="progress" ng-hide="currentSite === 1">
+            <div class="progress-bar" role="progressbar" style="width: {{ barWidth }}%">{{ barWidth }}% vollständig</div>
         </div>
 
 
@@ -56,14 +56,14 @@
        ga('send', 'pageview');
     </script>
 
-    <!-- build:js(.) scripts/oldieshim.js -->
+    <!-- build:js({.tmp,app}) scripts/oldieshim.js -->
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
     <![endif]-->
     <!-- endbuild -->
 
-    <!-- build:js(.) scripts/vendor.js -->
+    <!-- build:js({.tmp,app}) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -98,6 +98,9 @@
         <script src="scripts/controllers/step18.js"></script>
         <script src="scripts/controllers/step19.js"></script>
         <script src="scripts/controllers/step20.js"></script>
+        <script src="scripts/controllers/step21.js"></script>
+        <script src="scripts/controllers/step22.js"></script>
+        <script src="scripts/controllers/step23.js"></script>
         <script src="scripts/services/dataservice.js"></script>
         <script src="scripts/filters/makerange.js"></script>
         <script src="scripts/services/configdata.js"></script>

@@ -1,5 +1,5 @@
 <h2>Ihr persönlicher Code</h2>
-<p>Bitte erstellen Sie Ihren persönlichen Code. Dieser Code besteht aus einer Kombination von Buchstaben und Zahlen, die außer Ihnen niemandem bekannt ist, für Sie persönlich jedoch leicht wieder herzuleiten ist. Sollten Sie bereits an der vorangegangenen Studie teilgenommen haben, können die Ergebnisse beider Tests anhand dieses Codes einander zugeordnet werden und zugleich Ihre Anonymität gewahrt werden.
+<p>Bitte	erstellen	Sie	Ihren	persönlichen	Code.	Dieser	Code	besteht	aus	einer	Kombination	von	Buchstaben	und	Zahlen,	die	außer	Ihnen	niemandem	bekannt	ist,	für	Sie	persönlich	jedoch	leicht	wieder	herzuleiten	ist.
     <br>
     <br>
     Der persönliche Code setzt sich wie folgt zusammen:
@@ -29,21 +29,10 @@ Ihre Mutter heißt Helga, Sie sind in Frankfurt geboren,
     </div>
     <br>
     <div class="form-group">
-        <div class="col-xs-12">
-            <p>Haben Sie bereits an der vorangegangenen Studie mit dem Titel „Produktbewertung“ teilgenommen?</p>
-            <label class="radio-inline">
-                <input type="radio" name="previousParticipant" ng-model="isPreviousParticipant" value="1"> Ja
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="previousParticipant" ng-model="isPreviousParticipant" value="0"> Nein
-            </label>
-        </div>
-    </div>
-    <div class="form-group">
         <div class="col-sm-12">
             <a type="submit"
                ng-click="onFormSubmit()"
-               ng-disabled="!personalCode || !isPreviousParticipant"
+               ng-disabled="!personalCode"
                class="btn btn-lg btn-success btn-next">Weiter <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
                 <div class="spinner" ng-hide="notWaitingForRequestToFinish">
                     <div class="rect1"></div>

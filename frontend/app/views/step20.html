@@ -1,24 +1,100 @@
-<h2>Ihre	Zeit	und	Ihr	Punktestand	</h2>
-<p >
-   Bitte	notieren	Sie	sich	die	folgenden	Angaben	und	überreichen	Sie	diese	dem	Studienleiter,	damit	er	die	entsprechende	Auszahlung	vornehmen	kann:	
-</p>
+<p>Bitte beantworten Sie die folgenden Fragen ohne groß zu überlegen und klicken Sie den Wert an der Ihnen als erstes in den Sinn kommt. Wenn eine Aussage für Sie schwierig einzuschätzen ist, versuchen Sie, diese bitte trotzdem zu beantworten.</p>
 
-<ul>
-    <li>Dauer der Studienteilnahme: <strong>9min 3sek</strong></li>
-    <li>Ihre Gesamtpunkte: <strong>100</strong></li>
-</ul>
 
-<p>
-   Bevor	Sie	den	PC	verlassen	bitte	ich	Sie	durch	den	unten	stehenden	Button	wieder	auf	die	Startseite	der	Studie	zurückzukehren	–	vielen	Dank!
-</p>
-<p>
-    <a class="btn btn-info btn-next" target="_self" href="/">Zurück zum Start</a>
-</p>
+<form class="form-horizontal stress-questions">
+    <div class="form-group">
+        <div class="col-sm-5">
+            <p><strong>1. 	Solange	man	die	bessere	aus	zwei	Aktien	kauft,	kann	man	mehr	Punkte	bekommen	wenn	man...</strong></p>
+        </div>
+        <div class="col-sm-7">
+            <div class="radio">
+              <label>
+                <input type="radio" name="metaQuestion1" value="1"  ng-model="metaQuestion1" ng-change="checkAllSet()">
+                viele	Informationen	recherchiert	und	dadurch	wenige	aber	dafür	sichere	Aktienkäufe	tätigt	
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="metaQuestion1" value="2" ng-model="metaQuestion1" ng-change="checkAllSet()">
+                wenige	Informationen	recherchiert	und	dadurch	viele	aber	dafür	unsichere	Aktienkäufe	tätigt		
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="metaQuestion1" value="3" ng-model="metaQuestion1" ng-change="checkAllSet()">
+               Es	ist	egal	wie	man	Aktien	kauft,	es	macht	am	Ende	des	Arbeitstages	keinen	Unterschied	
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="metaQuestion1" value="4" ng-model="metaQuestion1" ng-change="checkAllSet()">
+                Ich	weiß	nicht	wie	man	Aktien	kaufen	soll,	um	möglichst	viele	Punkte	zu	bekommen
+              </label>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="form-group">
+        <div class="col-sm-5">
+            <p><strong>2. Die	Art	und	Weise	wie	ich	Aktien	an	einem	Arbeitstag	gekauft	habe	war	im	Gesamten...</strong></p>
+        </div>
+        <div class="col-sm-7">
+            <span class="stress-questions-option-label">sehr spontan</span>
 
-<div class="footer">
-    <p>Verantwortlich für die technische Umsetzung der Studie:</p>
-    <p>
-        Thomas Blank <br>
-        <a href="mailto:thomas.blank@fh-erfurt.de">thomas.blank@fh-erfurt.de</a>
-    </p>
-</div>
+            <label class="radio-inline" ng-repeat="i in [6]|makeRange track by $index">
+                <input type="radio" ng-model="$parent.metaQuestion2" ng-change="checkAllSet()" name="metaQuestion2" value="{{ $index + 1 }}">
+            </label>
+
+            <span class="stress-questions-option-label">genau überlegt</span>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-sm-5">
+            <p><strong>3. Ich	fand	es	gut,	über	mein	Vorgehen	bei	den	Aktienkäufen	selbst	bestimmen	zu	können</strong></p>
+        </div>
+        <div class="col-sm-7">
+            <span class="stress-questions-option-label">trifft nicht zu</span>
+
+            <label class="radio-inline" ng-repeat="i in [6]|makeRange track by $index">
+                <input type="radio" ng-model="$parent.metaQuestion3" ng-change="checkAllSet()" name="metaQuestion3" value="{{ $index + 1 }}">
+            </label>
+
+            <span class="stress-questions-option-label">trifft zu</span>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-sm-5">
+            <p><strong>4. Die	Informationen	im	rechten	oberen	Bildschirmrand	zur	verbleibenden	Zeit	oder	den	verbleibenden	Aktienkäufen	habe	ich	während	eines	Arbeitstages	immer	aufmerksam	beobachtet</strong></p>
+        </div>
+        <div class="col-sm-7">
+            <span class="stress-questions-option-label">trifft nicht zu</span>
+
+            <label class="radio-inline" ng-repeat="i in [6]|makeRange track by $index">
+                <input type="radio" ng-model="$parent.metaQuestion4" ng-change="checkAllSet()" name="metaQuestion4" value="{{ $index + 1 }}">
+            </label>
+
+            <span class="stress-questions-option-label">trifft zu</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-12">
+            <a type="submit"
+               ng-click="onFormSubmit()"
+               ng-disabled="!allQuestionsAnswered"
+               class="btn btn-lg btn-success btn-next">Weiter <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                <div class="spinner" ng-hide="notWaitingForRequestToFinish">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</form>
+
+<div class="maximising-bottom-margin"></div>

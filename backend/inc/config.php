@@ -2,12 +2,12 @@
 // -----------------------------------------------------------------------------
 // Database configuration
 // -----------------------------------------------------------------------------
-define('DB_USERNAME', 'testlab');
-define('DB_PASSWORD', 'testlab');
+define('DB_USERNAME', 'thoomi');
+define('DB_PASSWORD', '');
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'testlabdb');
+define('DB_NAME', 'kopietzmasterlive');
 
 // -----------------------------------------------------------------------------
 // Additional constants
 // -----------------------------------------------------------------------------
-define('ALLOWED_ORIGINS', 'http://localhost:9000');
+define('ALLOWED_ORIGINS', '*');

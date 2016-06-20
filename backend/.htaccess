@@ -1,8 +1,3 @@
-AuthType Basic
-AuthName "restricted area"
-AuthUserFile /var/www/kopietz/backend/.htpasswd
-require valid-user
-
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ %{ENV:BASE}index.php [QSA,L]

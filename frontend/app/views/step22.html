@@ -1,0 +1,44 @@
+<h2>Vielen Dank für Ihre Teilnahme!</h2>
+<p>Die	Studie	an	der	Sie	teilgenommen	haben	beschäftigt	sich	mit	der	Frage,	wie	Entscheider	eine	begrenzte	Entscheidungszeit	nutzen,	wenn	sie	eine	Reihe	von	Entscheidungen	zu	treffen	haben.	Dabei	steht	die	Frage	im	Zentrum,	ob	Entscheider	unter	Zeitdruck	wenige	Entscheidungen	anhand	von	vielen	Informationen	treffen	oder	ob	sie	viele	Entscheidungen	anhand	von	wenigen	Informationen	treffen.	Letztlich	geht	es	darum	zu	untersuchen,	für	was	die	begrenzte	Ressource	Zeit	unter	Zeitdruck	genutzt	wird	und	ob	sich	allgemeine	Tendenzen	daraus	ableiten	lassen.	
+</p>
+<p>
+    Ich	würde	mich	sehr	freuen,	wenn	ich	Sie	zu	weiteren	Studien	im	Rahmen	meiner	Promotion	einladen	darf	und	Sie	mir	Ihre	Mailadresse	hinterlassen.	Sollten	Sie	Anmerkungen	oder	Anregungen	zu	dieser	Studie	haben,	freue	ich	mich	über	ein	Kommentar	von	Ihnen
+</p>
+<br>
+
+<form class="" action="">
+    <div class="form-group">
+        <label for="inputEmail">E-Mail</label>
+        <input type="email" ng-model="participantEmail" class="form-control thanks-form-input" id="inputEmail"  placeholder="E-Mail">
+    </div>
+
+    <div class="form-group">
+        <div class="">
+            <p><strong>Teilnahme an weiteren Studien im Rahmen meiner Masterarbeit?</strong></p>
+            <label class="radio-inline">
+                <input type="radio" ng-model="participateInOther" name="participateInOther" value="1" checked> ja
+            </label>
+            <label class="radio-inline">
+                <input type="radio" ng-model="participateInOther" name="participateInOther" value="0"> nein
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="comments">Anmerkungen und Anregungen zur Studie</label>
+        <textarea class="form-control thanks-form-input" rows="4" ng-model="comments" name="comments" id="comments"></textarea>
+    </div>
+    <div class="form-group">
+        <a type="submit"
+           ng-click="onFormSubmit()"
+           ng-disabled="saveAndCloseEnabled"
+           class="btn btn-lg btn-success btn-next">Weiter <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+            <div class="spinner" ng-hide="notWaitingForRequestToFinish">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+        </a>
+    </div>
+</form>

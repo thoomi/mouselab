@@ -10,11 +10,11 @@
 angular.module('mouselabApp')
   .service('configData', function (randomizer) {
       // Location will be different for each url
-      var experimentLocation  = 'T';
+      var experimentLocation  = 'L';
 
-      //var baseApiUrl = 'http://api.stephan-kopietz.dev';
-      var baseApiUrl = 'https://mouselab-promo-thoomi.c9users.io:8080/api';
-
+      var baseApiUrl = 'http://api-001.stephan-kopietz.de';
+      //var baseApiUrl = 'https://mouselab-promo-thoomi.c9users.io:8080/api';
+      
       var numberOfRounds = 3;
       var experimentConditions = ['C1', 'C2'];
       
@@ -26,6 +26,9 @@ angular.module('mouselabApp')
       availableTime[possibleTasks[1]] = 235520;
       availableTime[possibleTasks[2]] = 299520;
       
+      //availableTime[possibleTasks[0]] = 17150;
+      //availableTime[possibleTasks[1]] = 23552;
+      //availableTime[possibleTasks[2]] = 29952;
       
       var taskOrder = {};
       taskOrder[possibleGroups[0]] = [possibleTasks[0], possibleTasks[1], possibleTasks[2]];
@@ -46,14 +49,14 @@ angular.module('mouselabApp')
       // cost is given in milliseconds
       var cueValues = [
         {
+          validity: 0.84,
+          cost: 2320,
+          weight: 0.29
+        },
+        {
           validity: 0.78,
           cost: 2160,
           weight: 0.27
-        },
-        {
-          validity: 0.61,
-          cost: 1680,
-          weight: 0.21
         },
         {
           validity: 0.68,
@@ -61,9 +64,9 @@ angular.module('mouselabApp')
           weight: 0.23
         },
         {
-          validity: 0.84,
-          cost: 2320,
-          weight: 0.29
+          validity: 0.61,
+          cost: 1680,
+          weight: 0.21
         },
       ];
       
@@ -120,7 +123,7 @@ angular.module('mouselabApp')
             
             if (indexOfOption < 4)
             {
-              trials[indexOfTrial].optionId = 16 - indexOfOption;
+              trials[indexOfTrial].optionId = 17 - pairComparisons[indexOfComparison].id;
               
               trials[indexOfTrial].pattern[0] = 1 - trials[indexOfTrial].pattern[0];
               trials[indexOfTrial].pattern[1] = 1 - trials[indexOfTrial].pattern[1];
@@ -182,7 +185,7 @@ angular.module('mouselabApp')
           return generateTrials();
         },
         
-        getPairComparison(index) {
+        getPairComparison : function(index) {
           return pairComparisons[index];
         }
       };

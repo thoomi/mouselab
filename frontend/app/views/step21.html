@@ -1,20 +1,22 @@
 <p>Bitte beantworten Sie die folgenden Fragen ohne groß zu überlegen und klicken Sie den Wert an der Ihnen als erstes in den Sinn kommt. Bei den Fragen kommt es auf Ihre subjektive Einschätzung an, es gibt keine richtigen oder falschen Antworten. Wenn eine Aussage für Sie schwierig einzuschätzen ist, versuchen Sie, diese bitte trotzdem zu beantworten.</p>
 
 
-<form class="form-horizontal stress-questions">
-    <div class="form-group" ng-repeat="question in maximisingQuestions">
-        <div class="col-sm-5">
+<form class="form-horizontal nfc-questions">
+    <div class="form-group" ng-repeat="question in nfcQuestions">
+        <div>
             <p><strong>{{ $index + 1 }}. {{ question.title }}</strong></p>
         </div>
-        <div class="col-sm-7">
+        <div class="nfc-radio-wrapper">
             <span class="stress-questions-option-label">{{ labelLeft }}</span>
 
-            <label class="radio-inline" ng-repeat="i in [9]|makeRange track by $index">
+            <label class="radio-inline" ng-repeat="i in [7]|makeRange track by $index">
+                <span ng-show="$index === 3" class="nfcQuestion-label-center">{{ labelCenter }}</span>
                 <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="{{ $index + 1 }}">
             </label>
 
             <span class="stress-questions-option-label">{{ labelRight }}</span>
         </div>
+        <br><br>
     </div>
 
     <div class="form-group">

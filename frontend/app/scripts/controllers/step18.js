@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc function
- * @name mouselabApp.controller:MaximisingCtrl
+ * @name mouselabApp.controller:Step18Ctrl
  * @description
- * # MaximisingCtrl
+ * # Step17Ctrl
  * Controller of the mouselabApp
  */
 angular.module('mouselabApp')
@@ -13,8 +13,8 @@ angular.module('mouselabApp')
     
     dataService.incrementSiteNumber();
 
-        $scope.labelLeft = 'trifft nicht zu';
-        $scope.labelRight = 'trifft zu';
+        $scope.labelLeft = 'stimme nicht zu';
+        $scope.labelRight = 'stimme völlig zu';
 
         $scope.allQuestionsAnswered = false;
         $scope.notWaitingForRequestToFinish = true;
@@ -38,7 +38,7 @@ angular.module('mouselabApp')
             if (!$scope.allQuestionsAnswered) { return; } 
             
             $scope.notWaitingForRequestToFinish = false;
-             
+
             // Save all Answers into an array and calculate the sum
             var answerValues = [];
             var sumAnswers   = 0;
@@ -47,11 +47,11 @@ angular.module('mouselabApp')
                 sumAnswers += parseInt(question.value);
             });
 
-            dataService.saveResilienceAnswers(answerValues, sumAnswers, function(error) {
+            dataService.saveMaximisingAnswers(answerValues, sumAnswers, function(error) {
                 if (!error)
                 {
                     $scope.notWaitingForRequestToFinish = true;
-                    $location.path('step19');
+                    $location.path(dataService.getNextQuestionSet());
                 }
                 else
                 {
@@ -65,38 +65,68 @@ angular.module('mouselabApp')
         $scope.maximisingQuestions = [
           {
               id    : 1,
-              title : 'Wenn	ich	im	Auto	Radio	höre,	prüfe	ich	oft	die	anderen	Radiosender	daraufhin,	ob	etwas	besseres	gespielt	wird,	sogar	wenn	ich	relativ	zufrieden	mit	dem	bin,	was	ich	gerade	höre.',
+              title : '	Wenn	ich	Pläne	habe,	verfolge	ich	sie	auch.	',
               label : 'max-questions-1',
               value : 0
           },
           {
               id    : 2,
-              title : '	Egal	wie	zufrieden	ich	mit	meinem	Beruf	bin,	es	ist	immer	sinnvoll,	nach	besseren	Optionen	Ausschau	zu	halten.	',
+              title : 'Normalerweise	schaffe	ich	alles	irgendwie.	',
               label : 'max-questions-2',
               value : 0
           },
           {
               id    : 3,
-              title : '	Es	fällt	mir	häufig	schwer,	ein	Geschenk	für	einen	Freund	zu	kaufen.	',
+              title : '	Es	ist	mir	wichtig,	an	vielen	Dingen	interessiert	zu	bleiben.	',
               label : 'max-questions-3',
               value : 0
           },
           {
               id    : 4,
-              title : 'Videos	auszuleihen	ist	sehr	schwierig.	Ich	mühe	mich	stets	damit	ab,	das	Beste	auszusuchen.',
+              title : '	Ich	mag	mich.	',
               label : 'max-questions-4',
               value : 0
           },
           {
               id    : 5,
-              title : '	Egal	was	ich	tue:	Ich	messe	mich	am	höchsten	Standard.',
+              title : '	Ich	kann	mehrere	Dinge	gleichzeitig	bewältigen.	',
               label : 'max-questions-5',
               value : 0
           },
           {
               id    : 6,
-              title : '	Ich	gebe	mich	nie	mit	dem	zweitbesten	zufrieden.	',
+              title : 'Ich	bin	entschlossen.	',
               label : 'max-questions-6',
+              value : 0
+          },
+          {
+              id    : 7,
+              title : '	Ich	behalte	an	vielen	Dingen	Interesse.	',
+              label : 'max-questions-7',
+              value : 0
+          },
+          {
+              id    : 8,
+              title : '	Ich	finde	öfters	etwas,	worüber	ich	lachen	kann.	',
+              label : 'max-questions-8',
+              value : 0
+          },
+          {
+              id    : 9,
+              title : '	Normalerweise	kann	ich	eine	Situation	aus	mehreren	Perspektiven	betrachten.	',
+              label : 'max-questions-9',
+              value : 0
+          },
+          {
+              id    : 10,
+              title : '	Ich	kann	mich	auch	überwinden,	Dinge	zu	tun,	die	ich	eigentlich	nicht	machen	will.	',
+              label : 'max-questions-10',
+              value : 0
+          },
+          {
+              id    : 11,
+              title : '	In	mir	steckt	genügend	Energie,	um	alles	zu	machen,	was	ich	machen	muss.	',
+              label : 'max-questions-11',
               value : 0
           }
         ];

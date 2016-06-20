@@ -69,7 +69,9 @@ angular.module('mouselabApp')
           {
             timeToFinish = configData.getAvailableTime(dataService.getCurrentTask()) - $scope.availableTime;
           }
-        
+          
+          dataService.addScore($scope.currentScore);
+          
           dataService.saveExperiment($scope.finishedTrialData, timeToFinish, function(error){
             if (!error)
             {
@@ -168,14 +170,17 @@ angular.module('mouselabApp')
       
       angular.forEach($scope.cueValues, function(value, key) {
         acquiredWeights += value.weight * $scope.showCueValues[key].show;
-        // TODO: Calculate correct local accuracy
-        
+        localAccuracy += value.weight * $scope.showCueValues[key].show * getCueScore(key, share);
         
         // Calculate sum of acquired times
         acquisitionTime += value.cost * $scope.showCueValues[key].show;
       });
       
-      $scope.currentScore += 100 * acquiredWeights * localAccuracy;
+      localAccuracy /= getMaxLocalAccuracy();
+      
+      var trialScore =  Math.round(100 * acquiredWeights * localAccuracy);
+      $scope.currentScore += trialScore;
+      
     
       var numberOfAcquisitions = 4;
       for (var indexOfAcquisition = $scope.aquiredInfos.length; indexOfAcquisition < 4; indexOfAcquisition++)
@@ -191,7 +196,9 @@ angular.module('mouselabApp')
         numberOfAcquisitions: numberOfAcquisitions,
         acquiredWeights:      acquiredWeights,
         localAccuracy:        localAccuracy,
-        chosenOption:         share === 'A' ? $scope.currentTrial.optionId : (17 - $scope.currentTrial.optionId), // Get the chosen pair option. (The option given by the trail data is always displayed left)
+        score:                trialScore,
+        acquisitionPattern:   determineAcquisitionPattern(numberOfAcquisitions),
+        chosenOption:         share === 'A' ? $scope.currentTrial.optionId : (17 - $scope.currentTrial.pairId), // Get the chosen pair option. (The option given by the trail data is always displayed left)
         timeToFinish:         $scope.timeOfLastAcquiredTrial - $scope.availableTime,
         acquisitionTime:      acquisitionTime,
         acquisitionOrder:     $scope.aquiredInfos.join(':')
@@ -199,4 +206,63 @@ angular.module('mouselabApp')
       
       setupNextTrial();
     };
+    
+    
+    function getCueScore(index, share) {
+      if (share === 'A')
+      {
+        return $scope.currentTrial.pattern[index];
+      }
+      else
+      {
+        return 1 - $scope.currentTrial.pattern[index];
+      }
+    }
+    
+    function getMaxLocalAccuracy() {
+      var accuracy1 = 0;
+      var accuracy2 = 0;
+      
+      angular.forEach($scope.cueValues, function(value, key) {
+        accuracy1 += value.weight * $scope.showCueValues[key].show * getCueScore(key, 'A');
+        accuracy1 += value.weight * $scope.showCueValues[key].show * getCueScore(key, 'B');
+      });
+      
+      return Math.max(accuracy1, accuracy2);
+    }
+    
+    function determineAcquisitionPattern(acquisitionCount) {
+      var cue1 = $scope.showCueValues[0].show;
+      var cue2 = $scope.showCueValues[1].show;
+      var cue3 = $scope.showCueValues[2].show;
+      var cue4 = $scope.showCueValues[3].show;
+      
+      if (acquisitionCount === 1)
+      {
+        if (cue1 && !cue2 && !cue3 && !cue4) { return 12; }
+        if (!cue1 && cue2 && !cue3 && !cue4) { return 13; }
+        if (!cue1 && !cue2 && cue3 && !cue4) { return 14; }
+        if (!cue1 && !cue2 && !cue3 && cue4) { return 15; }
+      }
+      else if (acquisitionCount === 2)
+      {
+        if (cue1 && cue2 && !cue3 && !cue4) { return 6; }
+        if (cue1 && !cue2 && cue3 && !cue4) { return 7; }
+        if (cue1 && !cue2 && !cue3 && cue4) { return 8; }
+        if (!cue1 && cue2 && cue3 && !cue4) { return 9; }
+        if (!cue1 && cue2 && !cue3 && cue4) { return 10; }
+        if (!cue1 && !cue2 && !cue3 && cue4) { return 11; }
+      }
+      else if (acquisitionCount === 3)
+      {
+        if (cue1 && cue2 && cue3 && !cue4) { return 2; }
+        if (cue1 && cue2 && !cue3 && cue4) { return 3; }
+        if (cue1 && !cue2 && cue3 && cue4) { return 4; }
+        if (!cue1 && cue2 && cue3 && cue4) { return 5; }
+      }
+      else if (acquisitionCount === 4)
+      {
+        return 1;
+      }
+    }
   });

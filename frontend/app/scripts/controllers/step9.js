@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc function
- * @name mouselabApp.controller:Step8Ctrl
+ * @name mouselabApp.controller:Step9Ctrl
  * @description
  * # Step8Ctrl
  * Controller of the mouselabApp

@@ -85,6 +85,28 @@ $app->post('/participant/create', function() use($app) {
 });
 
 
+
+$app->post('/participant/update', function() use($app) {
+	$requestData = json_decode($app->request->getBody(), true);
+
+	if (isset($requestData['participantDatabaseId'])
+        && isset($requestData['totalTime']))
+	{
+		$app->db->updateParticipant($requestData['participantDatabaseId'], $requestData['totalTime']);
+
+		$app->response->setStatus(200);
+        $app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
+        $app->response->headers->set('Content-Type', 'application/json');
+
+        echo json_encode(array());
+	}
+	else
+	{
+		throw new Exception("Bad request body");
+	}
+});
+
+
 // -----------------------------------------------------------------------------
 // This route saves the participants attribute answer values
 // -----------------------------------------------------------------------------
@@ -189,7 +211,8 @@ $app->post('/participant/save/demographics', function() use($app, $deviceDetecto
 		&& isset($requestData['graduation'])
         && isset($requestData['status'])
         && isset($requestData['apprenticeship'])
-        && isset($requestData['academicDegree']))
+        && isset($requestData['academicDegree'])
+        && isset($requestData['psychoStudies']))
 	{
         // Determine users device
         $device = 1;
@@ -197,7 +220,7 @@ $app->post('/participant/save/demographics', function() use($app, $deviceDetecto
         if ($deviceDetector->isTablet()) { $device = 2; }
         if ($deviceDetector->isMobile() && !$deviceDetector->isTablet()) { $device = 3; }
 
-		$app->db->saveDemographics($requestData['participantDatabaseId'], $requestData['age'], $requestData['gender'], $requestData['graduation'], $requestData['status'], $requestData['apprenticeship'], $requestData['academicDegree'], $device);
+		$app->db->saveDemographics($requestData['participantDatabaseId'], $requestData['age'], $requestData['gender'], $requestData['graduation'], $requestData['status'], $requestData['apprenticeship'], $requestData['academicDegree'], $requestData['psychoStudies'], $device);
 
 		$app->response->setStatus(200);
 		$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
@@ -261,6 +284,75 @@ $app->post('/participant/save/resilienceanswers', function() use($app) {
 	}
 });
 
+// -----------------------------------------------------------------------------
+// This route saves the answers to the meta answers questions
+// -----------------------------------------------------------------------------
+$app->post('/participant/save/metaanswers', function() use($app) {
+	$requestData = json_decode($app->request->getBody(), true);
+
+	if (isset($requestData['participantDatabaseId'])
+		&& isset($requestData['answerValues']))
+	{
+		$app->db->saveMetaAnswers($requestData['participantDatabaseId'], $requestData['answerValues']);
+
+		$app->response->setStatus(200);
+		$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
+		$app->response->headers->set('Content-Type', 'application/json');
+
+		echo json_encode(array());
+	}
+	else
+	{
+		throw new Exception("Bad request body");
+	}
+});
+
+// -----------------------------------------------------------------------------
+// This route saves the answers to the nfc answers questions
+// -----------------------------------------------------------------------------
+$app->post('/participant/save/nfcanswers', function() use($app) {
+	$requestData = json_decode($app->request->getBody(), true);
+
+	if (isset($requestData['participantDatabaseId'])
+		&& isset($requestData['answerValues'])
+		&& isset($requestData['sumAnswers']))
+	{
+		$app->db->saveNfcAnswers($requestData['participantDatabaseId'], $requestData['answerValues'], $requestData['sumAnswers']);
+
+		$app->response->setStatus(200);
+		$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
+		$app->response->headers->set('Content-Type', 'application/json');
+
+		echo json_encode(array());
+	}
+	else
+	{
+		throw new Exception("Bad request body");
+	}
+});
+
+// -----------------------------------------------------------------------------
+// This route saves the answers to the risk answers questions
+// -----------------------------------------------------------------------------
+$app->post('/participant/save/riskanswers', function() use($app) {
+	$requestData = json_decode($app->request->getBody(), true);
+
+	if (isset($requestData['participantDatabaseId'])
+		&& isset($requestData['answerValues']))
+	{
+		$app->db->saveRiskAnswers($requestData['participantDatabaseId'], $requestData['answerValues']);
+
+		$app->response->setStatus(200);
+		$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
+		$app->response->headers->set('Content-Type', 'application/json');
+
+		echo json_encode(array());
+	}
+	else
+	{
+		throw new Exception("Bad request body");
+	}
+});
 
 // -----------------------------------------------------------------------------
 // This route creates a new user entry

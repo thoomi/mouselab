@@ -9,17 +9,16 @@
  */
 angular.module('mouselabApp')
   .controller('Step3Ctrl', function ($scope, $window, $location, dataService) {
-      if (!dataService.everythingIsValid()) { $location.path(''); }
-      
+
       $scope.personalCode = '';
       $scope.notWaitingForRequestToFinish = true;
-      $scope.isPreviousParticipant = '';
+      $scope.isPreviousParticipant = 0;
 
       dataService.startTime();
       dataService.incrementSiteNumber();
 
       $scope.onFormSubmit = function() {
-        if (!$scope.personalCode || !$scope.isPreviousParticipant) 
+        if (!$scope.personalCode) 
         {
           return false;
         }

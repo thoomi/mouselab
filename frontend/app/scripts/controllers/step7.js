@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc function
- * @name mouselabApp.controller:Step6Ctrl
+ * @name mouselabApp.controller:Step7Ctrl
  * @description
  * # Step6Ctrl
  * Controller of the mouselabApp
@@ -97,10 +97,9 @@ angular.module('mouselabApp')
       
       angular.forEach($scope.cueOptions, function(value) {
         acquiredWeights += value.weight * value.isShown;
-        // TODO: Calculate correct local accuracy
       });
       
-      $scope.currentScore += 100 * acquiredWeights * localAccuracy;
+      $scope.currentScore += Math.round(100 * acquiredWeights * localAccuracy);
       $scope.finishedTrials++;
       
       dataService.setTrainingData({

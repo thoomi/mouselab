@@ -83,6 +83,18 @@ angular
         templateUrl: 'views/step20.html',
         controller: 'Step20Ctrl'
       })
+      .when('/step21', {
+        templateUrl: 'views/step21.html',
+        controller: 'Step21Ctrl'
+      })
+      .when('/step22', {
+        templateUrl: 'views/step22.html',
+        controller: 'Step22Ctrl'
+      })
+      .when('/step23', {
+        templateUrl: 'views/step23.html',
+        controller: 'Step23Ctrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

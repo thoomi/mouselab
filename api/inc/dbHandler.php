@@ -48,6 +48,19 @@ class DbHandler
 
         return $this->dbh->lastInsertId();
     }
+    
+    public function updateParticipant($participantDbId, $totalTime)
+    {
+        // Update Dropout column in participant table
+        $updateStatement = $this->dbh->prepare('UPDATE tl_participant SET dropout = :dropout, total_time = :totalTime WHERE id = :participantId');
+        
+        $dropout = false;
+        
+        $updateStatement->bindParam(':dropout',       $dropout);
+        $updateStatement->bindParam(':totalTime',     $totalTime);
+        $updateStatement->bindParam(':participantId', $participantDbId);
+        $updateStatement->execute();
+    }
 
 
     public function saveTraining($participantDbId, $trainingId, $optionRank, $timeToDecision)
@@ -79,8 +92,8 @@ class DbHandler
         
         
         // Save the trails
-        $insertTrialStatement = $this->dbh->prepare('INSERT INTO tl_trial (number, pair_comparison, number_of_acquisitions, chosen_option, order_of_acqusitions, time_to_finish, acquisition_time, acquired_weights, local_accuracy, tl_experiment_id)
-                                                     VALUES (:number, :pair_comparison, :number_of_acquisitions, :chosen_option, :order_of_acquisitions, :time_to_finish, :acquisition_time, :acquired_weights, :local_accuracy, :tl_experiment_id)');
+        $insertTrialStatement = $this->dbh->prepare('INSERT INTO tl_trial (number, pair_comparison, number_of_acquisitions, chosen_option, order_of_acqusitions, time_to_finish, acquisition_time, acquired_weights, local_accuracy, acquisition_pattern, score, tl_experiment_id)
+                                                     VALUES (:number, :pair_comparison, :number_of_acquisitions, :chosen_option, :order_of_acquisitions, :time_to_finish, :acquisition_time, :acquired_weights, :local_accuracy, :acquisition_pattern, :score, :tl_experiment_id)');
         
         
         foreach ($trials as $trial)
@@ -94,6 +107,8 @@ class DbHandler
             $insertTrialStatement->bindParam(':acquisition_time',       $trial['acquisitionTime']);
             $insertTrialStatement->bindParam(':acquired_weights',       $trial['acquiredWeights']);
             $insertTrialStatement->bindParam(':local_accuracy',         $trial['localAccuracy']);
+            $insertTrialStatement->bindParam(':acquisition_pattern',    $trial['acquisitionPattern']);
+            $insertTrialStatement->bindParam(':score',                  $trial['score']);
             $insertTrialStatement->bindParam(':tl_experiment_id',       $experimentId);
             
             $insertTrialStatement->execute();
@@ -121,15 +136,12 @@ class DbHandler
         $insertStatement->bindParam(':experimentId',  $experimentId);
 
         $insertStatement->execute();
-        
-        $arr = $insertStatement->errorInfo();
-        print_r($arr);
     }
 
-    public function saveDemographics($participantDbId, $age, $gender, $graduation, $status, $apprenticeship, $academicDegree, $device)
+    public function saveDemographics($participantDbId, $age, $gender, $graduation, $status, $apprenticeship, $academicDegree, $psychoStudies, $device)
     {
-        $insertStatement = $this->dbh->prepare('INSERT INTO tl_demographics (age, gender, graduation, live_status, apprenticeship, academic_degree, device, tl_participant_id)
-                                                VALUES (:age, :gender, :graduation, :liveStatus, :apprenticeship, :academic_degree, :device, :participantId)');
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_demographics (age, gender, graduation, live_status, apprenticeship, academic_degree, device, psycho_studies, tl_participant_id)
+                                                VALUES (:age, :gender, :graduation, :liveStatus, :apprenticeship, :academic_degree, :psychoStudies, :device, :participantId)');
 
         $insertStatement->bindParam(':age',             $age);
         $insertStatement->bindParam(':gender',          $gender);
@@ -137,6 +149,7 @@ class DbHandler
         $insertStatement->bindParam(':liveStatus',      $status);
         $insertStatement->bindParam(':apprenticeship',  $apprenticeship);
         $insertStatement->bindParam(':academic_degree', $academicDegree);
+        $insertStatement->bindParam(':psychoStudies',   $psychoStudies);
         $insertStatement->bindParam(':device',          $device);
         $insertStatement->bindParam(':participantId',   $participantDbId);
 
@@ -177,6 +190,49 @@ class DbHandler
         $insertStatement->bindParam(':answer5', $answerValues[4]);
         $insertStatement->bindParam(':answer6', $answerValues[5]);
         $insertStatement->bindParam(':sumAnswers', $sumAnswers);
+        $insertStatement->bindParam(':participantId', $participantDbId);
+
+        $insertStatement->execute();
+    }
+    
+    public function saveMetaAnswers($participantDbId, $answerValues)
+    {
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_meta_question (q_num_1, q_num_2, q_num_3, q_num_4, tl_participant_id)
+                                                VALUES (:answer1, :answer2, :answer3, :answer4, :participantId)');
+
+        $insertStatement->bindParam(':answer1', $answerValues[0]);
+        $insertStatement->bindParam(':answer2', $answerValues[1]);
+        $insertStatement->bindParam(':answer3', $answerValues[2]);
+        $insertStatement->bindParam(':answer4', $answerValues[3]);
+        $insertStatement->bindParam(':participantId', $participantDbId);
+
+        $insertStatement->execute();
+    }
+    
+    public function saveNfcAnswers($participantDbId, $answerValues, $sumAnswers)
+    {
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_nfc_question (q_num_1, q_num_2, q_num_3, q_num_4, q_sum, tl_participant_id)
+                                                VALUES (:answer1, :answer2, :answer3, :answer4, :sumAnswers, :participantId)');
+
+        $insertStatement->bindParam(':answer1', $answerValues[0]);
+        $insertStatement->bindParam(':answer2', $answerValues[1]);
+        $insertStatement->bindParam(':answer3', $answerValues[2]);
+        $insertStatement->bindParam(':answer4', $answerValues[3]);
+        $insertStatement->bindParam(':sumAnswers', $sumAnswers);
+        $insertStatement->bindParam(':participantId', $participantDbId);
+
+        $insertStatement->execute();
+    }
+    
+        public function saveRiskAnswers($participantDbId, $answerValues)
+    {
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_risk_question (q_num_1, q_num_2, q_num_3, q_num_4, tl_participant_id)
+                                                VALUES (:answer1, :answer2, :answer3, :answer4, :participantId)');
+
+        $insertStatement->bindParam(':answer1', $answerValues[0]);
+        $insertStatement->bindParam(':answer2', $answerValues[1]);
+        $insertStatement->bindParam(':answer3', $answerValues[2]);
+        $insertStatement->bindParam(':answer4', $answerValues[3]);
         $insertStatement->bindParam(':participantId', $participantDbId);
 
         $insertStatement->execute();

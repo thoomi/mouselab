@@ -1,28 +1,89 @@
-<p>Bitte beantworten Sie die folgenden Fragen ohne groß zu überlegen und klicken Sie den Wert an der Ihnen als erstes in den Sinn kommt. Wenn eine Aussage für Sie schwierig einzuschätzen ist, versuchen Sie, diese bitte trotzdem zu beantworten.</p>
+<h2>Geschafft!</h2>
+<p>Sie haben den Hauptteil nun hinter sich und abschließend erwarten Sie nur noch ein paar Fragen.</p>
 
-
-<form class="form-horizontal stress-questions">
-    <div class="form-group" ng-repeat="question in maximisingQuestions">
-        <div class="col-sm-5">
-            <p><strong>{{ $index + 1 }}. {{ question.title }}</strong></p>
-        </div>
-        <div class="col-sm-7">
-            <span class="stress-questions-option-label">{{ labelLeft }}</span>
-
-            <label class="radio-inline" ng-repeat="i in [7]|makeRange track by $index">
-                <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="{{ $index + 1 }}">
-            </label>
-
-            <span class="stress-questions-option-label">{{ labelRight }}</span>
+<form class="form-horizontal">
+    <div class="form-group">
+        <div class="col-sm-3 text-right"><strong>Wie alt sind Sie?</strong></div>
+        <div class="col-sm-9">
+            <input type="number" min="0" max="120" ng-minlength="1" ng-maxlength="3" class="form-control demographics-age" ng-model="age">
         </div>
     </div>
-
+    <div class="form-group">
+        <div class="col-sm-3 text-right"><strong>Geschlecht</strong></div>
+        <div class="col-sm-9">
+            <label class="radio-inline">
+                <input type="radio" name="gender" value="0" ng-model="gender"> weiblich
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="gender" value="1" ng-model="gender"> männlich
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right"><strong>Höchster Schulabschluss</strong></div>
+        <div class="col-sm-9">
+            <select class="form-control from-demographics" ng-model="graduation">
+                <option value="1">kein Abschluss</option>
+                <option value="2">Hauptschule</option>
+                <option value="3">Realschule, Mittlere Reife</option>
+                <option value="4">Fachhochschulreife</option>
+                <option value="5">Abitur</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right"><strong>Betriebliche Ausbildung</strong></div>
+        <div class="col-sm-9">
+            <label class="radio-inline">
+                <input type="radio" name="apprenticeship" value="0" ng-model="apprenticeship"> Nein
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="apprenticeship" value="1" ng-model="apprenticeship"> Ja
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right"><strong>Akademischer Grad</strong></div>
+        <div class="col-sm-9">
+            <select class="form-control from-demographics" ng-model="academicDegree">
+                <option value="1">Bachelor</option>
+                <option value="2">Master</option>
+                <option value="3">Promotion</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right"><strong>Aktueller Berufsstatus</strong></div>
+        <div class="col-sm-9">
+            <select class="form-control from-demographics" ng-model="currentStatus">
+                <option value="1">Schule</option>
+                <option value="2">Ausbildung</option>
+                <option value="3">Studium</option>
+                <option value="4">Angestellt</option>
+                <option value="5">Selbstständig</option>
+                <option value="6">Ruhestand</option>
+                <option value="7">Erwerbslos</option>
+                <option value="8">Eltern- / Familienzeit</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right"><strong>Psychologischer Studiengang</strong></div>
+        <div class="col-sm-9">
+            <label class="radio-inline">
+                <input type="radio" name="psychoStudies" value="0" ng-model="psychoStudies"> Nein
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="psychoStudies" value="1" ng-model="psychoStudies"> Ja
+            </label>
+        </div>
+    </div>
     <div class="form-group">
         <div class="col-sm-12">
             <a type="submit"
                ng-click="onFormSubmit()"
-               ng-disabled="!allQuestionsAnswered"
-               class="btn btn-lg btn-success btn-next">Weiter <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+               ng-disabled="!age || !gender || !graduation || !currentStatus || !apprenticeship || !academicDegree || !psychoStudies"
+               class="btn btn-lg btn-success btn-next">Weiter
                 <div class="spinner" ng-hide="notWaitingForRequestToFinish">
                     <div class="rect1"></div>
                     <div class="rect2"></div>
@@ -33,6 +94,5 @@
             </a>
         </div>
     </div>
-</form>
 
-<div class="maximising-bottom-margin"></div>
+</form>

@@ -39,13 +39,6 @@ class DbHandler
         return $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
     }
 
-    public function getNumberOfPreviousParticipants()
-    {
-        $selectStatement = $this->dbh->prepare('SELECT COUNT(DISTINCT id) as total FROM tl_participant WHERE previous_participant = 1');
-        $selectStatement->execute();
-
-        return $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
-    }
 
     public function getDropOuts()
     {
@@ -128,74 +121,62 @@ class DbHandler
         );
     }
 
-    public function getDataByStrategy($strategy)
-    {
-        $data = array();
-
-        // Get participant count per strategy
-        $selectStatement = $this->dbh->prepare('SELECT COUNT(*) as total FROM tl_participant
-                                                WHERE tl_participant.Participation_condition = :strategy');
-        $selectStatement->bindParam(':strategy', $strategy);
-        $selectStatement->execute();
-        $data['numberOfParticipants'] = $selectStatement->fetch(PDO::FETCH_ASSOC)['total'];
-
-
-        // Get data for tasks
-        $tasks = array('A', 'B', 'C');
-        foreach($tasks as $task)
-        {
-            $selectStatement = $this->dbh->prepare('SELECT
-                                                    COUNT(CASE WHEN tl_experiment.time_to_decision = 0 THEN 1 ELSE null END) as timeouts,
-                                                    AVG(CASE WHEN tl_experiment.time_to_decision = 0 THEN null ELSE tl_experiment.time_to_decision END) as decision_time,
-                                                    AVG(CASE WHEN tl_experiment.time_to_decision = 0 THEN null ELSE tl_experiment.chosen_option_rank END) as chosen_option,
-                                                    AVG(tl_satisfaction_question.q_sum) as satisfaction,
-                                                    AVG(tl_stress_question.q_sum) as stress
-                                                FROM tl_participant
-                                                JOIN tl_experiment ON tl_experiment.tl_participant_id = tl_participant.id
-                                                JOIN tl_satisfaction_question ON tl_satisfaction_question.tl_experiment_id = tl_experiment.id
-                                                JOIN tl_stress_question ON tl_stress_question.tl_experiment_id = tl_experiment.id
-                                                WHERE tl_participant.Participation_condition = :strategy
-                                                AND tl_experiment.task = :task');
-            $selectStatement->bindParam(':strategy', $strategy);
-            $selectStatement->bindParam(':task', $task);
-
-            $selectStatement->execute();
-
-            $data[$task] = $selectStatement->fetch(PDO::FETCH_ASSOC);
-        }
-
-        return $data;
-    }
 
     public function getExperiments($participantId)
     {
-            $selectStatement = $this->dbh->prepare('SELECT
-                                                        tl_experiment.task,
-                                                        tl_experiment.task_pos AS task_pos,
-                                                        tl_experiment.chosen_option_position AS chosen_option_position,
-                                                        tl_experiment.chosen_option_rank AS chosen_option_rank,
-                                                        tl_experiment.time_to_decision AS time_to_decision,
-                                                        tl_experiment.q_decision_by_guideline AS by_guide_line,
-
-                                                        tl_satisfaction_question.q_num_1 AS satisfaction_q1,
-                                                        tl_satisfaction_question.q_num_2 AS satisfaction_q2,
-                                                        tl_satisfaction_question.q_sum AS satisfaction_sum,
-
-                                                        tl_stress_question.q_num_1 AS stress_q1,
-                                                        tl_stress_question.q_num_2 AS stress_q2,
-                                                        tl_stress_question.q_num_3 AS stress_q3,
-                                                        tl_stress_question.q_num_4 AS stress_q4,
-                                                        tl_stress_question.q_num_5 AS stress_q5,
-                                                        tl_stress_question.q_num_6 AS stress_q6,
-                                                        tl_stress_question.q_num_7 AS stress_q7,
-                                                        tl_stress_question.q_sum AS stress_sum
+            $selectStatement = $this->dbh->prepare('SELECT 
+                                                    	tl_experiment.task AS task,
+                                                    	tl_experiment.task_pos AS task_pos,
+                                                    	tl_experiment.time_to_finish AS time_to_finish,
+                                                    
+                                                    	tl_stress_question.q_num_1 AS stress_q1,
+                                                    	tl_stress_question.q_num_2 AS stress_q2,
+                                                    	tl_stress_question.q_num_3 AS stress_q3,
+                                                    	tl_stress_question.q_num_4 AS stress_q4,
+                                                    	tl_stress_question.q_num_5 AS stress_q5,
+                                                    	tl_stress_question.q_num_6 AS stress_q6,
+                                                    	tl_stress_question.q_num_7 AS stress_q7,
+                                                    	tl_stress_question.time_to_answer AS time_to_answer,
+                                                    	tl_stress_question.q_sum AS stress_sum,
+                                                    	
+                                                    	COUNT(tl_trial.id) AS numberOfTrials,
+                                                    	SUM(tl_trial.score) AS score
+                                                    	
                                                     FROM tl_experiment
-                                                    JOIN tl_stress_question ON tl_stress_question.tl_experiment_id = tl_experiment.id
-                                                    JOIN tl_satisfaction_question ON tl_satisfaction_question.tl_experiment_id = tl_experiment.id
+                                                    LEFT JOIN tl_stress_question ON tl_stress_question.tl_experiment_id = tl_experiment.id
+                                                    LEFT JOIN tl_trial ON tl_trial.tl_experiment_id = tl_experiment.id
                                                     WHERE tl_experiment.tl_participant_id = :participantId
+                                                    GROUP BY tl_experiment.task
                                                     ORDER BY tl_experiment.task');
         $selectStatement->bindParam(':participantId', $participantId);
 
+        $selectStatement->execute();
+        
+        return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function getTrials($participantId)
+    {
+        $selectStatement = $this->dbh->prepare('SELECT 
+                                                    tl_experiment.task AS task,
+                                                    tl_trial.number AS number,
+                                                    tl_trial.pair_comparison AS pair_comparison,
+                                                    tl_trial.number_of_acquisitions AS number_of_acquisitions,
+                                                    tl_trial.order_of_acqusitions AS order_of_acqusitions,
+                                                    tl_trial.time_to_finish AS time_to_finish,
+                                                    tl_trial.acquisition_time AS acquisition_time,
+                                                    tl_trial.acquired_weights AS acquired_weights,
+                                                    tl_trial.local_accuracy AS local_accuracy,
+                                                    tl_trial.acquisition_pattern AS acquisition_pattern,
+                                                    tl_trial.chosen_option AS chosen_option,
+                                                    tl_trial.score AS score
+                                                    
+                                                FROM tl_experiment
+                                                LEFT JOIN tl_trial ON tl_trial.tl_experiment_id = tl_experiment.id
+                                                WHERE tl_experiment.tl_participant_id = :participantId
+                                                ORDER BY tl_experiment.task');
+        $selectStatement->bindParam(':participantId', $participantId);                                        
+                                                
         $selectStatement->execute();
 
         return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
@@ -203,7 +184,7 @@ class DbHandler
 
     public function getMaximisingAnswers($participantId)
     {
-        $selectStatement = $this->dbh->prepare('SELECT * FROM tl_maximising_question
+        $selectStatement = $this->dbh->prepare('SELECT * FROM tl_maximizing_question
                                                 WHERE tl_participant_id = :participantId');
         $selectStatement->bindParam(':participantId', $participantId);
 
@@ -212,39 +193,6 @@ class DbHandler
         return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getTrainingExperiments($participantId)
-    {
-        $selectStatement = $this->dbh->prepare('SELECT * FROM tl_experiment_training
-                                                WHERE tl_participant_id = :participantId
-                                                ORDER BY training_number');
-        $selectStatement->bindParam(':participantId', $participantId);
-
-        $selectStatement->execute();
-
-        return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function getAttributeWeights($participantId)
-    {
-        $selectStatement = $this->dbh->prepare('SELECT * FROM tl_attribute_weights
-                                                WHERE tl_participant_id = :participantId');
-        $selectStatement->bindParam(':participantId', $participantId);
-
-        $selectStatement->execute();
-
-        return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function getAdditionalQuestions($participantId)
-    {
-        $selectStatement = $this->dbh->prepare('SELECT * FROM tl_additional_questions
-                                                WHERE tl_participant_id = :participantId');
-        $selectStatement->bindParam(':participantId', $participantId);
-
-        $selectStatement->execute();
-
-        return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
-    }
 
     public function getStressQuestions($participantId)
     {
@@ -257,9 +205,10 @@ class DbHandler
         return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getSatisfactionQuestions($participantId)
+
+    public function getDemographicData($participantId)
     {
-        $selectStatement = $this->dbh->prepare('SELECT * FROM tl_satisfaction_question
+        $selectStatement = $this->dbh->prepare('SELECT * FROM tl_demographics
                                                 WHERE tl_participant_id = :participantId');
         $selectStatement->bindParam(':participantId', $participantId);
 
@@ -267,10 +216,43 @@ class DbHandler
 
         return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    public function getDemographicData($participantId)
+    
+    public function getResilianceData($participantId)
     {
-        $selectStatement = $this->dbh->prepare('SELECT * FROM tl_demographics
+        $selectStatement = $this->dbh->prepare('SELECT * FROM tl_resilience_question
+                                                WHERE tl_participant_id = :participantId');
+        $selectStatement->bindParam(':participantId', $participantId);
+
+        $selectStatement->execute();
+
+        return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function getRiskData($participantId)
+    {
+        $selectStatement = $this->dbh->prepare('SELECT * FROM tl_risk_question
+                                                WHERE tl_participant_id = :participantId');
+        $selectStatement->bindParam(':participantId', $participantId);
+
+        $selectStatement->execute();
+
+        return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function getNfcData($participantId)
+    {
+        $selectStatement = $this->dbh->prepare('SELECT * FROM tl_nfc_question
+                                                WHERE tl_participant_id = :participantId');
+        $selectStatement->bindParam(':participantId', $participantId);
+
+        $selectStatement->execute();
+
+        return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function getMetaData($participantId)
+    {
+        $selectStatement = $this->dbh->prepare('SELECT * FROM tl_meta_question
                                                 WHERE tl_participant_id = :participantId');
         $selectStatement->bindParam(':participantId', $participantId);
 
@@ -298,20 +280,24 @@ class DbHandler
 
         foreach ($participants as $participant) {
             $experiments           = $this->getExperiments($participant['id']);
+            $trials                = $this->getTrials($participant['id']);
             $maximisingAnswers     = $this->getMaximisingAnswers($participant['id']);
-            $attributeWeights      = $this->getAttributeWeights($participant['id']);
-            $additionalQuestions   = $this->getAdditionalQuestions($participant['id']);
             $demographics          = $this->getDemographicData($participant['id']);
-            $trainings             = $this->getTrainingExperiments($participant['id']);
+            $resiliance            = $this->getResilianceData($participant['id']);
+            $meta                  = $this->getMetaData($participant['id']);
+            $risk                  = $this->getRiskData($participant['id']);
+            $nfc                   = $this->getNfcData($participant['id']);
 
             $data[] = array(
                 'participant'  => $participant,
                 'experiments'  => $experiments,
                 'maximising'   => $maximisingAnswers,
-                'attributes'   => $attributeWeights,
-                'additional'   => $additionalQuestions,
                 'demographic'  => $demographics,
-                'training'    => $trainings
+                'resiliance'   => $resiliance,
+                'risk'         => $risk,
+                'nfc'          => $nfc,
+                'meta'         => $meta,
+                'trials'       => $trials,
             );
         }
 
