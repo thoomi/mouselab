@@ -29,7 +29,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <strong>Dashboard Grundlagenstudie</strong>
-                <a href="/backend/csv" class="btn btn-info pull-right btn-sm dashboard-btn">Data CSV</a>
+                <a href="/csv" class="btn btn-info pull-right btn-sm dashboard-btn">Data CSV</a>
                 <a href="/user" class="btn btn-info pull-right btn-sm dashboard-btn">User CSV</a>
                 <div class="clearfix"></div></div>
             <div class="panel-body">
