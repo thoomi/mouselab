@@ -70,6 +70,7 @@ angular.module('mouselabApp')
       
       if ($scope.cueOptions[index].intervalId !== -1 || $scope.buyTimerRunning) { return;  }
       
+      $scope.informationAcquired = false;
       $scope.buyTimerRunning = true;
       
       $scope.cueOptions[index].intervalId = $interval(function() {
