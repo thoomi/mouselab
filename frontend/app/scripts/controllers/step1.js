@@ -8,7 +8,17 @@
  * Controller of the mouselabApp
  */
 angular.module('mouselabApp')
-  .controller('Step1Ctrl', function (dataService) {
+  .controller('Step1Ctrl', function ($scope, $location, dataService) {
     dataService.clearAllData();
     dataService.incrementSiteNumber();
+    
+    $scope.reward = '';
+    
+    $scope.onSubmit = function() {
+      if (!$scope.reward) { return; }
+      
+      dataService.setParticipantReward($scope.reward);
+      
+      $location.path('step2');
+    };
   });

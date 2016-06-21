@@ -89,15 +89,18 @@ angular.module('mouselabApp')
     };
     
     
-    $scope.chooseShare = function() {
+    $scope.chooseShare = function(share) {
       if (!$scope.informationAcquired) { return;  }
       
       var acquiredWeights = 0;
-      var localAccuracy   = 1;
+      var localAccuracy   = 0;
       
-      angular.forEach($scope.cueOptions, function(value) {
+      angular.forEach($scope.cueOptions, function(value, key) {
         acquiredWeights += value.weight * value.isShown;
+        localAccuracy += value.weight * value.isShown * getCueScore(key, share);
       });
+      
+      localAccuracy /= getMaxLocalAccuracy();
       
       $scope.currentScore += Math.round(100 * acquiredWeights * localAccuracy);
       $scope.finishedTrials++;
@@ -119,5 +122,28 @@ angular.module('mouselabApp')
       
       $scope.currentPattern = $scope.pairComparisons[randomizer.numberBetween(0,3)].pattern;
     };
+    
+    function getCueScore(index, share) {
+      if (share === 'A')
+      {
+        return $scope.currentPattern[index];
+      }
+      else
+      {
+        return 1 - $scope.currentPattern[index];
+      }
+    }
+    
+    function getMaxLocalAccuracy() {
+      var accuracy1 = 0;
+      var accuracy2 = 0;
+      
+      angular.forEach($scope.cueOptions, function(value, key) {
+        accuracy1 += value.weight * value.isShown * getCueScore(key, 'A');
+        accuracy2 += value.weight * value.isShown * getCueScore(key, 'B');
+      });
+      
+      return Math.max(accuracy1, accuracy2);
+    }
     
   });

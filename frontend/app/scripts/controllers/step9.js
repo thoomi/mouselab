@@ -15,6 +15,12 @@ angular.module('mouselabApp')
     
     $scope.cueLabels = configData.getCueLabels();
     $scope.cueValues = configData.getCueValues();
-
+    
+    $scope.instructions =['views/partials/instruction1.html', 'views/partials/instruction2.html'];
+    $scope.currentInstruction = 0;
+    
+    $scope.changeInstruction = function(index) {
+      $scope.currentInstruction = index;
+    };
   });
  

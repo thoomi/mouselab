@@ -18,6 +18,7 @@ angular.module('mouselabApp')
     $scope.notWaitingForRequestToFinish = true;
     $scope.labelLeft = 'trifft nicht zu';
     $scope.labelRight = 'trifft zu';
+    $scope.stressQuestions8 = '';
    
     var startDate = new Date();
     $scope.startTime = startDate.getTime();
@@ -32,6 +33,11 @@ angular.module('mouselabApp')
             allSet = false;
           }
         });
+        
+        if (!$scope.stressQuestions8)
+        {
+          allSet = false;
+        }
 
         $scope.allQuestionsAnswered = allSet;
       };
@@ -55,6 +61,7 @@ angular.module('mouselabApp')
       $scope.endTime = endDate.getTime();
       
       taskQuestionData.timeToAnswer = $scope.endTime - $scope.startTime;
+      taskQuestionData.stressAnswers[7] = $scope.stressQuestions8;
 
       dataService.saveStressQuestions(taskQuestionData, function(error) {
           if (!error)
@@ -83,19 +90,19 @@ angular.module('mouselabApp')
     $scope.stressQuestions = [
       {
         id    : 1,
-        title : 'Ich empfand deutlichen Zeitstress als ich meine Entscheidung getroffen habe.',
+        title : 'Ich empfand deutlichen Zeitstress als ich meine Entscheidungen getroffen habe.',
         label : 'stress-questions-1',
         value : 0
       },
       {
         id    : 2,
-        title : 'Ich war angespannt/nervös, während ich meine Entscheidung treffen musste.',
+        title : 'Ich war angespannt/nervös, während ich meine Entscheidungen treffen musste.',
         label : 'stress-questions-2',
         value : 0
       },
       {
         id    : 3,
-        title : 'Ich empfand mich als hektisch, während ich meine Entscheidung treffen musste.',
+        title : 'Ich empfand mich als hektisch, während ich meine Entscheidungen treffen musste.',
         label : 'stress-questions-3',
         value : 0
       },
@@ -107,19 +114,19 @@ angular.module('mouselabApp')
       },
       {
         id    : 5,
-        title : 'Die Anzahl an Eigenschaften der Unternehmen empfand ich als zu hoch',
+        title : 'Die Anzahl an Eigenschaften der Unternehmen empfand ich als zu hoch.',
         label : 'stress-questions-5',
         value : 0
       },
       {
         id    : 6,
-        title : 'Die Entscheidungszeit empfand ich als zu kurz',
+        title : 'Die Entscheidungszeit empfand ich als zu kurz.',
         label : 'stress-questions-6',
         value : 0
       },
       {
         id    : 7,
-        title : 'Ich hatte nicht ausreichend Zeit zum nachdenken',
+        title : 'Ich hatte nicht ausreichend Zeit zum nachdenken.',
         label : 'stress-questions-7',
         value : 0
       }
@@ -127,4 +134,12 @@ angular.module('mouselabApp')
     
     randomizer.shuffleArray($scope.stressQuestions);
     
+    
+    
+    $scope.instructions =['views/partials/instruction1.html', 'views/partials/instruction2.html'];
+    $scope.currentInstruction = 0;
+    
+    $scope.changeInstruction = function(index) {
+      $scope.currentInstruction = index;
+    };
   });
