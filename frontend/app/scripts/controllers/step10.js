@@ -100,6 +100,13 @@ angular.module('mouselabApp')
           value.countdownTime = $scope.cueValues[key].cost;
         });
         
+        // All trials done
+        if ($scope.finishedTrials === $scope.maxTrials)
+        {
+          $scope.informationAcquired = false;
+          saveExperiment();
+        }
+        
         console.log($scope.finishedTrialData);
       }
 
@@ -109,6 +116,7 @@ angular.module('mouselabApp')
         {
           $interval.cancel(intervalId);
           $scope.timerRunning = false;
+          $scope.informationAcquired = false;
           saveExperiment();
           return;
         }
