@@ -59,6 +59,16 @@ html {
     text-align: center;
     width: 100%;
 }
+
+.radio-reward-header {
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+.radio-reward {
+  margin-left: 35px;
+}
+
 .select-strategy {
     min-width: 80px;
 }

@@ -5,7 +5,7 @@
 define('DB_USERNAME', 'thoomi');
 define('DB_PASSWORD', '');
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'kopietzmasterlive');
+define('DB_NAME', 'skopietz_grundlagenstudie');
 
 // -----------------------------------------------------------------------------
 // Additional constants

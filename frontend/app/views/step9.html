@@ -34,8 +34,28 @@
 <p>
     Viel Erfolg!
 </p>
-
 <p>
-    <a class="btn btn-info btn-next" ng-href="#/step4"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Zurück zur Aufgabenbeschreibung</a>
+    <button class="btn btn-info btn-next" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-info-sign"></span> Aufgabenbeschreibung ansehen</button>
     <a class="btn btn-success btn-next" ng-href="#/step10">Ersten Arbeitstag beginnen <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
 </p>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>Aufgabenbeschreibung</h4>
+      </div>
+      <div class="modal-body">
+         <div ng-include src="instructions[currentInstruction]"></div>
+         <button type="button" class="btn btn-default btn-info" ng-click="changeInstruction(1)" ng-hide="currentInstruction === 1">Weiter</button>
+         <button type="button" class="btn btn-default btn-info" ng-click="changeInstruction(0)" ng-hide="currentInstruction === 0">Zurück</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+

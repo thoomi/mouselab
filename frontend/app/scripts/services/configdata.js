@@ -22,9 +22,9 @@ angular.module('mouselabApp')
       var possibleTasks  = ['A',  'B',  'C'];
 
       var availableTime = {};
-      availableTime[possibleTasks[0]] = 171520;
-      availableTime[possibleTasks[1]] = 235520;
-      availableTime[possibleTasks[2]] = 299520;
+      availableTime[possibleTasks[0]] = 117760;
+      availableTime[possibleTasks[1]] = 181760;
+      availableTime[possibleTasks[2]] = 245760;
       
       //availableTime[possibleTasks[0]] = 17150;
       //availableTime[possibleTasks[1]] = 23552;
@@ -50,22 +50,22 @@ angular.module('mouselabApp')
       var cueValues = [
         {
           validity: 0.84,
-          cost: 2320,
+          cost: 1160,
           weight: 0.29
         },
         {
           validity: 0.78,
-          cost: 2160,
+          cost: 1070,
           weight: 0.27
         },
         {
           validity: 0.68,
-          cost: 1840,
+          cost: 1070,
           weight: 0.23
         },
         {
           validity: 0.61,
-          cost: 1680,
+          cost: 610,
           weight: 0.21
         },
       ];

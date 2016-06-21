@@ -98,6 +98,7 @@ $app->get('/csv', function() use($app) {
 		'Geschlecht',
 		'Psycho-Studies',
 		'Gesamtzeit',
+		'Dropout',
 		'pps', // Punkte in Studie
         
         
@@ -197,7 +198,12 @@ $app->get('/csv', function() use($app) {
         $firstRow[] = 'AC_Order_A_' . $indexOfTrial; // acquisition order
         $firstRow[] = 'tt_A_' . $indexOfTrial; // trial time to finish
         $firstRow[] = 'at_SUM_A_' . $indexOfTrial; // sum aqcuisition times
-        $firstRow[] = 'ppt_A_' . $indexOfTrial; // sum aqcuisition times
+        $firstRow[] = 'ppt_A_' . $indexOfTrial; //  trial score
+        
+        $firstRow[] = 'AC_A_' . $indexOfTrial . '_1';
+        $firstRow[] = 'AC_A_' . $indexOfTrial . '_2'; 
+        $firstRow[] = 'AC_A_' . $indexOfTrial . '_3';
+        $firstRow[] = 'AC_A_' . $indexOfTrial . '_4'; 
     }
     
     for ($indexOfTrial = 1; $indexOfTrial < 65; $indexOfTrial++)
@@ -211,7 +217,12 @@ $app->get('/csv', function() use($app) {
         $firstRow[] = 'AC_Order_B_' . $indexOfTrial; // acquisition order
         $firstRow[] = 'tt_B_' . $indexOfTrial; // trial time to finish
         $firstRow[] = 'at_SUM_B_' . $indexOfTrial; // sum aqcuisition times
-        $firstRow[] = 'ppt_B_' . $indexOfTrial; // sum aqcuisition times
+        $firstRow[] = 'ppt_B_' . $indexOfTrial; //  trial score
+        
+        $firstRow[] = 'AC_B_' . $indexOfTrial . '_1';
+        $firstRow[] = 'AC_B_' . $indexOfTrial . '_2'; 
+        $firstRow[] = 'AC_B_' . $indexOfTrial . '_3';
+        $firstRow[] = 'AC_B_' . $indexOfTrial . '_4'; 
     }
     
     for ($indexOfTrial = 1; $indexOfTrial < 65; $indexOfTrial++)
@@ -225,7 +236,12 @@ $app->get('/csv', function() use($app) {
         $firstRow[] = 'AC_Order_C_' . $indexOfTrial; // acquisition order
         $firstRow[] = 'tt_C_' . $indexOfTrial; // trial time to finish
         $firstRow[] = 'at_SUM_C_' . $indexOfTrial; // sum aqcuisition times
-        $firstRow[] = 'ppt_C_' . $indexOfTrial; // sum aqcuisition times
+        $firstRow[] = 'ppt_C_' . $indexOfTrial; // trial score
+        
+        $firstRow[] = 'AC_C_' . $indexOfTrial . '_1';
+        $firstRow[] = 'AC_C_' . $indexOfTrial . '_2'; 
+        $firstRow[] = 'AC_C_' . $indexOfTrial . '_3';
+        $firstRow[] = 'AC_C_' . $indexOfTrial . '_4'; 
     }
     
     $result[] = $firstRow;
@@ -361,7 +377,9 @@ $app->get('/csv', function() use($app) {
 
 		$totalTime = '#';
 		if (isset($value['participant']['total_time'])) { $totalTime = $value['participant']['total_time']; }
-
+		
+        $dropout = '#';
+		if (isset($value['participant']['dropout'])) { $dropout = $value['participant']['dropout']; }
 
 
 		$currentRow = array(
@@ -379,6 +397,7 @@ $app->get('/csv', function() use($app) {
 			$gender,
 			$psychoStudies,
 			$totalTime,
+			$dropout,
 			$totalScore,
 			
 			
@@ -482,6 +501,13 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
                 
+                $acqOrder = explode(':', $value['trials'][0]['order_of_acqusitions']);
+                
+                $currentRow[] = $acqOrder[0];
+                $currentRow[] = $acqOrder[1];
+                $currentRow[] = $acqOrder[2];
+                $currentRow[] = $acqOrder[3];
+                
                 array_shift($value['trials']);
             }
             else 
@@ -492,6 +518,11 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
@@ -514,6 +545,13 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
                 
+                $acqOrder = explode(':', $value['trials'][0]['order_of_acqusitions']);
+                
+                $currentRow[] = $acqOrder[0];
+                $currentRow[] = $acqOrder[1];
+                $currentRow[] = $acqOrder[2];
+                $currentRow[] = $acqOrder[3];
+                
                 array_shift($value['trials']);
             }
             else 
@@ -524,6 +562,11 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
@@ -545,6 +588,13 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
                 
+                $acqOrder = explode(':', $value['trials'][0]['order_of_acqusitions']);
+                
+                $currentRow[] = $acqOrder[0];
+                $currentRow[] = $acqOrder[1];
+                $currentRow[] = $acqOrder[2];
+                $currentRow[] = $acqOrder[3];
+                
                 array_shift($value['trials']);
             }
             else 
@@ -555,6 +605,11 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';

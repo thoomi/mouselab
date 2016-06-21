@@ -5,10 +5,10 @@
     <table class="table-feedback">
         <tr>
             <td class="text-right">Verbleibende Zeit:</td>
-            <td class="text-right" style="width: 150px;"><span class="decision-timer">{{ remainingMinutes }} min {{ remainingSeconds |number:1 }} sek</span></td>
+            <td class="text-right" style="width: 165px;"><span class="decision-timer">{{ remainingMinutes }} min {{ remainingSeconds |number:2 }} sek</span></td>
         </tr>
         <tr>
-            <td class="text-right">Verbleibende Trials:</td>
+            <td class="text-right">Verbleibende Aktienkäufe:</td>
             <td class="text-right"><strong>{{ maxTrials - finishedTrials }}</strong></td>
         </tr>
         <tr  ng-hide="experimentCondition === 'C1'">

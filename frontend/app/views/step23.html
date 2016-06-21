@@ -1,16 +1,24 @@
-<h2>Ihr Punktestand</h2>
-<p >
-   Bitte	nennen	Sie	dem	Studienleiter	Ihren	Punktestand,	damit	er	die	entsprechende	Auszahlung	vornehmen	kann:
-</p>
-<br>
-<ul class="list-unstyled">
-    <li class="end-score">Ihre Gesamtpunkte: <strong>{{ score }}</strong></li>
-</ul>
-<br>
+<h2>Zu guter Letzt</h2>
+
+<div ng-if="reward === 2">
+    <p>
+       Bitte merken Sie sich Ihren Punktstand und nennen Sie diesen dem Studienleiter, damit er die entsprechende Auszahlung vornehmen kann: 
+    </p>
+    
+    <ul class="list-unstyled">
+        <li class="end-score">Ihre Auszahlung in bar: <strong>{{ score }}</strong></li>
+    </ul>
+</div>
+
 <p>
-   Sie	können	diese	Seite	so	stehen	lassen	und	den	PC	verlassen	–	vielen	Dank!
+   Sie können nun die Kopfhörer absetzten, diese Seite so stehen lassen und den PC einfach verlassen. Bitte lassen Sie den Vorhang Ihrer Kabine aufgezogen.
 </p>
 <p>
+    
+  Vielen Dank nochmal das Sie an der Studie teilgenommen haben!
+</p>
+<p>
+    
     <a class="btn btn-info btn-next btn-refresh-to-start" target="_self" href="/">Zum Start</a>
 </p>
 

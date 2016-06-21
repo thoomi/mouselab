@@ -141,6 +141,8 @@ angular.module('mouselabApp')
       
       if ($scope.showCueValues[index].intervalId !== -1 || $scope.buyTimerRunning) { return;  }
       
+      $scope.informationAcquired = false;
+      
       $scope.buyTimerRunning = true;
       
       $scope.showCueValues[index].intervalId = $interval(function() {
@@ -165,7 +167,7 @@ angular.module('mouselabApp')
       if (!$scope.informationAcquired) { return;  }
       
       var acquiredWeights = 0;
-      var localAccuracy   = 1;
+      var localAccuracy   = 0;
       var acquisitionTime = 0;
       
       angular.forEach($scope.cueValues, function(value, key) {
@@ -175,6 +177,7 @@ angular.module('mouselabApp')
         // Calculate sum of acquired times
         acquisitionTime += value.cost * $scope.showCueValues[key].show;
       });
+      
       
       localAccuracy /= getMaxLocalAccuracy();
       
@@ -225,7 +228,7 @@ angular.module('mouselabApp')
       
       angular.forEach($scope.cueValues, function(value, key) {
         accuracy1 += value.weight * $scope.showCueValues[key].show * getCueScore(key, 'A');
-        accuracy1 += value.weight * $scope.showCueValues[key].show * getCueScore(key, 'B');
+        accuracy2 += value.weight * $scope.showCueValues[key].show * getCueScore(key, 'B');
       });
       
       return Math.max(accuracy1, accuracy2);

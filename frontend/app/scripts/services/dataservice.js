@@ -17,6 +17,7 @@ angular.module('mouselabApp')
         var startTime                   = 0;
         var endTime                     = 0;
         var participantScore            = 0;
+        var participantReward           = '';
 
         var currentExperimentRound   = 1;
         var lastExperimentDatabaseId = 35;
@@ -48,7 +49,8 @@ angular.module('mouselabApp')
                 participantPreviously   : participantIsPreviousParticipant,
                 participantLocation     : configData.getExperimentLocation(),
                 participantCondition    : participantCondition,
-                participantGroup        : participantGroup
+                participantGroup        : participantGroup,
+                participantReward       : participantReward
             };
 
             $http.post(configData.getBaseUrl() + '/participant/create', postData).
@@ -276,8 +278,6 @@ angular.module('mouselabApp')
             initializeTrials : function() {
               availableTrials = configData.getTrials();
               usedTrials      = [];
-              
-              console.log(availableTrials);
             },
             
             getNextTrial : function() {
@@ -461,6 +461,14 @@ angular.module('mouselabApp')
             
             getScore : function() {
               return participantScore;
+            },
+            
+             getParticipantReward : function() {
+                return participantReward;
+            },
+            
+            setParticipantReward : function(reward) {
+              participantReward = reward;  
             },
 
             clearAllData : function() {
