@@ -29,8 +29,10 @@ angular.module('mouselabApp')
             }
             
             $scope.notWaitingForRequestToFinish = false;
-
-            dataService.saveDemographicData($scope.age, $scope.gender, $scope.graduation, $scope.currentStatus, $scope.apprenticeship, $scope.academicDegree, $scope.psychoStudies, function(error) {
+            
+            var academicDegree =  $scope.academicDegree - 1;
+            
+            dataService.saveDemographicData($scope.age, $scope.gender, $scope.graduation, $scope.currentStatus, $scope.apprenticeship, academicDegree, $scope.psychoStudies, function(error) {
                 if (!error)
                 {
                     $scope.notWaitingForRequestToFinish = true;

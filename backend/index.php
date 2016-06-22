@@ -440,7 +440,7 @@ $app->get('/csv', function() use($app) {
             
             
 			$expA['task_pos'],
-			171520,
+			85650,
 			$expA['numberOfTrials'],
             $expA['stress_q1'],
             $expA['stress_q2'],
@@ -455,7 +455,7 @@ $app->get('/csv', function() use($app) {
             $expA['score'],
 
 			$expB['task_pos'],
-			235520,
+			117650,
 			$expB['numberOfTrials'],
             $expB['stress_q1'],
             $expB['stress_q2'],
@@ -470,7 +470,7 @@ $app->get('/csv', function() use($app) {
             $expB['score'],
 
 			$expC['task_pos'],
-			299520,
+			149650,
 			$expC['numberOfTrials'],
             $expC['stress_q1'],
             $expC['stress_q2'],
