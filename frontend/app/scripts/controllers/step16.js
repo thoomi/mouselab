@@ -25,8 +25,10 @@ angular.module('mouselabApp')
     };
     
     $scope.onFormSubmit = function() {
-
-        if (!$scope.investmentAmount) { return; } 
+        
+        console.log($scope.investmentAmount);
+        
+        if ($scope.investmentAmount === '') { return; } 
             
         $scope.notWaitingForRequestToFinish = false;
          

@@ -88,7 +88,7 @@
     
     <a type="submit"
        ng-click="onFormSubmit()"
-       ng-disabled="!investmentAmount"
+       ng-disabled="investmentAmount === ''"
        class="btn btn-lg btn-success btn-next">Weiter <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
         <div class="spinner" ng-hide="notWaitingForRequestToFinish">
             <div class="rect1"></div>

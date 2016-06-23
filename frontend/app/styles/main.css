@@ -195,6 +195,11 @@ html {
   vertical-align: middle;
 }
 
+.table-buy-board tr {
+  height: 100px;
+}
+
+
 .table-buy-board > tbody > tr > td,
 .table-buy-board > thead > tr > td,
 .table-buy-board > tfoot > tr > td{
