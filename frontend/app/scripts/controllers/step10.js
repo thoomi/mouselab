@@ -121,7 +121,7 @@ angular.module('mouselabApp')
           return;
         }
     
-        //$scope.availableTime -= 10;
+        $scope.availableTime -= 10;
         
         $scope.remainingMinutes = Math.floor(($scope.availableTime / (1000.0 * 60.0)) % 60);
         $scope.remainingSeconds = ($scope.availableTime / 1000.0) % 60;

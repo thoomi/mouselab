@@ -196,7 +196,7 @@ html {
 }
 
 .table-buy-board tr {
-  height: 100px;
+  height: 90px;
 }
 
 
@@ -240,7 +240,7 @@ input[type="radio"]:hover {
 }
 
 .page-wrapper {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .invest-input {
