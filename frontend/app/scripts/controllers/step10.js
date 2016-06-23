@@ -121,7 +121,7 @@ angular.module('mouselabApp')
           return;
         }
     
-        $scope.availableTime -= 10;
+        //$scope.availableTime -= 10;
         
         $scope.remainingMinutes = Math.floor(($scope.availableTime / (1000.0 * 60.0)) % 60);
         $scope.remainingSeconds = ($scope.availableTime / 1000.0) % 60;
@@ -200,6 +200,12 @@ angular.module('mouselabApp')
         numberOfAcquisitions -= 1;
       }
       
+      var aqcuisitionPattern = determineAcquisitionPattern(numberOfAcquisitions);
+      
+      // Get the time cost and subtract it from current time
+      var timeCost = determineTimeCost(aqcuisitionPattern, dataService.getCurrentTask());
+      $scope.availableTime -= timeCost;
+      
       
       $scope.finishedTrialData.push({
         number:               $scope.finishedTrials + 1,
@@ -208,7 +214,7 @@ angular.module('mouselabApp')
         acquiredWeights:      acquiredWeights,
         localAccuracy:        localAccuracy,
         score:                trialScore,
-        acquisitionPattern:   determineAcquisitionPattern(numberOfAcquisitions),
+        acquisitionPattern:   aqcuisitionPattern,
         chosenOption:         share === 'A' ? $scope.currentTrial.optionId : (17 - $scope.currentTrial.pairId), // Get the chosen pair option. (The option given by the trail data is always displayed left)
         timeToFinish:         $scope.timeOfLastAcquiredTrial - $scope.availableTime,
         acquisitionTime:      acquisitionTime,
@@ -275,5 +281,15 @@ angular.module('mouselabApp')
       {
         return 1;
       }
+    }
+    
+    function determineTimeCost(acquisitionPattern, condition) {
+      var timeCosts = {
+        'A' : [2090, 1380, 1190, 1330, 1170, 840, 700, 670, 680, 650, 580, 200, 140, 40, 0],
+        'B' : [4050, 2760, 2470, 2610, 2350, 1670, 1430, 1350, 1360, 1290, 1150, 400, 280, 100, 0],
+        'C' : [6010, 4140, 3750, 3880, 3530, 2510, 2160, 2040, 2050, 1940, 1720, 600, 420, 150, 0]
+      };
+      
+      return timeCosts[condition][acquisitionPattern - 1];
     }
   });
