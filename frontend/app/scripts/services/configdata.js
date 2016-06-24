@@ -50,22 +50,22 @@ angular.module('mouselabApp')
       var cueValues = [
         {
           validity: 0.84,
-          cost: 1160,
+          cost: { 'A' : 1160, 'B' : 1740, 'C' : 2320 },
           weight: 0.29
         },
         {
           validity: 0.78,
-          cost: 1070,
+          cost: { 'A' : 1070, 'B' : 1600, 'C' : 2140 },
           weight: 0.27
         },
         {
           validity: 0.68,
-          cost: 930,
+          cost: { 'A' : 930, 'B' : 1400, 'C' : 1870 },
           weight: 0.23
         },
         {
           validity: 0.61,
-          cost: 840,
+          cost: { 'A' : 840, 'B' : 1260, 'C' : 1680 },
           weight: 0.21
         },
       ];

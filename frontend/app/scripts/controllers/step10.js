@@ -38,25 +38,25 @@ angular.module('mouselabApp')
           id: 'A',
           show: false,
           intervalId: -1,
-          countdownTime: $scope.cueValues[0].cost
+          countdownTime: $scope.cueValues[0].cost[dataService.getCurrentTask()]
         },
         {
           id: 'B',
           show: false,
           intervalId: -1,
-          countdownTime: $scope.cueValues[1].cost
+          countdownTime: $scope.cueValues[1].cost[dataService.getCurrentTask()]
         },
         {
           id: 'C',
           show: false,
           intervalId: -1,
-          countdownTime: $scope.cueValues[2].cost
+          countdownTime: $scope.cueValues[2].cost[dataService.getCurrentTask()]
         },
         {
           id: 'D',
           show: false,
           intervalId: -1,
-          countdownTime: $scope.cueValues[3].cost
+          countdownTime: $scope.cueValues[3].cost[dataService.getCurrentTask()]
         }];
       
       
@@ -97,7 +97,7 @@ angular.module('mouselabApp')
         angular.forEach($scope.showCueValues, function(value, key) {
           value.show = false;
           value.intervalId = -1;
-          value.countdownTime = $scope.cueValues[key].cost;
+          value.countdownTime = $scope.cueValues[key].cost[dataService.getCurrentTask()];
         });
         
         // All trials done
@@ -285,9 +285,9 @@ angular.module('mouselabApp')
     
     function determineTimeCost(acquisitionPattern, condition) {
       var timeCosts = {
-        'A' : [2090, 1380, 1190, 1330, 1170, 840, 700, 670, 680, 650, 580, 200, 140, 40, 0],
-        'B' : [4050, 2760, 2470, 2610, 2350, 1670, 1430, 1350, 1360, 1290, 1150, 400, 280, 100, 0],
-        'C' : [6010, 4140, 3750, 3880, 3530, 2510, 2160, 2040, 2050, 1940, 1720, 600, 420, 150, 0]
+        'A' : [4110, 2760, 2430, 2630, 2340, 1680, 1420, 1350, 1360, 1300, 1160, 400, 280, 90, 0],
+        'B' : [4110, 2760, 2430, 2630, 2340, 1680, 1420, 1350, 1360, 1300, 1160, 400, 280, 90, 0],
+        'C' : [4110, 2760, 2430, 2630, 2340, 1680, 1420, 1350, 1360, 1300, 1160, 400, 280, 90, 0]
       };
       
       return timeCosts[condition][acquisitionPattern - 1];
