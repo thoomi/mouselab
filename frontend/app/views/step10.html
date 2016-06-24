@@ -29,7 +29,7 @@
             <td class="text-center">Zuverlässigkeit</td>
             <td class="text-center">Aktie A</td>
             <td class="text-center">Aktie B</td>
-            <td class="text-center">Information kaufen:</td>
+            <td class="text-center">Informationen suchen:</td>
         </tr>
     </thead>
     <tbody>
@@ -38,7 +38,7 @@
             <td class="text-center">{{ cueValues[$index].validity * 100 }} %</td>
             <td class="text-center"><span ng-if="!showCueValues[$index].show">?</span><span ng-if="showCueValues[$index].show">{{ currentTrial.pattern[$index] === 1 ? 'Ja' : 'Nein' }}</span></td>
             <td class="text-center"><span ng-if="!showCueValues[$index].show">?</span><span ng-if="showCueValues[$index].show">{{ currentTrial.pattern[$index] !== 1 ? 'Ja' : 'Nein' }}</span></td>
-            <td class="text-center"><button class="btn btn-info btn-xs" ng-disabled="showCueValues[$index].intervalId !== -1" ng-click="buyCue($index)"><strong><span>{{ showCueValues[$index].countdownTime / 1000.0 |number:2 }} sek</span></strong></button></td>
+            <td class="text-center"><button class="btn btn-info" ng-disabled="showCueValues[$index].intervalId !== -1" ng-click="buyCue($index)"><strong><span>{{ showCueValues[$index].countdownTime / 1000.0 |number:2 }} sek</span></strong></button></td>
         </tr>
     </tbody>
     <tfoot>

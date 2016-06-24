@@ -56,8 +56,14 @@ angular.module('mouselabApp')
             $http.post(configData.getBaseUrl() + '/participant/create', postData).
                 success(function(data) {
                     participantDatabaseId = data.participantDatabaseId;
+                    participantGroup      = data.participantGroup;
+                    participantCondition  = data.participantCondition;
+                    
+                    console.log(data.participantGroup);
+                    console.log(data.participantCondition);
+                    
                     isParticipantSaved = true;
-
+                    
                     callback();
                 }).
                 error(function() {
