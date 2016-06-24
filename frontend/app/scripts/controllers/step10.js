@@ -183,7 +183,7 @@ angular.module('mouselabApp')
         localAccuracy += value.weight * $scope.showCueValues[key].show * getCueScore(key, share);
         
         // Calculate sum of acquired times
-        acquisitionTime += value.cost * $scope.showCueValues[key].show;
+        acquisitionTime += value.cost[dataService.getCurrentTask()] * $scope.showCueValues[key].show;
       });
       
       
