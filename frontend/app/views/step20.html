@@ -64,9 +64,24 @@
         </div>
     </div>
     
+    <div class="form-group">
+        <div class="col-sm-5">
+            <p><strong>4. Ich wurde während der Studie gestört oder abgelenkt.</strong></p>
+        </div>
+        <div class="col-sm-7">
+            <span class="stress-questions-option-label">stimme nicht zu</span>
+
+            <label class="radio-inline" ng-repeat="i in [6]|makeRange track by $index">
+                <input type="radio" ng-model="$parent.metaQuestion5" ng-change="checkAllSet()" name="metaQuestion5" value="{{ $index + 1 }}">
+            </label>
+
+            <span class="stress-questions-option-label">stimme zu</span>
+        </div>
+    </div>
+    
      <div class="form-group">
         <div class="col-sm-5">
-            <p><strong>4. Während den Arbeitstagen ist die angezeigte Zeit oben rechts... </strong></p>
+            <p><strong>5. Während den Arbeitstagen ist die angezeigte Zeit oben rechts... </strong></p>
         </div>
         <div class="col-sm-7">
             <div class="radio">
@@ -95,6 +110,8 @@
             </div>
         </div>
     </div>
+    
+
 
     <div class="form-group">
         <div class="col-sm-12">

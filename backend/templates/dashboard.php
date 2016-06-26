@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-xs-6">
                         <p><strong>Allgemeine Daten:</strong></p>
-                        <table class="table table-condensed table-bordered table-striped common-data">
+                        <table class="table table-condensed table-bordered table-striped ">
                             <tr>
                                 <td>Anzahl Teilnehmer</td>
                                 <td><strong><?php echo $this->data['general']['numberOfParticipants'] ?></strong></td>
@@ -46,8 +46,16 @@
                                 <td><strong><?php echo $this->data['general']['genderShare']['male'] . ' / ' . $this->data['general']['genderShare']['female'] ?></strong></td>
                             </tr>
                             <tr>
-                                <td>Durchschnittliches Alter</td>
-                                <td><strong><?php echo round($this->data['general']['averageAge']) ?></strong></td>
+                                <td>Anteil VpH und Auszahlung</td>
+                                <td><strong><?php echo $this->data['general']['rewardShare']['reward1'] . ' / ' . $this->data['general']['rewardShare']['reward2'] ?></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Durchschnittliche Dauer</td>
+                                <td><strong><?php echo floor(($this->data['general']['averageTotalTime'] / (1000.0 * 60.0)) % 60) . ' min ' . (($this->data['general']['averageTotalTime'] / 1000.0) % 60) . ' sek' ?></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Durchschnittlicher Auszahlungsbetrag</td>
+                                <td><strong><?php echo round($this->data['general']['averagePayout'], 2) ?></strong></td>
                             </tr>
                         </table>
                     </div>
@@ -57,7 +65,7 @@
                             <tr>
                                 <td>Gesammelte E-Mail Adressen</td>
                                 <td><strong><?php echo $this->data['user']['numberOfEmails'] ?></strong></td>
-                            </tr>
+                        </tr>
                             <tr>
                                 <td>Bereit zu weiteren Teilnahmen</td>
                                 <td><strong><?php echo $this->data['user']['participateInOther'] ?></strong></td>
@@ -68,6 +76,27 @@
                             <tr>
                                 <td colspan="2"><?php echo $this->data['user']['lastComment'] ?></td>
                             </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p><strong>Letzte Teilnehmer: </strong></p>
+                        <table class="table table-condensed table-bordered table-striped">
+                            <tr>
+                                <td>End Zeitpunkt</td>
+                                <td>Pers. Code</td>
+                                <td>Gesamtdauer</td>
+                                <td>Betrag</td>
+                            </tr>
+                            <?php foreach($this->data['general']['payoutParticipants'] as $value): ?>
+                            <tr>
+                                <td><?php echo date('d.m.Y H:i:s', $value['endtime'] / 1000.0); ?></td>
+                                <td><?php echo $value['participation_id'] ?></td>
+                                <td><?php echo floor(($value['total_time'] / (1000.0 * 60.0)) % 60) . ' min ' . (($value['total_time'] / 1000.0) % 60) . ' sek' ?></td>
+                                <td><?php echo $value['payout'] . ' €'?></td>
+                            </tr>
+                            <?php endforeach; ?>
                         </table>
                     </div>
                 </div>

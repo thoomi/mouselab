@@ -30,6 +30,7 @@ angular.module('mouselabApp')
       $scope.informationAcquired = false;
       $scope.aquiredInfos        = [];
       $scope.finishedTrialData   = [];
+      $scope.savingInProgress    = false;
       
       $scope.timeOfLastAcquiredTrial = configData.getAvailableTime(dataService.getCurrentTask());
       
@@ -63,6 +64,8 @@ angular.module('mouselabApp')
       
       
       function saveExperiment() {
+          if ($scope.savingInProgress) { return; }
+        
           var timeToFinish = configData.getAvailableTime(dataService.getCurrentTask());
           
           if ($scope.availableTime > 0)
@@ -71,6 +74,10 @@ angular.module('mouselabApp')
           }
           
           dataService.addScore($scope.currentScore);
+          
+          $interval.cancel(intervalId);
+          $scope.availableTime    = 0;
+          $scope.savingInProgress = true;
           
           dataService.saveExperiment($scope.finishedTrialData, timeToFinish, function(error){
             if (!error)
@@ -285,9 +292,9 @@ angular.module('mouselabApp')
     
     function determineTimeCost(acquisitionPattern, condition) {
       var timeCosts = {
-        'A' : [4110, 2760, 2430, 2630, 2340, 1680, 1420, 1350, 1360, 1300, 1160, 400, 280, 90, 0],
-        'B' : [4110, 2760, 2430, 2630, 2340, 1680, 1420, 1350, 1360, 1300, 1160, 400, 280, 90, 0],
-        'C' : [4110, 2760, 2430, 2630, 2340, 1680, 1420, 1350, 1360, 1300, 1160, 400, 280, 90, 0]
+        'A' : [4440, 3040, 2730, 2860, 2590, 1840, 1580, 1490, 1500, 1420, 1260, 440, 310, 110, 0],
+        'B' : [4510, 3030, 2680, 2890, 2580, 1840, 1570, 1480, 1490, 1430, 1270, 440, 310, 100, 0],
+        'C' : [4570, 3030, 2640, 2910, 2570, 1850, 1550, 1470, 1490, 1430, 1280, 450, 310, 100, 0]
       };
       
       return timeCosts[condition][acquisitionPattern - 1];

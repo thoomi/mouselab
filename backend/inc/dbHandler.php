@@ -30,6 +30,29 @@ class DbHandler
 
         return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function getPayoutParticipants()
+    {
+        $selectStatement = $this->dbh->prepare('SELECT *, 
+                                                       (UNIX_TIMESTAMP(participated_at) * 1000 + total_time) AS endtime 
+                                                FROM `tl_participant` 
+                                                WHERE reward = 2
+                                                ORDER BY endtime DESC
+                                                LIMIT 15');
+        $selectStatement->execute();
+
+        return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function getAveragePayout()
+    {
+        $selectStatement = $this->dbh->prepare('SELECT AVG(payout) AS average
+                                                FROM tl_participant
+                                                WHERE reward = 2');
+        $selectStatement->execute();
+
+        return $selectStatement->fetch(PDO::FETCH_ASSOC)['average'];
+    }
 
     public function getNumberOfParticipants()
     {
@@ -84,6 +107,18 @@ class DbHandler
 
         return $genderShare;
     }
+    
+    public function getRewardShare()
+    {
+        $selectStatement = $this->dbh->prepare('SELECT COUNT(CASE reward WHEN 1 then 1 ELSE null END) AS reward1,
+                                                	   COUNT(CASE reward WHEN 2 then 1 ELSE null END) AS reward2
+                                                FROM `tl_participant`');
+        $selectStatement->execute();
+        $rewards = $selectStatement->fetch(PDO::FETCH_ASSOC);
+
+        return $rewards;
+    }
+
 
     public function getAverageAge()
     {

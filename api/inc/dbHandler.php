@@ -30,10 +30,10 @@ class DbHandler
      * @param $group
      * @return string
      */
-    public function saveParticipant($ipAddress, $participatedAt, $id, $dropout, $location, $group, $condition, $participatedPreviously)
+    public function saveParticipant($ipAddress, $participatedAt, $id, $dropout, $location, $group, $condition, $participatedPreviously, $reward)
     {
-        $insertStatement = $this->dbh->prepare('INSERT INTO tl_participant (ip_address, participated_at, participation_id, dropout, location, participation_group, participation_condition, previous_participant)
-                                                VALUES (:ip_address, :participated_at, :participation_id, :dropout, :location, :participation_group, :participation_condition, :previous_participant)');
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_participant (ip_address, participated_at, participation_id, dropout, location, participation_group, participation_condition, previous_participant, reward)
+                                                VALUES (:ip_address, :participated_at, :participation_id, :dropout, :location, :participation_group, :participation_condition, :previous_participant, :reward)');
 
         $insertStatement->bindParam(':ip_address',              $ipAddress);
         $insertStatement->bindParam(':participated_at',         $participatedAt);
@@ -43,6 +43,7 @@ class DbHandler
         $insertStatement->bindParam(':participation_group',     $group);
         $insertStatement->bindParam(':participation_condition', $condition);
         $insertStatement->bindParam(':previous_participant',    $participatedPreviously);
+        $insertStatement->bindParam(':reward',                  $reward);
 
         $insertStatement->execute();
 
@@ -78,15 +79,16 @@ class DbHandler
     
     
     
-    public function updateParticipant($participantDbId, $totalTime)
+    public function updateParticipant($participantDbId, $totalTime, $payout)
     {
         // Update Dropout column in participant table
-        $updateStatement = $this->dbh->prepare('UPDATE tl_participant SET dropout = :dropout, total_time = :totalTime WHERE id = :participantId');
+        $updateStatement = $this->dbh->prepare('UPDATE tl_participant SET dropout = :dropout, total_time = :totalTime, payout = :payout WHERE id = :participantId');
         
         $dropout = false;
         
         $updateStatement->bindParam(':dropout',       $dropout);
         $updateStatement->bindParam(':totalTime',     $totalTime);
+        $updateStatement->bindParam(':payout',        $payout);
         $updateStatement->bindParam(':participantId', $participantDbId);
         $updateStatement->execute();
     }
@@ -227,13 +229,14 @@ class DbHandler
     
     public function saveMetaAnswers($participantDbId, $answerValues)
     {
-        $insertStatement = $this->dbh->prepare('INSERT INTO tl_meta_question (q_num_1, q_num_2, q_num_3, q_num_4, tl_participant_id)
-                                                VALUES (:answer1, :answer2, :answer3, :answer4, :participantId)');
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_meta_question (q_num_1, q_num_2, q_num_3, q_num_4, q_num_5, tl_participant_id)
+                                                VALUES (:answer1, :answer2, :answer3, :answer4, :answer5, :participantId)');
 
         $insertStatement->bindParam(':answer1', $answerValues[0]);
         $insertStatement->bindParam(':answer2', $answerValues[1]);
         $insertStatement->bindParam(':answer3', $answerValues[2]);
         $insertStatement->bindParam(':answer4', $answerValues[3]);
+        $insertStatement->bindParam(':answer5', $answerValues[4]);
         $insertStatement->bindParam(':participantId', $participantDbId);
 
         $insertStatement->execute();

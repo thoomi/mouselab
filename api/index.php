@@ -36,7 +36,8 @@ $app->post('/participant/create', function() use($app) {
         && isset($requestData['participantGroup'])
         && isset($requestData['participantLocation'])
         && isset($requestData['participantCondition'])
-        && isset($requestData['participantPreviously']))
+        && isset($requestData['participantPreviously'])
+        && isset($requestData['participantReward']))
 	{
         // Check if the participant group matches the expectations
 		if (!in_array($requestData['participantGroup'], array('G1', 'G2', 'G3')))
@@ -65,7 +66,8 @@ $app->post('/participant/create', function() use($app) {
             $requestData['participantLocation'],
             $participantGroup,
             $participantCondition,
-            $requestData['participantPreviously']);
+            $requestData['participantPreviously'],
+            $requestData['participantReward']);
 
 		if ($participantDatabaseId)
 		{
@@ -97,9 +99,10 @@ $app->post('/participant/update', function() use($app) {
 	$requestData = json_decode($app->request->getBody(), true);
 
 	if (isset($requestData['participantDatabaseId'])
-        && isset($requestData['totalTime']))
+        && isset($requestData['totalTime'])
+        && isset($requestData['payout']))
 	{
-		$app->db->updateParticipant($requestData['participantDatabaseId'], $requestData['totalTime']);
+		$app->db->updateParticipant($requestData['participantDatabaseId'], $requestData['totalTime'], $requestData['payout']);
 
 		$app->response->setStatus(200);
         $app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);

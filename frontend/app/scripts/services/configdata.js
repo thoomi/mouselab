@@ -22,9 +22,9 @@ angular.module('mouselabApp')
       var possibleTasks  = ['A',  'B',  'C'];
 
       var availableTime = {};
-      availableTime[possibleTasks[0]] = 85650;
-      availableTime[possibleTasks[1]] = 117650;
-      availableTime[possibleTasks[2]] = 149650;
+      availableTime[possibleTasks[0]] = 124050;
+      availableTime[possibleTasks[1]] = 150880;
+      availableTime[possibleTasks[2]] = 177710;
       
       //availableTime[possibleTasks[0]] = 17150;
       //availableTime[possibleTasks[1]] = 23552;
