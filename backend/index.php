@@ -25,7 +25,11 @@ $app->get('/', function() use($app) {
     $generalData = array(
         'numberOfParticipants'         => $app->db->getNumberOfParticipants(),
         'genderShare'                  => $app->db->getGenderShare(),
-        'averageAge'                   => $app->db->getAverageAge()
+        'averageAge'                   => $app->db->getAverageAge(),
+        'rewardShare'                  => $app->db->getRewardShare(),
+        'payoutParticipants'           => $app->db->getPayoutParticipants(),
+        'averagePayout'                => $app->db->getAveragePayout(),
+        'averageTotalTime'             => $app->db->getAverageTotalTime()
     );
 
 
@@ -440,7 +444,7 @@ $app->get('/csv', function() use($app) {
             
             
 			$expA['task_pos'],
-			85650,
+			124050,
 			$expA['numberOfTrials'],
             $expA['stress_q1'],
             $expA['stress_q2'],
@@ -455,7 +459,7 @@ $app->get('/csv', function() use($app) {
             $expA['score'],
 
 			$expB['task_pos'],
-			117650,
+			150880,
 			$expB['numberOfTrials'],
             $expB['stress_q1'],
             $expB['stress_q2'],
@@ -470,7 +474,7 @@ $app->get('/csv', function() use($app) {
             $expB['score'],
 
 			$expC['task_pos'],
-			149650,
+			177710,
 			$expC['numberOfTrials'],
             $expC['stress_q1'],
             $expC['stress_q2'],

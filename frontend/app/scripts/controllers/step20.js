@@ -21,10 +21,11 @@ angular.module('mouselabApp')
         $scope.metaQuestion2 = 0;
         $scope.metaQuestion3 = 0;
         $scope.metaQuestion4 = 0;
+        $scope.metaQuestion5 = 0;
         
 
         $scope.checkAllSet = function() {
-            if ($scope.metaQuestion1 && $scope.metaQuestion2 && $scope.metaQuestion3 && $scope.metaQuestion4)
+            if ($scope.metaQuestion1 && $scope.metaQuestion2 && $scope.metaQuestion3 && $scope.metaQuestion4 && $scope.metaQuestion5)
             {
                 $scope.allQuestionsAnswered = true;
             }
@@ -36,7 +37,7 @@ angular.module('mouselabApp')
             $scope.notWaitingForRequestToFinish = false;
              
             // Save all Answers into an array and calculate the sum
-            var answerValues = [$scope.metaQuestion1, $scope.metaQuestion2, $scope.metaQuestion3, $scope.metaQuestion4];
+            var answerValues = [$scope.metaQuestion1, $scope.metaQuestion2, $scope.metaQuestion3, $scope.metaQuestion4, $scope.metaQuestion5];
             
 
             dataService.saveMetaQuestions(answerValues, function(error) {

@@ -74,7 +74,8 @@ angular.module('mouselabApp')
         function saveTotalTime() {
             var postData = {
                 participantDatabaseId : participantDatabaseId,
-                totalTime             : parseInt(endTime) - parseInt(startTime)
+                totalTime             : parseInt(endTime) - parseInt(startTime),
+                payout                : Math.round(participantScore * 0.0015 * 100) / 100
             };
             
             $http.post(configData.getBaseUrl() + '/participant/update', postData);

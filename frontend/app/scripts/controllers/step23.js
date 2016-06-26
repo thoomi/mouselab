@@ -12,7 +12,7 @@ angular.module('mouselabApp')
     if (!dataService.everythingIsValid()) { $location.path(''); }
     
     $scope.reward = dataService.getParticipantReward();
-    $scope.score = Math.round(dataService.getScore() * 0.0015 * 100) / 100;
+    $scope.score = Math.min(Math.round(dataService.getScore() * 0.0015 * 100) / 100, 5.95);
     
     
     $timeout(function() {
