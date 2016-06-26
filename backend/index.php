@@ -501,12 +501,16 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
                 
-                $acqOrder = explode(':', $value['trials'][0]['order_of_acqusitions']);
-                
-                $currentRow[] = $acqOrder[0];
-                $currentRow[] = $acqOrder[1];
-                $currentRow[] = $acqOrder[2];
-                $currentRow[] = $acqOrder[3];
+                if (isset($value['trials'][0]['order_of_acqusitions']))
+                {
+                    $acqOrder = explode(':', $value['trials'][0]['order_of_acqusitions']);                
+
+                    $currentRow[] = $acqOrder[0];
+                    $currentRow[] = $acqOrder[1];
+                    $currentRow[] = $acqOrder[2];
+                    $currentRow[] = $acqOrder[3];
+                }
+
                 
                 array_shift($value['trials']);
             }
@@ -545,12 +549,15 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
                 
-                $acqOrder = explode(':', $value['trials'][0]['order_of_acqusitions']);
-                
-                $currentRow[] = $acqOrder[0];
-                $currentRow[] = $acqOrder[1];
-                $currentRow[] = $acqOrder[2];
-                $currentRow[] = $acqOrder[3];
+                if (isset($value['trials'][0]['order_of_acqusitions']))
+                {
+                    $acqOrder = explode(':', $value['trials'][0]['order_of_acqusitions']);                
+
+                    $currentRow[] = $acqOrder[0];
+                    $currentRow[] = $acqOrder[1];
+                    $currentRow[] = $acqOrder[2];
+                    $currentRow[] = $acqOrder[3];
+                }
                 
                 array_shift($value['trials']);
             }
@@ -588,12 +595,15 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
                 
-                $acqOrder = explode(':', $value['trials'][0]['order_of_acqusitions']);
-                
-                $currentRow[] = $acqOrder[0];
-                $currentRow[] = $acqOrder[1];
-                $currentRow[] = $acqOrder[2];
-                $currentRow[] = $acqOrder[3];
+                if (isset($value['trials'][0]['order_of_acqusitions']))
+                {
+                    $acqOrder = explode(':', $value['trials'][0]['order_of_acqusitions']);                
+
+                    $currentRow[] = $acqOrder[0];
+                    $currentRow[] = $acqOrder[1];
+                    $currentRow[] = $acqOrder[2];
+                    $currentRow[] = $acqOrder[3];
+                }
                 
                 array_shift($value['trials']);
             }
