@@ -38,25 +38,25 @@ angular.module('mouselabApp')
           id: 'A',
           show: false,
           intervalId: -1,
-          countdownTime: $scope.cueValues[0].cost
+          countdownTime: $scope.cueValues[0].cost[dataService.getCurrentTask()]
         },
         {
           id: 'B',
           show: false,
           intervalId: -1,
-          countdownTime: $scope.cueValues[1].cost
+          countdownTime: $scope.cueValues[1].cost[dataService.getCurrentTask()]
         },
         {
           id: 'C',
           show: false,
           intervalId: -1,
-          countdownTime: $scope.cueValues[2].cost
+          countdownTime: $scope.cueValues[2].cost[dataService.getCurrentTask()]
         },
         {
           id: 'D',
           show: false,
           intervalId: -1,
-          countdownTime: $scope.cueValues[3].cost
+          countdownTime: $scope.cueValues[3].cost[dataService.getCurrentTask()]
         }];
       
       
@@ -97,7 +97,7 @@ angular.module('mouselabApp')
         angular.forEach($scope.showCueValues, function(value, key) {
           value.show = false;
           value.intervalId = -1;
-          value.countdownTime = $scope.cueValues[key].cost;
+          value.countdownTime = $scope.cueValues[key].cost[dataService.getCurrentTask()];
         });
         
         // All trials done
@@ -183,7 +183,7 @@ angular.module('mouselabApp')
         localAccuracy += value.weight * $scope.showCueValues[key].show * getCueScore(key, share);
         
         // Calculate sum of acquired times
-        acquisitionTime += value.cost * $scope.showCueValues[key].show;
+        acquisitionTime += value.cost[dataService.getCurrentTask()] * $scope.showCueValues[key].show;
       });
       
       
@@ -200,6 +200,12 @@ angular.module('mouselabApp')
         numberOfAcquisitions -= 1;
       }
       
+      var aqcuisitionPattern = determineAcquisitionPattern(numberOfAcquisitions);
+      
+      // Get the time cost and subtract it from current time
+      var timeCost = determineTimeCost(aqcuisitionPattern, dataService.getCurrentTask());
+      $scope.availableTime -= timeCost;
+      
       
       $scope.finishedTrialData.push({
         number:               $scope.finishedTrials + 1,
@@ -208,7 +214,7 @@ angular.module('mouselabApp')
         acquiredWeights:      acquiredWeights,
         localAccuracy:        localAccuracy,
         score:                trialScore,
-        acquisitionPattern:   determineAcquisitionPattern(numberOfAcquisitions),
+        acquisitionPattern:   aqcuisitionPattern,
         chosenOption:         share === 'A' ? $scope.currentTrial.optionId : (17 - $scope.currentTrial.pairId), // Get the chosen pair option. (The option given by the trail data is always displayed left)
         timeToFinish:         $scope.timeOfLastAcquiredTrial - $scope.availableTime,
         acquisitionTime:      acquisitionTime,
@@ -275,5 +281,15 @@ angular.module('mouselabApp')
       {
         return 1;
       }
+    }
+    
+    function determineTimeCost(acquisitionPattern, condition) {
+      var timeCosts = {
+        'A' : [4110, 2760, 2430, 2630, 2340, 1680, 1420, 1350, 1360, 1300, 1160, 400, 280, 90, 0],
+        'B' : [4110, 2760, 2430, 2630, 2340, 1680, 1420, 1350, 1360, 1300, 1160, 400, 280, 90, 0],
+        'C' : [4110, 2760, 2430, 2630, 2340, 1680, 1420, 1350, 1360, 1300, 1160, 400, 280, 90, 0]
+      };
+      
+      return timeCosts[condition][acquisitionPattern - 1];
     }
   });

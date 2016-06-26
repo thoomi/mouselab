@@ -52,7 +52,10 @@ $app->post('/participant/create', function() use($app) {
 		{
 			throw new Exception('Bad participant location');
 		}
-
+		
+		$participantCondition = $app->db->getCounterBalanceCondition();
+		$participantGroup     = $app->db->getCounterBalanceGroup();
+		
 
 		$participantDatabaseId = $app->db->saveParticipant(
             $app->request->getIp(),
@@ -60,8 +63,8 @@ $app->post('/participant/create', function() use($app) {
             $requestData['participantId'],
             true,
             $requestData['participantLocation'],
-            $requestData['participantGroup'],
-            $requestData['participantCondition'],
+            $participantGroup,
+            $participantCondition,
             $requestData['participantPreviously']);
 
 		if ($participantDatabaseId)
@@ -70,7 +73,11 @@ $app->post('/participant/create', function() use($app) {
 			$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
 			$app->response->headers->set('Content-Type', 'application/json');
 
-			echo json_encode(array('participantDatabaseId' => $participantDatabaseId));
+			echo json_encode(array(
+				'participantDatabaseId' => $participantDatabaseId,
+				'participantCondition'  => $participantCondition,
+				'participantGroup'      => $participantGroup
+			));
 		}
 		else
 		{

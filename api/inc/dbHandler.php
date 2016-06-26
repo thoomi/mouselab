@@ -32,7 +32,7 @@ class DbHandler
      */
     public function saveParticipant($ipAddress, $participatedAt, $id, $dropout, $location, $group, $condition, $participatedPreviously)
     {
-        $insertStatement = $this->dbh->prepare('INSERT INTO tl_participant (ip_address, participated_at, participation_id, dropout, location, participation_group, Participation_condition, previous_participant)
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_participant (ip_address, participated_at, participation_id, dropout, location, participation_group, participation_condition, previous_participant)
                                                 VALUES (:ip_address, :participated_at, :participation_id, :dropout, :location, :participation_group, :participation_condition, :previous_participant)');
 
         $insertStatement->bindParam(':ip_address',              $ipAddress);
@@ -48,6 +48,35 @@ class DbHandler
 
         return $this->dbh->lastInsertId();
     }
+    
+    /**
+     *  Checks all participants and returns the next condition in order to counter balance the participants
+     */
+    public function getCounterBalanceCondition()
+    {
+        $selectStatement = $this->dbh->prepare('SELECT COUNT(CASE participation_condition WHEN "C1" then 1 ELSE null END) AS condition1,
+                                                	   COUNT(CASE participation_condition WHEN "C2" then 1 ELSE null END) AS condition2
+                                                FROM `tl_participant`');
+        $selectStatement->execute();
+        $conditions = $selectStatement->fetch(PDO::FETCH_ASSOC);
+        
+        return $conditions['condition1'] >= $conditions['condition2'] ? 'C2' : 'C1';
+    }
+    
+    public function getCounterBalanceGroup()
+    {
+        $selectStatement = $this->dbh->prepare('SELECT COUNT(CASE participation_group WHEN "G1" then 1 ELSE null END) AS G1,
+                                                	   COUNT(CASE participation_group WHEN "G2" then 1 ELSE null END) AS G2,
+                                                	   COUNT(CASE participation_group WHEN "G3" then 1 ELSE null END) AS G3
+                                                FROM `tl_participant`');
+        $selectStatement->execute();
+        $groups = $selectStatement->fetch(PDO::FETCH_ASSOC);
+        
+        
+        return min(array_keys($groups, min($groups)));
+    }
+    
+    
     
     public function updateParticipant($participantDbId, $totalTime)
     {

@@ -195,6 +195,11 @@ html {
   vertical-align: middle;
 }
 
+.table-buy-board tr {
+  height: 65px;
+}
+
+
 .table-buy-board > tbody > tr > td,
 .table-buy-board > thead > tr > td,
 .table-buy-board > tfoot > tr > td{
@@ -235,7 +240,7 @@ input[type="radio"]:hover {
 }
 
 .page-wrapper {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .invest-input {

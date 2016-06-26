@@ -1,22 +1,7 @@
 <h2>Fragen zum Arbeitstag {{ currentRound }}</h2>
 
 <form class="form-horizontal stress-questions">
-    <div class="form-group" ng-repeat="question in stressQuestions">
-        <div class="col-sm-5">
-            <p><strong>{{ $index + 1 }}. {{ question.title }}</strong></p>
-        </div>
-        <div class="col-sm-7">
-            <span class="stress-questions-option-label">{{ labelLeft }}</span>
-
-            <label class="radio-inline" ng-repeat="i in [9]|makeRange track by $index">
-                <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="{{ $index + 1 }}">
-            </label>
-
-            <span class="stress-questions-option-label">{{ labelRight }}</span>
-        </div>
-    </div>
-    <br>
-    <div class="form-group">
+      <div class="form-group">
         <div class="col-sm-2">
             <p><strong>Ich habe…</strong></p>
         </div>
@@ -47,6 +32,22 @@
             </div>
         </div>
     </div>
+    <br>
+    <div class="form-group" ng-repeat="question in stressQuestions">
+        <div class="col-sm-5">
+            <p><strong>{{ $index + 1 }}. {{ question.title }}</strong></p>
+        </div>
+        <div class="col-sm-7">
+            <span class="stress-questions-option-label">{{ labelLeft }}</span>
+
+            <label class="radio-inline" ng-repeat="i in [9]|makeRange track by $index">
+                <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="{{ $index + 1 }}">
+            </label>
+
+            <span class="stress-questions-option-label">{{ labelRight }}</span>
+        </div>
+    </div>
+    <br>
 
     <br>
     <div class="form-group">
@@ -77,8 +78,8 @@
       </div>
       <div class="modal-body">
          <div ng-include src="instructions[currentInstruction]"></div>
-         <button type="button" class="btn btn-default btn-info" ng-click="changeInstruction(1)" ng-hide="currentInstruction === 1">Weiter</button>
-         <button type="button" class="btn btn-default btn-info" ng-click="changeInstruction(0)" ng-hide="currentInstruction === 0">Zurück</button>
+         <button type="button" class="btn btn-default btn-info" ng-click="changeInstruction(1)" ng-hide="currentInstruction === 1">Nächste Aufgabenbeschreibung</button>
+         <button type="button" class="btn btn-default btn-info" ng-click="changeInstruction(0)" ng-hide="currentInstruction === 0">Vorherige Aufgabenbeschreibung</button>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>

@@ -64,18 +64,35 @@
         </div>
     </div>
     
-    <div class="form-group">
+     <div class="form-group">
         <div class="col-sm-5">
-            <p><strong>4. Die	Informationen	im	rechten	oberen	Bildschirmrand	zur	verbleibenden	Zeit	oder	den	verbleibenden	Aktienkäufen	habe	ich	während	eines	Arbeitstages	immer	aufmerksam	beobachtet</strong></p>
+            <p><strong>4. Während den Arbeitstagen ist die angezeigte Zeit oben rechts... </strong></p>
         </div>
         <div class="col-sm-7">
-            <span class="stress-questions-option-label">trifft nicht zu</span>
-
-            <label class="radio-inline" ng-repeat="i in [6]|makeRange track by $index">
-                <input type="radio" ng-model="$parent.metaQuestion4" ng-change="checkAllSet()" name="metaQuestion4" value="{{ $index + 1 }}">
-            </label>
-
-            <span class="stress-questions-option-label">trifft zu</span>
+            <div class="radio">
+              <label>
+                <input type="radio" name="metaQuestion4" value="1"  ng-model="metaQuestion4" ng-change="checkAllSet()">
+                kontinuierlich abgelaufen
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="metaQuestion4" value="2" ng-model="metaQuestion4" ng-change="checkAllSet()">
+                 langsamer abgelaufen
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="metaQuestion4" value="3" ng-model="metaQuestion4" ng-change="checkAllSet()">
+               schneller abgelaufen
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="metaQuestion4" value="4" ng-model="metaQuestion4" ng-change="checkAllSet()">
+               ich habe nicht auf die Zeit geachtet
+              </label>
+            </div>
         </div>
     </div>
 

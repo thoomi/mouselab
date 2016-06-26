@@ -30,19 +30,19 @@ angular.module('mouselabApp')
         label:    'Familiengeführt?',
         validity: 0.84,
         weight:   0.58,
-        cost:     2320,
+        cost:     1160,
         isShown:  false,
         intervalId: -1,
-        countdownTime: 2320
+        countdownTime: 1160
       },
       {
         label:    'Firmensitz in Steueroase?',
         validity: 0.61,
         weight:   0.42,
-        cost:     1680,
+        cost:     840,
         isShown:  false,
         intervalId: -1,
-        countdownTime: 1680
+        countdownTime: 840
       }
     ];
     
