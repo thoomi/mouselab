@@ -23,13 +23,13 @@ $app->container->singleton('db', function () {
 $app->get('/', function() use($app) {
 
     $generalData = array(
-        'numberOfParticipants'         => $app->db->getNumberOfParticipants(),
-        'genderShare'                  => $app->db->getGenderShare(),
-        'averageAge'                   => $app->db->getAverageAge(),
-        'rewardShare'                  => $app->db->getRewardShare(),
-        'payoutParticipants'           => $app->db->getPayoutParticipants(),
-        'averagePayout'                => $app->db->getAveragePayout(),
-        'averageTotalTime'             => $app->db->getAverageTotalTime()
+        'numberOfParticipants' => $app->db->getNumberOfParticipants(),
+        'genderShare'          => $app->db->getGenderShare(),
+        'averageAge'           => $app->db->getAverageAge(),
+        'rewardShare'          => $app->db->getRewardShare(),
+        'payoutParticipants'   => $app->db->getPayoutParticipants(),
+        'payout'               => $app->db->getPayoutStats(),
+        'averageTotalTime'     => $app->db->getAverageTotalTime()
     );
 
 

@@ -329,12 +329,14 @@ angular.module('mouselabApp')
                 }
             },
 
-            saveExperiment : function(data, timeToFinish, callback) {
+            saveExperiment : function(data, timeToFinish, score, callback) {
                 if (isExperimentSaved[currentExperimentRound-1])
                 {
                     callback();
                     return;
                 }
+                
+                participantScore += score;
                 
                 saveExperiment(data, timeToFinish, callback);
             },

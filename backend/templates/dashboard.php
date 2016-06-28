@@ -55,7 +55,11 @@
                             </tr>
                             <tr>
                                 <td>Durchschnittlicher Auszahlungsbetrag</td>
-                                <td><strong><?php echo round($this->data['general']['averagePayout'], 2) ?></strong></td>
+                                <td><strong><?php echo round($this->data['general']['payout']['average'], 2) ?></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Auszahlungen Gesamt</td>
+                                <td><strong><?php echo round($this->data['general']['payout']['sum'], 2) ?></strong></td>
                             </tr>
                         </table>
                     </div>

@@ -44,14 +44,16 @@ class DbHandler
         return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    public function getAveragePayout()
+    public function getPayoutStats()
     {
-        $selectStatement = $this->dbh->prepare('SELECT AVG(payout) AS average
+        $selectStatement = $this->dbh->prepare('SELECT 
+                                                    AVG(payout) AS average,
+                                                    SUM(payout) AS sum
                                                 FROM tl_participant
                                                 WHERE reward = 2');
         $selectStatement->execute();
 
-        return $selectStatement->fetch(PDO::FETCH_ASSOC)['average'];
+        return $selectStatement->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getNumberOfParticipants()

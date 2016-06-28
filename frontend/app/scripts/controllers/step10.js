@@ -73,13 +73,11 @@ angular.module('mouselabApp')
             timeToFinish = configData.getAvailableTime(dataService.getCurrentTask()) - $scope.availableTime;
           }
           
-          dataService.addScore($scope.currentScore);
-          
           $interval.cancel(intervalId);
           $scope.availableTime    = 0;
           $scope.savingInProgress = true;
           
-          dataService.saveExperiment($scope.finishedTrialData, timeToFinish, function(error){
+          dataService.saveExperiment($scope.finishedTrialData, timeToFinish, $scope.currentScore,  function(error){
             if (!error)
             {
               $location.path('step11');
