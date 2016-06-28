@@ -89,8 +89,7 @@ angular.module('mouselabApp')
           $scope.buyTimerRunning  = true;
           $scope.informationAcquired = false;
           
-          $timeout(function() {
-            dataService.saveExperiment($scope.finishedTrialData, timeToFinish, $scope.currentScore,  function(error){
+          dataService.saveExperiment($scope.finishedTrialData, timeToFinish, $scope.currentScore,  function(error){
             if (!error)
             {
               $location.path('step11');
@@ -101,9 +100,6 @@ angular.module('mouselabApp')
               // TODO: Handle error properly
             }
           });
-          }, 2000);
-          
-          
         }
         
         
