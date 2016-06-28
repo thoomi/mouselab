@@ -98,7 +98,7 @@
                                 <td><?php echo date('d.m.Y H:i:s', $value['endtime'] / 1000.0); ?></td>
                                 <td><?php echo $value['participation_id'] ?></td>
                                 <td><?php echo floor(($value['total_time'] / (1000.0 * 60.0)) % 60) . ' min ' . (($value['total_time'] / 1000.0) % 60) . ' sek' ?></td>
-                                <td><?php echo $value['payout'] . ' €'?></td>
+                                <td><?php echo min($value['payout'], 5.95) . ' €'?></td>
                             </tr>
                             <?php endforeach; ?>
                         </table>
