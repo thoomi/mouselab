@@ -8,7 +8,7 @@
  * Controller of the mouselabApp
  */
 angular.module('mouselabApp')
-  .controller('Step10Ctrl', function ($scope, $location,$interval, dataService, configData) {
+  .controller('Step10Ctrl', function ($scope, $location,$interval, $timeout, dataService, configData) {
       if (!dataService.everythingIsValid()) { $location.path(''); }
       
       dataService.incrementSiteNumber();
@@ -65,7 +65,7 @@ angular.module('mouselabApp')
       
       function saveExperiment() {
           if ($scope.savingInProgress) { return; }
-        
+          
           var timeToFinish = configData.getAvailableTime(dataService.getCurrentTask());
           
           if ($scope.availableTime > 0)
@@ -73,11 +73,24 @@ angular.module('mouselabApp')
             timeToFinish = configData.getAvailableTime(dataService.getCurrentTask()) - $scope.availableTime;
           }
           
+          // Cancel all running intervals
           $interval.cancel(intervalId);
-          $scope.availableTime    = 0;
-          $scope.savingInProgress = true;
           
-          dataService.saveExperiment($scope.finishedTrialData, timeToFinish, $scope.currentScore,  function(error){
+          angular.forEach($scope.showCueValues, function(value, key) {
+            $interval.cancel(value.intervalId);
+          });
+        
+          
+          $scope.availableTime    = 0;
+          $scope.remainingSeconds = 0;
+          $scope.remainingMinutes = 0;
+          
+          $scope.savingInProgress = true;
+          $scope.buyTimerRunning  = true;
+          $scope.informationAcquired = false;
+          
+          $timeout(function() {
+            dataService.saveExperiment($scope.finishedTrialData, timeToFinish, $scope.currentScore,  function(error){
             if (!error)
             {
               $location.path('step11');
@@ -88,6 +101,9 @@ angular.module('mouselabApp')
               // TODO: Handle error properly
             }
           });
+          }, 2000);
+          
+          
         }
         
         
@@ -101,6 +117,7 @@ angular.module('mouselabApp')
         
         angular.forEach($scope.showCueValues, function(value, key) {
           value.show = false;
+          $interval.cancel(value.intervalId);
           value.intervalId = -1;
           value.countdownTime = $scope.cueValues[key].cost[dataService.getCurrentTask()];
         });
@@ -111,8 +128,6 @@ angular.module('mouselabApp')
           $scope.informationAcquired = false;
           saveExperiment();
         }
-        
-        console.log($scope.finishedTrialData);
       }
 
 
@@ -137,18 +152,12 @@ angular.module('mouselabApp')
     $scope.$on('$destroy', function() {
       // Make sure that the interval is destroyed too
       $interval.cancel(intervalId);
+      
+      angular.forEach($scope.showCueValues, function(value, key) {
+        $interval.cancel(value.intervalId);
+      });
     });
   
-  
-  
-    $scope.$on('timer-stopped', function (event, data) {
-      if (!event.targetScope.countdown)
-      {
-        saveExperiment(data.millis);
-      }
-    });
-    
-    
     
     $scope.buyCue = function(index) {
       
@@ -178,6 +187,7 @@ angular.module('mouselabApp')
     
     $scope.chooseShare = function(share) {
       if (!$scope.informationAcquired) { return;  }
+      $scope.informationAcquired = false;
       
       var acquiredWeights = 0;
       var localAccuracy   = 0;
@@ -273,7 +283,7 @@ angular.module('mouselabApp')
         if (cue1 && !cue2 && !cue3 && cue4) { return 8; }
         if (!cue1 && cue2 && cue3 && !cue4) { return 9; }
         if (!cue1 && cue2 && !cue3 && cue4) { return 10; }
-        if (!cue1 && !cue2 && !cue3 && cue4) { return 11; }
+        if (!cue1 && !cue2 && cue3 && cue4) { return 11; }
       }
       else if (acquisitionCount === 3)
       {

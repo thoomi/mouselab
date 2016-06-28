@@ -55,7 +55,7 @@
                             </tr>
                             <tr>
                                 <td>Durchschnittlicher Auszahlungsbetrag</td>
-                                <td><strong><?php echo round($this->data['general']['payout']['average'], 2) ?></strong></td>
+                                <td><strong><?php echo round($this->data['general']['payout']['average'], 2) ?> €</strong></td>
                             </tr>
                             <tr>
                                 <td>Auszahlungen Gesamt</td>
@@ -63,7 +63,7 @@
                                     foreach ($this->data['general']['payoutParticipants'] as $value) {
                                         $sumPayout += min($value['payout'], 5.95);
                                 }  ?>
-                                <td><strong><?php echo round($sumPayout, 2) ?></strong></td>
+                                <td><strong><?php echo round($sumPayout, 2) ?> €</strong></td>
                             </tr>
                         </table>
                     </div>

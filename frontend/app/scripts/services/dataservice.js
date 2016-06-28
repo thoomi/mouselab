@@ -75,7 +75,7 @@ angular.module('mouselabApp')
             var postData = {
                 participantDatabaseId : participantDatabaseId,
                 totalTime             : parseInt(endTime) - parseInt(startTime),
-                payout                : Math.round(participantScore * 0.0015 * 100) / 100
+                payout                : (Math.round(participantScore * 0.0015 * 100) / 100)
             };
             
             $http.post(configData.getBaseUrl() + '/participant/update', postData);
@@ -337,7 +337,7 @@ angular.module('mouselabApp')
                 }
                 
                 participantScore += score;
-                
+
                 saveExperiment(data, timeToFinish, callback);
             },
 
@@ -462,10 +462,6 @@ angular.module('mouselabApp')
                 }
                 
                 return questionSetSteps.pop();
-            },
-            
-            addScore : function(score) {
-              participantScore += score;
             },
             
             getScore : function() {
