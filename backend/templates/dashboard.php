@@ -60,7 +60,7 @@
                             <tr>
                                 <td>Auszahlungen Gesamt</td>
                                 <?php $sumPayout = 0; 
-                                    foreach ($this->data['gerneral']['payoutParticipants'] as $value) {
+                                    foreach ($this->data['general']['payoutParticipants'] as $value) {
                                         $sumPayout += min($value['payout'], 5.95);
                                 }  ?>
                                 <td><strong><?php echo round($sumPayout, 2) ?></strong></td>
