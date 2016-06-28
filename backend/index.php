@@ -91,6 +91,7 @@ $app->get('/csv', function() use($app) {
 		'Date',
 		'VpN',  		
 		'Code',	            // Participant ID
+        'Entlohnung',
         'ExpB',             // Condition
 		'ExpG',				// Group
             
@@ -385,11 +386,14 @@ $app->get('/csv', function() use($app) {
         $dropout = '#';
 		if (isset($value['participant']['dropout'])) { $dropout = $value['participant']['dropout']; }
 
+        $reward = '#';
+        if (isset($value['participant']['reward'])) { $reward = $value['participant']['reward']; }
 
 		$currentRow = array(
 			$value['participant']['participated_at'],
 			$value['participant']['id'],
 			$value['participant']['participation_id'],
+            $reward,
             $value['participant']['participation_condition'],
 			$value['participant']['participation_group'],
             
