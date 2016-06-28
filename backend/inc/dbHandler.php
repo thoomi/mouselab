@@ -37,8 +37,7 @@ class DbHandler
                                                        (UNIX_TIMESTAMP(participated_at) * 1000 + total_time) AS endtime 
                                                 FROM `tl_participant` 
                                                 WHERE reward = 2
-                                                ORDER BY endtime DESC
-                                                LIMIT 15');
+                                                ORDER BY endtime DESC');
         $selectStatement->execute();
 
         return $selectStatement->fetchAll(PDO::FETCH_ASSOC);
