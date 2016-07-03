@@ -23,7 +23,27 @@
     <!-- Add your site or application content here -->
     <div class="container page-wrapper position-relative">
         <div ng-view="" autoscroll="true"></div>
+        
+        <div class="footer">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Verantwortlich für Inhalt und Durchführung der Studie:</p>
+                    <p>
+                        Stephan Kopietz <br>
+                        <a href="mailto:stephan.kopietz@uni-erfurt.de">stephan.kopietz@uni-erfurt.de</a>
+                    </p>
+                </div>
+                <div class="col-sm-6">
+                    <p>Verantwortlich für die technische Umsetzung der Studie:</p>
+                    <p>
+                        Thomas Blank <br>
+                        <a href="mailto:thomas.blank@fh-erfurt.de">thomas.blank@fh-erfurt.de</a>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
+
 
     <div class="status-bar" ng-controller="StatusbarCtrl">
         <div class="progress" ng-hide="currentSite === 1">

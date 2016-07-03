@@ -176,7 +176,9 @@ class DbHandler
                                                     	tl_stress_question.q_sum AS stress_sum,
                                                     	
                                                     	COUNT(tl_trial.id) AS numberOfTrials,
-                                                    	SUM(tl_trial.score) AS score
+                                                    	SUM(tl_trial.score) AS score,
+                                                    	SUM(tl_trial.time_to_finish) AS trialTimeSum,
+                                                    	SUM(tl_trial.acquisition_time) AS acquisitionSum
                                                     	
                                                     FROM tl_experiment
                                                     LEFT JOIN tl_stress_question ON tl_stress_question.tl_experiment_id = tl_experiment.id

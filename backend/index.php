@@ -105,6 +105,7 @@ $app->get('/csv', function() use($app) {
 		'Gesamtzeit',
 		'Dropout',
 		'pps', // Punkte in Studie
+		'payout',
         
         
         'MaxT-1',
@@ -159,6 +160,9 @@ $app->get('/csv', function() use($app) {
         'Stress-Time-A',
         'Time-ExpBA',
         'ppa-A',
+        'tt1-A-Sum',
+        'tt2-A-Sum',
+        'at-A-Sum',
 
 		'Position-ExpBB',	     // task_pos
 		'lt_ExpG-B',	             // Verfügbare Zeit
@@ -174,6 +178,9 @@ $app->get('/csv', function() use($app) {
         'Stress-Time-B',
         'Time-ExpBB',
         'ppa-B',
+        'tt1-B-Sum',
+        'tt2-B-Sum',
+        'at-B-Sum',
 
 		'Position-ExpBC',	     // task_pos
 		'lt_ExpG-C',	             // Verfügbare Zeit
@@ -188,7 +195,10 @@ $app->get('/csv', function() use($app) {
         'Stress-MW-C',
         'Stress-Time-C',
         'Time-ExpBC',
-        'ppa-C'
+        'ppa-C',
+        'tt1-C-Sum',
+        'tt2-C-Sum',
+        'at-C-Sum',
 	);
     
     // Generate Labels for Trials
@@ -201,7 +211,8 @@ $app->get('/csv', function() use($app) {
         $firstRow[] = 'Gew_Opt_A_' . $indexOfTrial; // chosen option
         $firstRow[] = 'apt_A_' . $indexOfTrial; // number of acquisitions
         $firstRow[] = 'AC_Order_A_' . $indexOfTrial; // acquisition order
-        $firstRow[] = 'tt_A_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'tt1_A_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'tt2_A_' . $indexOfTrial; // trial time to finish
         $firstRow[] = 'at_SUM_A_' . $indexOfTrial; // sum aqcuisition times
         $firstRow[] = 'ppt_A_' . $indexOfTrial; //  trial score
         
@@ -220,7 +231,8 @@ $app->get('/csv', function() use($app) {
         $firstRow[] = 'Gew_Opt_B_' . $indexOfTrial; // chosen option
         $firstRow[] = 'apt_B_' . $indexOfTrial; // number of acquisitions
         $firstRow[] = 'AC_Order_B_' . $indexOfTrial; // acquisition order
-        $firstRow[] = 'tt_B_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'tt1_B_' . $indexOfTrial; // trial time to finish after cost
+        $firstRow[] = 'tt2_B_' . $indexOfTrial; // trial time to finish
         $firstRow[] = 'at_SUM_B_' . $indexOfTrial; // sum aqcuisition times
         $firstRow[] = 'ppt_B_' . $indexOfTrial; //  trial score
         
@@ -239,7 +251,8 @@ $app->get('/csv', function() use($app) {
         $firstRow[] = 'Gew_Opt_C_' . $indexOfTrial; // chosen option
         $firstRow[] = 'apt_C_' . $indexOfTrial; // number of acquisitions
         $firstRow[] = 'AC_Order_C_' . $indexOfTrial; // acquisition order
-        $firstRow[] = 'tt_C_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'tt1_C_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'tt2_C_' . $indexOfTrial; // trial time to finish
         $firstRow[] = 'at_SUM_C_' . $indexOfTrial; // sum aqcuisition times
         $firstRow[] = 'ppt_C_' . $indexOfTrial; // trial score
         
@@ -269,6 +282,8 @@ $app->get('/csv', function() use($app) {
             'time_to_answer'         => '#',
             'numberOfTrials'         => '#',
             'score'                  => '#',
+            'trialTimeSum'           => '#',
+            'acquisitionSum'         => '#',
             
 		);
 		if (isset($value['experiments'][0])) { $expA = $value['experiments'][0]; $totalScore += $expA['score']; }
@@ -287,6 +302,8 @@ $app->get('/csv', function() use($app) {
             'time_to_answer'         => '#',
             'numberOfTrials'         => '#',
             'score'                  => '#',
+            'trialTimeSum'           => '#',
+            'acquisitionSum'         => '#',
 		);
 		if (isset($value['experiments'][1])) { $expB = $value['experiments'][1]; $totalScore += $expB['score']; }
 
@@ -304,6 +321,8 @@ $app->get('/csv', function() use($app) {
             'time_to_answer'         => '#',
             'numberOfTrials'         => '#',
             'score'                  => '#',
+            'trialTimeSum'           => '#',
+            'acquisitionSum'         => '#',
 		);
 		if (isset($value['experiments'][2])) { $expC = $value['experiments'][2]; $totalScore += $expC['score']; }
 
@@ -388,7 +407,35 @@ $app->get('/csv', function() use($app) {
 
         $reward = '#';
         if (isset($value['participant']['reward'])) { $reward = $value['participant']['reward']; }
-
+        
+        $payout = '#';
+        if (isset($value['participant']['payout'])) { $payout = $value['participant']['payout']; }
+        
+        
+        $timeCosts = array(
+            'A' => [4440, 3040, 2730, 2860, 2590, 1840, 1580, 1490, 1500, 1420, 1260, 440, 310, 110, 0],
+            'B' => [4510, 3030, 2680, 2890, 2580, 1840, 1570, 1480, 1490, 1430, 1270, 440, 310, 100, 0],
+            'C' => [4570, 3030, 2640, 2910, 2570, 1850, 1550, 1470, 1490, 1430, 1280, 450, 310, 100, 0]);
+        
+        // Calculate tt1 sum
+        $tt1Sums = array('A' => 0, 'B' => 0, 'C' => 0);
+        foreach ($value['trials'] as $trial)
+        {
+            if ($trial['task'] === 'A')
+            {
+                $tt1Sums['A'] += ($trial['time_to_finish'] - $timeCosts['A'][max($trial['acquisition_pattern'], 1) - 1]);
+            }
+            else if ($trial['task'] === 'B')
+            {
+                $tt1Sums['B'] += ($trial['time_to_finish'] - $timeCosts['B'][max($trial['acquisition_pattern'], 1) - 1]);
+            }
+            else if ($trial['task'] === 'C')
+            {
+                $tt1Sums['C'] += ($trial['time_to_finish'] - $timeCosts['C'][max($trial['acquisition_pattern'], 1) - 1]);
+            }
+        }
+        
+        
 		$currentRow = array(
 			$value['participant']['participated_at'],
 			$value['participant']['id'],
@@ -407,6 +454,7 @@ $app->get('/csv', function() use($app) {
 			$totalTime,
 			$dropout,
 			$totalScore,
+			$payout,
 			
 			
 			$maximising['q_num_1'],
@@ -461,6 +509,9 @@ $app->get('/csv', function() use($app) {
             $expA['time_to_answer'],
             $expA['time_to_finish'],
             $expA['score'],
+            $tt1Sums['A'],
+            $expA['trialTimeSum'],
+            $expA['acquisitionSum'],
 
 			$expB['task_pos'],
 			150880,
@@ -476,7 +527,10 @@ $app->get('/csv', function() use($app) {
             $expB['time_to_answer'],
             $expB['time_to_finish'],
             $expB['score'],
-
+            $tt1Sums['B'],
+            $expB['trialTimeSum'],
+            $expB['acquisitionSum'],
+            
 			$expC['task_pos'],
 			177710,
 			$expC['numberOfTrials'],
@@ -490,8 +544,13 @@ $app->get('/csv', function() use($app) {
             $expC['stress_sum'],
             $expC['time_to_answer'],
             $expC['time_to_finish'],
-            $expC['score']
+            $expC['score'],
+            $tt1Sums['C'],
+            $expC['trialTimeSum'],
+            $expC['acquisitionSum']
 		);
+		
+
 		
 	    // Attach trial data
 	    for ($indexOfTrial = 0; $indexOfTrial < 64; $indexOfTrial++)
@@ -505,6 +564,7 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = $value['trials'][0]['chosen_option'];
                 $currentRow[] = $value['trials'][0]['number_of_acquisitions'];
                 $currentRow[] = $value['trials'][0]['order_of_acqusitions'];
+                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts['A'][max($value['trials'][0]['acquisition_pattern'], 1) - 1];
                 $currentRow[] = $value['trials'][0]['time_to_finish'];
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
@@ -553,6 +613,7 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = $value['trials'][0]['chosen_option'];
                 $currentRow[] = $value['trials'][0]['number_of_acquisitions'];
                 $currentRow[] = $value['trials'][0]['order_of_acqusitions'];
+                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts['B'][max($value['trials'][0]['acquisition_pattern'], 1) - 1];
                 $currentRow[] = $value['trials'][0]['time_to_finish'];
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
@@ -599,6 +660,7 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = $value['trials'][0]['chosen_option'];
                 $currentRow[] = $value['trials'][0]['number_of_acquisitions'];
                 $currentRow[] = $value['trials'][0]['order_of_acqusitions'];
+                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts['C'][max($value['trials'][0]['acquisition_pattern'], 1) - 1];
                 $currentRow[] = $value['trials'][0]['time_to_finish'];
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
