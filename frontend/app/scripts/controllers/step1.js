@@ -12,12 +12,10 @@ angular.module('mouselabApp')
     dataService.clearAllData();
     dataService.incrementSiteNumber();
     
-    $scope.reward = '';
     
     $scope.onSubmit = function() {
-      if (!$scope.reward) { return; }
       
-      dataService.setParticipantReward($scope.reward);
+      dataService.setParticipantReward(1);
       
       $location.path('step2');
     };

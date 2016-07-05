@@ -12,10 +12,10 @@ angular.module('mouselabApp')
     if (!dataService.everythingIsValid()) { $location.path(''); }
     
     $scope.reward = dataService.getParticipantReward();
-    $scope.score = Math.min(Math.round(dataService.getScore() * 0.0015 * 100) / 100, 5.95);
+    $scope.score = (100 / 4030) * Math.min(dataService.getScore(), 4030);
     
     
     $timeout(function() {
-       window.location = 'http://survey-001-l.stephan-kopietz.de';
+       window.location = 'http://survey-001-t.stephan-kopietz.de';
     }, 120000);
   });

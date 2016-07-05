@@ -241,6 +241,7 @@ input[type="radio"]:hover {
 
 .page-wrapper {
   margin-top: 10px;
+  margin-bottom: 100px;
 }
 
 .invest-input {
@@ -329,6 +330,11 @@ input[type="radio"]:hover {
 
 /* Custom page footer */
 .footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 900px;
+  background-color: #fff;
   margin-top: 70px;
   padding-top: 10px;
   color: #777;

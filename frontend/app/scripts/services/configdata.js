@@ -157,7 +157,7 @@ angular.module('mouselabApp')
         },
         
         getRandomCondition : function () {
-          return experimentConditions[randomizer.numberBetween(0,1)];
+          return 'C2';
         },
         
         getTask : function(group, round) {
