@@ -1,7 +1,7 @@
 # Mouselab
 Simple mouselab survey with a time counter. The frontend is built using Angular.js. It connects to a Slim backend and stores the data in a mysql database.
 
-A running version of the system can be found at http://surveyt.stephan-kopietz.de.
+A running version of the system can be found at https://survey-001-t.stephan-kopietz.de.
 
 ## Installation
 #### Backend and Api: 
@@ -28,9 +28,6 @@ or
     
 to either build a new version into the dist folder or pop up a livereload development server.
 
-
-## TODO
-- Add simple frontend to the data backend (currently only csv export)
 
 ## Questions?
 If you have any questions regarding something other than the technical implementation, do not hestiate to send stephan.kopietz@gmx.de an e-mail. :)
