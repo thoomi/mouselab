@@ -12,7 +12,7 @@ angular.module('mouselabApp')
       // Location will be different for each url
       var experimentLocation  = 'O';
 
-      var baseApiUrl = 'http://api-001.stephan-kopietz.de';
+      var baseApiUrl = 'https://api-001.stephan-kopietz.de';
       //var baseApiUrl = 'https://mouselab-promo-thoomi.c9users.io:8080/api';
       
       var numberOfRounds = 3;

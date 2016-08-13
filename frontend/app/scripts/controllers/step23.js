@@ -16,6 +16,6 @@ angular.module('mouselabApp')
     
     
     $timeout(function() {
-       window.location = 'http://survey-001-t.stephan-kopietz.de';
+       window.location = 'https://survey-001-t.stephan-kopietz.de';
     }, 120000);
   });
