@@ -105,30 +105,6 @@ angular.module('mouselabApp')
         title : 'Ich empfand mich als hektisch, während ich meine Entscheidungen treffen musste.',
         label : 'stress-questions-3',
         value : 0
-      },
-      {
-        id    : 4,
-        title : 'Die Anzahl an Unternehmen empfand ich als zu hoch.',
-        label : 'stress-questions-4',
-        value : 0
-      },
-      {
-        id    : 5,
-        title : 'Die Anzahl an Eigenschaften der Unternehmen empfand ich als zu hoch.',
-        label : 'stress-questions-5',
-        value : 0
-      },
-      {
-        id    : 6,
-        title : 'Die Entscheidungszeit empfand ich als zu kurz.',
-        label : 'stress-questions-6',
-        value : 0
-      },
-      {
-        id    : 7,
-        title : 'Ich hatte nicht ausreichend Zeit zum nachdenken.',
-        label : 'stress-questions-7',
-        value : 0
       }
     ];
     

@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `skopietz_grundlagenstudie`.`tl_participant` (
   `dropout` TINYINT(1) NOT NULL,
   `location` CHAR NOT NULL COMMENT 'Either:\nL = Labor,\nO = Online,\nT = Test',
   `participation_group` VARCHAR(2) NOT NULL COMMENT 'Either:\nG1, G2 or G3',
-  `participation_condition` VARCHAR(4) NOT NULL,
+  `participation_condition` VARCHAR(2) NOT NULL COMMENT 'Either:\nC1 or C2',
   `previous_participant` TINYINT(1) NOT NULL,
   `reward` SMALLINT(6) NOT NULL,
   `payout` FLOAT NULL,

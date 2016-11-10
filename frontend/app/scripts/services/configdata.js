@@ -12,8 +12,8 @@ angular.module('mouselabApp')
       // Location will be different for each url
       var experimentLocation  = 'O';
 
-      var baseApiUrl = 'https://api-001.stephan-kopietz.de';
-      //var baseApiUrl = 'https://mouselab-promo-thoomi.c9users.io:8080/api';
+      //var baseApiUrl = 'https://api-001.stephan-kopietz.de';
+      var baseApiUrl = 'https://mouselab-promo-thoomi.c9users.io:8080/api';
       
       var numberOfRounds = 3;
       var experimentConditions = ['C1', 'C2'];
@@ -22,9 +22,9 @@ angular.module('mouselabApp')
       var possibleTasks  = ['A',  'B',  'C'];
 
       var availableTime = {};
-      availableTime[possibleTasks[0]] = 124050;
-      availableTime[possibleTasks[1]] = 150880;
-      availableTime[possibleTasks[2]] = 177710;
+      availableTime[possibleTasks[0]] = 18060;
+      availableTime[possibleTasks[1]] = 81270;
+      availableTime[possibleTasks[2]] = 144480;
       
       //availableTime[possibleTasks[0]] = 17150;
       //availableTime[possibleTasks[1]] = 23552;
@@ -50,22 +50,22 @@ angular.module('mouselabApp')
       var cueValues = [
         {
           validity: 0.84,
-          cost: { 'A' : 1160, 'B' : 1740, 'C' : 2320 },
+          cost: 1740,
           weight: 0.29
         },
         {
           validity: 0.78,
-          cost: { 'A' : 1070, 'B' : 1600, 'C' : 2140 },
+          cost: 1600,
           weight: 0.27
         },
         {
           validity: 0.68,
-          cost: { 'A' : 930, 'B' : 1400, 'C' : 1870 },
+          cost: 1400,
           weight: 0.23
         },
         {
           validity: 0.61,
-          cost: { 'A' : 840, 'B' : 1260, 'C' : 1680 },
+          cost: 1260,
           weight: 0.21
         },
       ];

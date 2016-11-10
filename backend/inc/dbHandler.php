@@ -172,6 +172,7 @@ class DbHandler
                                                     	tl_stress_question.q_num_5 AS stress_q5,
                                                     	tl_stress_question.q_num_6 AS stress_q6,
                                                     	tl_stress_question.q_num_7 AS stress_q7,
+                                                    	tl_stress_question.q_num_8 AS stress_q8,
                                                     	tl_stress_question.time_to_answer AS time_to_answer,
                                                     	tl_stress_question.q_sum AS stress_sum,
                                                     	

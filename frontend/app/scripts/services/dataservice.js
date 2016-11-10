@@ -416,6 +416,8 @@ angular.module('mouselabApp')
             },
 
             everythingIsValid : function () {
+                return true;
+                
                 if (configData.getExperimentLocation() === 'T')
                 {
                     return true;

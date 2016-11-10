@@ -156,6 +156,7 @@ $app->get('/csv', function() use($app) {
         'Stress-5-A',
         'Stress-6-A',
         'Stress-7-A',
+        'Stress-8-A',
         'Stress-MW-A',
         'Stress-Time-A',
         'Time-ExpBA',
@@ -174,6 +175,7 @@ $app->get('/csv', function() use($app) {
         'Stress-5-B',
         'Stress-6-B',
         'Stress-7-B',
+        'Stress-8-B',
         'Stress-MW-B',
         'Stress-Time-B',
         'Time-ExpBB',
@@ -192,6 +194,7 @@ $app->get('/csv', function() use($app) {
         'Stress-5-C',
         'Stress-6-C',
         'Stress-7-C',
+        'Stress-8-C',
         'Stress-MW-C',
         'Stress-Time-C',
         'Time-ExpBC',
@@ -278,6 +281,7 @@ $app->get('/csv', function() use($app) {
             'stress_q5'              => '#',
             'stress_q6'              => '#',
             'stress_q7'              => '#',
+            'stress_q8'              => '#',
             'stress_sum'             => '#',
             'time_to_answer'         => '#',
             'numberOfTrials'         => '#',
@@ -298,6 +302,7 @@ $app->get('/csv', function() use($app) {
             'stress_q5'              => '#',
             'stress_q6'              => '#',
             'stress_q7'              => '#',
+            'stress_q8'              => '#',
             'stress_sum'             => '#',
             'time_to_answer'         => '#',
             'numberOfTrials'         => '#',
@@ -317,6 +322,7 @@ $app->get('/csv', function() use($app) {
             'stress_q5'              => '#',
             'stress_q6'              => '#',
             'stress_q7'              => '#',
+            'stress_q8'              => '#',
             'stress_sum'             => '#',
             'time_to_answer'         => '#',
             'numberOfTrials'         => '#',
@@ -505,6 +511,7 @@ $app->get('/csv', function() use($app) {
             $expA['stress_q5'],
             $expA['stress_q6'],
             $expA['stress_q7'],
+            $expA['stress_q8'],
             $expA['stress_sum'],
             $expA['time_to_answer'],
             $expA['time_to_finish'],
@@ -523,6 +530,7 @@ $app->get('/csv', function() use($app) {
             $expB['stress_q5'],
             $expB['stress_q6'],
             $expB['stress_q7'],
+            $expB['stress_q8'],
             $expB['stress_sum'],
             $expB['time_to_answer'],
             $expB['time_to_finish'],
@@ -541,6 +549,7 @@ $app->get('/csv', function() use($app) {
             $expC['stress_q5'],
             $expC['stress_q6'],
             $expC['stress_q7'],
+            $expC['stress_q8'],
             $expC['stress_sum'],
             $expC['time_to_answer'],
             $expC['time_to_finish'],
@@ -578,12 +587,20 @@ $app->get('/csv', function() use($app) {
                     $currentRow[] = $acqOrder[2];
                     $currentRow[] = $acqOrder[3];
                 }
+                else
+                {
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                }
 
                 
                 array_shift($value['trials']);
             }
             else 
             {
+                $currentRow[] = '#####';
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
@@ -627,11 +644,19 @@ $app->get('/csv', function() use($app) {
                     $currentRow[] = $acqOrder[2];
                     $currentRow[] = $acqOrder[3];
                 }
+                else
+                {
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                }
                 
                 array_shift($value['trials']);
             }
             else 
             {
+                $currentRow[] = '#####';
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
@@ -674,11 +699,19 @@ $app->get('/csv', function() use($app) {
                     $currentRow[] = $acqOrder[2];
                     $currentRow[] = $acqOrder[3];
                 }
+                else
+                {
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                }
                 
                 array_shift($value['trials']);
             }
             else 
             {
+                $currentRow[] = '#####';
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';

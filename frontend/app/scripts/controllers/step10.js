@@ -39,25 +39,25 @@ angular.module('mouselabApp')
           id: 'A',
           show: false,
           intervalId: -1,
-          countdownTime: $scope.cueValues[0].cost[dataService.getCurrentTask()]
+          countdownTime: $scope.cueValues[0].cost
         },
         {
           id: 'B',
           show: false,
           intervalId: -1,
-          countdownTime: $scope.cueValues[1].cost[dataService.getCurrentTask()]
+          countdownTime: $scope.cueValues[1].cost
         },
         {
           id: 'C',
           show: false,
           intervalId: -1,
-          countdownTime: $scope.cueValues[2].cost[dataService.getCurrentTask()]
+          countdownTime: $scope.cueValues[2].cost
         },
         {
           id: 'D',
           show: false,
           intervalId: -1,
-          countdownTime: $scope.cueValues[3].cost[dataService.getCurrentTask()]
+          countdownTime: $scope.cueValues[3].cost
         }];
       
       
@@ -115,7 +115,7 @@ angular.module('mouselabApp')
           value.show = false;
           $interval.cancel(value.intervalId);
           value.intervalId = -1;
-          value.countdownTime = $scope.cueValues[key].cost[dataService.getCurrentTask()];
+          value.countdownTime = $scope.cueValues[key].cost;
         });
         
         // All trials done
@@ -294,13 +294,9 @@ angular.module('mouselabApp')
       }
     }
     
-    function determineTimeCost(acquisitionPattern, condition) {
-      var timeCosts = {
-        'A' : [4440, 3040, 2730, 2860, 2590, 1840, 1580, 1490, 1500, 1420, 1260, 440, 310, 110, 0],
-        'B' : [4510, 3030, 2680, 2890, 2580, 1840, 1570, 1480, 1490, 1430, 1270, 440, 310, 100, 0],
-        'C' : [4570, 3030, 2640, 2910, 2570, 1850, 1550, 1470, 1490, 1430, 1280, 450, 310, 100, 0]
-      };
+    function determineTimeCost(acquisitionPattern) {
+      var timeCosts = [3770, 2770, 2660, 2500, 2390, 1660, 1500, 1390, 1380, 1280, 1110, 380, 280, 110, 0];
       
-      return timeCosts[condition][acquisitionPattern - 1];
+      return timeCosts[acquisitionPattern - 1];
     }
   });
