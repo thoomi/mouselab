@@ -68,7 +68,10 @@ class DbHandler
     {
         $selectStatement = $this->dbh->prepare('SELECT COUNT(CASE participation_group WHEN "G1" then 1 ELSE null END) AS G1,
                                                 	   COUNT(CASE participation_group WHEN "G2" then 1 ELSE null END) AS G2,
-                                                	   COUNT(CASE participation_group WHEN "G3" then 1 ELSE null END) AS G3
+                                                	   COUNT(CASE participation_group WHEN "G3" then 1 ELSE null END) AS G3,
+                                                	   COUNT(CASE participation_group WHEN "G4" then 1 ELSE null END) AS G4,
+                                                	   COUNT(CASE participation_group WHEN "G5" then 1 ELSE null END) AS G5,
+                                                	   COUNT(CASE participation_group WHEN "G6" then 1 ELSE null END) AS G6
                                                 FROM `tl_participant`');
         $selectStatement->execute();
         $groups = $selectStatement->fetch(PDO::FETCH_ASSOC);
@@ -148,21 +151,17 @@ class DbHandler
         return $experimentId;
     }
 
-    public function saveStressQuestionAnswers($participantDbId, $experimentId, $stressAnswers, $stressAnswersSum, $timeToAnswer)
+    public function saveStressQuestionAnswers($participantDbId, $experimentId, $stressAnswers, $stressAnswer8, $me4Answer, $timeToAnswer)
     {
         // Insert stress question answers
-        $insertStatement = $this->dbh->prepare('INSERT INTO tl_stress_question (q_num_1, q_num_2, q_num_3, q_num_4, q_num_5, q_num_6, q_num_7, q_num_8, q_sum, time_to_answer, tl_participant_id, tl_experiment_id)
-                                                VALUES (:answer1, :answer2, :answer3, :answer4, :answer5, :answer6, :answer7, :answer8, :sumAnswers, :timeToAnswer, :participantId, :experimentId)');
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_stress_question (q_num_1, q_num_2, q_num_3, q_num_8, q_me4, time_to_answer, tl_participant_id, tl_experiment_id)
+                                                VALUES (:answer1, :answer2, :answer3, :answer8, :answerMe4, :timeToAnswer, :participantId, :experimentId)');
 
         $insertStatement->bindParam(':answer1', $stressAnswers[0]);
         $insertStatement->bindParam(':answer2', $stressAnswers[1]);
         $insertStatement->bindParam(':answer3', $stressAnswers[2]);
-        $insertStatement->bindParam(':answer4', $stressAnswers[3]);
-        $insertStatement->bindParam(':answer5', $stressAnswers[4]);
-        $insertStatement->bindParam(':answer6', $stressAnswers[5]);
-        $insertStatement->bindParam(':answer7', $stressAnswers[6]);
-        $insertStatement->bindParam(':answer8', $stressAnswers[7]);
-        $insertStatement->bindParam(':sumAnswers',    $stressAnswersSum);
+        $insertStatement->bindParam(':answer8', $stressAnswer8);
+        $insertStatement->bindParam(':answerMe4',    $me4Answer);
         $insertStatement->bindParam(':timeToAnswer',    $timeToAnswer);
         $insertStatement->bindParam(':participantId', $participantDbId);
         $insertStatement->bindParam(':experimentId',  $experimentId);

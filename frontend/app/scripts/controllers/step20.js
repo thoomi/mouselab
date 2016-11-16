@@ -25,7 +25,7 @@ angular.module('mouselabApp')
         
 
         $scope.checkAllSet = function() {
-            if ($scope.metaQuestion1 && $scope.metaQuestion2 && $scope.metaQuestion3 && $scope.metaQuestion4 && $scope.metaQuestion5)
+            if ($scope.metaQuestion1 && $scope.metaQuestion2 && $scope.metaQuestion4 && $scope.metaQuestion5)
             {
                 $scope.allQuestionsAnswered = true;
             }

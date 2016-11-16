@@ -1,7 +1,7 @@
 <h2>Fragen zum Arbeitstag {{ currentRound }}</h2>
 
 <form class="form-horizontal stress-questions">
-      <div class="form-group">
+      <div class="form-group" ng-if="currentRound === 3 || currentRound === 6">
         <div class="col-sm-2">
             <p><strong>Ich habe…</strong></p>
         </div>
@@ -32,12 +32,13 @@
             </div>
         </div>
     </div>
+    
     <br>
     <div class="form-group" ng-repeat="question in stressQuestions">
         <div class="col-sm-5">
             <p><strong>{{ $index + 1 }}. {{ question.title }}</strong></p>
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-7" ng-if="question.id !== 4">
             <span class="stress-questions-option-label">{{ labelLeft }}</span>
 
             <label class="radio-inline" ng-repeat="i in [9]|makeRange track by $index">
@@ -45,6 +46,32 @@
             </label>
 
             <span class="stress-questions-option-label">{{ labelRight }}</span>
+        </div>
+        <div class="col-sm-7" ng-if="question.id === 4">
+            <div class="radio-inline">
+              <label>
+                <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="1">
+                nie
+              </label>
+            </div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="2">
+                manchmal
+              </label>
+            </div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="3">
+               häufig
+              </label>
+            </div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="4">
+                immer
+              </label>
+            </div>
         </div>
     </div>
     <br>
@@ -55,7 +82,7 @@
              <button class="btn btn-info btn-lg btn-next" data-toggle="modal" data-target="#myModal" ng-if="currentRound < 3"><span class="glyphicon glyphicon-info-sign"></span> Aufgabenbeschreibung ansehen</button>
             <a type="submit" ng-click="onFormSubmit()"
                ng-disabled="!allQuestionsAnswered"
-               class="btn btn-lg btn-success btn-next"><span ng-if="currentRound === 3">Weiter</span><span ng-if="currentRound < 3">Nächsten Arbeitstag beginnen</span>
+               class="btn btn-lg btn-success btn-next"><span ng-if="currentRound === 6">Weiter</span><span ng-if="currentRound < 6">Nächsten Arbeitstag beginnen</span>
                 <div class="spinner" ng-hide="notWaitingForRequestToFinish">
                     <div class="rect1"></div>
                     <div class="rect2"></div>

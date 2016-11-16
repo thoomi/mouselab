@@ -10,31 +10,52 @@
 angular.module('mouselabApp')
   .service('configData', function (randomizer) {
       // Location will be different for each url
-      var experimentLocation  = 'O';
+      var experimentLocation  = 'T';
 
       //var baseApiUrl = 'https://api-001.stephan-kopietz.de';
       var baseApiUrl = 'https://mouselab-promo-thoomi.c9users.io:8080/api';
       
-      var numberOfRounds = 3;
+      var numberOfRounds = 6;
       var experimentConditions = ['C1', 'C2'];
       
-      var possibleGroups = ['G1', 'G2', 'G3'];
-      var possibleTasks  = ['A',  'B',  'C'];
+      var possibleGroups = ['G1', 'G2', 'G3', 'G4', 'G5', 'G6'];
+      var possibleTasks  = ['X_A',  'X_B',  'X_C', 'Y_A',  'Y_B',  'Y_C'];
 
       var availableTime = {};
       availableTime[possibleTasks[0]] = 18060;
       availableTime[possibleTasks[1]] = 81270;
       availableTime[possibleTasks[2]] = 144480;
-      
       //availableTime[possibleTasks[0]] = 17150;
       //availableTime[possibleTasks[1]] = 23552;
       //availableTime[possibleTasks[2]] = 29952;
+      availableTime[possibleTasks[3]] = availableTime[possibleTasks[0]];
+      availableTime[possibleTasks[4]] = availableTime[possibleTasks[1]];
+      availableTime[possibleTasks[5]] = availableTime[possibleTasks[2]];
       
       var taskOrder = {};
-      taskOrder[possibleGroups[0]] = [possibleTasks[0], possibleTasks[1], possibleTasks[2]];
-      taskOrder[possibleGroups[1]] = [possibleTasks[1], possibleTasks[2], possibleTasks[0]];
-      taskOrder[possibleGroups[2]] = [possibleTasks[2], possibleTasks[0], possibleTasks[1]];
+      taskOrder[possibleGroups[0]] = [possibleTasks[0], possibleTasks[1], possibleTasks[2], possibleTasks[3], possibleTasks[4], possibleTasks[5]];
+      taskOrder[possibleGroups[1]] = [possibleTasks[1], possibleTasks[2], possibleTasks[0], possibleTasks[4], possibleTasks[5], possibleTasks[3]];
+      taskOrder[possibleGroups[2]] = [possibleTasks[2], possibleTasks[0], possibleTasks[1], possibleTasks[5], possibleTasks[3], possibleTasks[4]];
+      taskOrder[possibleGroups[3]] = [possibleTasks[3], possibleTasks[4], possibleTasks[5], possibleTasks[0], possibleTasks[1], possibleTasks[2]];
+      taskOrder[possibleGroups[4]] = [possibleTasks[4], possibleTasks[5], possibleTasks[3], possibleTasks[1], possibleTasks[2], possibleTasks[0]];
+      taskOrder[possibleGroups[5]] = [possibleTasks[5], possibleTasks[3], possibleTasks[4], possibleTasks[2], possibleTasks[0], possibleTasks[1]];
       
+      
+      var maxPossibleTrials = {};
+      maxPossibleTrials[possibleTasks[0]] = 8;
+      maxPossibleTrials[possibleTasks[1]] = 36;
+      maxPossibleTrials[possibleTasks[2]] = 64;
+      maxPossibleTrials[possibleTasks[3]] = 8;
+      maxPossibleTrials[possibleTasks[4]] = 36;
+      maxPossibleTrials[possibleTasks[5]] = 64;
+      
+      var maxScore = {}
+      maxScore[possibleTasks[0]] = 168;
+      maxScore[possibleTasks[1]] = 755;
+      maxScore[possibleTasks[2]] = 1341;
+      maxScore[possibleTasks[3]] = 168;
+      maxScore[possibleTasks[4]] = 755;
+      maxScore[possibleTasks[5]] = 1341;
       
       var cueLabels = [
         'Positiver Aktienverlauf?', 
@@ -153,11 +174,11 @@ angular.module('mouselabApp')
         },
         
         getRandomGroup : function () {
-          return possibleGroups[randomizer.numberBetween(0, 2)];
+          return possibleGroups[randomizer.numberBetween(0, 5)];
         },
         
         getRandomCondition : function () {
-          return 'C2';
+          return experimentConditions[randomizer.numberBetween(0, 1)];
         },
         
         getTask : function(group, round) {
@@ -187,6 +208,14 @@ angular.module('mouselabApp')
         
         getPairComparison : function(index) {
           return pairComparisons[index];
+        },
+        
+        getMaxPossibleTrials : function(task) {
+          return maxPossibleTrials[task];
+        },
+        
+        getMaxScore : function(task) {
+          return maxScore[task];
         }
       };
   });

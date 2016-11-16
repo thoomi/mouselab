@@ -33,8 +33,8 @@ angular.module('mouselabApp')
         // Helping variables to determine if data is already saved
         // For example if the user hits the back button and answers the questions twice
         var isParticipantSaved    = false;
-        var isExperimentSaved     = [false, false, false];
-        var isStressQuestionSaved = [false, false, false];
+        var isExperimentSaved     = [false, false, false, false, false, false];
+        var isStressQuestionSaved = [false, false, false, false, false, false];
         var isDemographicsSaved   = false;
         var isMaximisingSaved     = false;
         var isResilienceSaved     = false;
@@ -107,7 +107,8 @@ angular.module('mouselabApp')
                 participantDatabaseId  : participantDatabaseId,
                 experimentDatabaseId   : lastExperimentDatabaseId,
                 stressAnswers          : questionsData.stressAnswers,
-                stressAnswersSum       : questionsData.stressAnswersSum,
+                stressAnswer8          : questionsData.stressAnswer8,
+                me4Answer              : questionsData.me4Answer,
                 timeToAnswer           : questionsData.timeToAnswer
             };
 
@@ -416,8 +417,6 @@ angular.module('mouselabApp')
             },
 
             everythingIsValid : function () {
-                return true;
-                
                 if (configData.getExperimentLocation() === 'T')
                 {
                     return true;
@@ -489,8 +488,8 @@ angular.module('mouselabApp')
                 lastExperimentDatabaseId    = 0;
                 participantIsPreviousParticipant = 0;
                 isParticipantSaved    = false;
-                isExperimentSaved     = [false, false, false];
-                isStressQuestionSaved = [false, false, false];
+                isExperimentSaved     = [false, false, false, false, false, false];
+                isStressQuestionSaved = [false, false, false, false, false, false];
                 isDemographicsSaved   = false;
                 isMaximisingSaved     = false;
                 isResilienceSaved     = false;

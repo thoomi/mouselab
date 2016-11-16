@@ -40,7 +40,7 @@ $app->post('/participant/create', function() use($app) {
         && isset($requestData['participantReward']))
 	{
         // Check if the participant group matches the expectations
-		if (!in_array($requestData['participantGroup'], array('G1', 'G2', 'G3')))
+		if (!in_array($requestData['participantGroup'], array('G1', 'G2', 'G3', 'G4', 'G5', 'G6')))
 		{
 			throw new Exception("Bad participant Group");
 		}
@@ -156,7 +156,7 @@ $app->post('/experiment/create', function() use($app){
 		&& isset($requestData['trials'])
 		&& isset($requestData['timeToFinish']))
 	{
-		if (!in_array($requestData['task'], array('A', 'B', 'C')))
+		if (!in_array($requestData['task'], array('X_A',  'X_B',  'X_C', 'Y_A',  'Y_B',  'Y_C')))
 		{
 			throw new Exception("Bad participant Group");
 		}
@@ -185,7 +185,8 @@ $app->post('/experiment/save/stressquestions', function() use($app) {
 	if (isset($requestData['participantDatabaseId'])
 		&& isset($requestData['experimentDatabaseId'])
         && isset($requestData['stressAnswers'])
-        && isset($requestData['stressAnswersSum'])
+        && isset($requestData['stressAnswer8'])
+        && isset($requestData['me4Answer'])
 		&& isset($requestData['timeToAnswer']))
 	{
 
@@ -193,7 +194,8 @@ $app->post('/experiment/save/stressquestions', function() use($app) {
             $requestData['participantDatabaseId'],
             $requestData['experimentDatabaseId'],
             $requestData['stressAnswers'],
-            $requestData['stressAnswersSum'],
+            $requestData['stressAnswer8'],
+            $requestData['me4Answer'],
             $requestData['timeToAnswer']);
 
 		$app->response->setStatus(200);

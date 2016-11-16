@@ -43,6 +43,21 @@ html {
     white-space: nowrap;
 }
 
+.progress-exp {
+  height: 26px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+}
+
+.progress-bar-exp {
+  line-height: 26px;
+  font-size: 14px;
+}
+
+.progress-time .progress-bar {
+  transition: none!important;
+}
+
 .testing-configurators {
     position: fixed;
     top: 50px;
@@ -160,6 +175,16 @@ html {
 .radio-inline {
   vertical-align: top;
   padding-top: 0;
+
+}
+
+.radio-inline label{
+  font-weight: normal;
+}
+
+.radio-inline input[type="radio"] {
+    margin-right: 5px;
+    margin-top: 0;
 }
 
 .form-horizontal .radio-inline {
@@ -213,7 +238,7 @@ html {
 
 .table-feedback {
   font-size: 18px;
-  float: right;
+  width: 100%;
 }
 
 input[type="radio"]:hover {
@@ -385,4 +410,70 @@ input[type="radio"]:hover {
   } 20% {
       transform: scaleY(1.0);
     }
+}
+
+
+
+.ready-animation-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #eee;
+  opacity: 0.9;
+}
+
+.ready-animation-3 {
+  position: absolute;
+  top: calc(50% - 220px);
+  left: calc(50% - 110px);
+  font-size: 400px;
+  width: 220px;
+  height: 440px;
+  opacity: 0;
+  animation: load 1s;
+  animation-delay: 0s;
+}
+.ready-animation-2 {
+  position: absolute;
+  top: calc(50% - 220px);
+  left: calc(50% - 110px);
+  font-size: 400px;
+  width: 220px;
+  height: 440px;
+  opacity: 0;
+  animation: load 1s;
+  animation-delay: 1s;
+}
+.ready-animation-1 {
+  position: absolute;
+  top: calc(50% - 220px);
+  left: calc(50% - 110px);
+  font-size: 400px;
+  width: 220px;
+  height: 440px;
+  opacity: 0;
+  animation: load 1s;
+  animation-delay: 2s;
+}
+.ready-animation-go {
+  position: absolute;
+  top: calc(50% - 220px);
+  left: calc(50% - 310px);
+  font-size: 400px;
+  width: 620px;
+  height: 440px;
+  opacity: 0;
+  animation: load 1s;
+  animation-delay: 3s;
+}
+
+@keyframes load {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

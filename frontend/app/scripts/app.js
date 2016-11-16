@@ -55,6 +55,10 @@ angular
         templateUrl: 'views/step9.html',
         controller: 'Step9Ctrl'
       })
+      .when('/getReady', {
+        templateUrl: 'views/getReady.html',
+        controller: 'GetReadyCtrl'
+      })
       .when('/step10', {
         templateUrl: 'views/step10.html',
         controller: 'Step10Ctrl'

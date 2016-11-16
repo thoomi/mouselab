@@ -17,13 +17,15 @@ angular.module('mouselabApp')
       $scope.cueLabels     = configData.getCueLabels();
       $scope.cueValues     = configData.getCueValues();
       $scope.currentRound  = dataService.getCurrentRound();
+      $scope.initialTime   = configData.getAvailableTime(dataService.getCurrentTask());
       $scope.availableTime = configData.getAvailableTime(dataService.getCurrentTask());
       $scope.timerRunning  = true;
       $scope.currentTrial  = dataService.getNextTrial();
+      $scope.maxScore      = configData.getMaxScore(dataService.getCurrentTask());
       
       $scope.experimentCondition = dataService.getParticipantCondition();
       
-      $scope.maxTrials           = 64;
+      $scope.maxTrials           = configData.getMaxPossibleTrials(dataService.getCurrentTask());
       $scope.finishedTrials      = 0;
       $scope.currentScore        = 0;
       $scope.buyTimerRunning     = false;

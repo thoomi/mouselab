@@ -33,11 +33,6 @@ angular.module('mouselabApp')
             allSet = false;
           }
         });
-        
-        if (!$scope.stressQuestions8)
-        {
-          allSet = false;
-        }
 
         $scope.allQuestionsAnswered = allSet;
       };
@@ -50,18 +45,32 @@ angular.module('mouselabApp')
       var taskQuestionData = {};
       
       // Save all Answers into an array and calculate the sum
-      taskQuestionData.stressAnswers    = [];
-      taskQuestionData.stressAnswersSum = 0;
+      taskQuestionData.stressAnswers = [];
       angular.forEach($scope.stressQuestions, function(question) {
-        taskQuestionData.stressAnswers[parseInt(question.id - 1)] = question.value;
-        taskQuestionData.stressAnswersSum += parseInt(question.value);
+        if (question.id !== 4)
+        {
+          taskQuestionData.stressAnswers[parseInt(question.id - 1)] = question.value;
+        }
+        else 
+        {
+          taskQuestionData.me4Answer = question.value
+        }
       });
       
       var endDate = new Date();
       $scope.endTime = endDate.getTime();
       
       taskQuestionData.timeToAnswer = $scope.endTime - $scope.startTime;
-      taskQuestionData.stressAnswers[7] = $scope.stressQuestions8;
+      
+      if ($scope.stressQuestions8)
+      {
+        taskQuestionData.stressAnswer8 = $scope.stressQuestions8;
+      }
+      else 
+      {
+        taskQuestionData.stressAnswer8 = -1;
+      }
+      
 
       dataService.saveStressQuestions(taskQuestionData, function(error) {
           if (!error)
@@ -75,7 +84,7 @@ angular.module('mouselabApp')
               else
               {
                   dataService.startNextRound();
-                  $location.path('step10');
+                  $location.path('getReady');
               }
           }
           else
@@ -104,6 +113,12 @@ angular.module('mouselabApp')
         id    : 3,
         title : 'Ich empfand mich als hektisch, während ich meine Entscheidungen treffen musste.',
         label : 'stress-questions-3',
+        value : 0
+      },
+      {
+        id    : 4,
+        title : 'Die Informationen zur verbleibenden Zeit und den erreichten Punkten habe ich wie folgt beobachtet',
+        label : 'stress-questions-4',
         value : 0
       }
     ];
