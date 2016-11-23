@@ -1,7 +1,13 @@
 .idea/
 .vagrant/
+
 backend/vendor/
 backend/data/
 backend/composer.lock
+backend/composer.phar
+
 api/vendor/
 api/composer.lock
+api/composer.phar
+
+provisioning/
