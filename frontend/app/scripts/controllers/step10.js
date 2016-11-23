@@ -8,7 +8,7 @@
  * Controller of the mouselabApp
  */
 angular.module('mouselabApp')
-  .controller('Step10Ctrl', function ($scope, $location,$interval, $timeout, dataService, configData) {
+  .controller('Step10Ctrl', function ($scope, $location,$interval, dataService, configData) {
       if (!dataService.everythingIsValid()) { $location.path(''); }
       
       dataService.incrementSiteNumber();
@@ -22,6 +22,7 @@ angular.module('mouselabApp')
       $scope.timerRunning  = true;
       $scope.currentTrial  = dataService.getNextTrial();
       $scope.maxScore      = configData.getMaxScore(dataService.getCurrentTask());
+      $scope.taskWaiting   = configData.isTaskWithoutWaiting(dataService.getCurrentTask());
       
       $scope.experimentCondition = dataService.getParticipantCondition();
       
@@ -33,30 +34,31 @@ angular.module('mouselabApp')
       $scope.aquiredInfos        = [];
       $scope.finishedTrialData   = [];
       $scope.savingInProgress    = false;
+      $scope.sumOfTimeCosts      = 0;
       
       $scope.timeOfLastAcquiredTrial = configData.getAvailableTime(dataService.getCurrentTask());
       
       $scope.showCueValues  = [
         {
-          id: 'A',
+          id: '1',
           show: false,
           intervalId: -1,
           countdownTime: $scope.cueValues[0].cost
         },
         {
-          id: 'B',
+          id: '2',
           show: false,
           intervalId: -1,
           countdownTime: $scope.cueValues[1].cost
         },
         {
-          id: 'C',
+          id: '3',
           show: false,
           intervalId: -1,
           countdownTime: $scope.cueValues[2].cost
         },
         {
-          id: 'D',
+          id: '4',
           show: false,
           intervalId: -1,
           countdownTime: $scope.cueValues[3].cost
@@ -112,6 +114,7 @@ angular.module('mouselabApp')
         $scope.informationAcquired = false;
         $scope.aquiredInfos        = [];
         $scope.currentTrial        = dataService.getNextTrial();
+        $scope.sumOfTimeCosts      = 0;
         
         angular.forEach($scope.showCueValues, function(value, key) {
           value.show = false;
@@ -165,21 +168,41 @@ angular.module('mouselabApp')
       
       $scope.buyTimerRunning = true;
       
-      $scope.showCueValues[index].intervalId = $interval(function() {
+      if ($scope.taskWaiting)
+      {
+          $scope.showCueValues[index].intervalId = $interval(function() {
          
-         if ($scope.showCueValues[index].countdownTime <= 0)
-         {
-           $interval.cancel($scope.showCueValues[index].intervalId);
-           $scope.showCueValues[index].show = true;
-           $scope.buyTimerRunning = false;
-           $scope.informationAcquired = true;
-           $scope.aquiredInfos.push($scope.showCueValues[index].id);
-           
-           return;
-         }
-         
-         $scope.showCueValues[index].countdownTime -= 10; 
-      }, 10);
+             if ($scope.showCueValues[index].countdownTime <= 0)
+             {
+               $interval.cancel($scope.showCueValues[index].intervalId);
+               $scope.showCueValues[index].show = true;
+               $scope.buyTimerRunning = false;
+               $scope.informationAcquired = true;
+               $scope.aquiredInfos.push($scope.showCueValues[index].id);
+               
+               return;
+             }
+             
+             $scope.showCueValues[index].countdownTime -= 10;
+          }, 10);
+      }
+      else
+      {
+          $scope.showCueValues[index].intervalId = 0;
+          $scope.showCueValues[index].show = true;
+          $scope.buyTimerRunning = false;
+          $scope.informationAcquired = true;
+          $scope.aquiredInfos.push($scope.showCueValues[index].id);
+          
+          var acquisitionPattern = determineAcquisitionPattern();
+          var timeCost = determineTimeCost(acquisitionPattern, dataService.getCurrentTask());
+          
+          var localTimeCost = timeCost - $scope.sumOfTimeCosts;
+          
+          $scope.availableTime -= ($scope.showCueValues[index].countdownTime + localTimeCost);
+          
+          $scope.sumOfTimeCosts = timeCost;
+      }
     };
     
     
@@ -196,13 +219,15 @@ angular.module('mouselabApp')
         localAccuracy += value.weight * $scope.showCueValues[key].show * getCueScore(key, share);
         
         // Calculate sum of acquired times
-        acquisitionTime += value.cost[dataService.getCurrentTask()] * $scope.showCueValues[key].show;
+        
+        acquisitionTime += value.cost * $scope.showCueValues[key].show;
       });
       
       
       localAccuracy /= getMaxLocalAccuracy();
+      var localAccuracy2 = localAccuracy < 1 ? 0 : 1;
       
-      var trialScore =  Math.round(100 * acquiredWeights * localAccuracy);
+      var trialScore =  Math.round(100 * acquiredWeights * localAccuracy2);
       $scope.currentScore += trialScore;
       
     
@@ -217,15 +242,20 @@ angular.module('mouselabApp')
       
       // Get the time cost and subtract it from current time
       var timeCost = determineTimeCost(aqcuisitionPattern, dataService.getCurrentTask());
-      $scope.availableTime -= timeCost;
       
+      if ($scope.taskWaiting)
+      {
+        $scope.availableTime -= timeCost;
+      }
       
+
       $scope.finishedTrialData.push({
         number:               $scope.finishedTrials + 1,
         pairComparison:       $scope.currentTrial.pairId,
         numberOfAcquisitions: numberOfAcquisitions,
         acquiredWeights:      acquiredWeights,
         localAccuracy:        localAccuracy,
+        localAccuracy2:       localAccuracy2,
         score:                trialScore,
         acquisitionPattern:   aqcuisitionPattern,
         chosenOption:         share === 'A' ? $scope.currentTrial.optionId : (17 - $scope.currentTrial.pairId), // Get the chosen pair option. (The option given by the trail data is always displayed left)
@@ -261,39 +291,30 @@ angular.module('mouselabApp')
       return Math.max(accuracy1, accuracy2);
     }
     
-    function determineAcquisitionPattern(acquisitionCount) {
+    function determineAcquisitionPattern() {
       var cue1 = $scope.showCueValues[0].show;
       var cue2 = $scope.showCueValues[1].show;
       var cue3 = $scope.showCueValues[2].show;
       var cue4 = $scope.showCueValues[3].show;
       
-      if (acquisitionCount === 1)
-      {
-        if (cue1 && !cue2 && !cue3 && !cue4) { return 12; }
-        if (!cue1 && cue2 && !cue3 && !cue4) { return 13; }
-        if (!cue1 && !cue2 && cue3 && !cue4) { return 14; }
-        if (!cue1 && !cue2 && !cue3 && cue4) { return 15; }
-      }
-      else if (acquisitionCount === 2)
-      {
-        if (cue1 && cue2 && !cue3 && !cue4) { return 6; }
-        if (cue1 && !cue2 && cue3 && !cue4) { return 7; }
-        if (cue1 && !cue2 && !cue3 && cue4) { return 8; }
-        if (!cue1 && cue2 && cue3 && !cue4) { return 9; }
-        if (!cue1 && cue2 && !cue3 && cue4) { return 10; }
-        if (!cue1 && !cue2 && cue3 && cue4) { return 11; }
-      }
-      else if (acquisitionCount === 3)
-      {
-        if (cue1 && cue2 && cue3 && !cue4) { return 2; }
-        if (cue1 && cue2 && !cue3 && cue4) { return 3; }
-        if (cue1 && !cue2 && cue3 && cue4) { return 4; }
-        if (!cue1 && cue2 && cue3 && cue4) { return 5; }
-      }
-      else if (acquisitionCount === 4)
-      {
-        return 1;
-      }
+      if (!cue1 && !cue2 && !cue3 &&  cue4) { return 15; }
+      if (!cue1 && !cue2 &&  cue3 && !cue4) { return 14; }
+      if (!cue1 &&  cue2 && !cue3 && !cue4) { return 13; }
+      if ( cue1 && !cue2 && !cue3 && !cue4) { return 12; }
+      
+      if (!cue1 && !cue2 &&  cue3 &&  cue4) { return 11; }
+      if (!cue1 &&  cue2 && !cue3 &&  cue4) { return 10; }
+      if (!cue1 &&  cue2 &&  cue3 && !cue4) { return  9; }
+      if ( cue1 && !cue2 && !cue3 &&  cue4) { return  8; }
+      if ( cue1 && !cue2 &&  cue3 && !cue4) { return  7; }
+      if ( cue1 &&  cue2 && !cue3 && !cue4) { return  6; }
+
+      if (!cue1 &&  cue2 &&  cue3 &&  cue4) { return  5; }
+      if ( cue1 && !cue2 &&  cue3 &&  cue4) { return  4; }
+      if ( cue1 &&  cue2 && !cue3 &&  cue4) { return  3; }
+      if ( cue1 &&  cue2 &&  cue3 && !cue4) { return  2; }
+      
+      if ( cue1 &&  cue2 &&  cue3 &&  cue4) { return  1; }
     }
     
     function determineTimeCost(acquisitionPattern) {

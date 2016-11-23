@@ -420,8 +420,22 @@ input[type="radio"]:hover {
   height: 100%;
   top: 0;
   left: 0;
-  background-color: #eee;
-  opacity: 0.9;
+  background-color: #fff;
+  opacity: 1;
+}
+
+.ready-animation-get {
+  position: absolute;
+  top: calc(50% - 220px);
+  left: calc(50% - 350px);
+  font-size: 200px;
+  width: 700px;
+  height: 440px;
+  opacity: 0;
+  text-align: center;
+  font-weight: bold;
+  animation: load 2s;
+  animation-delay: 0s;
 }
 
 .ready-animation-3 {
@@ -429,44 +443,48 @@ input[type="radio"]:hover {
   top: calc(50% - 220px);
   left: calc(50% - 110px);
   font-size: 400px;
-  width: 220px;
-  height: 440px;
-  opacity: 0;
-  animation: load 1s;
-  animation-delay: 0s;
-}
-.ready-animation-2 {
-  position: absolute;
-  top: calc(50% - 220px);
-  left: calc(50% - 110px);
-  font-size: 400px;
-  width: 220px;
-  height: 440px;
-  opacity: 0;
-  animation: load 1s;
-  animation-delay: 1s;
-}
-.ready-animation-1 {
-  position: absolute;
-  top: calc(50% - 220px);
-  left: calc(50% - 110px);
-  font-size: 400px;
+  font-weight: bold;
   width: 220px;
   height: 440px;
   opacity: 0;
   animation: load 1s;
   animation-delay: 2s;
 }
+.ready-animation-2 {
+  position: absolute;
+  top: calc(50% - 220px);
+  left: calc(50% - 110px);
+  font-size: 400px;
+  font-weight: bold;
+  width: 220px;
+  height: 440px;
+  opacity: 0;
+  animation: load 1s;
+  animation-delay: 3s;
+}
+.ready-animation-1 {
+  position: absolute;
+  top: calc(50% - 220px);
+  left: calc(50% - 110px);
+  font-size: 400px;
+  font-weight: bold;
+  width: 220px;
+  height: 440px;
+  opacity: 0;
+  animation: load 1s;
+  animation-delay: 4s;
+}
 .ready-animation-go {
   position: absolute;
   top: calc(50% - 220px);
   left: calc(50% - 310px);
   font-size: 400px;
+  font-weight: bold;
   width: 620px;
   height: 440px;
   opacity: 0;
   animation: load 1s;
-  animation-delay: 3s;
+  animation-delay: 5s;
 }
 
 @keyframes load {

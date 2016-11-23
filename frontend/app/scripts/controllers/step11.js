@@ -18,7 +18,7 @@ angular.module('mouselabApp')
     $scope.notWaitingForRequestToFinish = true;
     $scope.labelLeft = 'trifft nicht zu';
     $scope.labelRight = 'trifft zu';
-    $scope.stressQuestions8 = '';
+    $scope.stressQuestions8 = -1;
    
     var startDate = new Date();
     $scope.startTime = startDate.getTime();
@@ -61,16 +61,8 @@ angular.module('mouselabApp')
       $scope.endTime = endDate.getTime();
       
       taskQuestionData.timeToAnswer = $scope.endTime - $scope.startTime;
-      
-      if ($scope.stressQuestions8)
-      {
-        taskQuestionData.stressAnswer8 = $scope.stressQuestions8;
-      }
-      else 
-      {
-        taskQuestionData.stressAnswer8 = -1;
-      }
-      
+
+      taskQuestionData.stressAnswer8 = $scope.stressQuestions8;
 
       dataService.saveStressQuestions(taskQuestionData, function(error) {
           if (!error)

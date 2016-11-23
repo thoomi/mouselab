@@ -142,127 +142,228 @@ $app->get('/csv', function() use($app) {
             
         'Meta-1',
         'Meta-2',
-        'Meta-3',
         'Meta-4',
         
         
-		'Position-ExpBA',	     // task_pos
-		'lt_ExpG-A',	             // Verfügbare Zeit
-        'numberTrials-A',          // Anzahl trials in A
-        'Stress-1-A',
-        'Stress-2-A',
-        'Stress-3-A',
-        'Stress-4-A',
-        'Stress-5-A',
-        'Stress-6-A',
-        'Stress-7-A',
-        'Stress-8-A',
-        'Stress-MW-A',
-        'Stress-Time-A',
-        'Time-ExpBA',
-        'ppa-A',
-        'tt1-A-Sum',
-        'tt2-A-Sum',
-        'at-A-Sum',
+		'Position-ExpB-X-A',	     // task_pos
+		'lt_ExpG-X-A',	             // Verfügbare Zeit
+        'nT-X-A',          // Anzahl trials in A
+        'Stress-1-X-A',
+        'Stress-2-X-A',
+        'Stress-3-X-A',
+        'Stress-8-X-A',
+        'Stress-Time-X-A',
+        'Time-ExpB-X-A',
+        'ppa-X-A',
+        'tt1-X-A-Sum',
+        'tt2-X-A-Sum',
+        'at-X-A-Sum',
 
-		'Position-ExpBB',	     // task_pos
-		'lt_ExpG-B',	             // Verfügbare Zeit
-        'numberTrials-B',          // Anzahl trials in A
-        'Stress-1-B',
-        'Stress-2-B',
-        'Stress-3-B',
-        'Stress-4-B',
-        'Stress-5-B',
-        'Stress-6-B',
-        'Stress-7-B',
-        'Stress-8-B',
-        'Stress-MW-B',
-        'Stress-Time-B',
-        'Time-ExpBB',
-        'ppa-B',
-        'tt1-B-Sum',
-        'tt2-B-Sum',
-        'at-B-Sum',
+		'Position-ExpB-X-B',	     // task_pos
+		'lt_ExpG-X-B',	             // Verfügbare Zeit
+        'nT-X-B',          // Anzahl trials in A
+        'Stress-1-X-B',
+        'Stress-2-X-B',
+        'Stress-3-X-B',
+        'Stress-8-X-B',
+        'Stress-Time-X-B',
+        'Time-ExpB-X-B',
+        'ppa-X-B',
+        'tt1-X-B-Sum',
+        'tt2-X-B-Sum',
+        'at-X-B-Sum',
 
-		'Position-ExpBC',	     // task_pos
-		'lt_ExpG-C',	             // Verfügbare Zeit
-        'numberTrials-C',          // Anzahl trials in A
-        'Stress-1-C',
-        'Stress-2-C',
-        'Stress-3-C',
-        'Stress-4-C',
-        'Stress-5-C',
-        'Stress-6-C',
-        'Stress-7-C',
-        'Stress-8-C',
-        'Stress-MW-C',
-        'Stress-Time-C',
-        'Time-ExpBC',
-        'ppa-C',
-        'tt1-C-Sum',
-        'tt2-C-Sum',
-        'at-C-Sum',
+		'Position-ExpB-X-C',	     // task_pos
+		'lt_ExpG-X-C',	             // Verfügbare Zeit
+        'nT-X-C',          // Anzahl trials in A
+        'Stress-1-X-C',
+        'Stress-2-X-C',
+        'Stress-3-X-C',
+        'Stress-8-X-C',
+        'Stress-Time-X-C',
+        'Time-ExpB-X-C',
+        'ppa-X-C',
+        'tt1-X-C-Sum',
+        'tt2-X-C-Sum',
+        'at-X-C-Sum',
+        
+        'Position-ExpB-Y-A',	     // task_pos
+		'lt_ExpG-Y-A',	             // Verfügbare Zeit
+        'nT-Y-A',          // Anzahl trials in A
+        'Stress-1-Y-A',
+        'Stress-2-Y-A',
+        'Stress-3-Y-A',
+        'Stress-8-Y-A',
+        'Stress-Time-Y-A',
+        'Time-ExpB-Y-A',
+        'ppa-Y-A',
+        'tt1-Y-A-Sum',
+        'tt2-Y-A-Sum',
+        'at-Y-A-Sum',
+
+		'Position-ExpB-Y-B',	     // task_pos
+		'lt_ExpG-Y-B',	             // Verfügbare Zeit
+        'nT-Y-B',          // Anzahl trials in A
+        'Stress-1-Y-B',
+        'Stress-2-Y-B',
+        'Stress-3-Y-B',
+        'Stress-8-Y-B',
+        'Stress-Time-Y-B',
+        'Time-ExpB-Y-B',
+        'ppa-Y-B',
+        'tt1-Y-B-Sum',
+        'tt2-Y-B-Sum',
+        'at-Y-B-Sum',
+
+		'Position-ExpB-Y-C',	     // task_pos
+		'lt_ExpG-Y-C',	             // Verfügbare Zeit
+        'nT-Y-C',          // Anzahl trials in A
+        'Stress-1-Y-C',
+        'Stress-2-Y-C',
+        'Stress-3-Y-C',
+        'Stress-8-Y-C',
+        'Stress-Time-Y-C',
+        'Time-ExpB-Y-C',
+        'ppa-Y-C',
+        'tt1-Y-C-Sum',
+        'tt2-Y-C-Sum',
+        'at-Y-C-Sum',
 	);
     
     // Generate Labels for Trials
-    for ($indexOfTrial = 1; $indexOfTrial < 65; $indexOfTrial++)
+    for ($indexOfTrial = 1; $indexOfTrial < 9; $indexOfTrial++)
     {
-        $firstRow[] = 'PC_A_' . $indexOfTrial; // pair compairison
-        $firstRow[] = 'AS_A_' . $indexOfTrial; // acquisition_pattern
-        $firstRow[] = 'aw_SUM_A_' . $indexOfTrial; // weight sum
-        $firstRow[] = 'laa_A_' . $indexOfTrial; // local_accuracy
-        $firstRow[] = 'Gew_Opt_A_' . $indexOfTrial; // chosen option
-        $firstRow[] = 'apt_A_' . $indexOfTrial; // number of acquisitions
-        $firstRow[] = 'AC_Order_A_' . $indexOfTrial; // acquisition order
-        $firstRow[] = 'tt1_A_' . $indexOfTrial; // trial time to finish
-        $firstRow[] = 'tt2_A_' . $indexOfTrial; // trial time to finish
-        $firstRow[] = 'at_SUM_A_' . $indexOfTrial; // sum aqcuisition times
-        $firstRow[] = 'ppt_A_' . $indexOfTrial; //  trial score
+        $firstRow[] = 'PC_X_A_' . $indexOfTrial; // pair compairison
+        $firstRow[] = 'AS_X_A_' . $indexOfTrial; // acquisition_pattern
+        $firstRow[] = 'aw_SUM_X_A_' . $indexOfTrial; // weight sum
+        $firstRow[] = 'laa_X_A_' . $indexOfTrial; // local_accuracy
+        $firstRow[] = 'laa2_X_A_' . $indexOfTrial; // local_accuracy
+        $firstRow[] = 'Gew_Opt_X_A_' . $indexOfTrial; // chosen option
+        $firstRow[] = 'apt_X_A_' . $indexOfTrial; // number of acquisitions
+        $firstRow[] = 'AC_Order_X_A_' . $indexOfTrial; // acquisition order
+        $firstRow[] = 'tt1_X_A_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'tt2_X_A_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'dt_X_A_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'at_SUM_X_A_' . $indexOfTrial; // sum aqcuisition times
+        $firstRow[] = 'ppt2_X_A_' . $indexOfTrial; //  trial score
         
-        $firstRow[] = 'AC_A_' . $indexOfTrial . '_1';
-        $firstRow[] = 'AC_A_' . $indexOfTrial . '_2'; 
-        $firstRow[] = 'AC_A_' . $indexOfTrial . '_3';
-        $firstRow[] = 'AC_A_' . $indexOfTrial . '_4'; 
+        $firstRow[] = 'ACO_X_A_' . $indexOfTrial . '_1';
+        $firstRow[] = 'ACO_X_A_' . $indexOfTrial . '_2'; 
+        $firstRow[] = 'ACO_X_A_' . $indexOfTrial . '_3';
+        $firstRow[] = 'ACO_X_A_' . $indexOfTrial . '_4'; 
+    }
+    
+    for ($indexOfTrial = 1; $indexOfTrial < 37; $indexOfTrial++)
+    {
+        $firstRow[] = 'PC_X_B_' . $indexOfTrial; // pair compairison
+        $firstRow[] = 'AS_X_B_' . $indexOfTrial; // acquisition_pattern
+        $firstRow[] = 'aw_SUM_X_B_' . $indexOfTrial; // weight sum
+        $firstRow[] = 'laa_X_B_' . $indexOfTrial; // local_accuracy
+        $firstRow[] = 'laa2_X_B_' . $indexOfTrial; // local_accuracy
+        $firstRow[] = 'Gew_Opt_X_B_' . $indexOfTrial; // chosen option
+        $firstRow[] = 'apt_X_B_' . $indexOfTrial; // number of acquisitions
+        $firstRow[] = 'AC_Order_X_B_' . $indexOfTrial; // acquisition order
+        $firstRow[] = 'tt1_X_B_' . $indexOfTrial; // trial time to finish after cost
+        $firstRow[] = 'tt2_X_B_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'dt_X_B_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'at_SUM_X_B_' . $indexOfTrial; // sum aqcuisition times
+        $firstRow[] = 'ppt2_X_B_' . $indexOfTrial; //  trial score
+        
+        $firstRow[] = 'ACO_X_B_' . $indexOfTrial . '_1';
+        $firstRow[] = 'ACO_X_B_' . $indexOfTrial . '_2'; 
+        $firstRow[] = 'ACO_X_B_' . $indexOfTrial . '_3';
+        $firstRow[] = 'ACO_X_B_' . $indexOfTrial . '_4'; 
     }
     
     for ($indexOfTrial = 1; $indexOfTrial < 65; $indexOfTrial++)
     {
-        $firstRow[] = 'PC_B_' . $indexOfTrial; // pair compairison
-        $firstRow[] = 'AS_B_' . $indexOfTrial; // acquisition_pattern
-        $firstRow[] = 'aw_SUM_B_' . $indexOfTrial; // weight sum
-        $firstRow[] = 'laa_B_' . $indexOfTrial; // local_accuracy
-        $firstRow[] = 'Gew_Opt_B_' . $indexOfTrial; // chosen option
-        $firstRow[] = 'apt_B_' . $indexOfTrial; // number of acquisitions
-        $firstRow[] = 'AC_Order_B_' . $indexOfTrial; // acquisition order
-        $firstRow[] = 'tt1_B_' . $indexOfTrial; // trial time to finish after cost
-        $firstRow[] = 'tt2_B_' . $indexOfTrial; // trial time to finish
-        $firstRow[] = 'at_SUM_B_' . $indexOfTrial; // sum aqcuisition times
-        $firstRow[] = 'ppt_B_' . $indexOfTrial; //  trial score
+        $firstRow[] = 'PC_X_C_' . $indexOfTrial; // pair compairison
+        $firstRow[] = 'AS_X_C_' . $indexOfTrial; // acquisition_pattern
+        $firstRow[] = 'aw_SUM_X_C_' . $indexOfTrial; // weight sum
+        $firstRow[] = 'laa_X_C_' . $indexOfTrial; // local_accuracy
+        $firstRow[] = 'laa2_X_C_' . $indexOfTrial; // local_accuracy
+        $firstRow[] = 'Gew_Opt_X_C_' . $indexOfTrial; // chosen option
+        $firstRow[] = 'apt_X_C_' . $indexOfTrial; // number of acquisitions
+        $firstRow[] = 'AC_Order_X_C_' . $indexOfTrial; // acquisition order
+        $firstRow[] = 'tt1_X_C_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'tt2_X_C_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'dt_X_C_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'at_SUM_X_C_' . $indexOfTrial; // sum aqcuisition times
+        $firstRow[] = 'ppt2_X_C_' . $indexOfTrial; // trial score
         
-        $firstRow[] = 'AC_B_' . $indexOfTrial . '_1';
-        $firstRow[] = 'AC_B_' . $indexOfTrial . '_2'; 
-        $firstRow[] = 'AC_B_' . $indexOfTrial . '_3';
-        $firstRow[] = 'AC_B_' . $indexOfTrial . '_4'; 
+        $firstRow[] = 'ACO_X_C_' . $indexOfTrial . '_1';
+        $firstRow[] = 'ACO_X_C_' . $indexOfTrial . '_2'; 
+        $firstRow[] = 'ACO_X_C_' . $indexOfTrial . '_3';
+        $firstRow[] = 'ACO_X_C_' . $indexOfTrial . '_4'; 
+    }
+    
+    
+    
+        // Generate Labels for Trials
+    for ($indexOfTrial = 1; $indexOfTrial < 9; $indexOfTrial++)
+    {
+        $firstRow[] = 'PC_Y_A_' . $indexOfTrial; // pair compairison
+        $firstRow[] = 'AS_Y_A_' . $indexOfTrial; // acquisition_pattern
+        $firstRow[] = 'aw_SUM_Y_A_' . $indexOfTrial; // weight sum
+        $firstRow[] = 'laa_Y_A_' . $indexOfTrial; // local_accuracy
+        $firstRow[] = 'laa2_Y_A_' . $indexOfTrial; // local_accuracy
+        $firstRow[] = 'Gew_Opt_Y_A_' . $indexOfTrial; // chosen option
+        $firstRow[] = 'apt_Y_A_' . $indexOfTrial; // number of acquisitions
+        $firstRow[] = 'AC_Order_Y_A_' . $indexOfTrial; // acquisition order
+        $firstRow[] = 'tt1_Y_A_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'tt2_Y_A_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'dt_Y_A_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'at_SUM_Y_A_' . $indexOfTrial; // sum aqcuisition times
+        $firstRow[] = 'ppt2_Y_A_' . $indexOfTrial; //  trial score
+        
+        $firstRow[] = 'ACO_Y_A_' . $indexOfTrial . '_1';
+        $firstRow[] = 'ACO_Y_A_' . $indexOfTrial . '_2'; 
+        $firstRow[] = 'ACO_Y_A_' . $indexOfTrial . '_3';
+        $firstRow[] = 'ACO_Y_A_' . $indexOfTrial . '_4'; 
+    }
+    
+    for ($indexOfTrial = 1; $indexOfTrial < 37; $indexOfTrial++)
+    {
+        $firstRow[] = 'PC_Y_B_' . $indexOfTrial; // pair compairison
+        $firstRow[] = 'AS_Y_B_' . $indexOfTrial; // acquisition_pattern
+        $firstRow[] = 'aw_SUM_Y_B_' . $indexOfTrial; // weight sum
+        $firstRow[] = 'laa_Y_B_' . $indexOfTrial; // local_accuracy
+        $firstRow[] = 'laa2_Y_B_' . $indexOfTrial; // local_accuracy
+        $firstRow[] = 'Gew_Opt_Y_B_' . $indexOfTrial; // chosen option
+        $firstRow[] = 'apt_Y_B_' . $indexOfTrial; // number of acquisitions
+        $firstRow[] = 'AC_Order_Y_B_' . $indexOfTrial; // acquisition order
+        $firstRow[] = 'tt1_Y_B_' . $indexOfTrial; // trial time to finish after cost
+        $firstRow[] = 'tt2_Y_B_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'dt_Y_B_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'at_SUM_Y_B_' . $indexOfTrial; // sum aqcuisition times
+        $firstRow[] = 'ppt2_Y_B_' . $indexOfTrial; //  trial score
+        
+        $firstRow[] = 'ACO_Y_B_' . $indexOfTrial . '_1';
+        $firstRow[] = 'ACO_Y_B_' . $indexOfTrial . '_2'; 
+        $firstRow[] = 'ACO_Y_B_' . $indexOfTrial . '_3';
+        $firstRow[] = 'ACO_Y_B_' . $indexOfTrial . '_4'; 
     }
     
     for ($indexOfTrial = 1; $indexOfTrial < 65; $indexOfTrial++)
     {
-        $firstRow[] = 'PC_C_' . $indexOfTrial; // pair compairison
-        $firstRow[] = 'AS_C_' . $indexOfTrial; // acquisition_pattern
-        $firstRow[] = 'aw_SUM_C_' . $indexOfTrial; // weight sum
-        $firstRow[] = 'laa_C_' . $indexOfTrial; // local_accuracy
-        $firstRow[] = 'Gew_Opt_C_' . $indexOfTrial; // chosen option
-        $firstRow[] = 'apt_C_' . $indexOfTrial; // number of acquisitions
-        $firstRow[] = 'AC_Order_C_' . $indexOfTrial; // acquisition order
-        $firstRow[] = 'tt1_C_' . $indexOfTrial; // trial time to finish
-        $firstRow[] = 'tt2_C_' . $indexOfTrial; // trial time to finish
-        $firstRow[] = 'at_SUM_C_' . $indexOfTrial; // sum aqcuisition times
-        $firstRow[] = 'ppt_C_' . $indexOfTrial; // trial score
+        $firstRow[] = 'PC_Y_C_' . $indexOfTrial; // pair compairison
+        $firstRow[] = 'AS_Y_C_' . $indexOfTrial; // acquisition_pattern
+        $firstRow[] = 'aw_SUM_Y_C_' . $indexOfTrial; // weight sum
+        $firstRow[] = 'laa_Y_C_' . $indexOfTrial; // local_accuracy
+        $firstRow[] = 'laa2_Y_C_' . $indexOfTrial; // local_accuracy
+        $firstRow[] = 'Gew_Opt_Y_C_' . $indexOfTrial; // chosen option
+        $firstRow[] = 'apt_Y_C_' . $indexOfTrial; // number of acquisitions
+        $firstRow[] = 'AC_Order_Y_C_' . $indexOfTrial; // acquisition order
+        $firstRow[] = 'tt1_Y_C_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'tt2_Y_C_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'dt_Y_C_' . $indexOfTrial; // trial time to finish
+        $firstRow[] = 'at_SUM_Y_C_' . $indexOfTrial; // sum aqcuisition times
+        $firstRow[] = 'ppt2_Y_C_' . $indexOfTrial; // trial score
         
-        $firstRow[] = 'AC_C_' . $indexOfTrial . '_1';
-        $firstRow[] = 'AC_C_' . $indexOfTrial . '_2'; 
-        $firstRow[] = 'AC_C_' . $indexOfTrial . '_3';
-        $firstRow[] = 'AC_C_' . $indexOfTrial . '_4'; 
+        $firstRow[] = 'ACO_Y_C_' . $indexOfTrial . '_1';
+        $firstRow[] = 'ACO_Y_C_' . $indexOfTrial . '_2'; 
+        $firstRow[] = 'ACO_Y_C_' . $indexOfTrial . '_3';
+        $firstRow[] = 'ACO_Y_C_' . $indexOfTrial . '_4'; 
     }
     
     $result[] = $firstRow;
@@ -271,16 +372,12 @@ $app->get('/csv', function() use($app) {
 	foreach ($data as $value) {
 	    $totalScore = 0;
 	    
-		$expA = array(
+		$expXA = array(
 			'task_pos'               => '#',
 			'time_to_finish'         => '#',
             'stress_q1'              => '#',
             'stress_q2'              => '#',
             'stress_q3'              => '#',
-            'stress_q4'              => '#',
-            'stress_q5'              => '#',
-            'stress_q6'              => '#',
-            'stress_q7'              => '#',
             'stress_q8'              => '#',
             'stress_sum'             => '#',
             'time_to_answer'         => '#',
@@ -290,18 +387,14 @@ $app->get('/csv', function() use($app) {
             'acquisitionSum'         => '#',
             
 		);
-		if (isset($value['experiments'][0])) { $expA = $value['experiments'][0]; $totalScore += $expA['score']; }
+		if (isset($value['experiments'][0])) { $expXA = $value['experiments'][0]; $totalScore += $expXA['score']; }
 
-		$expB = array(
+		$expXB = array(
 			'task_pos'               => '#',
 			'time_to_finish'         => '#',
             'stress_q1'              => '#',
             'stress_q2'              => '#',
             'stress_q3'              => '#',
-            'stress_q4'              => '#',
-            'stress_q5'              => '#',
-            'stress_q6'              => '#',
-            'stress_q7'              => '#',
             'stress_q8'              => '#',
             'stress_sum'             => '#',
             'time_to_answer'         => '#',
@@ -310,18 +403,14 @@ $app->get('/csv', function() use($app) {
             'trialTimeSum'           => '#',
             'acquisitionSum'         => '#',
 		);
-		if (isset($value['experiments'][1])) { $expB = $value['experiments'][1]; $totalScore += $expB['score']; }
+		if (isset($value['experiments'][1])) { $expXB = $value['experiments'][1]; $totalScore += $expXB['score']; }
 
-		$expC = array(
+		$expXC = array(
 			'task_pos'               => '#',
 			'time_to_finish'         => '#',
             'stress_q1'              => '#',
             'stress_q2'              => '#',
             'stress_q3'              => '#',
-            'stress_q4'              => '#',
-            'stress_q5'              => '#',
-            'stress_q6'              => '#',
-            'stress_q7'              => '#',
             'stress_q8'              => '#',
             'stress_sum'             => '#',
             'time_to_answer'         => '#',
@@ -330,7 +419,55 @@ $app->get('/csv', function() use($app) {
             'trialTimeSum'           => '#',
             'acquisitionSum'         => '#',
 		);
-		if (isset($value['experiments'][2])) { $expC = $value['experiments'][2]; $totalScore += $expC['score']; }
+		if (isset($value['experiments'][2])) { $expXC = $value['experiments'][2]; $totalScore += $expXC['score']; }
+		
+		$expYA = array(
+			'task_pos'               => '#',
+			'time_to_finish'         => '#',
+            'stress_q1'              => '#',
+            'stress_q2'              => '#',
+            'stress_q3'              => '#',
+            'stress_q8'              => '#',
+            'stress_sum'             => '#',
+            'time_to_answer'         => '#',
+            'numberOfTrials'         => '#',
+            'score'                  => '#',
+            'trialTimeSum'           => '#',
+            'acquisitionSum'         => '#',
+		);
+		if (isset($value['experiments'][3])) { $expYA = $value['experiments'][3]; $totalScore += $expYA['score']; }
+		
+		$expYB = array(
+			'task_pos'               => '#',
+			'time_to_finish'         => '#',
+            'stress_q1'              => '#',
+            'stress_q2'              => '#',
+            'stress_q3'              => '#',
+            'stress_q8'              => '#',
+            'stress_sum'             => '#',
+            'time_to_answer'         => '#',
+            'numberOfTrials'         => '#',
+            'score'                  => '#',
+            'trialTimeSum'           => '#',
+            'acquisitionSum'         => '#',
+		);
+		if (isset($value['experiments'][4])) { $expYB = $value['experiments'][4]; $totalScore += $expYB['score']; }
+		
+		$expYC = array(
+			'task_pos'               => '#',
+			'time_to_finish'         => '#',
+            'stress_q1'              => '#',
+            'stress_q2'              => '#',
+            'stress_q3'              => '#',
+            'stress_q8'              => '#',
+            'stress_sum'             => '#',
+            'time_to_answer'         => '#',
+            'numberOfTrials'         => '#',
+            'score'                  => '#',
+            'trialTimeSum'           => '#',
+            'acquisitionSum'         => '#',
+		);
+		if (isset($value['experiments'][5])) { $expYC = $value['experiments'][5]; $totalScore += $expYC['score']; }
 
         $maximising = array(
             'q_num_1' => '#',
@@ -418,26 +555,35 @@ $app->get('/csv', function() use($app) {
         if (isset($value['participant']['payout'])) { $payout = $value['participant']['payout']; }
         
         
-        $timeCosts = array(
-            'A' => [4440, 3040, 2730, 2860, 2590, 1840, 1580, 1490, 1500, 1420, 1260, 440, 310, 110, 0],
-            'B' => [4510, 3030, 2680, 2890, 2580, 1840, 1570, 1480, 1490, 1430, 1270, 440, 310, 100, 0],
-            'C' => [4570, 3030, 2640, 2910, 2570, 1850, 1550, 1470, 1490, 1430, 1280, 450, 310, 100, 0]);
+        $timeCosts = [3770, 2770, 2660, 2500, 2390, 1660, 1500, 1390, 1380, 1280, 1110, 380, 280, 110, 0];
         
         // Calculate tt1 sum
-        $tt1Sums = array('A' => 0, 'B' => 0, 'C' => 0);
+        $tt1Sums = array('X_A' => 0, 'X_B' => 0, 'X_C' => 0, 'Y_A' => 0, 'Y_B' => 0, 'Y_C' => 0);
         foreach ($value['trials'] as $trial)
         {
-            if ($trial['task'] === 'A')
+            if ($trial['task'] === 'X_A')
             {
-                $tt1Sums['A'] += ($trial['time_to_finish'] - $timeCosts['A'][max($trial['acquisition_pattern'], 1) - 1]);
+                $tt1Sums['X_A'] += ($trial['time_to_finish'] - $timeCosts[max($trial['acquisition_pattern'], 1) - 1]);
             }
-            else if ($trial['task'] === 'B')
+            else if ($trial['task'] === 'X_B')
             {
-                $tt1Sums['B'] += ($trial['time_to_finish'] - $timeCosts['B'][max($trial['acquisition_pattern'], 1) - 1]);
+                $tt1Sums['X_B'] += ($trial['time_to_finish'] - $timeCosts[max($trial['acquisition_pattern'], 1) - 1]);
             }
-            else if ($trial['task'] === 'C')
+            else if ($trial['task'] === 'X_C')
             {
-                $tt1Sums['C'] += ($trial['time_to_finish'] - $timeCosts['C'][max($trial['acquisition_pattern'], 1) - 1]);
+                $tt1Sums['X_C'] += ($trial['time_to_finish'] - $timeCosts[max($trial['acquisition_pattern'], 1) - 1]);
+            }
+            else if ($trial['task'] === 'Y_A')
+            {
+                $tt1Sums['Y_A'] += ($trial['time_to_finish'] - $timeCosts[max($trial['acquisition_pattern'], 1) - 1]);
+            }
+            else if ($trial['task'] === 'Y_B')
+            {
+                $tt1Sums['Y_B'] += ($trial['time_to_finish'] - $timeCosts[max($trial['acquisition_pattern'], 1) - 1]);
+            }
+            else if ($trial['task'] === 'Y_C')
+            {
+                $tt1Sums['Y_C'] += ($trial['time_to_finish'] - $timeCosts[max($trial['acquisition_pattern'], 1) - 1]);
             }
         }
         
@@ -469,7 +615,7 @@ $app->get('/csv', function() use($app) {
             $maximising['q_num_4'],
             $maximising['q_num_5'],
             $maximising['q_num_6'],
-            $maximising['q_sum'],
+            $maximising['q_sum'] / 6,
             
             $resiliance['q_num_1'],
             $resiliance['q_num_2'],
@@ -482,7 +628,7 @@ $app->get('/csv', function() use($app) {
             $resiliance['q_num_9'],
             $resiliance['q_num_10'],
             $resiliance['q_num_11'],
-            $resiliance['q_sum'],
+            $resiliance['q_sum'] / 11,
             
             $risk['q_num_1'],
             $risk['q_num_2'],
@@ -493,88 +639,116 @@ $app->get('/csv', function() use($app) {
             $nfc['q_num_2'],
             $nfc['q_num_3'],
             $nfc['q_num_4'],
-            $nfc['q_sum'],
+            $nfc['q_sum'] / 4,
             
             $meta['q_num_1'],
             $meta['q_num_2'],
-            $meta['q_num_3'],
             $meta['q_num_4'],
             
             
-			$expA['task_pos'],
-			124050,
-			$expA['numberOfTrials'],
-            $expA['stress_q1'],
-            $expA['stress_q2'],
-            $expA['stress_q3'],
-            $expA['stress_q4'],
-            $expA['stress_q5'],
-            $expA['stress_q6'],
-            $expA['stress_q7'],
-            $expA['stress_q8'],
-            $expA['stress_sum'],
-            $expA['time_to_answer'],
-            $expA['time_to_finish'],
-            $expA['score'],
-            $tt1Sums['A'],
-            $expA['trialTimeSum'],
-            $expA['acquisitionSum'],
+			$expXA['task_pos'],
+			18060,
+			$expXA['numberOfTrials'],
+            $expXA['stress_q1'],
+            $expXA['stress_q2'],
+            $expXA['stress_q3'],
+            $expXA['stress_q8'],
+            $expXA['time_to_answer'],
+            $expXA['time_to_finish'],
+            $expXA['score'],
+            $tt1Sums['X_A'],
+            $expXA['trialTimeSum'],
+            $expXA['acquisitionSum'],
 
-			$expB['task_pos'],
-			150880,
-			$expB['numberOfTrials'],
-            $expB['stress_q1'],
-            $expB['stress_q2'],
-            $expB['stress_q3'],
-            $expB['stress_q4'],
-            $expB['stress_q5'],
-            $expB['stress_q6'],
-            $expB['stress_q7'],
-            $expB['stress_q8'],
-            $expB['stress_sum'],
-            $expB['time_to_answer'],
-            $expB['time_to_finish'],
-            $expB['score'],
-            $tt1Sums['B'],
-            $expB['trialTimeSum'],
-            $expB['acquisitionSum'],
+			$expXB['task_pos'],
+			81270,
+			$expXB['numberOfTrials'],
+            $expXB['stress_q1'],
+            $expXB['stress_q2'],
+            $expXB['stress_q3'],
+            $expXB['stress_q8'],
+            $expXB['time_to_answer'],
+            $expXB['time_to_finish'],
+            $expXB['score'],
+            $tt1Sums['X_B'],
+            $expXB['trialTimeSum'],
+            $expXB['acquisitionSum'],
             
-			$expC['task_pos'],
-			177710,
-			$expC['numberOfTrials'],
-            $expC['stress_q1'],
-            $expC['stress_q2'],
-            $expC['stress_q3'],
-            $expC['stress_q4'],
-            $expC['stress_q5'],
-            $expC['stress_q6'],
-            $expC['stress_q7'],
-            $expC['stress_q8'],
-            $expC['stress_sum'],
-            $expC['time_to_answer'],
-            $expC['time_to_finish'],
-            $expC['score'],
-            $tt1Sums['C'],
-            $expC['trialTimeSum'],
-            $expC['acquisitionSum']
+			$expXC['task_pos'],
+			144480,
+			$expXC['numberOfTrials'],
+            $expXC['stress_q1'],
+            $expXC['stress_q2'],
+            $expXC['stress_q3'],
+            $expXC['stress_q8'],
+            $expXC['time_to_answer'],
+            $expXC['time_to_finish'],
+            $expXC['score'],
+            $tt1Sums['X_C'],
+            $expXC['trialTimeSum'],
+            $expXC['acquisitionSum'],
+            
+            $expYA['task_pos'],
+			18060,
+			$expYA['numberOfTrials'],
+            $expYA['stress_q1'],
+            $expYA['stress_q2'],
+            $expYA['stress_q3'],
+            $expYA['stress_q8'],
+            $expYA['time_to_answer'],
+            $expYA['time_to_finish'],
+            $expYA['score'],
+            $tt1Sums['Y_A'],
+            $expYA['trialTimeSum'],
+            $expYA['acquisitionSum'],
+            
+            $expYB['task_pos'],
+			81270,
+			$expYB['numberOfTrials'],
+            $expYB['stress_q1'],
+            $expYB['stress_q2'],
+            $expYB['stress_q3'],
+            $expYB['stress_q8'],
+            $expYB['time_to_answer'],
+            $expYB['time_to_finish'],
+            $expYB['score'],
+            $tt1Sums['Y_B'],
+            $expYB['trialTimeSum'],
+            $expYB['acquisitionSum'],
+            
+            $expYC['task_pos'],
+			144480,
+			$expYC['numberOfTrials'],
+            $expYC['stress_q1'],
+            $expYC['stress_q2'],
+            $expYC['stress_q3'],
+            $expYC['stress_q8'],
+            $expYC['time_to_answer'],
+            $expYC['time_to_finish'],
+            $expYC['score'],
+            $tt1Sums['Y_C'],
+            $expYC['trialTimeSum'],
+            $expYC['acquisitionSum']
 		);
 		
 
 		
 	    // Attach trial data
-	    for ($indexOfTrial = 0; $indexOfTrial < 64; $indexOfTrial++)
+	    for ($indexOfTrial = 0; $indexOfTrial < 8; $indexOfTrial++)
         {
-            if (isset($value['trials'][0]) && $value['trials'][0]['task'] === 'A')
+            if (isset($value['trials'][0]) && $value['trials'][0]['task'] === 'X_A')
             {
                 $currentRow[] = $value['trials'][0]['pair_comparison'];
                 $currentRow[] = $value['trials'][0]['acquisition_pattern'];
                 $currentRow[] = $value['trials'][0]['acquired_weights'];
                 $currentRow[] = $value['trials'][0]['local_accuracy'];
+                $currentRow[] = $value['trials'][0]['local_accuracy2'];
                 $currentRow[] = $value['trials'][0]['chosen_option'];
                 $currentRow[] = $value['trials'][0]['number_of_acquisitions'];
                 $currentRow[] = $value['trials'][0]['order_of_acqusitions'];
-                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts['A'][max($value['trials'][0]['acquisition_pattern'], 1) - 1];
+                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1];
                 $currentRow[] = $value['trials'][0]['time_to_finish'];
+                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
                 
@@ -600,6 +774,8 @@ $app->get('/csv', function() use($app) {
             }
             else 
             {
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
@@ -619,19 +795,21 @@ $app->get('/csv', function() use($app) {
             }
         }
         
-        for ($indexOfTrial = 0; $indexOfTrial < 64; $indexOfTrial++)
+        for ($indexOfTrial = 0; $indexOfTrial < 36; $indexOfTrial++)
         {
-            if (isset($value['trials'][0]) && $value['trials'][0]['task'] === 'B')
+            if (isset($value['trials'][0]) && $value['trials'][0]['task'] === 'X_B')
             {
                 $currentRow[] = $value['trials'][0]['pair_comparison'];
                 $currentRow[] = $value['trials'][0]['acquisition_pattern'];
                 $currentRow[] = $value['trials'][0]['acquired_weights'];
                 $currentRow[] = $value['trials'][0]['local_accuracy'];
+                $currentRow[] = $value['trials'][0]['local_accuracy2'];
                 $currentRow[] = $value['trials'][0]['chosen_option'];
                 $currentRow[] = $value['trials'][0]['number_of_acquisitions'];
                 $currentRow[] = $value['trials'][0]['order_of_acqusitions'];
-                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts['B'][max($value['trials'][0]['acquisition_pattern'], 1) - 1];
+                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1];
                 $currentRow[] = $value['trials'][0]['time_to_finish'];
+                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
                 
@@ -667,6 +845,8 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
                 
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
@@ -676,17 +856,19 @@ $app->get('/csv', function() use($app) {
         }
         for ($indexOfTrial = 0; $indexOfTrial < 64; $indexOfTrial++)
         {
-            if (isset($value['trials'][0]) && $value['trials'][0]['task'] === 'C')
+            if (isset($value['trials'][0]) && $value['trials'][0]['task'] === 'X_C')
             {
                 $currentRow[] = $value['trials'][0]['pair_comparison'];
                 $currentRow[] = $value['trials'][0]['acquisition_pattern'];
                 $currentRow[] = $value['trials'][0]['acquired_weights'];
                 $currentRow[] = $value['trials'][0]['local_accuracy'];
+                $currentRow[] = $value['trials'][0]['local_accuracy2'];
                 $currentRow[] = $value['trials'][0]['chosen_option'];
                 $currentRow[] = $value['trials'][0]['number_of_acquisitions'];
                 $currentRow[] = $value['trials'][0]['order_of_acqusitions'];
-                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts['C'][max($value['trials'][0]['acquisition_pattern'], 1) - 1];
+                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1];
                 $currentRow[] = $value['trials'][0]['time_to_finish'];
+                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
                 
@@ -722,6 +904,8 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
                 
                 $currentRow[] = '#####';
                 $currentRow[] = '#####';
@@ -729,6 +913,191 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = '#####';
             }
         }
+        
+        
+        
+        
+         // Attach trial data
+	    for ($indexOfTrial = 0; $indexOfTrial < 8; $indexOfTrial++)
+        {
+            if (isset($value['trials'][0]) && $value['trials'][0]['task'] === 'Y_A')
+            {
+                $currentRow[] = $value['trials'][0]['pair_comparison'];
+                $currentRow[] = $value['trials'][0]['acquisition_pattern'];
+                $currentRow[] = $value['trials'][0]['acquired_weights'];
+                $currentRow[] = $value['trials'][0]['local_accuracy'];
+                $currentRow[] = $value['trials'][0]['local_accuracy2'];
+                $currentRow[] = $value['trials'][0]['chosen_option'];
+                $currentRow[] = $value['trials'][0]['number_of_acquisitions'];
+                $currentRow[] = $value['trials'][0]['order_of_acqusitions'];
+                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1];
+                $currentRow[] = $value['trials'][0]['time_to_finish'];
+                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
+                $currentRow[] = $value['trials'][0]['acquisition_time'];
+                $currentRow[] = $value['trials'][0]['score'];
+                
+                if (isset($value['trials'][0]['order_of_acqusitions']))
+                {
+                    $acqOrder = explode(':', $value['trials'][0]['order_of_acqusitions']);                
+
+                    $currentRow[] = $acqOrder[0];
+                    $currentRow[] = $acqOrder[1];
+                    $currentRow[] = $acqOrder[2];
+                    $currentRow[] = $acqOrder[3];
+                }
+                else
+                {
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                }
+
+                
+                array_shift($value['trials']);
+            }
+            else 
+            {
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+            }
+        }
+        
+        for ($indexOfTrial = 0; $indexOfTrial < 36; $indexOfTrial++)
+        {
+            if (isset($value['trials'][0]) && $value['trials'][0]['task'] === 'Y_B')
+            {
+                $currentRow[] = $value['trials'][0]['pair_comparison'];
+                $currentRow[] = $value['trials'][0]['acquisition_pattern'];
+                $currentRow[] = $value['trials'][0]['acquired_weights'];
+                $currentRow[] = $value['trials'][0]['local_accuracy'];
+                $currentRow[] = $value['trials'][0]['local_accuracy2'];
+                $currentRow[] = $value['trials'][0]['chosen_option'];
+                $currentRow[] = $value['trials'][0]['number_of_acquisitions'];
+                $currentRow[] = $value['trials'][0]['order_of_acqusitions'];
+                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1];
+                $currentRow[] = $value['trials'][0]['time_to_finish'];
+                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
+                $currentRow[] = $value['trials'][0]['acquisition_time'];
+                $currentRow[] = $value['trials'][0]['score'];
+                
+                if (isset($value['trials'][0]['order_of_acqusitions']))
+                {
+                    $acqOrder = explode(':', $value['trials'][0]['order_of_acqusitions']);                
+
+                    $currentRow[] = $acqOrder[0];
+                    $currentRow[] = $acqOrder[1];
+                    $currentRow[] = $acqOrder[2];
+                    $currentRow[] = $acqOrder[3];
+                }
+                else
+                {
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                }
+                
+                array_shift($value['trials']);
+            }
+            else 
+            {
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+            }
+        }
+        for ($indexOfTrial = 0; $indexOfTrial < 64; $indexOfTrial++)
+        {
+            if (isset($value['trials'][0]) && $value['trials'][0]['task'] === 'Y_C')
+            {
+                $currentRow[] = $value['trials'][0]['pair_comparison'];
+                $currentRow[] = $value['trials'][0]['acquisition_pattern'];
+                $currentRow[] = $value['trials'][0]['acquired_weights'];
+                $currentRow[] = $value['trials'][0]['local_accuracy'];
+                $currentRow[] = $value['trials'][0]['local_accuracy2'];
+                $currentRow[] = $value['trials'][0]['chosen_option'];
+                $currentRow[] = $value['trials'][0]['number_of_acquisitions'];
+                $currentRow[] = $value['trials'][0]['order_of_acqusitions'];
+                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1];
+                $currentRow[] = $value['trials'][0]['time_to_finish'];
+                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
+                $currentRow[] = $value['trials'][0]['acquisition_time'];
+                $currentRow[] = $value['trials'][0]['score'];
+                
+                if (isset($value['trials'][0]['order_of_acqusitions']))
+                {
+                    $acqOrder = explode(':', $value['trials'][0]['order_of_acqusitions']);                
+
+                    $currentRow[] = $acqOrder[0];
+                    $currentRow[] = $acqOrder[1];
+                    $currentRow[] = $acqOrder[2];
+                    $currentRow[] = $acqOrder[3];
+                }
+                else
+                {
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                    $currentRow[] = '#####';
+                }
+                
+                array_shift($value['trials']);
+            }
+            else 
+            {
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+                $currentRow[] = '#####';
+            }
+        }
+         
          
         $result[] = $currentRow;       
 	}

@@ -1,9 +1,25 @@
 <h2>Herzlich Willkommen</h2>
-<p >
-   und	vielen	Dank	dass	Sie	an	meiner	Studie	teilnehmen.
-</p>
-<p>
-   Um mit der Studie zu beginnen, bitte die Entlohnung wählen und auf „Studie beginnen“ klicken.
-</p>
+ <p >
+    und	vielen	Dank	dass	Sie	an	meiner	Studie	teilnehmen.
+   <br>
+   Bitte ziehen Sie den Vorhang Ihrer Kabine zu und setzen Sie für die Dauer der Studie die bereitgelegten Kopfhörer auf. 
+ </p>
+ <p>
+    Um mit der Studie zu beginnen, bitte die Entlohnung wählen und auf „Studie beginnen“ klicken.
+ </p>
+ 
+<form class="form-horizontal" action="">
+    <div class="form-group">
+        <div class="col-xs-12">
+            <p class="radio-reward-header">Ich möchte für die Studienteilnahme: </p>
+            <label class="radio radio-reward">
+                <input type="radio" name="reward" ng-model="reward" value="1"> eine halbe Versuchspersonenstunde
+            </label>
+            <label class="radio radio-reward">
+                <input type="radio" name="reward" ng-model="reward" value="2"> eine leistungsabhängige Auszahlung in bar
+            </label>
+        </div>
+    </div>
+</form>
 
-<p><button class="btn btn-lg btn-success btn-next" ng-click="onSubmit()">Studie beginnen</button></p>
+<p><button class="btn btn-lg btn-success btn-next" ng-disabled="!reward" ng-click="onSubmit()">Studie beginnen</button></p>

@@ -62,7 +62,7 @@ DROP TABLE IF EXISTS `skopietz_grundlagenstudie`.`tl_experiment` ;
 
 CREATE TABLE IF NOT EXISTS `skopietz_grundlagenstudie`.`tl_experiment` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `task` CHAR NOT NULL COMMENT 'A, B oder C',
+  `task` VARCHAR(3) NOT NULL COMMENT 'A, B oder C',
   `task_pos` SMALLINT(6) NOT NULL COMMENT '1, 2 oder 3',
   `time_to_finish` INT(11) NOT NULL,
   `tl_participant_id` INT NOT NULL,
@@ -204,6 +204,7 @@ CREATE TABLE IF NOT EXISTS `skopietz_grundlagenstudie`.`tl_trial` (
   `acquisition_time` INT(11) NOT NULL,
   `acquired_weights` FLOAT NOT NULL,
   `local_accuracy` FLOAT NOT NULL,
+  `local_accuracy2` FLOAT NOT NULL,
   `acquisition_pattern` SMALLINT(6) NOT NULL,
   `score` INT(11) NOT NULL,
   `tl_experiment_id` INT NOT NULL,

@@ -25,9 +25,9 @@ angular.module('mouselabApp')
       availableTime[possibleTasks[0]] = 18060;
       availableTime[possibleTasks[1]] = 81270;
       availableTime[possibleTasks[2]] = 144480;
-      //availableTime[possibleTasks[0]] = 17150;
-      //availableTime[possibleTasks[1]] = 23552;
-      //availableTime[possibleTasks[2]] = 29952;
+      availableTime[possibleTasks[0]] = 17150;
+      availableTime[possibleTasks[1]] = 23552;
+      availableTime[possibleTasks[2]] = 29952;
       availableTime[possibleTasks[3]] = availableTime[possibleTasks[0]];
       availableTime[possibleTasks[4]] = availableTime[possibleTasks[1]];
       availableTime[possibleTasks[5]] = availableTime[possibleTasks[2]];
@@ -182,7 +182,7 @@ angular.module('mouselabApp')
         },
         
         getTask : function(group, round) {
-          if (experimentLocation === 'T') { return taskOrder['G1'][round - 1]; }
+          if (experimentLocation === 'T') { return taskOrder['G6'][round - 1]; }
           return taskOrder[group][round - 1];
         },
         
@@ -216,6 +216,17 @@ angular.module('mouselabApp')
         
         getMaxScore : function(task) {
           return maxScore[task];
+        },
+        
+        isTaskWithoutWaiting : function(task) {
+          if (task === 'Y_A' || task === 'Y_B' || task === 'Y_C')
+          {
+            return true;  
+          }
+          else 
+          {
+            return false;
+          }
         }
       };
   });

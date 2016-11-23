@@ -126,10 +126,9 @@ class DbHandler
         
         
         // Save the trails
-        $insertTrialStatement = $this->dbh->prepare('INSERT INTO tl_trial (number, pair_comparison, number_of_acquisitions, chosen_option, order_of_acqusitions, time_to_finish, acquisition_time, acquired_weights, local_accuracy, acquisition_pattern, score, tl_experiment_id)
-                                                     VALUES (:number, :pair_comparison, :number_of_acquisitions, :chosen_option, :order_of_acquisitions, :time_to_finish, :acquisition_time, :acquired_weights, :local_accuracy, :acquisition_pattern, :score, :tl_experiment_id)');
-        
-        
+        $insertTrialStatement = $this->dbh->prepare('INSERT INTO tl_trial (number, pair_comparison, number_of_acquisitions, chosen_option, order_of_acqusitions, time_to_finish, acquisition_time, acquired_weights, local_accuracy, local_accuracy2, acquisition_pattern, score, tl_experiment_id)
+                                                     VALUES (:number, :pair_comparison, :number_of_acquisitions, :chosen_option, :order_of_acquisitions, :time_to_finish, :acquisition_time, :acquired_weights, :local_accuracy, :local_accuracy2, :acquisition_pattern, :score, :tl_experiment_id)');
+
         foreach ($trials as $trial)
         {
             $insertTrialStatement->bindParam(':number',                 $trial['number']);
@@ -141,6 +140,7 @@ class DbHandler
             $insertTrialStatement->bindParam(':acquisition_time',       $trial['acquisitionTime']);
             $insertTrialStatement->bindParam(':acquired_weights',       $trial['acquiredWeights']);
             $insertTrialStatement->bindParam(':local_accuracy',         $trial['localAccuracy']);
+            $insertTrialStatement->bindParam(':local_accuracy2',        $trial['localAccuracy2']);
             $insertTrialStatement->bindParam(':acquisition_pattern',    $trial['acquisitionPattern']);
             $insertTrialStatement->bindParam(':score',                  $trial['score']);
             $insertTrialStatement->bindParam(':tl_experiment_id',       $experimentId);

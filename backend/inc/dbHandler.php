@@ -168,13 +168,9 @@ class DbHandler
                                                     	tl_stress_question.q_num_1 AS stress_q1,
                                                     	tl_stress_question.q_num_2 AS stress_q2,
                                                     	tl_stress_question.q_num_3 AS stress_q3,
-                                                    	tl_stress_question.q_num_4 AS stress_q4,
-                                                    	tl_stress_question.q_num_5 AS stress_q5,
-                                                    	tl_stress_question.q_num_6 AS stress_q6,
-                                                    	tl_stress_question.q_num_7 AS stress_q7,
+                                                    	tl_stress_question.q_me4   AS stress_q4,
                                                     	tl_stress_question.q_num_8 AS stress_q8,
                                                     	tl_stress_question.time_to_answer AS time_to_answer,
-                                                    	tl_stress_question.q_sum AS stress_sum,
                                                     	
                                                     	COUNT(tl_trial.id) AS numberOfTrials,
                                                     	SUM(tl_trial.score) AS score,
@@ -206,6 +202,7 @@ class DbHandler
                                                     tl_trial.acquisition_time AS acquisition_time,
                                                     tl_trial.acquired_weights AS acquired_weights,
                                                     tl_trial.local_accuracy AS local_accuracy,
+                                                    tl_trial.local_accuracy2 AS local_accuracy2,
                                                     tl_trial.acquisition_pattern AS acquisition_pattern,
                                                     tl_trial.chosen_option AS chosen_option,
                                                     tl_trial.score AS score
