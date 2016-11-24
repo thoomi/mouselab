@@ -21,15 +21,15 @@ angular.module('mouselabApp')
 
         var currentExperimentRound   = 1;
         var lastExperimentDatabaseId = 35;
-        
+
         var availableTrials = [];
         var usedTrials      = [];
-        
+
         var trainingData = {};
-        
+
         var questionSetSteps = ['step18', 'step19', 'step20', 'step21'];
         randomizer.shuffleArray(questionSetSteps);
-        
+
         // Helping variables to determine if data is already saved
         // For example if the user hits the back button and answers the questions twice
         var isParticipantSaved    = false;
@@ -58,26 +58,26 @@ angular.module('mouselabApp')
                     participantDatabaseId = data.participantDatabaseId;
                     participantGroup      = data.participantGroup;
                     participantCondition  = data.participantCondition;
-                    
+
                     console.log(data.participantGroup);
                     console.log(data.participantCondition);
-                    
+
                     isParticipantSaved = true;
-                    
+
                     callback();
                 }).
                 error(function() {
                     callback('Error: http request went wrong.');
                 });
         }
-        
+
         function saveTotalTime() {
             var postData = {
                 participantDatabaseId : participantDatabaseId,
                 totalTime             : parseInt(endTime) - parseInt(startTime),
                 payout                : (Math.round(participantScore * 0.0012 * 100) / 100)
             };
-            
+
             $http.post(configData.getBaseUrl() + '/participant/update', postData);
         }
 
@@ -89,7 +89,7 @@ angular.module('mouselabApp')
                 timeToFinish          : timeToFinish,
                 trials                : data
             };
-            
+
             $http.post(configData.getBaseUrl() + '/experiment/create', postData).
                 success(function(data) {
                     lastExperimentDatabaseId = data.experimentDbId;
@@ -160,7 +160,7 @@ angular.module('mouselabApp')
                     callback('Error: http request went wrong.');
                 });
         }
-        
+
         function saveResilienceAnswers(answerValues, sumAnswers, callback) {
             var postData = {
                 participantDatabaseId : participantDatabaseId,
@@ -177,7 +177,7 @@ angular.module('mouselabApp')
                     callback('Error: http request went wrong.');
                 });
         }
-        
+
         function saveMetaQuestions(answerValues, callback) {
             var postData = {
                 participantDatabaseId : participantDatabaseId,
@@ -193,7 +193,7 @@ angular.module('mouselabApp')
                     callback('Error: http request went wrong.');
                 });
         }
-        
+
         function saveNfcQuestions(answerValues, sumAnswers, callback) {
             var postData = {
                 participantDatabaseId : participantDatabaseId,
@@ -210,7 +210,7 @@ angular.module('mouselabApp')
                     callback('Error: http request went wrong.');
                 });
         }
-        
+
         function saveRiskAnswers(answerValues, callback) {
             var postData = {
                 participantDatabaseId : participantDatabaseId,
@@ -278,28 +278,29 @@ angular.module('mouselabApp')
             getCurrentRound : function () {
               return currentExperimentRound;
             },
-            
+
             getParticipantCondition : function () {
-              return participantCondition;  
+              return participantCondition;
             },
-            
+
             initializeTrials : function() {
               availableTrials = configData.getTrials();
               usedTrials      = [];
             },
-            
+
             getNextTrial : function() {
-                var trial = availableTrials.pop();
-                usedTrials.push(trial);
-                
-                return trial;
+                return availableTrials[randomizer.numberBetween(0, 15)];
+                //var trial = availableTrials.pop();
+                //usedTrials.push(trial);
+
+                //return trial;
             },
 
             startNextRound : function () {
                 if (currentExperimentRound >= 1 && currentExperimentRound <= configData.getMaxRounds())
                 {
                     currentExperimentRound +=1;
-                    
+
                     return true;
                 }
                 else
@@ -336,7 +337,7 @@ angular.module('mouselabApp')
                     callback();
                     return;
                 }
-                
+
                 participantScore += score;
 
                 saveExperiment(data, timeToFinish, callback);
@@ -371,7 +372,7 @@ angular.module('mouselabApp')
 
                 saveMaximisingAnswers(answerValues, sumAnswers, callback);
             },
-            
+
             saveResilienceAnswers : function (answerValues, sumAnswers, callback) {
                 if (isResilienceSaved)
                 {
@@ -381,7 +382,7 @@ angular.module('mouselabApp')
 
                 saveResilienceAnswers(answerValues, sumAnswers, callback);
             },
-            
+
             saveMetaQuestions : function (answerValues, callback) {
                 if (isMetaSaved)
                 {
@@ -391,7 +392,7 @@ angular.module('mouselabApp')
 
                 saveMetaQuestions(answerValues, callback);
             },
-            
+
             saveNfcQuestions : function (answerValues, sumAnswers, callback) {
                 if (isNfcSaved)
                 {
@@ -401,7 +402,7 @@ angular.module('mouselabApp')
 
                 saveNfcQuestions(answerValues, sumAnswers, callback);
             },
-            
+
             saveRiskAnswers : function (answerValues, callback) {
                 if (isRiskSaved)
                 {
@@ -411,7 +412,7 @@ angular.module('mouselabApp')
 
                 saveRiskAnswers(answerValues, callback);
             },
-            
+
             saveUserData : function(email, participateInOther, comments, callback) {
                 saveUserData(email, participateInOther, comments, callback);
             },
@@ -421,16 +422,16 @@ angular.module('mouselabApp')
                 {
                     return true;
                 }
-                else 
+                else
                 {
                     // if the participant id is set and so on
                     var dataIsFine = true;
-    
+
                     if (participantDatabaseId === 0 || participantId === 0 || participantGroup === '')
                     {
                         dataIsFine = false;
                     }
-    
+
                     return dataIsFine;
                 }
             },
@@ -442,39 +443,39 @@ angular.module('mouselabApp')
             incrementSiteNumber : function() {
               $rootScope.$broadcast('siteChange');
             },
-            
+
             getTrainingData : function() {
                 return trainingData;
             },
-            
+
             setTrainingData : function(data) {
-              trainingData = data;  
+              trainingData = data;
             },
-            
+
             getNextQuestionSet : function() {
                 if (questionSetSteps.length === 0)
                 {
                     // Save the current time and set dropout to false
                     endTime = new Date().getTime();
-                    
+
                     saveTotalTime();
-                    
+
                     return 'step22';
                 }
-                
+
                 return questionSetSteps.pop();
             },
-            
+
             getScore : function() {
               return participantScore;
             },
-            
+
              getParticipantReward : function() {
                 return participantReward;
             },
-            
+
             setParticipantReward : function(reward) {
-              participantReward = reward;  
+              participantReward = reward;
             },
 
             clearAllData : function() {
