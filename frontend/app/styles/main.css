@@ -58,6 +58,10 @@ html {
   transition: none!important;
 }
 
+.progress-bar-highlight {
+  background-color: #ff0a1c;
+}
+
 .testing-configurators {
     position: fixed;
     top: 50px;
@@ -402,6 +406,21 @@ input[type="radio"]:hover {
 }
 .spinner .rect5 {
   animation-delay: -0.8s;
+}
+
+.spinner-cue {
+  width: 10px;
+  height: 20px;
+  font-size: 5px;
+  margin-left: 0px; 
+}
+
+.spinner-cue > div {
+  background-color: #fff;
+  height: 100%;
+  width: 3px;
+  display: inline-block;
+  animation: stretchdelay 1.2s infinite ease-in-out;
 }
 
 @keyframes stretchdelay {

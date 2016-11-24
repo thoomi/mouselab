@@ -182,7 +182,7 @@ angular.module('mouselabApp')
         },
 
         getTask : function(group, round) {
-          //if (experimentLocation === 'T') { return taskOrder['G6'][round - 1]; }
+          if (experimentLocation === 'T') { return taskOrder['G6'][round - 1]; }
           return taskOrder[group][round - 1];
         },
 

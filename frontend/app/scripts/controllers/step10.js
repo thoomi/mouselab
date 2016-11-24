@@ -42,24 +42,28 @@ angular.module('mouselabApp')
         {
           id: '1',
           show: false,
+          isAcquired: false,
           intervalId: -1,
           countdownTime: $scope.cueValues[0].cost
         },
         {
           id: '2',
           show: false,
+          isAcquired: false,
           intervalId: -1,
           countdownTime: $scope.cueValues[1].cost
         },
         {
           id: '3',
           show: false,
+          isAcquired: false,
           intervalId: -1,
           countdownTime: $scope.cueValues[2].cost
         },
         {
           id: '4',
           show: false,
+          isAcquired: false,
           intervalId: -1,
           countdownTime: $scope.cueValues[3].cost
         }];
@@ -118,6 +122,7 @@ angular.module('mouselabApp')
         
         angular.forEach($scope.showCueValues, function(value, key) {
           value.show = false;
+          value.isAcquired = false;
           $interval.cancel(value.intervalId);
           value.intervalId = -1;
           value.countdownTime = $scope.cueValues[key].cost;
@@ -170,26 +175,38 @@ angular.module('mouselabApp')
       
       if ($scope.taskWaiting)
       {
-          $scope.showCueValues[index].intervalId = $interval(function() {
-         
-             if ($scope.showCueValues[index].countdownTime <= 0)
-             {
-               $interval.cancel($scope.showCueValues[index].intervalId);
-               $scope.showCueValues[index].show = true;
-               $scope.buyTimerRunning = false;
-               $scope.informationAcquired = true;
-               $scope.aquiredInfos.push($scope.showCueValues[index].id);
-               
-               return;
-             }
+        $scope.showCueValues[index].isAcquired = true;
+        
+        var acquisitionPattern = determineAcquisitionPattern();
+        var timeCost = determineTimeCost(acquisitionPattern, dataService.getCurrentTask());
+        
+        var localTimeCost = timeCost - $scope.sumOfTimeCosts;
+        
+        $scope.showCueValues[index].countdownTime += localTimeCost;
+        
+        $scope.sumOfTimeCosts = timeCost;
+        
+        $scope.showCueValues[index].intervalId = $interval(function() {
+       
+           if ($scope.showCueValues[index].countdownTime <= 0)
+           {
+             $interval.cancel($scope.showCueValues[index].intervalId);
+             $scope.showCueValues[index].show = true;
+             $scope.buyTimerRunning = false;
+             $scope.informationAcquired = true;
+             $scope.aquiredInfos.push($scope.showCueValues[index].id);
              
-             $scope.showCueValues[index].countdownTime -= 10;
-          }, 10);
+             return;
+           }
+           
+           $scope.showCueValues[index].countdownTime -= 10;
+        }, 10);
       }
       else
       {
           $scope.showCueValues[index].intervalId = 0;
           $scope.showCueValues[index].show = true;
+          $scope.showCueValues[index].isAcquired = true;
           $scope.buyTimerRunning = false;
           $scope.informationAcquired = true;
           $scope.aquiredInfos.push($scope.showCueValues[index].id);
@@ -292,10 +309,10 @@ angular.module('mouselabApp')
     }
     
     function determineAcquisitionPattern() {
-      var cue1 = $scope.showCueValues[0].show;
-      var cue2 = $scope.showCueValues[1].show;
-      var cue3 = $scope.showCueValues[2].show;
-      var cue4 = $scope.showCueValues[3].show;
+      var cue1 = $scope.showCueValues[0].isAcquired;
+      var cue2 = $scope.showCueValues[1].isAcquired;
+      var cue3 = $scope.showCueValues[2].isAcquired;
+      var cue4 = $scope.showCueValues[3].isAcquired;
       
       if (!cue1 && !cue2 && !cue3 &&  cue4) { return 15; }
       if (!cue1 && !cue2 &&  cue3 && !cue4) { return 14; }
