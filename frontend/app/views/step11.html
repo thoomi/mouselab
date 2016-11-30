@@ -1,7 +1,7 @@
 <h2>Fragen zum Arbeitstag {{ currentRound }}</h2>
 
 <form class="form-horizontal stress-questions">
-      <div class="form-group" ng-if="currentRound === 3 || currentRound === 6">
+      <div class="form-group" >
         <div class="col-sm-2">
             <p><strong>Ich habe…</strong></p>
         </div>
@@ -47,28 +47,34 @@
 
             <span class="stress-questions-option-label">{{ labelRight }}</span>
         </div>
-        <div class="col-sm-7" ng-if="question.id === 4">
+    </div>
+    
+    <div class="form-group">
+        <div class="col-sm-5">
+            <p><strong>Die Informationsbalken habe ich wie folgt beachtet: </strong></p>
+        </div>
+        <div class="col-sm-7">
             <div class="radio-inline">
               <label>
-                <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="1">
+                <input type="radio" ng-model="me4Question" ng-change="checkAllSet()" name="me4QuestionName" value="1">
                 nie
               </label>
             </div>
             <div class="radio-inline">
               <label>
-                <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="2">
+                <input type="radio" ng-model="me4Question" ng-change="checkAllSet()" name="me4QuestionName" value="2">
                 manchmal
               </label>
             </div>
             <div class="radio-inline">
               <label>
-                <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="3">
+                <input type="radio" ng-model="me4Question" ng-change="checkAllSet()" name="me4QuestionName" value="3">
                häufig
               </label>
             </div>
             <div class="radio-inline">
               <label>
-                <input type="radio" ng-model="question.value" ng-change="checkAllSet()" name="{{ question.label }}" value="4">
+                <input type="radio" ng-model="me4Question" ng-change="checkAllSet()" name="me4QuestionName" value="4">
                 immer
               </label>
             </div>

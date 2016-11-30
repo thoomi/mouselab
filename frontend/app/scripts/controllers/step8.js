@@ -13,4 +13,7 @@ angular.module('mouselabApp')
     dataService.incrementSiteNumber();
 
     $scope.trainingData = dataService.getTrainingData();
+    
+    $scope.remainingMinutes = Math.floor(($scope.trainingData.timeToDecision / (1000.0 * 60.0)) % 60);
+    $scope.remainingSeconds = ($scope.trainingData.timeToDecision / 1000.0) % 60;
   });

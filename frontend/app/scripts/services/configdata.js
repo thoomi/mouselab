@@ -22,9 +22,9 @@ angular.module('mouselabApp')
       var possibleTasks  = ['X_A',  'X_B',  'X_C', 'Y_A',  'Y_B',  'Y_C'];
 
       var availableTime = {};
-      availableTime[possibleTasks[0]] = 18060;
-      availableTime[possibleTasks[1]] = 81270;
-      availableTime[possibleTasks[2]] = 144480;
+      availableTime[possibleTasks[0]] = 18860;
+      availableTime[possibleTasks[1]] = 84870;
+      availableTime[possibleTasks[2]] = 150880;
       //availableTime[possibleTasks[0]] = 17150;
       //availableTime[possibleTasks[1]] = 23552;
       //availableTime[possibleTasks[2]] = 29952;
@@ -182,7 +182,7 @@ angular.module('mouselabApp')
         },
 
         getTask : function(group, round) {
-          //if (experimentLocation === 'T') { return taskOrder['G6'][round - 1]; }
+          if (experimentLocation === 'T') { return taskOrder['G6'][round - 1]; }
           return taskOrder[group][round - 1];
         },
 

@@ -44,14 +44,16 @@ html {
 }
 
 .progress-exp {
-  height: 26px;
+  height: 40px;
   margin-bottom: 5px;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .progress-bar-exp {
-  line-height: 26px;
-  font-size: 14px;
+  line-height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #555;
 }
 
 .progress-time .progress-bar {
@@ -453,7 +455,7 @@ input[type="radio"]:hover {
   opacity: 0;
   text-align: center;
   font-weight: bold;
-  animation: load 2s;
+  animation: load 1s;
   animation-delay: 0s;
 }
 
@@ -466,8 +468,8 @@ input[type="radio"]:hover {
   width: 220px;
   height: 440px;
   opacity: 0;
-  animation: load 1s;
-  animation-delay: 2s;
+  animation: load 0.5s;
+  animation-delay: 1s;
 }
 .ready-animation-2 {
   position: absolute;
@@ -478,8 +480,8 @@ input[type="radio"]:hover {
   width: 220px;
   height: 440px;
   opacity: 0;
-  animation: load 1s;
-  animation-delay: 3s;
+  animation: load 0.5s;
+  animation-delay: 1.5s;
 }
 .ready-animation-1 {
   position: absolute;
@@ -490,8 +492,8 @@ input[type="radio"]:hover {
   width: 220px;
   height: 440px;
   opacity: 0;
-  animation: load 1s;
-  animation-delay: 4s;
+  animation: load 0.5s;
+  animation-delay: 2s;
 }
 .ready-animation-go {
   position: absolute;
@@ -502,8 +504,8 @@ input[type="radio"]:hover {
   width: 620px;
   height: 440px;
   opacity: 0;
-  animation: load 1s;
-  animation-delay: 5s;
+  animation: load 0.5s;
+  animation-delay: 2.5s;
 }
 
 @keyframes load {

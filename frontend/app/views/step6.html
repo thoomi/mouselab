@@ -6,12 +6,32 @@
     Sie	können	in	dieser	Einarbeitungsphase	so	viele	Aktienkäufe	tätigen	wie	Sie	möchten	und	die	Übung	zu	jeder	Zeit	beenden.	Klicken	Sie	zum	Beenden	einfach	den	Button	unten	rechts.
 </p>
 <p>
-   Wenn	Sie	sich	die	Beschreibung	Ihrer	Aufgabe	erneut	durchlesen	wollen,	klicken	Sie	bitte	den	entsprechenden	Button	unten	links,	ansonsten	geht	es	mit	der	Einarbeitungsphase	los	wenn	Sie	unten	rechts	klicken.
+   Wenn	Sie	sich	die	Beschreibung	Ihrer	Aufgabe	erneut	durchlesen	wollen,	klicken	Sie	bitte	den	entsprechenden	Button	unten	links.
 </p>
 <p>
     Im	Anschluss	an	die	Übung	werden	Ihnen	Ihre	Ergebnisse	angezeigt.	Im	Sinn	einer	Einarbeitungsphase	entlohnt	Sie	Ihr	Arbeitgeber	jedoch	nicht	für	die	Übung.	
 </p>
 
 <p>
+    <button class="btn btn-info btn-next" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-info-sign"></span> Aufgabenbeschreibung ansehen</button>
     <a class="btn btn-success btn-next" ng-href="#/step7">Einarbeitungsphase beginnen <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
 </p>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>Aufgabenbeschreibung</h4>
+      </div>
+      <div class="modal-body">
+         <div ng-include src="instructions[currentInstruction]"></div>
+         <button type="button" class="btn btn-default btn-info" ng-click="changeInstruction(1)" ng-hide="currentInstruction === 1">Nächste Aufgabenbeschreibung</button>
+         <button type="button" class="btn btn-default btn-info" ng-click="changeInstruction(0)" ng-hide="currentInstruction === 0">Vorherige Aufgabenbeschreibung</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>

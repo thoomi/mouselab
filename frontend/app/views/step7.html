@@ -4,7 +4,7 @@
     <table class="table-feedback">
         <tr>
             <td class="text-right">Vergangene Zeit:</td>
-            <td class="text-right" style="width: 165px;"><timer class="decision-timer" interval="10">{{ minutes }} min {{ ((millis / 1000.0) % 60) | number:2 }} sek </timer></td>
+            <td class="text-right" style="width: 165px;"><span class="decision-timer">{{ remainingMinutes }} min {{ remainingSeconds |number:2 }} sek</span></td>
         </tr>
         <tr>
             <td class="text-right">Anzahl an Entscheidungen:</td>
@@ -38,7 +38,18 @@
             <td class="text-center">{{ option.validity * 100 }} %</td>
             <td class="text-center"><span ng-if="!option.isShown">?</span><span ng-if="option.isShown">{{ currentPattern[$index] === 1 ? 'Ja' : 'Nein' }}</span></td>
             <td class="text-center"><span ng-if="!option.isShown">?</span><span ng-if="option.isShown">{{ currentPattern[$index] !== 1 ? 'Ja' : 'Nein' }}</span></td>
-            <td class="text-center"><button class="btn btn-info" ng-disabled="option.intervalId !== -1" ng-click="buyCue($index)"><strong><span>{{ option.countdownTime / 1000.0 |number:2 }} sek</span></strong></button></td>
+            <td class="text-center">
+                <button class="btn btn-info" ng-disabled="option.intervalId !== -1" ng-click="buyCue($index)">
+                    <strong><span>{{ option.cost / 1000.0 |number:2 }} sek</span></strong>
+                    <div class="spinner spinner-cue" ng-hide="cueOptions[$index].intervalId === -1 || cueOptions[$index].isShown">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
+                </button>
+            </td>
         </tr>
     </tbody>
     <tfoot>

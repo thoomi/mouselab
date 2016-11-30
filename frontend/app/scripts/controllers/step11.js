@@ -19,6 +19,7 @@ angular.module('mouselabApp')
     $scope.labelLeft = 'trifft nicht zu';
     $scope.labelRight = 'trifft zu';
     $scope.stressQuestions8 = -1;
+    $scope.me4Question = -1;
    
     var startDate = new Date();
     $scope.startTime = startDate.getTime();
@@ -26,7 +27,7 @@ angular.module('mouselabApp')
     
     $scope.checkAllSet = function() {
         var allSet = true;
-
+      
         angular.forEach($scope.stressQuestions, function(question) {
           if (question.value === 0)
           {
@@ -47,14 +48,7 @@ angular.module('mouselabApp')
       // Save all Answers into an array and calculate the sum
       taskQuestionData.stressAnswers = [];
       angular.forEach($scope.stressQuestions, function(question) {
-        if (question.id !== 4)
-        {
           taskQuestionData.stressAnswers[parseInt(question.id - 1)] = question.value;
-        }
-        else 
-        {
-          taskQuestionData.me4Answer = question.value
-        }
       });
       
       var endDate = new Date();
@@ -63,7 +57,11 @@ angular.module('mouselabApp')
       taskQuestionData.timeToAnswer = $scope.endTime - $scope.startTime;
 
       taskQuestionData.stressAnswer8 = $scope.stressQuestions8;
-
+      taskQuestionData.me4Answer     = $scope.me4Question;
+      
+      console.log(taskQuestionData.stressAnswer8);
+      console.log(taskQuestionData.me4Answer);
+      
       dataService.saveStressQuestions(taskQuestionData, function(error) {
           if (!error)
           {
@@ -105,12 +103,6 @@ angular.module('mouselabApp')
         id    : 3,
         title : 'Ich empfand mich als hektisch, während ich meine Entscheidungen treffen musste.',
         label : 'stress-questions-3',
-        value : 0
-      },
-      {
-        id    : 4,
-        title : 'Die Informationen zur verbleibenden Zeit und den erreichten Punkten habe ich wie folgt beobachtet',
-        label : 'stress-questions-4',
         value : 0
       }
     ];

@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `skopietz_grundlagenstudie`.`tl_participant` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `ip_address` VARCHAR(45) NOT NULL,
   `participated_at` DATETIME NOT NULL,
-  `participation_id` VARCHAR(7) NOT NULL,
+  `participation_id` VARCHAR(8) NOT NULL,
   `dropout` TINYINT(1) NOT NULL,
   `location` CHAR NOT NULL COMMENT 'Either:\nL = Labor,\nO = Online,\nT = Test',
   `participation_group` VARCHAR(2) NOT NULL COMMENT 'Either:\nG1, G2 or G3',

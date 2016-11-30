@@ -13,6 +13,6 @@ angular.module('mouselabApp')
     
     $timeout(function() {
        $location.path('step10');
-    }, 5800);
+    }, 2800);
   });
  

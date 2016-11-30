@@ -335,7 +335,7 @@ angular.module('mouselabApp')
     }
     
     function determineTimeCost(acquisitionPattern) {
-      var timeCosts = [3770, 2770, 2660, 2500, 2390, 1660, 1500, 1390, 1380, 1280, 1110, 380, 280, 110, 0];
+      var timeCosts = [4150, 3050, 2920, 2740, 2630, 1820, 1640, 1530, 1520, 1400, 1220, 420, 300, 120, 0];
       
       return timeCosts[acquisitionPattern - 1];
     }

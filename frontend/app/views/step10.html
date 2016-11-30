@@ -6,7 +6,7 @@
         <tr>
             <td>
                 <div class="progress progress-exp progress-time">
-                    <div class="progress-bar progress-bar-danger progress-bar-exp {{ buyTimerRunning ? 'progress-bar-highlight' : '' }}" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ ((100 / initialTime) * availableTime)|number:2 }}%;"></div>
+                    <div class="progress-bar progress-bar-danger progress-bar-exp {{ buyTimerRunning ? 'progress-bar-highlight' : '' }}" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ ((100 / initialTime) * availableTime)|number:2 }}%;">Verbleibend {{ remainingMinutes }}:{{ remainingSeconds |number:2 }}</div>
                 </div>
             </td>
             <td class="text-right" style="width: 165px;"><span class="decision-timer">{{ remainingMinutes }} min {{ remainingSeconds |number:2 }} sek</span></td>
@@ -14,7 +14,7 @@
         <tr>
             <td>
                 <div class="progress progress-exp">
-                    <div class="progress-bar progress-bar-info progress-bar-exp" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ (100 / maxTrials) * (maxTrials - finishedTrials)}}%;">Verbleibende Trials {{ maxTrials - finishedTrials }}</div>
+                    <div class="progress-bar progress-bar-info progress-bar-exp" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ (100 / maxTrials) * (maxTrials - finishedTrials)}}%;">Verbleibende Aktienkäufe {{ maxTrials - finishedTrials }}</div>
                 </div>
             </td>
             <td class="text-right"><strong>{{ maxTrials - finishedTrials }}</strong></td>
@@ -22,7 +22,7 @@
         <tr ng-hide="experimentCondition === 'C1'">
             <td>
                 <div class="progress progress-exp">
-                    <div class="progress-bar progress-bar-success progress-bar-exp" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ (100 / maxScore) * currentScore }}%;">Punkte {{ currentScore }}</div>
+                    <div class="progress-bar progress-bar-success progress-bar-exp" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ (100 / maxScore) * currentScore }}%;">Erreichte Punkte {{ currentScore }}</div>
                 </div>
             </td>
             <td class="text-right"><strong>{{ currentScore }}</strong></td>

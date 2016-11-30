@@ -14,9 +14,11 @@ angular.module('mouselabApp')
     
       dataService.setTrainingData({
         score: 0,
-        numberOfTrials: 0
+        numberOfTrials: 0,
+        timeToDecision: 0
       });
-    
+      
+    $scope.time           = 0;
     $scope.currentScore   = 0;
     $scope.currentTime    = 0;
     $scope.finishedTrials = 0;
@@ -108,7 +110,8 @@ angular.module('mouselabApp')
       
       dataService.setTrainingData({
         score: $scope.currentScore,
-        numberOfTrials: $scope.finishedTrials
+        numberOfTrials: $scope.finishedTrials,
+        timeToDecision: $scope.time
       });
       
       // Prepare next trial
@@ -146,5 +149,23 @@ angular.module('mouselabApp')
       
       return Math.max(accuracy1, accuracy2);
     }
+    
+    var intervalId = $interval(function() {
+        $scope.time += 10;
+        
+        $scope.remainingMinutes = Math.floor(($scope.time / (1000.0 * 60.0)) % 60);
+        $scope.remainingSeconds = ($scope.time / 1000.0) % 60;
+    
+      }, 10);
+  
+  
+    $scope.$on('$destroy', function() {
+      // Make sure that the interval is destroyed too
+      $interval.cancel(intervalId);
+      
+      angular.forEach($scope.cueOptions, function(value, key) {
+        $interval.cancel(value.intervalId);
+      });
+    });
     
   });
