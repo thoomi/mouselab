@@ -1,7 +1,7 @@
 <h2>Fragen zum Arbeitstag {{ currentRound }}</h2>
 
 <form class="form-horizontal stress-questions">
-      <div class="form-group" >
+      <div class="form-group" ng-if="currentRound === 3 || currentRound === 6">
         <div class="col-sm-2">
             <p><strong>Ich habe…</strong></p>
         </div>
