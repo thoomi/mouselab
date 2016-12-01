@@ -108,132 +108,133 @@ $app->get('/csv', function() use($app) {
 		'payout',
         
         
-        'MaxT-1',
-        'MaxT-2',
-        'MaxT-3',
-        'MaxT-4',
-        'MaxT-5',
-        'MaxT-6',
-		'MaxT-MW',				// maximising_sum
+        'MaxT_1',
+        'MaxT_2',
+        'MaxT_3',
+        'MaxT_4',
+        'MaxT_5',
+        'MaxT_6',
+		'MaxT_MW',				// maximising_sum
             
-        'Res-1',
-        'Res-2',
-        'Res-3',
-        'Res-4',
-        'Res-5',
-        'Res-6',
-        'Res-7',
-        'Res-8',
-        'Res-9',
-        'Res-10',
-        'Res-11',
-		'Res-MW',				// maximising_sum
+        'Res_1',
+        'Res_2',
+        'Res_3',
+        'Res_4',
+        'Res_5',
+        'Res_6',
+        'Res_7',
+        'Res_8',
+        'Res_9',
+        'Res_10',
+        'Res_11',
+		'Res_MW',				// maximising_sum
 		
-		'Risk-1',
-        'Risk-2',
-        'Risk-3',
-        'Risk-4',
+		'Risk_1',
+        'Risk_2',
+        'Risk_3',
+        'Risk_4',
         
-        'Nfc-1',
-        'Nfc-2',
-        'Nfc-3',
-        'Nfc-4',
-		'Nfc-MW',				// maximising_sum
+        'Nfc_1',
+        'Nfc_2',
+        'Nfc_3',
+        'Nfc_4',
+		'Nfc_MW',				// maximising_sum
             
-        'Meta-1',
-        'Meta-2',
-        'Meta-4',
+        'Meta_1',
+        'Meta_2',
+        'Meta_4',
+        'Meta_5',
         
         
-		'Position-ExpB-X-A',	     // task_pos
-		'lt_ExpG-X-A',	             // Verfügbare Zeit
-        'nT-X-A',          // Anzahl trials in A
-        'Stress-1-X-A',
-        'Stress-2-X-A',
-        'Stress-3-X-A',
-        'Stress-8-X-A',
-        'ME-4.1-X-A',
-        'Stress-Time-X-A',
-        'Time-ExpB-X-A',
-        'ppa-X-A',
-        'tt1-X-A-Sum',
-        'tt2-X-A-Sum',
-        'at-X-A-Sum',
+		'Position_ExpB_X_A',	     // task_pos
+		'lt_ExpG_X_A',	             // Verfügbare Zeit
+        'nT_X_A',          // Anzahl trials in A
+        'Stress_1_X_A',
+        'Stress_2_X_A',
+        'Stress_3_X_A',
+        'Stress_8_X_A',
+        'ME_4.1_X_A',
+        'Stress_Time_X_A',
+        'Time_ExpB_X_A',
+        'ppa_X_A',
+        'tt1_X_A_Sum',
+        'tt2_X_A_Sum',
+        'at_X_A_Sum',
 
-		'Position-ExpB-X-B',	     // task_pos
-		'lt_ExpG-X-B',	             // Verfügbare Zeit
-        'nT-X-B',          // Anzahl trials in A
-        'Stress-1-X-B',
-        'Stress-2-X-B',
-        'Stress-3-X-B',
-        'Stress-8-X-B',
-        'ME-4.1-X-B',
-        'Stress-Time-X-B',
-        'Time-ExpB-X-B',
-        'ppa-X-B',
-        'tt1-X-B-Sum',
-        'tt2-X-B-Sum',
-        'at-X-B-Sum',
+		'Position_ExpB_X_B',	     // task_pos
+		'lt_ExpG_X_B',	             // Verfügbare Zeit
+        'nT_X_B',          // Anzahl trials in A
+        'Stress_1_X_B',
+        'Stress_2_X_B',
+        'Stress_3_X_B',
+        'Stress_8_X_B',
+        'ME_4.1_X_B',
+        'Stress_Time_X_B',
+        'Time_ExpB_X_B',
+        'ppa_X_B',
+        'tt1_X_B_Sum',
+        'tt2_X_B_Sum',
+        'at_X_B_Sum',
 
-		'Position-ExpB-X-C',	     // task_pos
-		'lt_ExpG-X-C',	             // Verfügbare Zeit
-        'nT-X-C',          // Anzahl trials in A
-        'Stress-1-X-C',
-        'Stress-2-X-C',
-        'Stress-3-X-C',
-        'Stress-8-X-C',
-        'ME-4.1-X-C',
-        'Stress-Time-X-C',
-        'Time-ExpB-X-C',
-        'ppa-X-C',
-        'tt1-X-C-Sum',
-        'tt2-X-C-Sum',
-        'at-X-C-Sum',
+		'Position_ExpB_X_C',	     // task_pos
+		'lt_ExpG_X_C',	             // Verfügbare Zeit
+        'nT_X_C',          // Anzahl trials in A
+        'Stress_1_X_C',
+        'Stress_2_X_C',
+        'Stress_3_X_C',
+        'Stress_8_X_C',
+        'ME_4.1_X_C',
+        'Stress_Time_X_C',
+        'Time_ExpB_X_C',
+        'ppa_X_C',
+        'tt1_X_C_Sum',
+        'tt2_X_C_Sum',
+        'at_X_C_Sum',
         
-        'Position-ExpB-Y-A',	     // task_pos
-		'lt_ExpG-Y-A',	             // Verfügbare Zeit
-        'nT-Y-A',          // Anzahl trials in A
-        'Stress-1-Y-A',
-        'Stress-2-Y-A',
-        'Stress-3-Y-A',
-        'Stress-8-Y-A',
-        'ME-4.1-Y-A',
-        'Stress-Time-Y-A',
-        'Time-ExpB-Y-A',
-        'ppa-Y-A',
-        'tt1-Y-A-Sum',
-        'tt2-Y-A-Sum',
-        'at-Y-A-Sum',
+        'Position_ExpB_Y_A',	     // task_pos
+		'lt_ExpG_Y_A',	             // Verfügbare Zeit
+        'nT_Y_A',          // Anzahl trials in A
+        'Stress_1_Y_A',
+        'Stress_2_Y_A',
+        'Stress_3_Y_A',
+        'Stress_8_Y_A',
+        'ME_4.1_Y_A',
+        'Stress_Time_Y_A',
+        'Time_ExpB_Y_A',
+        'ppa_Y_A',
+        'tt1_Y_A_Sum',
+        'tt2_Y_A_Sum',
+        'at_Y_A_Sum',
 
-		'Position-ExpB-Y-B',	     // task_pos
-		'lt_ExpG-Y-B',	             // Verfügbare Zeit
-        'nT-Y-B',          // Anzahl trials in A
-        'Stress-1-Y-B',
-        'Stress-2-Y-B',
-        'Stress-3-Y-B',
-        'Stress-8-Y-B',
-        'ME-4.1-Y-A',
-        'Stress-Time-Y-B',
-        'Time-ExpB-Y-B',
-        'ppa-Y-B',
-        'tt1-Y-B-Sum',
-        'tt2-Y-B-Sum',
-        'at-Y-B-Sum',
+		'Position_ExpB_Y_B',	     // task_pos
+		'lt_ExpG_Y_B',	             // Verfügbare Zeit
+        'nT_Y_B',          // Anzahl trials in A
+        'Stress_1_Y_B',
+        'Stress_2_Y_B',
+        'Stress_3_Y_B',
+        'Stress_8_Y_B',
+        'ME_4.1_Y_B',
+        'Stress_Time_Y_B',
+        'Time_ExpB_Y_B',
+        'ppa_Y_B',
+        'tt1_Y_B_Sum',
+        'tt2_Y_B_Sum',
+        'at_Y_B_Sum',
 
-		'Position-ExpB-Y-C',	     // task_pos
-		'lt_ExpG-Y-C',	             // Verfügbare Zeit
-        'nT-Y-C',          // Anzahl trials in A
-        'Stress-1-Y-C',
-        'Stress-2-Y-C',
-        'Stress-3-Y-C',
-        'Stress-8-Y-C',
-        'ME-4.1-Y-A',
-        'Stress-Time-Y-C',
-        'Time-ExpB-Y-C',
-        'ppa-Y-C',
-        'tt1-Y-C-Sum',
-        'tt2-Y-C-Sum',
-        'at-Y-C-Sum',
+		'Position_ExpB_Y_C',	     // task_pos
+		'lt_ExpG_Y_C',	             // Verfügbare Zeit
+        'nT_Y_C',          // Anzahl trials in A
+        'Stress_1_Y_C',
+        'Stress_2_Y_C',
+        'Stress_3_Y_C',
+        'Stress_8_Y_C',
+        'ME_4.1_Y_C',
+        'Stress_Time_Y_C',
+        'Time_ExpB_Y_C',
+        'ppa_Y_C',
+        'tt1_Y_C_Sum',
+        'tt2_Y_C_Sum',
+        'at_Y_C_Sum',
 	);
     
     // Generate Labels for Trials
@@ -529,7 +530,8 @@ $app->get('/csv', function() use($app) {
             'q_num_1' => '#',
             'q_num_2' => '#',
             'q_num_3' => '#',
-            'q_num_4' => '#'
+            'q_num_4' => '#',
+            'q_num_5' => '#',
         );
 		if (isset($value['meta'][0])) { $meta = $value['meta'][0]; }
 
@@ -567,7 +569,7 @@ $app->get('/csv', function() use($app) {
         if (isset($value['participant']['payout'])) { $payout = $value['participant']['payout']; }
         
         
-        $timeCosts = [4150, 3050, 2920, 2740, 2630, 1820, 1640, 1530, 1520, 1400, 1220, 420, 300, 120, 0];
+        $timeCosts = [3770, 2770, 2660, 2500, 2390, 1660, 1500, 1390, 1380, 1280, 1110, 380, 280, 110, 0];
         
         // Calculate tt1 sum
         $tt1Sums = array('X_A' => 0, 'X_B' => 0, 'X_C' => 0, 'Y_A' => 0, 'Y_B' => 0, 'Y_C' => 0);
@@ -605,8 +607,8 @@ $app->get('/csv', function() use($app) {
 			$value['participant']['id'],
 			$value['participant']['participation_id'],
             $reward,
-            $value['participant']['participation_condition'],
-			$value['participant']['participation_group'],
+            str_replace('C', '', $value['participant']['participation_condition']),
+			str_replace('G', '', $value['participant']['participation_group']),
             
             $age,
 			$school,
@@ -627,7 +629,7 @@ $app->get('/csv', function() use($app) {
             $maximising['q_num_4'],
             $maximising['q_num_5'],
             $maximising['q_num_6'],
-            $maximising['q_sum'] / 6,
+            round($maximising['q_sum'] / 6, 1),
             
             $resiliance['q_num_1'],
             $resiliance['q_num_2'],
@@ -640,7 +642,7 @@ $app->get('/csv', function() use($app) {
             $resiliance['q_num_9'],
             $resiliance['q_num_10'],
             $resiliance['q_num_11'],
-            $resiliance['q_sum'] / 11,
+            round($resiliance['q_sum'] / 11, 1),
             
             $risk['q_num_1'],
             $risk['q_num_2'],
@@ -651,15 +653,16 @@ $app->get('/csv', function() use($app) {
             $nfc['q_num_2'],
             $nfc['q_num_3'],
             $nfc['q_num_4'],
-            $nfc['q_sum'] / 4,
+            round($nfc['q_sum'] / 4, 1),
             
             $meta['q_num_1'],
             $meta['q_num_2'],
             $meta['q_num_4'],
+            $meta['q_num_5'],
             
             
 			$expXA['task_pos'],
-			18860,
+			18060,
 			$expXA['numberOfTrials'],
             $expXA['stress_q1'],
             $expXA['stress_q2'],
@@ -674,13 +677,13 @@ $app->get('/csv', function() use($app) {
             $expXA['acquisitionSum'],
 
 			$expXB['task_pos'],
-			84870,
+			81270,
 			$expXB['numberOfTrials'],
             $expXB['stress_q1'],
             $expXB['stress_q2'],
             $expXB['stress_q3'],
             $expXB['stress_q8'],
-            $expXA['q_me4'],
+            $expXB['q_me4'],
             $expXB['time_to_answer'],
             $expXB['time_to_finish'],
             $expXB['score'],
@@ -689,13 +692,13 @@ $app->get('/csv', function() use($app) {
             $expXB['acquisitionSum'],
             
 			$expXC['task_pos'],
-			150880,
+			144480,
 			$expXC['numberOfTrials'],
             $expXC['stress_q1'],
             $expXC['stress_q2'],
             $expXC['stress_q3'],
             $expXC['stress_q8'],
-            $expXA['q_me4'],
+            $expXC['q_me4'],
             $expXC['time_to_answer'],
             $expXC['time_to_finish'],
             $expXC['score'],
@@ -704,13 +707,13 @@ $app->get('/csv', function() use($app) {
             $expXC['acquisitionSum'],
             
             $expYA['task_pos'],
-			18860,
+			18060,
 			$expYA['numberOfTrials'],
             $expYA['stress_q1'],
             $expYA['stress_q2'],
             $expYA['stress_q3'],
             $expYA['stress_q8'],
-            $expXA['q_me4'],
+            $expYA['q_me4'],
             $expYA['time_to_answer'],
             $expYA['time_to_finish'],
             $expYA['score'],
@@ -719,13 +722,13 @@ $app->get('/csv', function() use($app) {
             $expYA['acquisitionSum'],
             
             $expYB['task_pos'],
-			84870,
+			81270,
 			$expYB['numberOfTrials'],
             $expYB['stress_q1'],
             $expYB['stress_q2'],
             $expYB['stress_q3'],
             $expYB['stress_q8'],
-            $expXA['q_me4'],
+            $expYB['q_me4'],
             $expYB['time_to_answer'],
             $expYB['time_to_finish'],
             $expYB['score'],
@@ -734,13 +737,13 @@ $app->get('/csv', function() use($app) {
             $expYB['acquisitionSum'],
             
             $expYC['task_pos'],
-			150880,
+			144480,
 			$expYC['numberOfTrials'],
             $expYC['stress_q1'],
             $expYC['stress_q2'],
             $expYC['stress_q3'],
             $expYC['stress_q8'],
-            $expXA['q_me4'],
+            $expYC['q_me4'],
             $expYC['time_to_answer'],
             $expYC['time_to_finish'],
             $expYC['score'],

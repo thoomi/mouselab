@@ -260,10 +260,10 @@ angular.module('mouselabApp')
       // Get the time cost and subtract it from current time
       var timeCost = determineTimeCost(aqcuisitionPattern, dataService.getCurrentTask());
       
-      if ($scope.taskWaiting)
-      {
-        $scope.availableTime -= timeCost;
-      }
+      //if ($scope.taskWaiting)
+      //{
+        //$scope.availableTime -= timeCost;
+      //}
       
 
       $scope.finishedTrialData.push({
