@@ -1,39 +1,6 @@
 <h2>Fragen zum Arbeitstag {{ currentRound }}</h2>
 
 <form class="form-horizontal stress-questions">
-      <div class="form-group" ng-if="currentRound === 3 || currentRound === 6">
-        <div class="col-sm-2">
-            <p><strong>Ich habe…</strong></p>
-        </div>
-        <div class="col-sm-10">
-            <div class="radio">
-              <label>
-                <input type="radio" name="stressQuestion8" value="1"  ng-model="stressQuestions8" ng-change="checkAllSet()">
-                zu Beginn des Arbeitstages Stress empfunden, der zum Ende hin jedoch nachgelassen hat
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="stressQuestion8" value="2" ng-model="stressQuestions8" ng-change="checkAllSet()">
-                über den ganzen Arbeitstag relativ gleichmäßig Stress empfunden	
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="stressQuestion8" value="3" ng-model="stressQuestions8" ng-change="checkAllSet()">
-               zum Ende des Arbeitstages hin zunehmend mehr Stress empfunden
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="stressQuestion8" value="4" ng-model="stressQuestions8" ng-change="checkAllSet()">
-                während des Arbeitstages wenig bis keinen Stress empfunden
-              </label>
-            </div>
-        </div>
-    </div>
-    
-    <br>
     <div class="form-group" ng-repeat="question in stressQuestions">
         <div class="col-sm-5">
             <p><strong>{{ $index + 1 }}. {{ question.title }}</strong></p>
@@ -88,7 +55,7 @@
              <button class="btn btn-info btn-lg btn-next" data-toggle="modal" data-target="#myModal" ng-if="currentRound < 3"><span class="glyphicon glyphicon-info-sign"></span> Aufgabenbeschreibung ansehen</button>
             <a type="submit" ng-click="onFormSubmit()"
                ng-disabled="!allQuestionsAnswered"
-               class="btn btn-lg btn-success btn-next"><span ng-if="currentRound === 6">Weiter</span><span ng-if="currentRound < 6">Nächsten Arbeitstag beginnen</span>
+               class="btn btn-lg btn-success btn-next"><span ng-if="currentRound === 6 || currentRound === 3">Weiter</span><span ng-if="!(currentRound === 6 || currentRound === 3)">Nächsten Arbeitstag beginnen</span>
                 <div class="spinner" ng-hide="notWaitingForRequestToFinish">
                     <div class="rect1"></div>
                     <div class="rect2"></div>

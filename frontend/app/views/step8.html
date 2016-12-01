@@ -1,10 +1,11 @@
 <h2>Ihre Ergebnisse	aus	der	Einarbeitungsphase</h2>
 <p >
-   	In der Einarbeitungsphase haben Sie <strong>{{ remainingMinutes }} min und {{ remainingSeconds |number:2 }} sek</strong> benötigt, um:
+   	In der Einarbeitungsphase haben Sie: 
 </p>
 <ul class="list-unstyled" style="font-size: 18px;">
-    <li><strong>{{ trainingData.numberOfTrials }}</strong> Aktienkäufe zu erledigen und</li>
-    <li><strong>{{ trainingData.score }}</strong> Punkte zu erhalten</li>
+    <li><strong>{{ trainingData.numberOfTrials }}</strong> Aktienkäufe in</li>
+    <li><strong>{{ remainingMinutes }}</strong> Minuten und <strong>{{ remainingSeconds |number:2 }}</strong> Sekunden getätigt und</li>
+    <li><strong>{{ trainingData.score }}</strong> Punkte erhalten</li>
 </ul>
 
 <p>

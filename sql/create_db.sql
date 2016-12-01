@@ -226,6 +226,7 @@ DROP TABLE IF EXISTS `skopietz_grundlagenstudie`.`tl_meta_question` ;
 CREATE TABLE IF NOT EXISTS `skopietz_grundlagenstudie`.`tl_meta_question` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `q_num_1` SMALLINT(6) NOT NULL,
+  `q_num_11` SMALLINT(6) NOT NULL,
   `q_num_2` SMALLINT(6) NOT NULL,
   `q_num_3` SMALLINT(6) NOT NULL,
   `q_num_4` SMALLINT(6) NOT NULL,

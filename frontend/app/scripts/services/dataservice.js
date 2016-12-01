@@ -41,6 +41,8 @@ angular.module('mouselabApp')
         var isMetaSaved           = false;
         var isNfcSaved            = false;
         var isRiskSaved           = false;
+        
+        var metaAnswer1 = 0;
 
         // Define private http request methods
         function saveParticipant(callback) {
@@ -181,7 +183,8 @@ angular.module('mouselabApp')
         function saveMetaQuestions(answerValues, callback) {
             var postData = {
                 participantDatabaseId : participantDatabaseId,
-                answerValues          : answerValues
+                answerValues          : answerValues,
+                metaAnswer1           : metaAnswer1
             };
 
             $http.post(configData.getBaseUrl() + '/participant/save/metaanswers', postData).
@@ -282,6 +285,10 @@ angular.module('mouselabApp')
             getParticipantCondition : function () {
               return participantCondition;
             },
+            
+            getParticipantGroup : function () {
+              return participantGroup;
+            },
 
             initializeTrials : function() {
               availableTrials = configData.getTrials();
@@ -294,6 +301,10 @@ angular.module('mouselabApp')
                 //usedTrials.push(trial);
 
                 //return trial;
+            },
+            
+            setMetaAnswer : function (value) {
+                metaAnswer1 = value;
             },
 
             startNextRound : function () {
@@ -499,7 +510,8 @@ angular.module('mouselabApp')
                 participantScore      = 0;
                 questionSetSteps      = ['step18', 'step19', 'step20', 'step21'];
                 randomizer.shuffleArray(questionSetSteps);
-
+                metaAnswer1           = 0;
+                
                 $rootScope.$broadcast('resetPageCount');
             }
         };

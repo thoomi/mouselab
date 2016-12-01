@@ -140,7 +140,8 @@ $app->get('/csv', function() use($app) {
         'Nfc_4',
 		'Nfc_MW',				// maximising_sum
             
-        'Meta_1',
+        'Meta_1.1',
+        'Meta_1.2',
         'Meta_2',
         'Meta_4',
         'Meta_5',
@@ -528,6 +529,7 @@ $app->get('/csv', function() use($app) {
 		
 		$meta = array(
             'q_num_1' => '#',
+            'q_num_11' => '#',
             'q_num_2' => '#',
             'q_num_3' => '#',
             'q_num_4' => '#',
@@ -655,6 +657,7 @@ $app->get('/csv', function() use($app) {
             $nfc['q_num_4'],
             round($nfc['q_sum'] / 4, 1),
             
+            $meta['q_num_11'],
             $meta['q_num_1'],
             $meta['q_num_2'],
             $meta['q_num_4'],

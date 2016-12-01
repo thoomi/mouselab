@@ -226,12 +226,13 @@ class DbHandler
         $insertStatement->execute();
     }
     
-    public function saveMetaAnswers($participantDbId, $answerValues)
+    public function saveMetaAnswers($participantDbId, $answerValues, $metaAnswer1)
     {
-        $insertStatement = $this->dbh->prepare('INSERT INTO tl_meta_question (q_num_1, q_num_2, q_num_3, q_num_4, q_num_5, tl_participant_id)
-                                                VALUES (:answer1, :answer2, :answer3, :answer4, :answer5, :participantId)');
+        $insertStatement = $this->dbh->prepare('INSERT INTO tl_meta_question (q_num_1, q_num_11, q_num_2, q_num_3, q_num_4, q_num_5, tl_participant_id)
+                                                VALUES (:answer1, :answerMeta1, :answer2, :answer3, :answer4, :answer5, :participantId)');
 
         $insertStatement->bindParam(':answer1', $answerValues[0]);
+        $insertStatement->bindParam(':answerMeta1', $metaAnswer1);
         $insertStatement->bindParam(':answer2', $answerValues[1]);
         $insertStatement->bindParam(':answer3', $answerValues[2]);
         $insertStatement->bindParam(':answer4', $answerValues[3]);

@@ -39,6 +39,10 @@ angular
         templateUrl: 'views/step5.html',
         controller: 'Step5Ctrl' 
       })
+      .when('/step6-1', {
+        templateUrl: 'views/step6-1.html',
+        controller: 'Step6-1Ctrl'
+      })
       .when('/step6', {
         templateUrl: 'views/step6.html',
         controller: 'Step6Ctrl'
@@ -59,9 +63,17 @@ angular
         templateUrl: 'views/getReady.html',
         controller: 'GetReadyCtrl'
       })
+      .when('/step10-1', {
+        templateUrl: 'views/step10-1.html',
+        controller: 'Step10-1Ctrl'
+      })
       .when('/step10', {
         templateUrl: 'views/step10.html',
         controller: 'Step10Ctrl'
+      })
+      .when('/step11-1', {
+        templateUrl: 'views/step11-1.html',
+        controller: 'Step11-1Ctrl'
       })
       .when('/step11', {
         templateUrl: 'views/step11.html',

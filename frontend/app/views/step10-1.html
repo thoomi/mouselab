@@ -1,0 +1,21 @@
+<h2>Gleich geht's weiter</h2>
+
+<div ng-hide="participantGroup === 'G1' || participantGroup === 'G2' || participantGroup === 'G3'">
+  <p>
+    Beachten Sie bitte, dass Ihnen Ihre gesuchten Informationen nun sofort angezeigt werden, ohne eine Wartezeit. Die Recherchezeit wird Ihnen dennoch von Ihrer Arbeitszeit abgezogen. Behalten Sie also stets Ihre verbleibende Zeit im Auge. 
+    </p>
+</div>
+
+
+
+<div ng-hide="participantGroup === 'G4' || participantGroup === 'G5' || participantGroup === 'G6'">
+    <p>
+        Beachten Sie bitte, dass Ihnen Ihre gesuchten Informationen nicht mehr sofort angezeigt werden und Sie den Ablauf der angegebenen Recherchezeiten abwarten müssen.  
+    </p>
+</div>
+
+<p>Weiterhin viel Erfolg!</p>
+
+<p>
+    <a class="btn btn-success btn-next" ng-href="#/getReady">Nächsten Arbeitstag beginnen <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
+</p>

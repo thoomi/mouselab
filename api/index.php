@@ -305,7 +305,7 @@ $app->post('/participant/save/metaanswers', function() use($app) {
 	if (isset($requestData['participantDatabaseId'])
 		&& isset($requestData['answerValues']))
 	{
-		$app->db->saveMetaAnswers($requestData['participantDatabaseId'], $requestData['answerValues']);
+		$app->db->saveMetaAnswers($requestData['participantDatabaseId'], $requestData['answerValues'], $requestData['metaAnswer1']);
 
 		$app->response->setStatus(200);
 		$app->response->headers->set('Access-Control-Allow-Origin', ALLOWED_ORIGINS);

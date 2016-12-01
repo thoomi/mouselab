@@ -71,6 +71,11 @@ angular.module('mouselabApp')
               {
                   $location.path('step16');
               }
+              else if ($scope.currentRound === 3)
+              {
+                dataService.startNextRound();
+                $location.path('step10-1');
+              }
               else
               {
                   dataService.startNextRound();
