@@ -10,7 +10,7 @@
 angular.module('mouselabApp')
   .service('configData', function (randomizer) {
       // Location will be different for each url
-      var experimentLocation  = 'T';
+      var experimentLocation  = 'L';
 
       var baseApiUrl = 'http://api-002.stephan-kopietz.de';
       //var baseApiUrl = 'https://mouselab-promo-thoomi.c9users.io:8080/api';

@@ -168,7 +168,7 @@ class DbHandler
                                                     	tl_stress_question.q_num_1 AS stress_q1,
                                                     	tl_stress_question.q_num_2 AS stress_q2,
                                                     	tl_stress_question.q_num_3 AS stress_q3,
-                                                    	tl_stress_question.q_me4   AS stress_q4,
+                                                    	tl_stress_question.q_me4   AS q_me4,
                                                     	tl_stress_question.q_num_8 AS stress_q8,
                                                     	tl_stress_question.time_to_answer AS time_to_answer,
                                                     	
