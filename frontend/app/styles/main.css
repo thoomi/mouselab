@@ -178,6 +178,11 @@ html {
   left: -28px;
 }
 
+.form-horizontal .meta-questions {
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
 .radio-inline {
   vertical-align: top;
   padding-top: 0;
