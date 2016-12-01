@@ -38,6 +38,12 @@ angular.module('mouselabApp')
       
       $scope.timeOfLastAcquiredTrial = configData.getAvailableTime(dataService.getCurrentTask());
       
+      
+      var countDownStepValue = 10;
+      $scope.currentCueTime  = 0;
+      $scope.currentCueEndTime = 0;
+      
+      
       $scope.showCueValues  = [
         {
           id: '1',
@@ -147,7 +153,12 @@ angular.module('mouselabApp')
           return;
         }
     
-        $scope.availableTime -= 10;
+        $scope.availableTime -= countDownStepValue;
+        
+        if ($scope.currentCueTime > 0)
+        {
+          $scope.currentCueTime -= countDownStepValue;
+        }
         
         $scope.remainingMinutes = Math.floor(($scope.availableTime / (1000.0 * 60.0)) % 60);
         $scope.remainingSeconds = ($scope.availableTime / 1000.0) % 60;
@@ -182,19 +193,29 @@ angular.module('mouselabApp')
         
         var localTimeCost = timeCost - $scope.sumOfTimeCosts;
         
-        $scope.showCueValues[index].countdownTime += localTimeCost;
+        var countDownSteps = $scope.showCueValues[index].countdownTime / 10;
+        countDownStepValue = ($scope.showCueValues[index].countdownTime + localTimeCost) / countDownSteps;
+        
+        //$scope.showCueValues[index].countdownTime += localTimeCost;
         
         $scope.sumOfTimeCosts = timeCost;
+        $scope.currentCueTime  = $scope.showCueValues[index].countdownTime + localTimeCost;
+        $scope.currentCueEndTime = $scope.availableTime - ($scope.showCueValues[index].countdownTime + localTimeCost);
         
         $scope.showCueValues[index].intervalId = $interval(function() {
        
            if ($scope.showCueValues[index].countdownTime <= 0)
            {
+             countDownStepValue = 10;
+             
              $interval.cancel($scope.showCueValues[index].intervalId);
              $scope.showCueValues[index].show = true;
              $scope.buyTimerRunning = false;
              $scope.informationAcquired = true;
              $scope.aquiredInfos.push($scope.showCueValues[index].id);
+             
+             $scope.currentCueTime = 0;
+             $scope.currentCueEndTime = 0;
              
              return;
            }

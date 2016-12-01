@@ -6,7 +6,15 @@
         <tr>
             <td>
                 <div class="progress progress-exp progress-time">
-                    <div class="progress-bar progress-bar-danger progress-bar-exp {{ buyTimerRunning ? 'progress-bar-highlight' : '' }}" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ ((100 / initialTime) * availableTime)|number:2 }}%;">Verbleibende Zeit: {{ remainingMinutes|zeroPad:2  }} min {{ remainingSeconds |number:2|zeroPad:5 }} sek</div>
+                    <div class="progress-bar progress-bar-danger progress-bar-exp" 
+                         role="progressbar" 
+                         aria-valuenow="60" 
+                         aria-valuemin="0" 
+                         aria-valuemax="100" 
+                         style="width: {{ ((100 / initialTime) * availableTime)|number:2 }}%;">
+                    <span class="time-indicator" style="width: {{ ((100 / availableTime) * currentCueTime)|number:2 }}%; left: {{ (100 / availableTime) * currentCueEndTime }}%;"></span>
+                    Verbleibende Zeit: {{ remainingMinutes|zeroPad:2  }} min {{ remainingSeconds |number:2|zeroPad:5 }} sek
+                    </div>
                 </div>
             </td>
             <td class="text-right" style="width: 175px;"><span class="decision-timer">{{ remainingMinutes|zeroPad:2  }} min {{ remainingSeconds |number:2|zeroPad:5 }} sek</span></td>
