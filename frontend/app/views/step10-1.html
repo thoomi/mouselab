@@ -14,8 +14,60 @@
     </p>
 </div>
 
+
+<div ng-hide="experimentCondition === 'C2'">
+  <p>
+    Während eines Arbeitstages erhalten Sie Informationen über Ihre noch verbleibende Zeit und die verbleibende Anzahl maximal möglicher Aktienkäufe. Diese Informationen werden Ihnen als fortlaufende Balken und Zahlen im oberen Bereich des Bildschirms angezeigt.
+    </p>
+    
+    <div class="thumbnail">
+        <img src="screenshot-balken.jpg" alt="Screenshot">
+    </div>
+    <p>
+        Bitte beachten Sie diese Informationen stets! 
+    </p>  
+</div>
+
+
+
+<div ng-hide="experimentCondition === 'C1'">
+    <p>
+        Während eines Arbeitstages erhalten Sie Informationen über Ihre noch verbleibende Zeit, die verbleibende Anzahl maximal möglicher Aktienkäufe und wie viele Punkte Sie bereits gesammelt haben. Diese Informationen werden Ihnen als fortlaufende Balken und Zahlen im oberen Bereich des Bildschirms angezeigt. 
+    </p>
+    
+    <div class="thumbnail">
+        <img src="screenshot-balken.jpg" alt="Screenshot">
+    </div>
+    <p>
+        Bitte beachten Sie diese Informationen stets! 
+    </p>
+</div>
+
+
+
 <p>Weiterhin viel Erfolg!</p>
 
 <p>
+    <button class="btn btn-info btn-lg btn-next" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-info-sign"></span> Aufgabenbeschreibung ansehen</button>
     <a class="btn btn-success btn-next" ng-href="#/getReady">Nächsten Arbeitstag beginnen <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
 </p>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>Aufgabenbeschreibung</h4>
+      </div>
+      <div class="modal-body">
+         <div ng-include src="instructions[currentInstruction]"></div>
+         <button type="button" class="btn btn-default btn-info" ng-click="changeInstruction(1)" ng-hide="currentInstruction === 1">Nächste Aufgabenbeschreibung</button>
+         <button type="button" class="btn btn-default btn-info" ng-click="changeInstruction(0)" ng-hide="currentInstruction === 0">Vorherige Aufgabenbeschreibung</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>

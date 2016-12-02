@@ -34,6 +34,11 @@ angular.module('mouselabApp')
             allSet = false;
           }
         });
+        
+        if ($scope.me4Question === -1) 
+        {
+          allSet = false;
+        }
 
         $scope.allQuestionsAnswered = allSet;
       };

@@ -237,7 +237,8 @@ angular.module('mouselabApp')
           
           var localTimeCost = timeCost - $scope.sumOfTimeCosts;
           
-          $scope.availableTime -= ($scope.showCueValues[index].countdownTime + localTimeCost);
+          //$scope.availableTime -= ($scope.showCueValues[index].countdownTime + localTimeCost);
+          $scope.availableTime -= $scope.showCueValues[index].countdownTime;
           
           $scope.sumOfTimeCosts = timeCost;
       }

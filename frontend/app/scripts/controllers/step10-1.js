@@ -15,5 +15,13 @@ angular.module('mouselabApp')
     
     $scope.experimentCondition = dataService.getParticipantCondition();
     $scope.participantGroup    = dataService.getParticipantGroup();
+    $scope.currentround        = dataService.getCurrentRound();
 
+
+    $scope.instructions =['views/partials/instruction1.html', 'views/partials/instruction2.html'];
+        $scope.currentInstruction = 0;
+        
+        $scope.changeInstruction = function(index) {
+          $scope.currentInstruction = index;
+        };
   });

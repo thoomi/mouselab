@@ -52,7 +52,6 @@
     <br>
     <div class="form-group">
         <div class="col-sm-12">
-             <button class="btn btn-info btn-lg btn-next" data-toggle="modal" data-target="#myModal" ng-if="currentRound < 3"><span class="glyphicon glyphicon-info-sign"></span> Aufgabenbeschreibung ansehen</button>
             <a type="submit" ng-click="onFormSubmit()"
                ng-disabled="!allQuestionsAnswered"
                class="btn btn-lg btn-success btn-next"><span ng-if="currentRound === 6 || currentRound === 3">Weiter</span><span ng-if="!(currentRound === 6 || currentRound === 3)">Nächsten Arbeitstag beginnen</span>
@@ -67,23 +66,3 @@
         </div>
     </div>
 </form>
-
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"></h4>Aufgabenbeschreibung</h4>
-      </div>
-      <div class="modal-body">
-         <div ng-include src="instructions[currentInstruction]"></div>
-         <button type="button" class="btn btn-default btn-info" ng-click="changeInstruction(1)" ng-hide="currentInstruction === 1">Nächste Aufgabenbeschreibung</button>
-         <button type="button" class="btn btn-default btn-info" ng-click="changeInstruction(0)" ng-hide="currentInstruction === 0">Vorherige Aufgabenbeschreibung</button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
-      </div>
-    </div>
-  </div>
-</div>

@@ -55,6 +55,7 @@ html {
   font-weight: bold;
   color: #555;
   position: relative;
+  z-index: 2;
 }
 
 .progress-time .progress-bar {
@@ -71,6 +72,7 @@ html {
   left: 0;
   top: 0;
   background-color: #e9d70f;
+  z-index: -1;
 }
 
 .testing-configurators {

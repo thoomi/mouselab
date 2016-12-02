@@ -8,28 +8,10 @@
 <form class="form-horizontal ">
     <div class="form-group meta-questions">
         <div class="col-sm-12">
-            <div class="radio">
+            <div class="radio" ng-repeat="answer in metaQuestion1Answers">
               <label>
-                <input type="radio" name="metaQuestion1Name" value="1"  ng-model="metaQuestion1" ng-change="checkAllSet()">
-                viele	Informationen	recherchiert	und	dadurch	wenige	aber	dafür	sichere	Aktienkäufe	tätigt	
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="metaQuestion1Name" value="2" ng-model="metaQuestion1" ng-change="checkAllSet()">
-                wenige	Informationen	recherchiert	und	dadurch	viele	aber	dafür	unsichere	Aktienkäufe	tätigt		
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="metaQuestion1Name" value="3" ng-model="metaQuestion1" ng-change="checkAllSet()">
-               Es	ist	egal	wie	man	Aktien	kauft,	es	macht	am	Ende	des	Arbeitstages	keinen	Unterschied	
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="metaQuestion1Name" value="4" ng-model="metaQuestion1" ng-change="checkAllSet()">
-                Ich	weiß	nicht	wie	man	Aktien	kaufen	soll,	um	möglichst	viele	Punkte	zu	bekommen
+                <input type="radio" name="metaQuestion1Name" value="{{ answer.value }}"  ng-model="metaQuestion1" ng-change="checkAllSet()">
+                {{ answer.title  }}
               </label>
             </div>
         </div>
