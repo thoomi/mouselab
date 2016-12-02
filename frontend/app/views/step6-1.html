@@ -10,7 +10,7 @@
         <div class="col-sm-12">
             <div class="radio" ng-repeat="answer in metaQuestion1Answers">
               <label>
-                <input type="radio" name="metaQuestion1Name" value="{{ answer.value }}"  ng-model="metaQuestion1" ng-change="checkAllSet()">
+                <input type="radio" name="metaQuestion1Name" value="{{ answer.value }}"  ng-model="$parent.metaQuestion1" ng-change="checkAllSet()">
                 {{ answer.title  }}
               </label>
             </div>

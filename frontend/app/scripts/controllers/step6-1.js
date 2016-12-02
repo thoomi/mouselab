@@ -20,6 +20,7 @@ angular.module('mouselabApp')
     
     
     $scope.checkAllSet = function() {
+        console.log($scope.metaQuestion1);
         if ($scope.metaQuestion1)
         {
             $scope.allQuestionsAnswered = true;
