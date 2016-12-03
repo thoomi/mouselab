@@ -237,8 +237,8 @@ angular.module('mouselabApp')
           
           var localTimeCost = timeCost - $scope.sumOfTimeCosts;
           
-          //$scope.availableTime -= ($scope.showCueValues[index].countdownTime + localTimeCost);
-          $scope.availableTime -= $scope.showCueValues[index].countdownTime;
+          $scope.availableTime -= ($scope.showCueValues[index].countdownTime + localTimeCost);
+          //$scope.availableTime -= $scope.showCueValues[index].countdownTime;
           
           $scope.sumOfTimeCosts = timeCost;
       }
@@ -278,14 +278,6 @@ angular.module('mouselabApp')
       }
       
       var aqcuisitionPattern = determineAcquisitionPattern(numberOfAcquisitions);
-      
-      // Get the time cost and subtract it from current time
-      var timeCost = determineTimeCost(aqcuisitionPattern, dataService.getCurrentTask());
-      
-      //if ($scope.taskWaiting)
-      //{
-        //$scope.availableTime -= timeCost;
-      //}
       
 
       $scope.finishedTrialData.push({
@@ -343,8 +335,8 @@ angular.module('mouselabApp')
       
       if (!cue1 && !cue2 &&  cue3 &&  cue4) { return 11; }
       if (!cue1 &&  cue2 && !cue3 &&  cue4) { return 10; }
-      if (!cue1 &&  cue2 &&  cue3 && !cue4) { return  9; }
-      if ( cue1 && !cue2 && !cue3 &&  cue4) { return  8; }
+      if ( cue1 && !cue2 && !cue3 &&  cue4) { return  9; }
+      if (!cue1 &&  cue2 &&  cue3 && !cue4) { return  8; }
       if ( cue1 && !cue2 &&  cue3 && !cue4) { return  7; }
       if ( cue1 &&  cue2 && !cue3 && !cue4) { return  6; }
 
@@ -356,9 +348,17 @@ angular.module('mouselabApp')
       if ( cue1 &&  cue2 &&  cue3 &&  cue4) { return  1; }
     }
     
-    function determineTimeCost(acquisitionPattern) {
-      var timeCosts = [4150, 3050, 2920, 2740, 2630, 1820, 1640, 1530, 1520, 1400, 1220, 420, 300, 120, 0];
-      
-      return timeCosts[acquisitionPattern - 1];
+    function determineTimeCost(acquisitionPattern, condition) {
+        var timeCosts = {
+          'X_A' : [2330, 3590, 3730, 3930, 4070, 1840, 2050, 2180, 2190, 2320,  960, 310, 440, 190, 0],
+          'X_B' : [3510, 2640, 2790, 2990, 2350, 1620, 1820, 1550, 1560, 1340, 1230, 430, 330, 150, 0],
+          'X_C' : [4510, 3030, 2680, 2890, 2580, 1840, 1570, 1480, 1490, 1430, 1270, 440, 310, 100, 0],
+          
+          'Y_A' : [2330, 3590, 3730, 3930, 4070, 1840, 2050, 2180, 2190, 2320,  960, 310, 440, 190, 0],
+          'Y_B' : [3510, 2640, 2790, 2990, 2350, 1620, 1820, 1550, 1560, 1340, 1230, 430, 330, 150, 0],
+          'Y_C' : [4510, 3030, 2680, 2890, 2580, 1840, 1570, 1480, 1490, 1430, 1270, 440, 310, 100, 0]
+        };
+        
+        return timeCosts[condition][acquisitionPattern - 1];
     }
   });

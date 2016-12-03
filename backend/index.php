@@ -571,7 +571,15 @@ $app->get('/csv', function() use($app) {
         if (isset($value['participant']['payout'])) { $payout = $value['participant']['payout']; }
         
         
-        $timeCosts = [3770, 2770, 2660, 2500, 2390, 1660, 1500, 1390, 1380, 1280, 1110, 380, 280, 110, 0];
+        $timeCosts = [
+            'X_A' => [2330, 3590, 3730, 3930, 4070, 1840, 2050, 2180, 2190, 2320,  960, 310, 440, 190, 0],
+            'X_B' => [3510, 2640, 2790, 2990, 2350, 1620, 1820, 1550, 1560, 1340, 1230, 430, 330, 150, 0],
+            'X_C' => [4510, 3030, 2680, 2890, 2580, 1840, 1570, 1480, 1490, 1430, 1270, 440, 310, 100, 0],
+            
+            'Y_A' => [2330, 3590, 3730, 3930, 4070, 1840, 2050, 2180, 2190, 2320,  960, 310, 440, 190, 0],
+            'Y_B' => [3510, 2640, 2790, 2990, 2350, 1620, 1820, 1550, 1560, 1340, 1230, 430, 330, 150, 0],
+            'Y_C' => [4510, 3030, 2680, 2890, 2580, 1840, 1570, 1480, 1490, 1430, 1270, 440, 310, 100, 0]
+        ];
         
         // Calculate tt1 sum
         $tt1Sums = array('X_A' => 0, 'X_B' => 0, 'X_C' => 0, 'Y_A' => 0, 'Y_B' => 0, 'Y_C' => 0);
@@ -579,27 +587,27 @@ $app->get('/csv', function() use($app) {
         {
             if ($trial['task'] === 'X_A')
             {
-                $tt1Sums['X_A'] += ($trial['time_to_finish'] - $timeCosts[max($trial['acquisition_pattern'], 1) - 1]);
+                $tt1Sums['X_A'] += ($trial['time_to_finish'] - $timeCosts['X_A'][max($trial['acquisition_pattern'], 1) - 1]);
             }
             else if ($trial['task'] === 'X_B')
             {
-                $tt1Sums['X_B'] += ($trial['time_to_finish'] - $timeCosts[max($trial['acquisition_pattern'], 1) - 1]);
+                $tt1Sums['X_B'] += ($trial['time_to_finish'] - $timeCosts['X_B'][max($trial['acquisition_pattern'], 1) - 1]);
             }
             else if ($trial['task'] === 'X_C')
             {
-                $tt1Sums['X_C'] += ($trial['time_to_finish'] - $timeCosts[max($trial['acquisition_pattern'], 1) - 1]);
+                $tt1Sums['X_C'] += ($trial['time_to_finish'] - $timeCosts['X_C'][max($trial['acquisition_pattern'], 1) - 1]);
             }
             else if ($trial['task'] === 'Y_A')
             {
-                $tt1Sums['Y_A'] += ($trial['time_to_finish'] - $timeCosts[max($trial['acquisition_pattern'], 1) - 1]);
+                $tt1Sums['Y_A'] += ($trial['time_to_finish'] - $timeCosts['Y_A'][max($trial['acquisition_pattern'], 1) - 1]);
             }
             else if ($trial['task'] === 'Y_B')
             {
-                $tt1Sums['Y_B'] += ($trial['time_to_finish'] - $timeCosts[max($trial['acquisition_pattern'], 1) - 1]);
+                $tt1Sums['Y_B'] += ($trial['time_to_finish'] - $timeCosts['Y_B'][max($trial['acquisition_pattern'], 1) - 1]);
             }
             else if ($trial['task'] === 'Y_C')
             {
-                $tt1Sums['Y_C'] += ($trial['time_to_finish'] - $timeCosts[max($trial['acquisition_pattern'], 1) - 1]);
+                $tt1Sums['Y_C'] += ($trial['time_to_finish'] - $timeCosts['Y_C'][max($trial['acquisition_pattern'], 1) - 1]);
             }
         }
         
@@ -770,9 +778,9 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = $value['trials'][0]['chosen_option'];
                 $currentRow[] = $value['trials'][0]['number_of_acquisitions'];
                 $currentRow[] = $value['trials'][0]['order_of_acqusitions'];
-                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1];
+                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts['X_A'][max($value['trials'][0]['acquisition_pattern'], 1) - 1];
                 $currentRow[] = $value['trials'][0]['time_to_finish'];
-                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
+                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts['X_A'][max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
                 
@@ -831,9 +839,9 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = $value['trials'][0]['chosen_option'];
                 $currentRow[] = $value['trials'][0]['number_of_acquisitions'];
                 $currentRow[] = $value['trials'][0]['order_of_acqusitions'];
-                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1];
+                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts['X_B'][max($value['trials'][0]['acquisition_pattern'], 1) - 1];
                 $currentRow[] = $value['trials'][0]['time_to_finish'];
-                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
+                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts['X_B'][max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
                 
@@ -890,9 +898,9 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = $value['trials'][0]['chosen_option'];
                 $currentRow[] = $value['trials'][0]['number_of_acquisitions'];
                 $currentRow[] = $value['trials'][0]['order_of_acqusitions'];
-                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1];
+                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts['X_C'][max($value['trials'][0]['acquisition_pattern'], 1) - 1];
                 $currentRow[] = $value['trials'][0]['time_to_finish'];
-                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
+                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts['X_C'][max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
                 
@@ -954,9 +962,9 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = $value['trials'][0]['chosen_option'];
                 $currentRow[] = $value['trials'][0]['number_of_acquisitions'];
                 $currentRow[] = $value['trials'][0]['order_of_acqusitions'];
-                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1];
+                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts['Y_A'][max($value['trials'][0]['acquisition_pattern'], 1) - 1];
                 $currentRow[] = $value['trials'][0]['time_to_finish'];
-                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
+                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts['Y_A'][max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
                 
@@ -1015,9 +1023,9 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = $value['trials'][0]['chosen_option'];
                 $currentRow[] = $value['trials'][0]['number_of_acquisitions'];
                 $currentRow[] = $value['trials'][0]['order_of_acqusitions'];
-                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1];
+                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts['Y_B'][max($value['trials'][0]['acquisition_pattern'], 1) - 1];
                 $currentRow[] = $value['trials'][0]['time_to_finish'];
-                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
+                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts['Y_B'][max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
                 
@@ -1074,9 +1082,9 @@ $app->get('/csv', function() use($app) {
                 $currentRow[] = $value['trials'][0]['chosen_option'];
                 $currentRow[] = $value['trials'][0]['number_of_acquisitions'];
                 $currentRow[] = $value['trials'][0]['order_of_acqusitions'];
-                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1];
+                $currentRow[] = $value['trials'][0]['time_to_finish'] - $timeCosts['Y_C'][max($value['trials'][0]['acquisition_pattern'], 1) - 1];
                 $currentRow[] = $value['trials'][0]['time_to_finish'];
-                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts[max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
+                $currentRow[] = ($value['trials'][0]['time_to_finish'] - $timeCosts['Y_C'][max($value['trials'][0]['acquisition_pattern'], 1) - 1]) - $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['acquisition_time'];
                 $currentRow[] = $value['trials'][0]['score'];
                 
