@@ -143,7 +143,6 @@ $app->get('/csv', function() use($app) {
         'Meta_1.1',
         'Meta_1.2',
         'Meta_2',
-        'Meta_4',
         'Meta_5',
         
         
@@ -153,7 +152,6 @@ $app->get('/csv', function() use($app) {
         'Stress_1_X_A',
         'Stress_2_X_A',
         'Stress_3_X_A',
-        'Stress_8_X_A',
         'ME_4.1_X_A',
         'Stress_Time_X_A',
         'Time_ExpB_X_A',
@@ -168,7 +166,6 @@ $app->get('/csv', function() use($app) {
         'Stress_1_X_B',
         'Stress_2_X_B',
         'Stress_3_X_B',
-        'Stress_8_X_B',
         'ME_4.1_X_B',
         'Stress_Time_X_B',
         'Time_ExpB_X_B',
@@ -183,7 +180,6 @@ $app->get('/csv', function() use($app) {
         'Stress_1_X_C',
         'Stress_2_X_C',
         'Stress_3_X_C',
-        'Stress_8_X_C',
         'ME_4.1_X_C',
         'Stress_Time_X_C',
         'Time_ExpB_X_C',
@@ -198,7 +194,6 @@ $app->get('/csv', function() use($app) {
         'Stress_1_Y_A',
         'Stress_2_Y_A',
         'Stress_3_Y_A',
-        'Stress_8_Y_A',
         'ME_4.1_Y_A',
         'Stress_Time_Y_A',
         'Time_ExpB_Y_A',
@@ -213,7 +208,6 @@ $app->get('/csv', function() use($app) {
         'Stress_1_Y_B',
         'Stress_2_Y_B',
         'Stress_3_Y_B',
-        'Stress_8_Y_B',
         'ME_4.1_Y_B',
         'Stress_Time_Y_B',
         'Time_ExpB_Y_B',
@@ -228,7 +222,6 @@ $app->get('/csv', function() use($app) {
         'Stress_1_Y_C',
         'Stress_2_Y_C',
         'Stress_3_Y_C',
-        'Stress_8_Y_C',
         'ME_4.1_Y_C',
         'Stress_Time_Y_C',
         'Time_ExpB_Y_C',
@@ -376,6 +369,7 @@ $app->get('/csv', function() use($app) {
     
     $result[] = $firstRow;
     
+    var_dump($value['experiments']);
     
 	foreach ($data as $value) {
 	    $totalScore = 0;
@@ -386,7 +380,6 @@ $app->get('/csv', function() use($app) {
             'stress_q1'              => '#',
             'stress_q2'              => '#',
             'stress_q3'              => '#',
-            'stress_q8'              => '#',
             'q_me4'                  => '#',
             'stress_sum'             => '#',
             'time_to_answer'         => '#',
@@ -394,7 +387,6 @@ $app->get('/csv', function() use($app) {
             'score'                  => '#',
             'trialTimeSum'           => '#',
             'acquisitionSum'         => '#',
-            
 		);
 		if (isset($value['experiments'][0])) { $expXA = $value['experiments'][0]; $totalScore += $expXA['score']; }
 
@@ -404,7 +396,6 @@ $app->get('/csv', function() use($app) {
             'stress_q1'              => '#',
             'stress_q2'              => '#',
             'stress_q3'              => '#',
-            'stress_q8'              => '#',
             'q_me4'                  => '#',
             'stress_sum'             => '#',
             'time_to_answer'         => '#',
@@ -421,7 +412,6 @@ $app->get('/csv', function() use($app) {
             'stress_q1'              => '#',
             'stress_q2'              => '#',
             'stress_q3'              => '#',
-            'stress_q8'              => '#',
             'q_me4'                  => '#',
             'stress_sum'             => '#',
             'time_to_answer'         => '#',
@@ -438,7 +428,6 @@ $app->get('/csv', function() use($app) {
             'stress_q1'              => '#',
             'stress_q2'              => '#',
             'stress_q3'              => '#',
-            'stress_q8'              => '#',
             'q_me4'                  => '#',
             'stress_sum'             => '#',
             'time_to_answer'         => '#',
@@ -455,7 +444,6 @@ $app->get('/csv', function() use($app) {
             'stress_q1'              => '#',
             'stress_q2'              => '#',
             'stress_q3'              => '#',
-            'stress_q8'              => '#',
             'q_me4'                  => '#',
             'stress_sum'             => '#',
             'time_to_answer'         => '#',
@@ -472,7 +460,6 @@ $app->get('/csv', function() use($app) {
             'stress_q1'              => '#',
             'stress_q2'              => '#',
             'stress_q3'              => '#',
-            'stress_q8'              => '#',
             'q_me4'                  => '#',
             'stress_sum'             => '#',
             'time_to_answer'         => '#',
@@ -532,7 +519,6 @@ $app->get('/csv', function() use($app) {
             'q_num_11' => '#',
             'q_num_2' => '#',
             'q_num_3' => '#',
-            'q_num_4' => '#',
             'q_num_5' => '#',
         );
 		if (isset($value['meta'][0])) { $meta = $value['meta'][0]; }
@@ -668,7 +654,6 @@ $app->get('/csv', function() use($app) {
             $meta['q_num_11'],
             $meta['q_num_1'],
             $meta['q_num_2'],
-            $meta['q_num_4'],
             $meta['q_num_5'],
             
             
@@ -678,7 +663,6 @@ $app->get('/csv', function() use($app) {
             $expXA['stress_q1'],
             $expXA['stress_q2'],
             $expXA['stress_q3'],
-            $expXA['stress_q8'],
             $expXA['q_me4'],
             $expXA['time_to_answer'],
             $expXA['time_to_finish'],
@@ -693,7 +677,6 @@ $app->get('/csv', function() use($app) {
             $expXB['stress_q1'],
             $expXB['stress_q2'],
             $expXB['stress_q3'],
-            $expXB['stress_q8'],
             $expXB['q_me4'],
             $expXB['time_to_answer'],
             $expXB['time_to_finish'],
@@ -708,7 +691,6 @@ $app->get('/csv', function() use($app) {
             $expXC['stress_q1'],
             $expXC['stress_q2'],
             $expXC['stress_q3'],
-            $expXC['stress_q8'],
             $expXC['q_me4'],
             $expXC['time_to_answer'],
             $expXC['time_to_finish'],
@@ -723,7 +705,6 @@ $app->get('/csv', function() use($app) {
             $expYA['stress_q1'],
             $expYA['stress_q2'],
             $expYA['stress_q3'],
-            $expYA['stress_q8'],
             $expYA['q_me4'],
             $expYA['time_to_answer'],
             $expYA['time_to_finish'],
@@ -738,7 +719,6 @@ $app->get('/csv', function() use($app) {
             $expYB['stress_q1'],
             $expYB['stress_q2'],
             $expYB['stress_q3'],
-            $expYB['stress_q8'],
             $expYB['q_me4'],
             $expYB['time_to_answer'],
             $expYB['time_to_finish'],
@@ -753,7 +733,6 @@ $app->get('/csv', function() use($app) {
             $expYC['stress_q1'],
             $expYC['stress_q2'],
             $expYC['stress_q3'],
-            $expYC['stress_q8'],
             $expYC['q_me4'],
             $expYC['time_to_answer'],
             $expYC['time_to_finish'],

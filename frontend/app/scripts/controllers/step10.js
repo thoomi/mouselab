@@ -79,7 +79,9 @@ angular.module('mouselabApp')
 
       function saveExperiment() {
           if ($scope.savingInProgress) { return; }
-
+          $scope.savingInProgress = true;
+          
+          
           var timeToFinish = configData.getAvailableTime(dataService.getCurrentTask());
 
           if ($scope.availableTime > 0)
