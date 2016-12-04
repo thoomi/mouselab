@@ -388,7 +388,30 @@ $app->get('/csv', function() use($app) {
             'trialTimeSum'           => '#',
             'acquisitionSum'         => '#',
 		);
-		if (isset($value['experiments'][0])) { $expXA = $value['experiments'][0]; $totalScore += $expXA['score']; }
+		if (isset($value['experiments'][0])) 
+		{ 
+		    switch ($value['experiments'][0]['task'])
+		    {
+		        case 'X_A':
+		            $expXA = $value['experiments'][0]; $totalScore += $expXA['score']; 
+		            break;
+		        case 'X_B':
+    	            $expXB = $value['experiments'][0]; $totalScore += $expXB['score']; 
+    	            break;
+	            case 'X_C':
+    	            $expXC = $value['experiments'][0]; $totalScore += $expXC['score']; 
+    	            break;
+	            case 'Y_A':
+    	            $expYA = $value['experiments'][0]; $totalScore += $expYA['score']; 
+    	            break;
+	            case 'Y_B':
+    	            $expYB = $value['experiments'][0]; $totalScore += $expYB['score']; 
+	                break;
+	            case 'Y_C':
+    	            $expYC = $value['experiments'][0]; $totalScore += $expYC['score']; 
+    	            break;
+		    }
+		}
 
 		$expXB = array(
 			'task_pos'               => '#',
@@ -404,7 +427,30 @@ $app->get('/csv', function() use($app) {
             'trialTimeSum'           => '#',
             'acquisitionSum'         => '#',
 		);
-		if (isset($value['experiments'][1])) { $expXB = $value['experiments'][1]; $totalScore += $expXB['score']; }
+		if (isset($value['experiments'][1])) 
+		{ 
+		    switch ($value['experiments'][1]['task'])
+		    {
+		        case 'X_A':
+		            $expXA = $value['experiments'][1]; $totalScore += $expXA['score']; 
+		            break;
+		        case 'X_B':
+    	            $expXB = $value['experiments'][1]; $totalScore += $expXB['score']; 
+    	            break;
+	            case 'X_C':
+    	            $expXC = $value['experiments'][1]; $totalScore += $expXC['score']; 
+    	            break;
+	            case 'Y_A':
+    	            $expYA = $value['experiments'][1]; $totalScore += $expYA['score']; 
+    	            break;
+	            case 'Y_B':
+    	            $expYB = $value['experiments'][1]; $totalScore += $expYB['score']; 
+	                break;
+	            case 'Y_C':
+    	            $expYC = $value['experiments'][1]; $totalScore += $expYC['score']; 
+    	            break;
+		    }
+		}
 
 		$expXC = array(
 			'task_pos'               => '#',
@@ -420,7 +466,30 @@ $app->get('/csv', function() use($app) {
             'trialTimeSum'           => '#',
             'acquisitionSum'         => '#',
 		);
-		if (isset($value['experiments'][2])) { $expXC = $value['experiments'][2]; $totalScore += $expXC['score']; }
+		if (isset($value['experiments'][2])) 
+		{ 
+		    switch ($value['experiments'][2]['task'])
+		    {
+		        case 'X_A':
+		            $expXA = $value['experiments'][2]; $totalScore += $expXA['score']; 
+		            break;
+		        case 'X_B':
+    	            $expXB = $value['experiments'][2]; $totalScore += $expXB['score']; 
+    	            break;
+	            case 'X_C':
+    	            $expXC = $value['experiments'][2]; $totalScore += $expXC['score']; 
+    	            break;
+	            case 'Y_A':
+    	            $expYA = $value['experiments'][2]; $totalScore += $expYA['score']; 
+    	            break;
+	            case 'Y_B':
+    	            $expYB = $value['experiments'][2]; $totalScore += $expYB['score']; 
+	                break;
+	            case 'Y_C':
+    	            $expYC = $value['experiments'][2]; $totalScore += $expYC['score']; 
+    	            break;
+		    }
+		}
 		
 		$expYA = array(
 			'task_pos'               => '#',
@@ -436,7 +505,30 @@ $app->get('/csv', function() use($app) {
             'trialTimeSum'           => '#',
             'acquisitionSum'         => '#',
 		);
-		if (isset($value['experiments'][3])) { $expYA = $value['experiments'][3]; $totalScore += $expYA['score']; }
+		if (isset($value['experiments'][3])) 
+		{ 
+		    switch ($value['experiments'][3]['task'])
+		    {
+		        case 'X_A':
+		            $expXA = $value['experiments'][3]; $totalScore += $expXA['score']; 
+		            break;
+		        case 'X_B':
+    	            $expXB = $value['experiments'][3]; $totalScore += $expXB['score']; 
+    	            break;
+	            case 'X_C':
+    	            $expXC = $value['experiments'][3]; $totalScore += $expXC['score']; 
+    	            break;
+	            case 'Y_A':
+    	            $expYA = $value['experiments'][3]; $totalScore += $expYA['score']; 
+    	            break;
+	            case 'Y_B':
+    	            $expYB = $value['experiments'][3]; $totalScore += $expYB['score']; 
+	                break;
+	            case 'Y_C':
+    	            $expYC = $value['experiments'][3]; $totalScore += $expYC['score']; 
+    	            break;
+		    }
+		}
 		
 		$expYB = array(
 			'task_pos'               => '#',
@@ -452,7 +544,30 @@ $app->get('/csv', function() use($app) {
             'trialTimeSum'           => '#',
             'acquisitionSum'         => '#',
 		);
-		if (isset($value['experiments'][4])) { $expYB = $value['experiments'][4]; $totalScore += $expYB['score']; }
+		if (isset($value['experiments'][4])) 
+		{ 
+		    switch ($value['experiments'][4]['task'])
+		    {
+		        case 'X_A':
+		            $expXA = $value['experiments'][4]; $totalScore += $expXA['score']; 
+		            break;
+		        case 'X_B':
+    	            $expXB = $value['experiments'][4]; $totalScore += $expXB['score']; 
+    	            break;
+	            case 'X_C':
+    	            $expXC = $value['experiments'][4]; $totalScore += $expXC['score']; 
+    	            break;
+	            case 'Y_A':
+    	            $expYA = $value['experiments'][4]; $totalScore += $expYA['score']; 
+    	            break;
+	            case 'Y_B':
+    	            $expYB = $value['experiments'][4]; $totalScore += $expYB['score']; 
+	                break;
+	            case 'Y_C':
+    	            $expYC = $value['experiments'][4]; $totalScore += $expYC['score']; 
+    	            break;
+		    }
+		}
 		
 		$expYC = array(
 			'task_pos'               => '#',
@@ -468,7 +583,30 @@ $app->get('/csv', function() use($app) {
             'trialTimeSum'           => '#',
             'acquisitionSum'         => '#',
 		);
-		if (isset($value['experiments'][5])) { $expYC = $value['experiments'][5]; $totalScore += $expYC['score']; }
+		if (isset($value['experiments'][5])) 
+		{ 
+		    switch ($value['experiments'][5]['task'])
+		    {
+		        case 'X_A':
+		            $expXA = $value['experiments'][5]; $totalScore += $expXA['score']; 
+		            break;
+		        case 'X_B':
+    	            $expXB = $value['experiments'][5]; $totalScore += $expXB['score']; 
+    	            break;
+	            case 'X_C':
+    	            $expXC = $value['experiments'][5]; $totalScore += $expXC['score']; 
+    	            break;
+	            case 'Y_A':
+    	            $expYA = $value['experiments'][5]; $totalScore += $expYA['score']; 
+    	            break;
+	            case 'Y_B':
+    	            $expYB = $value['experiments'][5]; $totalScore += $expYB['score']; 
+	                break;
+	            case 'Y_C':
+    	            $expYC = $value['experiments'][5]; $totalScore += $expYC['score']; 
+    	            break;
+		    }
+		}
 
         $maximising = array(
             'q_num_1' => '#',
